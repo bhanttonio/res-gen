@@ -38,7 +38,6 @@ class MainHandler
 
     setUpCharacterCounters() {
         console.log('\t\t character counters')
-
         $('input#name, input#surname_1, input#surname_2, input#level, textarea#profile').characterCounter()
         $('input#course_name_1, input#course_institute_1, input#course_date_1').characterCounter()
         $('input#lang_name_1, input#lang_speaking_1, input#lang_reading_1, input#lang_writing_1').characterCounter()
@@ -53,7 +52,7 @@ class MainHandler
         console.log('\t\t next buttons')
 
         let tabsInstance = M.Tabs.getInstance(this.elTabs)
-        let $btnsNext = $('button[id^="btn-next-"]')
+        let $btnsNext = $('button[id^="btnNext"]')
 
         $btnsNext.on('click', function(e) {
             e.preventDefault()

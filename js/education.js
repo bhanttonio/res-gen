@@ -14,7 +14,7 @@ class EducationHandler
 	#$tableEduBody
 
 	static #FORM_LEGEND_INSERT = 'Escolaridad'
-	static #FORM_LEGEND_UPDATE = 'Escolaridad [Editar]'
+	static #FORM_LEGEND_UPDATE = 'Escolaridad [Edici&oacute;n]'
 	static #BTN_AUX_CLEAN = 'Limpiar'
 	static #BTN_AUX_CANCEL = 'Cancelar'
 	static #BTN_MAIN_INSERT = 'A&ntilde;adir'
@@ -60,8 +60,7 @@ class EducationHandler
 			if (this.textContent === EducationHandler.#BTN_AUX_CANCEL) {
 				_this.#formInInsertMode()
 			}
-			_this.#resetForm()
-			this.blur()
+			_this.#resetForm(this)
     	})
     }
 
@@ -77,8 +76,7 @@ class EducationHandler
 			else {
 				_this.#insertEducation()
 			}
-			_this.#resetForm()
-	        this.blur()
+			_this.#resetForm(this)
 	    })
     }
 
@@ -145,21 +143,22 @@ class EducationHandler
 			$row.hide()
 	}
 
-	#resetForm() {
+	#resetForm($button) {
 		this.#formEdu.reset()
 		this.#setUpCharacterCounters()
+		$button.blur()
 	}
 
 	#formInInsertMode() {
-		this.#$legend.text(EducationHandler.#FORM_LEGEND_INSERT)
-		this.#$btnAuxEdu.text(EducationHandler.#BTN_AUX_CLEAN)
+		this.#$legend.html(EducationHandler.#FORM_LEGEND_INSERT)
+		this.#$btnAuxEdu.html(EducationHandler.#BTN_AUX_CLEAN)
 		this.#$btnMainEdu.html(EducationHandler.#BTN_MAIN_INSERT)
 	}
 
 	#formInUpdateMode() {
-		this.#$legend.text(EducationHandler.#FORM_LEGEND_UPDATE)
-		this.#$btnAuxEdu.text(EducationHandler.#BTN_AUX_CANCEL)
-		this.#$btnMainEdu.text(EducationHandler.#BTN_MAIN_UPDATE)
+		this.#$legend.html(EducationHandler.#FORM_LEGEND_UPDATE)
+		this.#$btnAuxEdu.html(EducationHandler.#BTN_AUX_CANCEL)
+		this.#$btnMainEdu.html(EducationHandler.#BTN_MAIN_UPDATE)
 	}
 
 }//
