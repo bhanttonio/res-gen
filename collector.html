@@ -81,23 +81,23 @@
 						<legend>Escolaridad</legend>
 						<input name="eduIndex" type="hidden" value="">
 						<div class="input-field col s12">
-							<input name="eduName" type="text" class="validate" data-length="75" maxlength="75">
-							<label>Grado</label>
+							<input id="eduName" name="eduName" type="text" class="validate" data-length="75" maxlength="75">
+							<label for="eduName">Grado</label>
 							<span class="helper-text col s10">Ej. Licenciatura en Administraci&oacute;n</span>
 						</div>
 						<div class="input-field col s12">
-							<input name="eduInstitute" type="text" class="validate" data-length="75" maxlength="75">
-							<label>Instituci&oacute;n</label>
+							<input id="eduInstitute" name="eduInstitute" type="text" class="validate" data-length="75" maxlength="75">
+							<label for="eduInstitute">Instituci&oacute;n</label>
 							<span class="helper-text col s10">Ej. Instituto Polit&eacute;cnico Nacional</span>
 						</div>
 						<div class="input-field col s6">
-							<input name="eduStart" type="text" class="validate" data-length="4" maxlength="4">
-							<label>Inicio</label>
+							<input id="eduStart" name="eduStart" type="text" class="validate" data-length="4" maxlength="4">
+							<label for="eduStart">Inicio</label>
 							<span class="helper-text col s8">Ej. 2015</span>
 						</div>
 						<div class="input-field col s6">
-							<input name="eduEnd" type="text" class="validate" data-length="4" maxlength="4">
-							<label>Fin</label>
+							<input id="eduEnd" name="eduEnd" type="text" class="validate" data-length="4" maxlength="4">
+							<label for="eduEnd">Fin</label>
 							<span class="helper-text col s8">Ej. 2020</span>
 						</div>
 						<div class="input-field col s12 push-s2 right-align">
@@ -106,7 +106,7 @@
 									<button id="btnAuxEdu" name="btnAuxEdu" class="waves-effect btn-flat btn-small" tabindex="-1">Limpiar</button>
 								</div>
 								<div class="col s5">
-									<button name="btnMainEdu" class="waves-effect btn-flat btn-small">A&ntilde;adir</button>
+									<button id="btnMainEdu" name="btnMainEdu" class="waves-effect btn-flat btn-small">A&ntilde;adir</button>
 								</div>
 							</div>
 						</div>
@@ -137,7 +137,7 @@
 
 					<div class="row">
 						<div class="col s3 push-s9 right-align">
-							<button name="btnNextEdu" data-tab="courses" class="waves-effect btn-flat btn-small">Siguiente</button>
+							<button id="btnNextEdu" name="btnNextEdu" data-tab="courses" class="waves-effect btn-flat btn-small">Siguiente</button>
 						</div>
 					</div>
 				</article>
