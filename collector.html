@@ -76,39 +76,37 @@
 			<!-- education -->
 			<section id="education" class="section col s12">
 
-				<form id="form-education" class="col s4">
+				<form id="formEducation" class="col s4">
 					<fieldset>
-						<legend name="legend">Escolaridad</legend>
-						<input id="edu_index" type="hidden" value="">
+						<legend>Escolaridad</legend>
+						<input name="eduIndex" type="hidden" value="">
 						<div class="input-field col s12">
-							<input id="edu_name" type="text" class="validate" data-length="75" maxlength="75">
-							<label for="edu_name">Grado</label>
+							<input name="eduName" type="text" class="validate" data-length="75" maxlength="75">
+							<label>Grado</label>
 							<span class="helper-text col s10">Ej. Licenciatura en Administraci&oacute;n</span>
 						</div>
 						<div class="input-field col s12">
-							<input id="edu_institute" type="text" class="validate" data-length="75" maxlength="75">
-							<label for="edu_institute">Instituci&oacute;n</label>
+							<input name="eduInstitute" type="text" class="validate" data-length="75" maxlength="75">
+							<label>Instituci&oacute;n</label>
 							<span class="helper-text col s10">Ej. Instituto Polit&eacute;cnico Nacional</span>
 						</div>
 						<div class="input-field col s6">
-							<input id="edu_start" type="text" class="validate" data-length="4" maxlength="4">
-							<label for="edu_start">Inicio</label>
+							<input name="eduStart" type="text" class="validate" data-length="4" maxlength="4">
+							<label>Inicio</label>
 							<span class="helper-text col s8">Ej. 2015</span>
 						</div>
 						<div class="input-field col s6">
-							<input id="edu_end" type="text" class="validate" data-length="4" maxlength="4">
-							<label for="edu_end">Fin</label>
+							<input name="eduEnd" type="text" class="validate" data-length="4" maxlength="4">
+							<label>Fin</label>
 							<span class="helper-text col s8">Ej. 2020</span>
 						</div>
 						<div class="input-field col s12 push-s2 right-align">
 							<div class="row" style="margin-bottom: 0px;">
 								<div class="col s5">
-									<button id="btn-aux-edu" name="btnAux" class="waves-effect btn-flat btn-small" tabindex="-1">
-										Limpiar
-									</button>
+									<button id="btnAuxEdu" name="btnAuxEdu" class="waves-effect btn-flat btn-small" tabindex="-1">Limpiar</button>
 								</div>
 								<div class="col s5">
-									<button id="btn-main-edu" name="btnMain" class="waves-effect btn-flat btn-small">A&ntilde;adir</button>
+									<button name="btnMainEdu" class="waves-effect btn-flat btn-small">A&ntilde;adir</button>
 								</div>
 							</div>
 						</div>
@@ -116,7 +114,7 @@
 				</form>
 
 				<article class="col s8">
-					<table id="table-edu" class="striped">
+					<table id="tableEdu" class="striped">
 						<thead>
 							<tr>
 								<th>Per&iacute;odo</th>
@@ -139,9 +137,7 @@
 
 					<div class="row">
 						<div class="col s3 push-s9 right-align">
-							<button id="btn-next-edu" data-tab="courses" class="waves-effect btn-flat btn-small">
-								Siguiente
-							</button>
+							<button name="btnNextEdu" data-tab="courses" class="waves-effect btn-flat btn-small">Siguiente</button>
 						</div>
 					</div>
 				</article>

@@ -1,12 +1,12 @@
 
 class EducationHandler
 {
-	#elFormEdu
-	#elEduName
-	#elEduInstitute
-	#elEduStart
-	#elEduEnd
-	#elEduIndex
+	#formEdu
+	#eduName
+	#eduInstitute
+	#eduStart
+	#eduEnd
+	#eduIndex
 
 	#$legend
 	#$btnAuxEdu
@@ -32,21 +32,24 @@ class EducationHandler
 	}
 
 	#loadRefs() {
-		this.#elFormEdu = document.getElementById('form-education')
-		this.#elEduName = document.getElementById('edu_name')
-		this.#elEduInstitute = document.getElementById('edu_institute')
-	    this.#elEduStart = document.getElementById('edu_start')
-		this.#elEduEnd = document.getElementById('edu_end')
-		this.#elEduIndex = document.getElementById('edu_index')
+		this.#formEdu = document.getElementById('formEducation')
+		this.#eduName = this.#formEdu.elements.eduName
+		this.#eduInstitute = this.#formEdu.elements.eduInstitute
+	    this.#eduStart = this.#formEdu.elements.eduStart
+		this.#eduEnd = this.#formEdu.elements.eduEnd
+		this.#eduIndex = this.#formEdu.elements.eduIndex
 
-		this.#$legend = $('form#form-education').find('legend')
-		this.#$btnAuxEdu = $('button#btn-aux-edu')
-		this.#$btnMainEdu = $('button#btn-main-edu')
-		this.#$tableEduBody = $('table#table-edu tbody')
+		this.#$legend = $(this.#formEdu).find('legend')
+		this.#$btnAuxEdu = $(this.#formEdu.elements.btnAuxEdu)
+		this.#$btnMainEdu = $(this.#formEdu.elements.btnMainEdu)
+		this.#$tableEduBody = $('table#tableEdu tbody')
 	}
 
 	#setUpCharacterCounters() {
-		$('input#edu_start, input#edu_end, input#edu_name, input#edu_institute').characterCounter()
+		$(this.#eduName).characterCounter()
+		$(this.#eduInstitute).characterCounter()
+		$(this.#eduStart).characterCounter()
+		$(this.#eduEnd).characterCounter()
 	}
 
     #setUpAuxButton() {
@@ -80,10 +83,10 @@ class EducationHandler
     }
 
 	#insertEducation() {
-	    let name = this.#elEduName.value.trim()
-	    let institute = this.#elEduInstitute.value.trim()
-	    let start = this.#elEduStart.value.trim()
-	    let end = this.#elEduEnd.value.trim()
+	    let name = this.#eduName.value.trim()
+	    let institute = this.#eduInstitute.value.trim()
+	    let start = this.#eduStart.value.trim()
+	    let end = this.#eduEnd.value.trim()
 
 	    if (name && institute && start && end) {
 			let index = this.#$tableEduBody.children().length
@@ -108,19 +111,19 @@ class EducationHandler
 		let $row = this.#$tableEduBody.children().eq(index).children()
 		let period = $row.eq(EducationHandler.#COL_PERIOD).text().split('-')
 
-		this.#elEduStart.value = period[0]; this.#elEduStart.focus()
-		this.#elEduEnd.value = period[1]; this.#elEduEnd.focus()
-		this.#elEduInstitute.value = $row.eq(EducationHandler.#COL_INSTITUTE).text(); this.#elEduInstitute.focus()
-		this.#elEduName.value = $row.eq(EducationHandler.#COL_NAME).text(); this.#elEduName.focus()
-		this.#elEduIndex.value = index
+		this.#eduStart.value = period[0]; this.#eduStart.focus()
+		this.#eduEnd.value = period[1]; this.#eduEnd.focus()
+		this.#eduInstitute.value = $row.eq(EducationHandler.#COL_INSTITUTE).text(); this.#eduInstitute.focus()
+		this.#eduName.value = $row.eq(EducationHandler.#COL_NAME).text(); this.#eduName.focus()
+		this.#eduIndex.value = index
 	}
 
 	#updateEducation() {
-		let name = this.#elEduName.value.trim()
-	    let institute = this.#elEduInstitute.value.trim()
-	    let start = this.#elEduStart.value.trim()
-	    let end = this.#elEduEnd.value.trim()
-		let index = this.#elEduIndex.value.trim()
+		let name = this.#eduName.value.trim()
+	    let institute = this.#eduInstitute.value.trim()
+	    let start = this.#eduStart.value.trim()
+	    let end = this.#eduEnd.value.trim()
+		let index = this.#eduIndex.value.trim()
 
 	    if (name && institute && start && end) {
 			let updatedRow = 
@@ -143,7 +146,7 @@ class EducationHandler
 	}
 
 	#resetForm() {
-		this.#elFormEdu.reset()
+		this.#formEdu.reset()
 		this.#setUpCharacterCounters()
 	}
 
