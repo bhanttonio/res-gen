@@ -1,0 +1,87 @@
+
+@import url("reset.css");
+@import url("materialize.min.css");
+
+
+/* GENERAL */
+
+h1, h2, h3, h4, h5, h6 {
+	color: #ee6e73;
+	font-weight: 350;
+}
+
+
+/* TABS */
+
+div#wrap-tabs ul {
+	height: 28px;
+}
+div#wrap-tabs ul li {
+	height: 2px;
+}
+div#wrap-tabs ul li a {
+	height: 28px;
+	line-height: 28px;
+}
+
+
+/* FORM FIELDS */
+
+div.input-field input[type="text"] { 
+	height: 2rem;
+	margin: 0 0 4px 0;
+	font-size: 14px;
+	font-weight: 350;
+}
+textarea.materialize-textarea {
+	margin: 0 0 2px 0;
+	font-size: 14px;
+	font-weight: 350 !important;
+}
+.input-field > label {
+	color: black;
+	transform: translateY(0px);
+	font-size: 14px;
+	font-weight: 350;
+}
+span.helper-text {
+	padding-left: 0px !important;
+	color: rgba(0, 0, 0, 0.44) !important;
+}
+span.character-counter { 
+	color: rgba(0, 0, 0, 0.44); 
+}
+
+/* button small */
+.btn-small {
+	height: 22px;
+	line-height: 22px;
+	font-size: 10.5px;
+	border: 1px solid black;
+}
+.btn-small:hover, .btn-small:focus {
+	color: white;
+	background-color: #ef9a9a;
+}
+
+/* fieldset */
+fieldset {
+	border: 1px solid #e0e0e0;
+}
+fieldset legend {
+	font-size: 14px;
+	font-weight: bold;
+}
+
+
+/* TABLES */
+table {
+	font-size: 13px;
+}
+table thead {
+	font-weight: bold;
+}
+table tbody {
+	font-weight: 350;
+}
+

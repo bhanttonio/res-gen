@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Resume Generator</title>
+	<link type="text/css" rel="stylesheet" href="css/main.css" media="screen,projection, print"/>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+
+			<!-- title -->
+			<div class="col s12">
+				<br>
+				<h5>Datos del Candidato</h5>
+				<br><br><br>
+			</div>
+			
+			<!-- tabs -->
+			<div id="wrap-tabs" class="col s12">
+				<ul id="tabs" class="tabs tabs-fixed-width">
+					<li class="tab"><a href="#basic">B&aacute;sicos</a></li>
+					<li class="tab"><a href="#education">Educaci&oacute;n</a></li>
+					<li class="tab"><a href="#courses">Cursos</a></li>
+					<li class="tab"><a href="#languages">Idiomas</a></li>
+					<li class="tab"><a href="#skills">Conocimientos</a></li>
+					<li class="tab"><a href="#sectors">Sectores</a></li>
+					<li class="tab"><a href="#int-work-exp">Exp Int</a></li>
+					<li class="tab"><a href="#ext-work-exp">Exp Ext</a></li>
+				</ul>
+				<br><br><br>
+			</div>
+
+			<!-- basic -->
+			<section id="basic" class="section col s12">
+				<div class="row">
+					<div class="input-field col s3">
+			          	<input id="name" type="text" class="validate" autocomplete="off" data-length="50" maxlength="50">
+			          	<label for="name">Nombre</label>
+			        </div>
+					<div class="input-field col s2">
+			          	<input id="surname_1" type="text" class="validate" data-length="50" maxlength="50">
+			          	<label for="surname_1">Apellido Paterno</label>
+			        </div>
+			        <div class="input-field col s2">
+			          	<input id="surname_2" type="text" class="validate" data-length="50" maxlength="50">
+			          	<label for="surname_2">Apellido Materno</label>
+			        </div>
+			        <div class="input-field col s4 push-s1">
+						<input id="level" type="text" class="validate" data-length="50" maxlength="50">
+			          	<label for="level">Nivel</label>
+			          	<span class="helper-text col s10">P. ej. &nbsp;Consultor Senior</span>
+			        </div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<textarea id="profile" class="materialize-textarea validate" data-length="300" maxlength="300"></textarea>
+						<label for="profile">Perfil Profesional</label>
+						<span class="helper-text col s11">P. ej. &nbsp;Consultor senior biling&uuml;e del PP SAP, m&aacute;s de 10 
+						a&ntilde;os con SAP ECC, S4Hana y servicios en la nube. Experiencia trabajando de forma remota y en el sitio
+						con clientes en el extranjero y diferentes zonas horarias. Trabaje bien con enfoques Agile y Waterfall.</span>
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col s2 push-s10 right-align">
+						<button id="btn-next-basic" data-tab="education" class="waves-effect waves-teal btn-flat btn-small">
+							Siguiente
+						</button>
+					</div>
+				</div>
+			</section>
+
+
+			<!-- education -->
+			<section id="education" class="section col s12">
+
+				<form id="form-education" class="col s4">
+					<fieldset>
+						<legend name="legend">Escolaridad</legend>
+						<input id="edu_index" type="hidden" value="">
+						<div class="input-field col s12">
+							<input id="edu_name" type="text" class="validate" data-length="75" maxlength="75">
+							<label for="edu_name">Grado</label>
+							<span class="helper-text col s10">Ej. Licenciatura en Administraci&oacute;n</span>
+						</div>
+						<div class="input-field col s12">
+							<input id="edu_institute" type="text" class="validate" data-length="75" maxlength="75">
+							<label for="edu_institute">Instituci&oacute;n</label>
+							<span class="helper-text col s10">Ej. Instituto Polit&eacute;cnico Nacional</span>
+						</div>
+						<div class="input-field col s6">
+							<input id="edu_start" type="text" class="validate" data-length="4" maxlength="4">
+							<label for="edu_start">Inicio</label>
+							<span class="helper-text col s8">Ej. 2015</span>
+						</div>
+						<div class="input-field col s6">
+							<input id="edu_end" type="text" class="validate" data-length="4" maxlength="4">
+							<label for="edu_end">Fin</label>
+							<span class="helper-text col s8">Ej. 2020</span>
+						</div>
+						<div class="input-field col s12 push-s2 right-align">
+							<div class="row" style="margin-bottom: 0px;">
+								<div class="col s5">
+									<button id="btn-aux-edu" name="btnAux" class="waves-effect btn-flat btn-small" tabindex="-1">
+										Limpiar
+									</button>
+								</div>
+								<div class="col s5">
+									<button id="btn-main-edu" name="btnMain" class="waves-effect btn-flat btn-small">A&ntilde;adir</button>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+
+				<article class="col s8">
+					<table id="table-edu" class="striped">
+						<thead>
+							<tr>
+								<th>Per&iacute;odo</th>
+								<th>Grado</th>
+								<th>Instituci&oacute;n</th>
+								<th colspan="2">Opciones</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>2015-2020</td>
+								<td>Licenciatura en Inform&aacute;tica Administrativa</td>
+								<td>Universidad Nacional Aut&oacute;noma de M&eacute;xico</td>
+								<td><a href="#" onclick="educationHandler.selectEducation(event, 0)">Editar</a></td>
+								<td><a href="#" onclick="educationHandler.removeEducation(event, 0)">Eliminar</a></td>
+							</tr>
+						</tbody>
+					</table>
+					<br><br><br>
+
+					<div class="row">
+						<div class="col s3 push-s9 right-align">
+							<button id="btn-next-edu" data-tab="courses" class="waves-effect btn-flat btn-small">
+								Siguiente
+							</button>
+						</div>
+					</div>
+				</article>
+
+			</section>
+
+
+			<!-- courses -->
+			<section id="courses" class="section">
+				<br>
+				<div class="row">
+					<div class="input-field col s5">
+			          	<input id="course_name_1" type="text" class="validate" data-length="75" maxlength="75">
+			          	<label for="course_name_1">Curso</label>
+			          	<span class="helper-text col s10">P. ej. &nbsp;Persistencia de datos con Java</span>
+			        </div>
+			        <div class="input-field col s4">
+			          	<input id="course_institute_1" type="text" class="validate" data-length="75" maxlength="75">
+			          	<label for="course_institute_1">Instituci&oacute;n</label>
+			          	<span class="helper-text col s10">P. ej. &nbsp;Udemy</span>
+			        </div>
+			        <div class="input-field col s3">
+			          	<input id="course_date_1" type="text" class="validate" data-length="25" maxlength="25">
+			          	<label for="course_date_1">Fecha</label>
+			          	<span class="helper-text col s10">P. ej. &nbsp;Septiembre 2017</span>
+			        </div>
+				</div>
+				<div class="row">
+					<div class="input-field col s5">
+			          	<input id="course_name_2" type="text" class="validate" data-length="75" maxlength="75">
+			          	<label for="course_name_2">Curso</label>
+			        </div>
+			        <div class="input-field col s4">
+			          	<input id="course_institute_2" type="text" class="validate" data-length="75" maxlength="75">
+			          	<label for="course_institute_2">Instituci&oacute;n</label>
+			        </div>
+			        <div class="input-field col s3">
+			          	<input id="course_date_2" type="text" class="validate" data-length="25" maxlength="25">
+			          	<label for="course_date_2">Fecha</label>
+			        </div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col s2 push-s10 right-align">
+						<button id="btn-next-courses" data-tab="languages" class="waves-effect waves-teal btn-flat btn-small">
+							Siguiente
+						</button>
+					</div>
+				</div>
+			</section>
+
+
+			<!-- languages -->
+			<section id="languages" class="section">
+				<br>
+				<div class="row">
+					<div class="input-field col s2 push-s2">
+			          	<input id="lang_name_1" type="text" class="validate" data-length="25" maxlength="25" value="Ingl&eacute;s">
+						<label for="lang_name_1">Idioma</label>
+			        </div>
+					<div class="input-field col s2 push-s2">
+			          	<input id="lang_speaking_1" type="text" class="validate" data-length="3" maxlength="3">
+			          	<label for="lang_speaking_1">&percnt; Conversaci&oacute;n</label>
+			        </div>
+			        <div class="input-field col s2 push-s2">
+			          	<input id="lang_reading_1" type="text" class="validate" data-length="3" maxlength="3">
+			          	<label for="lang_reading_1">&percnt; Lectura</label>
+			        </div>
+			        <div class="input-field col s2 push-s2">
+			          	<input id="lang_writing_1" type="text" class="validate" data-length="3" maxlength="3">
+			          	<label for="lang_writing_1">&percnt; Escritura</label>
+			        </div>
+				</div>
+				<div class="row">
+					<div class="input-field col s2 push-s2">
+			          	<input id="lang_name_2" type="text" class="validate" data-length="25" maxlength="25">
+			          	<label for="lang_name_2">Idioma</label>
+			        </div>
+					<div class="input-field col s2 push-s2">
+			          	<input id="lang_speaking_2" type="text" class="validate" data-length="3" maxlength="3">
+			          	<label for="lang_speaking_2">&percnt; Conversaci&oacute;n</label>
+			        </div>
+			        <div class="input-field col s2 push-s2">
+			          	<input id="lang_reading_2" type="text" class="validate" data-length="3" maxlength="3">
+			          	<label for="lang_reading_2">&percnt; Lectura</label>
+			        </div>
+			        <div class="input-field col s2 push-s2">
+			          	<input id="lang_writing_2" type="text" class="validate" data-length="3" maxlength="3">
+			          	<label for="lang_writing_2">&percnt; Escritura</label>
+			        </div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col s2 push-s8 right-align">
+						<button id="btn-next-languages" data-tab="skills" class="waves-effect waves-teal btn-flat btn-small">
+							Siguiente
+						</button>
+					</div>
+				</div>
+			</section>
+
+
+			<!-- skills -->
+			<section id="skills" class="section">
+				<br>
+				<div class="row">
+					<div class="input-field col s6 push-s3">
+			          	<input id="skill_1" type="text" class="validate" data-length="100" maxlength="100">
+			          	<label for="skill_1">Conocimiento</label>
+			          	<span class="helper-text col s10">P. ej. &nbsp;Office avanzado &nbsp;/&nbsp; SAP m&oacute;dulos&colon; IM, QM, PP, FI</span>
+			        </div>
+				</div>
+				<div class="row">
+					<div class="input-field col s6 push-s3">
+			          	<input id="skill_2" type="text" class="validate" data-length="100" maxlength="100">
+			          	<label for="skill_2">Conocimiento</label>
+			        </div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col s2 push-s7 right-align">
+						<button id="btn-next-skills" data-tab="sectors" class="waves-effect waves-teal btn-flat btn-small">
+							Siguiente
+						</button>
+					</div>
+				</div>
+			</section>
+
+
+			<!-- sectors -->
+			<section id="sectors" class="section">
+				<br>
+				<div class="row">
+					<div class="input-field col s4 push-s4">
+			          	<input id="sector_1" type="text" class="validate" data-length="50" maxlength="50">
+			          	<label for="sector_1">Sector</label>
+			          	<span class="helper-text col s10">P. ej. &nbsp;Bancario &nbsp;/&nbsp; Cadena de suministro</span>
+			        </div>
+				</div>
+				<div class="row">
+					<div class="input-field col s4 push-s4">
+			          	<input id="sector_2" type="text" class="validate" data-length="50" maxlength="50">
+			          	<label for="sector_2">Sector</label>
+			        </div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col s2 push-s6 right-align">
+						<button id="btn-next-sectors" data-tab="int-work-exp" class="waves-effect waves-teal btn-flat btn-small">
+							Siguiente
+						</button>
+					</div>
+				</div>
+			</section>
+
+
+			<!-- internal-work-experience -->
+			<section id="int-work-exp" class="section">
+				<br>
+				<div class="row">
+					<div class="input-field col s3">
+			          	<input id="iwe_account_1" type="text" class="validate" data-length="50" maxlength="50">
+			          	<label for="iwe_account_1">Cuenta</label>
+			          	<span class="helper-text col s10">P. ej. &nbsp;Banco Nacional</span>
+			        </div>
+			        <div class="input-field col s3">
+			          	<input id="iwe_rol_1" type="text" class="validate" data-length="50" maxlength="50">
+			          	<label for="iwe_rol_1">Puesto</label>
+			          	<span class="helper-text col s10">P. ej. &nbsp;Desarrollador backend</span>
+			        </div>
+			        <div class="input-field col s3">
+			          	<input id="iwe_project_1" type="text" class="validate" data-length="75" maxlength="75">
+			          	<label for="iwe_project_1">Proyecto</label>
+			          	<span class="helper-text col s10">P. ej. &nbsp;Migraci&oacute;n de datos</span>
+			        </div>
+			        <div class="input-field col s3">
+						<input id="iwe_period_1" type="text" class="validate" data-length="50" maxlength="50">
+						<label for="iwe_period_1">Per&iacute;odo</label>
+						<span class="helper-text col s10">P. ej. &nbsp;Enero 2017 - Junio 2020</span>
+					</div>
+				</div>
+
+				<br>
+				<div class="row">
+					<!-- activities -->
+					<div class="col s6">
+						<div class="row">
+							<h6 class="col s12">Actividades</h6>
+							<div class="input-field col s12">
+					          	<input id="iwe_task_1" type="text" class="validate" data-length="125" maxlength="125">
+					          	<label for="iwe_task_1">Actividad</label>
+					          	<span class="helper-text col s11">P. ej. &nbsp;An&aacute;lisis de requerimientos funcionales</span>
+			        		</div>
+			        		<div class="input-field col s12">
+				          		<input id="iwe_task_2" type="text" class="validate" data-length="125" maxlength="125">
+				          		<label for="iwe_task_2">Actividad</label>
+			        		</div>
+						</div>
+					</div>
+					<!-- tools -->
+					<div class="col s6">
+						<div class="row">
+							<h6 class="col s12">Entorno T&eacute;cnico</h6>
+							<div class="input-field col s12">
+					          	<input id="iwe_tool_1" type="text" class="validate" data-length="125" maxlength="125">
+					          	<label for="iwe_tool_1">Descripci&oacute;n</label>
+					          	<span class="helper-text col s11">P. ej. &nbsp;Herramientas utlizadas&colon; JIRA, Confluence y Bitbucket</span>
+				        	</div>
+				        	<div class="input-field col s12">
+					          	<input id="iwe_tool_2" type="text" class="validate" data-length="125" maxlength="125">
+					          	<label for="iwe_tool_2">Descripci&oacute;n</label>
+				        	</div>
+				        </div>
+					</div>
+				</div>
+
+				<br>
+				<div class="row">
+					<div class="col s2 push-s10 right-align">
+						<button id="btn-next-iwe" data-tab="ext-work-exp" class="waves-effect waves-teal btn-flat btn-small">
+							Siguiente
+						</button>
+					</div>
+				</div>
+			</section>
+
+
+			<!-- external-work-experience -->
+			<section id="ext-work-exp" class="section">
+				<br>
+				<div class="row">
+					<div class="input-field col s4">
+			          	<input id="ewe_company_1" type="text" class="validate" data-length="50" maxlength="50">
+			          	<label for="ewe_company_1">Empresa</label>
+			          	<span class="helper-text col s10">P. ej. &nbsp;Consultancy Services Group</span>
+			        </div>
+			        <div class="input-field col s4">
+			          	<input id="ewe_rol_1" type="text" class="validate" data-length="50" maxlength="50">
+			          	<label for="ewe_rol_1">Puesto</label>
+			          	<span class="helper-text col s10">P. ej. &nbsp;Analista de sistemas</span>
+			        </div>
+			        <div class="input-field col s4">
+						<input id="ewe_period_1" type="text" class="validate" data-length="50" maxlength="50">
+						<label for="ewe_period_1">Per&iacute;odo</label>
+						<span class="helper-text col s10">P. ej. &nbsp;Marzo/2018 a Octubre/2019</span>
+					</div>
+				</div>
+
+				<br>
+				<div class="row">
+					<!-- activities -->
+					<div class="col s6">
+						<div class="row">
+							<h6 class="col s12">Actividades</h6>
+							<div class="input-field col s12">
+					          	<input id="ewe_task_1" type="text" class="validate" data-length="125" maxlength="125">
+					          	<label for="ewe_task_1">Descripci&oacute;n</label>
+					          	<span class="helper-text col s11">P. ej. &nbsp;Elaboraci&oacute;n de diagramas UML</span>
+			        		</div>
+			        		<div class="input-field col s12">
+				          		<input id="ewe_task_2" type="text" class="validate" data-length="125" maxlength="125">
+				          		<label for="ewe_task_2">Descripci&oacute;n</label>
+			        		</div>
+						</div>
+					</div>
+					<!-- tools -->
+					<div class="col s6">
+						<div class="row">
+							<h6 class="col s12">Entorno T&eacute;cnico</h6>
+							<div class="input-field col s12">
+					          	<input id="ewe_tool_1" type="text" class="validate" data-length="125" maxlength="125">
+					          	<label for="ewe_tool_1">Descripci&oacute;n</label>
+					          	<span class="helper-text col s11">P. ej. &nbsp;Herramientas&colon; Visual Paradigm, UMLet</span>
+				        	</div>
+				        	<div class="input-field col s12">
+					          	<input id="ewe_tool_2" type="text" class="validate" data-length="125" maxlength="125">
+					          	<label for="ewe_tool_2">Descripci&oacute;n</label>
+				        	</div>
+				        </div>
+					</div>
+				</div>
+			</section>
+
+		</div>
+	</div>
+
+	<script type="text/javascript" src="js/jquery-3.7.1.min.js"></script>
+	<script type="text/javascript" src="js/materialize.min.js"></script>
+	<script type="text/javascript" src="js/education.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>
