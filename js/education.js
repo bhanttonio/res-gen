@@ -22,6 +22,8 @@ class EducationHandler
 	static #COL_PERIOD = 0
 	static #COL_NAME = 1
 	static #COL_INSTITUTE = 2
+
+	#enabledMode = true
 	
 	constructor() {
 		console.log('\t education handler')
@@ -59,6 +61,7 @@ class EducationHandler
         	e.preventDefault()
 			if (this.textContent === EducationHandler.#BTN_AUX_CANCEL) {
 				_this.#formInInsertMode()
+				_this.#enableOptions()
 			}
 			_this.#resetForm()
 			this.blur()
@@ -86,7 +89,6 @@ class EducationHandler
 	    let start = this.#eduStart.value.trim()
 	    let end = this.#eduEnd.value.trim()
 
-	    // if (name && institute && start && end) {
 		if ( this.#isValidForm(name, institute, start, end) ) {
 			let index = this.#$tableEduBody.children().length
 	        let newRow = 
@@ -104,19 +106,24 @@ class EducationHandler
 	}
 
 	selectEducation(event, index) {
-		console.log(`# select education row [${index}]`)
-		event.preventDefault()
+		if (this.#enabledMode) 
+		{
+			console.log(`# select education row [${index}]`)
+			event.preventDefault()
 
-		this.#formInUpdateMode()
+			this.#formInUpdateMode()
 
-		let $row = this.#$tableEduBody.children().eq(index).children()
-		let period = $row.eq(EducationHandler.#COL_PERIOD).text().split('-')
+			let $row = this.#$tableEduBody.children().eq(index).children()
+			let period = $row.eq(EducationHandler.#COL_PERIOD).text().split('-')
 
-		this.#eduStart.value = period[0]; this.#eduStart.focus()
-		this.#eduEnd.value = period[1]; this.#eduEnd.focus()
-		this.#eduInstitute.value = $row.eq(EducationHandler.#COL_INSTITUTE).text(); this.#eduInstitute.focus()
-		this.#eduName.value = $row.eq(EducationHandler.#COL_NAME).text(); this.#eduName.focus()
-		this.#eduIndex.value = index
+			this.#eduStart.value = period[0]; this.#eduStart.focus()
+			this.#eduEnd.value = period[1]; this.#eduEnd.focus()
+			this.#eduInstitute.value = $row.eq(EducationHandler.#COL_INSTITUTE).text(); this.#eduInstitute.focus()
+			this.#eduName.value = $row.eq(EducationHandler.#COL_NAME).text(); this.#eduName.focus()
+			this.#eduIndex.value = index
+
+			this.#disableOptions()
+		}
 	}
 
 	#updateEducation() {
@@ -126,7 +133,6 @@ class EducationHandler
 	    let end = this.#eduEnd.value.trim()
 		let index = this.#eduIndex.value.trim()
 
-	    // if (name && institute && start && end) {
 		if ( this.#isValidForm(name, institute, start, end) ) {
 			let updatedRow = 
 			`<td>${start}-${end}</td>
@@ -139,16 +145,21 @@ class EducationHandler
 
 			this.#formInInsertMode()
 			this.#resetForm()
+			this.#enableOptions()
 		}
 	}
 
 	removeEducation(event, index) {
-		event.preventDefault()
-		let $row = this.#$tableEduBody.children().eq(index)
-		let eduName = $row.children().eq(EducationHandler.#COL_NAME).text()
+		if (this.#enabledMode) 
+		{
+			event.preventDefault()
+			let $row = this.#$tableEduBody.children().eq(index)
+			let eduName = $row.children().eq(EducationHandler.#COL_NAME).text()
 
-		if (confirm(`Confirma eliminaci\xF3n de '${eduName}'`))
-			$row.hide()
+			if (confirm(`Confirma eliminaci\xF3n de '${eduName}'`)) {
+				$row.hide()
+			}
+		}
 	}
 
 	#resetForm() {
@@ -195,6 +206,27 @@ class EducationHandler
 
 	#addInvalidStyle(element) {
 		element.classList.add('invalid')
+	}
+
+	#disableOptions() {
+		let $links = this.#$tableEduBody.find('tr:visible td a')
+		// for (let i = 0; i < $links.length; i++) console.log( $links[i] )
+		
+		$links.removeClass('enabled')
+		$links.addClass('disabled')
+		$links.removeAttr('href')
+
+		this.#enabledMode = false
+	}
+
+	#enableOptions() {
+		let $links = this.#$tableEduBody.find('tr:visible td a')
+
+		$links.removeClass('disabled')
+		$links.addClass('enabled')
+		$links.attr('href', '#')
+
+		this.#enabledMode = true
 	}
 
 }//
