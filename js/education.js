@@ -231,8 +231,8 @@ class EducationHandler
 		let $links = this.#$tableEduBody.find('tr:visible td a')
 		// for (let i = 0; i < $links.length; i++) console.log( $links[i] )
 		
-		$links.removeClass('enabled')
-		$links.addClass('disabled')
+		$links.removeClass('edu-enabled')
+		$links.addClass('edu-disabled')
 		$links.removeAttr('href')
 
 		this.#enabledMode = false
@@ -241,8 +241,8 @@ class EducationHandler
 	#enableOptions() {
 		let $links = this.#$tableEduBody.find('tr:visible td a')
 
-		$links.removeClass('disabled')
-		$links.addClass('enabled')
+		$links.removeClass('edu-disabled')
+		$links.addClass('edu-enabled')
 		$links.attr('href', '#')
 
 		this.#enabledMode = true

@@ -88,12 +88,12 @@ table tbody {
 
 /* LINKS */
 
-a.disabled {
+a.edu-disabled {
 	color: #bdbdbd;
 	user-select: none;
 }
 
-a.enabled {
+a.edu-enabled {
 	color: rgb(3, 155, 229);
 	user-select: all;
 }
