@@ -93,13 +93,14 @@ class EducationHandler
 		let btnNextEdu = document.getElementById('btnNextEdu')
 
 		let _this = this
-		btnNextEdu.addEventListener('click', function(e) {
+		btnNextEdu.addEventListener('click', e => {
 			e.preventDefault()
 			_this.#exitDisabledMode()
-			tabsInstance.select( this.getAttribute('data-tab') )
+			tabsInstance.select( e.target.getAttribute('data-tab') )
 		})
 
 	}
+	
 
 	#insertEducation() {
 	    let name = this.#eduName.value.trim()
