@@ -86,7 +86,8 @@ class EducationHandler
 	    let start = this.#eduStart.value.trim()
 	    let end = this.#eduEnd.value.trim()
 
-	    if (name && institute && start && end) {
+	    // if (name && institute && start && end) {
+		if ( this.#isValidForm(name, institute, start, end) ) {
 			let index = this.#$tableEduBody.children().length
 	        let newRow = 
 	        `<tr>
@@ -125,7 +126,8 @@ class EducationHandler
 	    let end = this.#eduEnd.value.trim()
 		let index = this.#eduIndex.value.trim()
 
-	    if (name && institute && start && end) {
+	    // if (name && institute && start && end) {
+		if ( this.#isValidForm(name, institute, start, end) ) {
 			let updatedRow = 
 			`<td>${start}-${end}</td>
 	         <td>${name}</td>
@@ -164,6 +166,35 @@ class EducationHandler
 		this.#$legend.html(EducationHandler.#FORM_LEGEND_UPDATE)
 		this.#$btnAuxEdu.html(EducationHandler.#BTN_AUX_CANCEL)
 		this.#$btnMainEdu.html(EducationHandler.#BTN_MAIN_UPDATE)
+	}
+
+	#isValidForm(name, institute, start, end) {
+		let isValidName = true
+		let isValidInstitute = true
+		let isValidStart = true
+		let isValidEnd = true 
+
+		if (name.trim() === '') {
+			this.#addInvalidStyle(this.#eduName)
+			isValidName = false
+		}
+		if (institute.trim() === '') {
+			this.#addInvalidStyle(this.#eduInstitute)
+			isValidInstitute = false
+		}
+		if (start.trim() === '' || isNaN(start) || start < 1000 || start > 9999) { 
+			this.#addInvalidStyle(this.#eduStart)
+			isValidStart = false
+		}
+		if (end.trim() === '' || isNaN(end) || end < 1000 || end > 9999) {
+			this.#addInvalidStyle(this.#eduEnd)
+			isValidEnd = false
+		}
+		return isValidName && isValidInstitute && isValidStart && isValidEnd
+	}
+
+	#addInvalidStyle(element) {
+		element.classList.add('invalid')
 	}
 
 }//
