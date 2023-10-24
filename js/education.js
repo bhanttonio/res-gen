@@ -31,6 +31,7 @@ class EducationHandler
 		this.#setUpCharacterCounters()
 		this.#setUpAuxButton()
 		this.#setUpMainButton()
+		this.#setUpNextButton()
 	}
 
 	#loadRefs() {
@@ -82,6 +83,23 @@ class EducationHandler
 			this.blur()	
 	    })
     }
+
+	#setUpNextButton() {
+		console.log('\t\t next button')		
+
+		let elTabs = document.getElementById('tabs')
+		let tabsInstance = M.Tabs.getInstance(elTabs)
+
+		let btnNextEdu = document.getElementById('btnNextEdu')
+
+		let _this = this
+		btnNextEdu.addEventListener('click', function(e) {
+			e.preventDefault()
+			_this.#exitDisabledMode()
+			tabsInstance.select( this.getAttribute('data-tab') )
+		})
+
+	}
 
 	#insertEducation() {
 	    let name = this.#eduName.value.trim()
@@ -227,6 +245,12 @@ class EducationHandler
 		$links.attr('href', '#')
 
 		this.#enabledMode = true
+	}
+
+	#exitDisabledMode() {
+		if (this.#enabledMode == false) {
+			this.#$btnAuxEdu.trigger('click')
+		}
 	}
 
 }//
