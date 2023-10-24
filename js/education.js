@@ -197,7 +197,7 @@ class EducationHandler
 			this.#addInvalidStyle(this.#eduStart)
 			isValidStart = false
 		}
-		if (end.trim() === '' || isNaN(end) || end < 1000 || end > 9999) {
+		if (end.trim() === '' || isNaN(end) || end < 1000 || end > 9999 || end < start) {
 			this.#addInvalidStyle(this.#eduEnd)
 			isValidEnd = false
 		}
