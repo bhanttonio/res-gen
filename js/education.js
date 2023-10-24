@@ -55,28 +55,28 @@ class EducationHandler
     #setUpAuxButton() {
     	console.log('\t\t aux button')
 		let _this = this
-    	this.#$btnAuxEdu.on('click', function(e) {
+    	_this.#$btnAuxEdu.on('click', function(e) {
         	e.preventDefault()
 			if (this.textContent === EducationHandler.#BTN_AUX_CANCEL) {
 				_this.#formInInsertMode()
 			}
-			_this.#resetForm(this)
+			_this.#resetForm()
+			this.blur()
     	})
     }
 
     #setUpMainButton() {
     	console.log('\t\t main button')
 		let _this = this
-    	this.#$btnMainEdu.on('click', function(e) {
+    	_this.#$btnMainEdu.on('click', function(e) {
 	        e.preventDefault()
 			if (this.textContent === EducationHandler.#BTN_MAIN_UPDATE) {
 				_this.#updateEducation()
-				_this.#formInInsertMode()
 			}
 			else {
 				_this.#insertEducation()
 			}
-			_this.#resetForm(this)
+			this.blur()	
 	    })
     }
 
@@ -97,6 +97,8 @@ class EducationHandler
 	            <td><a href="#" onclick="educationHandler.removeEducation(event, ${index})">Eliminar</a></td>
 	        </tr>`
 	        this.#$tableEduBody.append(newRow)
+
+			this.#resetForm()
 	    }
 	}
 
@@ -130,7 +132,11 @@ class EducationHandler
 	         <td>${institute}</td>
 	         <td><a href="#" onclick="educationHandler.selectEducation(event, ${index})">Editar</a></td>
 	         <td><a href="#" onclick="educationHandler.removeEducation(event, ${index})">Eliminar</a></td>`
+			 
 			this.#$tableEduBody.children().eq(index).html(updatedRow)
+
+			this.#formInInsertMode()
+			this.#resetForm()
 		}
 	}
 
@@ -143,10 +149,9 @@ class EducationHandler
 			$row.hide()
 	}
 
-	#resetForm($button) {
+	#resetForm() {
 		this.#formEdu.reset()
 		this.#setUpCharacterCounters()
-		$button.blur()
 	}
 
 	#formInInsertMode() {
