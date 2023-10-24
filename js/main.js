@@ -52,7 +52,7 @@ class MainHandler
         console.log('\t\t next buttons')
 
         let tabsInstance = M.Tabs.getInstance(this.elTabs)
-        let $btnsNext = $('button[id^="btnNext"]')
+        let $btnsNext = $('button[id^="btn-next-"]')
 
         $btnsNext.on('click', function(e) {
             e.preventDefault()
