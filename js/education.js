@@ -30,7 +30,10 @@ class EducationHandler
 	static #COL_INSTITUTE = 2
 
 	static #CSS_CLASS_REMOVED = 'removed'   // applied to removed rows of the table
-	static #ROWS_SELECTOR                   // selector for active (not deleted) rows in the table
+	static #CSS_CLASS_LINK_ENABLED = 'resgen-enabled'
+	static #CSS_CLASS_LINK_DISABLED = 'resgen-disabled'
+
+	static #ROWS_SELECTOR   // selector for active (not deleted) rows in the table
 	
 
 	constructor() {
@@ -246,8 +249,8 @@ class EducationHandler
 		let $links = this.#$tableEduBody.find( EducationHandler.#ROWS_SELECTOR )
 		// for (let i = 0; i < $links.length; i++) console.log( $links[i] )
 		
-		$links.removeClass('edu-enabled')
-		$links.addClass('edu-disabled')
+		$links.removeClass( EducationHandler.#CSS_CLASS_LINK_ENABLED )
+		$links.addClass( EducationHandler.#CSS_CLASS_LINK_DISABLED )
 		$links.removeAttr('href')
 
 		this.#enabledMode = false
@@ -256,8 +259,8 @@ class EducationHandler
 	#enableOptions() {
 		let $links = this.#$tableEduBody.find( EducationHandler.#ROWS_SELECTOR )
 
-		$links.removeClass('edu-disabled')
-		$links.addClass('edu-enabled')
+		$links.removeClass( EducationHandler.#CSS_CLASS_LINK_DISABLED )
+		$links.addClass( EducationHandler.#CSS_CLASS_LINK_ENABLED )
 		$links.attr('href', '#')
 
 		this.#enabledMode = true

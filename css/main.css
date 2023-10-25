@@ -81,12 +81,12 @@ table thead {
 
 /* LINKS */
 
-a.edu-disabled {
+a.resgen-disabled {
 	color: #bdbdbd;
 	user-select: none;
 }
 
-a.edu-enabled {
+a.resgen-enabled {
 	color: rgb(3, 155, 229);
 	user-select: all;
 }
