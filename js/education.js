@@ -29,7 +29,7 @@ class EducationHandler
 	static #COL_NAME = 1
 	static #COL_INSTITUTE = 2
 
-	static #CSS_CLASS_REMOVED = 'removed'   // applied to removed rows of the table
+	static #CSS_CLASS_ROW_REMOVED = 'resgen-removed'
 	static #CSS_CLASS_LINK_ENABLED = 'resgen-enabled'
 	static #CSS_CLASS_LINK_DISABLED = 'resgen-disabled'
 
@@ -63,7 +63,7 @@ class EducationHandler
 		this.#$btnMainEdu = $(this.#formEdu.elements.btnMainEdu)
 		this.#$tableEduBody = $('table#tableEdu tbody')
 
-		EducationHandler.#ROWS_SELECTOR = `tr:not(".${EducationHandler.#CSS_CLASS_REMOVED}") td a` 
+		EducationHandler.#ROWS_SELECTOR = `tr:not(".${EducationHandler.#CSS_CLASS_ROW_REMOVED}") td a` 
 	}
 
 	#setUpCharCounters() {
@@ -184,7 +184,7 @@ class EducationHandler
 			let eduName = $row.children().eq(EducationHandler.#COL_NAME).text()
 
 			if (confirm(`Confirma eliminaci\xF3n de '${eduName}'`)) {
-				$row.addClass( EducationHandler.#CSS_CLASS_REMOVED )
+				$row.addClass( EducationHandler.#CSS_CLASS_ROW_REMOVED )
 				$row.hide()
 			}
 		}
@@ -247,7 +247,7 @@ class EducationHandler
 
 	#disableOptions() {
 		let $links = this.#$tableEduBody.find( EducationHandler.#ROWS_SELECTOR )
-		// for (let i = 0; i < $links.length; i++) console.log( $links[i] )
+		//for (let i = 0; i < $links.length; i++) console.log( $links[i] )
 		
 		$links.removeClass( EducationHandler.#CSS_CLASS_LINK_ENABLED )
 		$links.addClass( EducationHandler.#CSS_CLASS_LINK_DISABLED )
@@ -274,7 +274,7 @@ class EducationHandler
 
 	getEducation() {
 		let eduList = new Array()
-		let $activeRows = this.#$tableEduBody.find(`tr:not(".${EducationHandler.#CSS_CLASS_REMOVED}")`)
+		let $activeRows = this.#$tableEduBody.find(`tr:not(".${EducationHandler.#CSS_CLASS_ROW_REMOVED}")`)
 
 		$activeRows.each( function(index) {
 			let $row = $(this).children()
