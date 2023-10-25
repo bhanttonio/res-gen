@@ -13,19 +13,24 @@ class EducationHandler
 	#$btnMainEdu
 	#$tableEduBody
 
-	// to control enabled (insertion) and disabled (updating) modes of table's links
-	#enabledMode = true
+	#enabledMode = true   // to control enabled (insertion) and disabled (updating) modes of table's links
 
 
 	static #FORM_LEGEND_INSERT = 'Escolaridad'
 	static #FORM_LEGEND_UPDATE = 'Escolaridad [Edici&oacute;n]'
+
 	static #BTN_AUX_CLEAN = 'Limpiar'
 	static #BTN_AUX_CANCEL = 'Cancelar'
+
 	static #BTN_MAIN_INSERT = 'A&ntilde;adir'
 	static #BTN_MAIN_UPDATE = 'Editar'
+
 	static #COL_PERIOD = 0
 	static #COL_NAME = 1
 	static #COL_INSTITUTE = 2
+
+	static #CSS_CLASS_REMOVED = 'removed'   // applied to removed rows of the table
+	static #ROWS_SELECTOR                   // selector for active (not deleted) rows in the table
 	
 
 	constructor() {
@@ -54,6 +59,8 @@ class EducationHandler
 		this.#$btnAuxEdu = $(this.#formEdu.elements.btnAuxEdu)
 		this.#$btnMainEdu = $(this.#formEdu.elements.btnMainEdu)
 		this.#$tableEduBody = $('table#tableEdu tbody')
+
+		EducationHandler.#ROWS_SELECTOR = `tr:not(".${EducationHandler.#CSS_CLASS_REMOVED}") td a` 
 	}
 
 	#setUpCharCounters() {
@@ -173,6 +180,7 @@ class EducationHandler
 			let eduName = $row.children().eq(EducationHandler.#COL_NAME).text()
 
 			if (confirm(`Confirma eliminaci\xF3n de '${eduName}'`)) {
+				$row.addClass( EducationHandler.#CSS_CLASS_REMOVED )
 				$row.hide()
 			}
 		}
@@ -234,7 +242,7 @@ class EducationHandler
 	// handle enabled and disabled modes of the links in the table
 
 	#disableOptions() {
-		let $links = this.#$tableEduBody.find('tr td a')
+		let $links = this.#$tableEduBody.find( EducationHandler.#ROWS_SELECTOR )
 		// for (let i = 0; i < $links.length; i++) console.log( $links[i] )
 		
 		$links.removeClass('edu-enabled')
@@ -245,9 +253,7 @@ class EducationHandler
 	}
 
 	#enableOptions() {
-		// should be "tr:visible td a" to discard deleted rows, but when moving to a different tab 
-		// all rows get hide, so that selector didn't work in the last case 
-		let $links = this.#$tableEduBody.find('tr td a')   
+		let $links = this.#$tableEduBody.find( EducationHandler.#ROWS_SELECTOR )
 
 		$links.removeClass('edu-disabled')
 		$links.addClass('edu-enabled')
