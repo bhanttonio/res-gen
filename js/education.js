@@ -126,6 +126,7 @@ class EducationHandler
 
 			this.#resetForm()   // clean form only if everything was ok 
 	    }
+		// console.log( JSON.stringify(this.getEducation(), null, 2) )
 	}
 
 	selectEducation(event, index) {   // not a private method because it's called from the links in the table
@@ -268,5 +269,33 @@ class EducationHandler
 		}
 	}
 
+	getEducation() {
+		let eduList = new Array()
+		let $activeRows = this.#$tableEduBody.find(`tr:not(".${EducationHandler.#CSS_CLASS_REMOVED}")`)
+
+		$activeRows.each( function(index) {
+			let $row = $(this).children()
+
+			let name = $row.eq(EducationHandler.#COL_NAME).text()
+			let institute = $row.eq(EducationHandler.#COL_INSTITUTE).text()
+			let period = $row.eq(EducationHandler.#COL_PERIOD).text().split('-')
+			let start = period[0]
+			let end = period[1]
+
+			eduList.push( new Education(name, institute, start, end) )
+		})
+
+		return eduList
+	}
+
 }//
 
+
+class Education {
+	constructor(name, institute, start, end) {
+		this.name = name
+		this.institute = institute
+		this.start = start
+		this.end = end
+	}
+}
