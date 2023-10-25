@@ -13,6 +13,10 @@ class EducationHandler
 	#$btnMainEdu
 	#$tableEduBody
 
+	// to control enabled (insertion) and disabled (updating) modes of table's links
+	#enabledMode = true
+
+
 	static #FORM_LEGEND_INSERT = 'Escolaridad'
 	static #FORM_LEGEND_UPDATE = 'Escolaridad [Edici&oacute;n]'
 	static #BTN_AUX_CLEAN = 'Limpiar'
@@ -22,19 +26,23 @@ class EducationHandler
 	static #COL_PERIOD = 0
 	static #COL_NAME = 1
 	static #COL_INSTITUTE = 2
-
-	#enabledMode = true
 	
+
 	constructor() {
 		console.log('\t education handler')
+
 		this.#loadRefs()
-		this.#setUpCharacterCounters()
+		this.#setUpCharCounters()
 		this.#setUpAuxButton()
 		this.#setUpMainButton()
-		this.#setUpNextButton()
 	}
 
+
+	// config methods
+
 	#loadRefs() {
+		console.log('\t\t references')
+
 		this.#formEdu = document.getElementById('formEducation')
 		this.#eduName = this.#formEdu.elements.eduName
 		this.#eduInstitute = this.#formEdu.elements.eduInstitute
@@ -48,7 +56,9 @@ class EducationHandler
 		this.#$tableEduBody = $('table#tableEdu tbody')
 	}
 
-	#setUpCharacterCounters() {
+	#setUpCharCounters() {
+		console.log('\t\t character counters')
+
 		$(this.#eduName).characterCounter()
 		$(this.#eduInstitute).characterCounter()
 		$(this.#eduStart).characterCounter()
@@ -57,11 +67,12 @@ class EducationHandler
 
     #setUpAuxButton() {
     	console.log('\t\t aux button')
+
 		let _this = this
-    	_this.#$btnAuxEdu.on('click', function(e) {
+    	_this.#$btnAuxEdu.on('click', function(e) {   // on click cancel update or just clean form (in insert mode)
         	e.preventDefault()
 			if (this.textContent === EducationHandler.#BTN_AUX_CANCEL) {
-				_this.#formInInsertMode()
+				_this.#formInInsertMode()   // if an update is canceled, set the form in insert mode and enable links in the table
 				_this.#enableOptions()
 			}
 			_this.#resetForm()
@@ -71,8 +82,9 @@ class EducationHandler
 
     #setUpMainButton() {
     	console.log('\t\t main button')
+
 		let _this = this
-    	_this.#$btnMainEdu.on('click', function(e) {
+    	_this.#$btnMainEdu.on('click', function(e) {   // on click update entry or insert a new one
 	        e.preventDefault()
 			if (this.textContent === EducationHandler.#BTN_MAIN_UPDATE) {
 				_this.#updateEducation()
@@ -84,23 +96,8 @@ class EducationHandler
 	    })
     }
 
-	#setUpNextButton() {
-		console.log('\t\t next button')		
 
-		let elTabs = document.getElementById('tabs')
-		let tabsInstance = M.Tabs.getInstance(elTabs)
-
-		let btnNextEdu = document.getElementById('btnNextEdu')
-
-		let _this = this
-		btnNextEdu.addEventListener('click', e => {
-			e.preventDefault()
-			_this.#exitDisabledMode()
-			tabsInstance.select( e.target.getAttribute('data-tab') )
-		})
-
-	}
-	
+	// crud operations
 
 	#insertEducation() {
 	    let name = this.#eduName.value.trim()
@@ -120,14 +117,14 @@ class EducationHandler
 	        </tr>`
 	        this.#$tableEduBody.append(newRow)
 
-			this.#resetForm()
+			this.#resetForm()   // clean form only if everything was ok 
 	    }
 	}
 
-	selectEducation(event, index) {
-		if (this.#enabledMode) 
+	selectEducation(event, index) {   // not a private method because it's called from the links in the table
+		if (this.#enabledMode)   // select entry only if no update is in progress
 		{
-			console.log(`# select education row [${index}]`)
+			console.log(`# select edu row [${index}]`)
 			event.preventDefault()
 
 			this.#formInUpdateMode()
@@ -141,7 +138,7 @@ class EducationHandler
 			this.#eduName.value = $row.eq(EducationHandler.#COL_NAME).text(); this.#eduName.focus()
 			this.#eduIndex.value = index
 
-			this.#disableOptions()
+			this.#disableOptions()   // disable links in the table, while updating an entry
 		}
 	}
 
@@ -162,14 +159,14 @@ class EducationHandler
 			 
 			this.#$tableEduBody.children().eq(index).html(updatedRow)
 
-			this.#formInInsertMode()
+			this.#formInInsertMode()  // after an update, return form to insert mode, clean it and enable links in the table
 			this.#resetForm()
 			this.#enableOptions()
 		}
 	}
 
-	removeEducation(event, index) {
-		if (this.#enabledMode) 
+	removeEducation(event, index) {   // not a private method because it's called from the links in the table
+		if (this.#enabledMode)   // remove entry only if no update is in progress
 		{
 			event.preventDefault()
 			let $row = this.#$tableEduBody.children().eq(index)
@@ -181,22 +178,8 @@ class EducationHandler
 		}
 	}
 
-	#resetForm() {
-		this.#formEdu.reset()
-		this.#setUpCharacterCounters()
-	}
 
-	#formInInsertMode() {
-		this.#$legend.html(EducationHandler.#FORM_LEGEND_INSERT)
-		this.#$btnAuxEdu.html(EducationHandler.#BTN_AUX_CLEAN)
-		this.#$btnMainEdu.html(EducationHandler.#BTN_MAIN_INSERT)
-	}
-
-	#formInUpdateMode() {
-		this.#$legend.html(EducationHandler.#FORM_LEGEND_UPDATE)
-		this.#$btnAuxEdu.html(EducationHandler.#BTN_AUX_CANCEL)
-		this.#$btnMainEdu.html(EducationHandler.#BTN_MAIN_UPDATE)
-	}
+	// form validation
 
 	#isValidForm(name, institute, start, end) {
 		let isValidName = true
@@ -227,8 +210,31 @@ class EducationHandler
 		element.classList.add('invalid')
 	}
 
+
+	// handle insert and updating modes of the form
+
+	#resetForm() {
+		this.#formEdu.reset()
+		this.#setUpCharCounters()
+	}
+
+	#formInInsertMode() {
+		this.#$legend.html(EducationHandler.#FORM_LEGEND_INSERT)
+		this.#$btnAuxEdu.html(EducationHandler.#BTN_AUX_CLEAN)
+		this.#$btnMainEdu.html(EducationHandler.#BTN_MAIN_INSERT)
+	}
+
+	#formInUpdateMode() {
+		this.#$legend.html(EducationHandler.#FORM_LEGEND_UPDATE)
+		this.#$btnAuxEdu.html(EducationHandler.#BTN_AUX_CANCEL)
+		this.#$btnMainEdu.html(EducationHandler.#BTN_MAIN_UPDATE)
+	}
+
+
+	// handle enabled and disabled modes of the links in the table
+
 	#disableOptions() {
-		let $links = this.#$tableEduBody.find('tr:visible td a')
+		let $links = this.#$tableEduBody.find('tr td a')
 		// for (let i = 0; i < $links.length; i++) console.log( $links[i] )
 		
 		$links.removeClass('edu-enabled')
@@ -239,7 +245,9 @@ class EducationHandler
 	}
 
 	#enableOptions() {
-		let $links = this.#$tableEduBody.find('tr:visible td a')
+		// should be "tr:visible td a" to discard deleted rows, but when moving to a different tab 
+		// all rows get hide, so that selector didn't work in the last case 
+		let $links = this.#$tableEduBody.find('tr td a')   
 
 		$links.removeClass('edu-disabled')
 		$links.addClass('edu-enabled')
@@ -248,9 +256,9 @@ class EducationHandler
 		this.#enabledMode = true
 	}
 
-	#exitDisabledMode() {
+	exitDisabledMode() {  // not private because it's called from an external method that handles custom events on the tabs component
 		if (this.#enabledMode == false) {
-			this.#$btnAuxEdu.trigger('click')
+			this.#$btnAuxEdu.trigger('click')  // trigger cancel button while updating an entry, if the user moves to another tab
 		}
 	}
 
