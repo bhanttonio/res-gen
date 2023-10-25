@@ -7,7 +7,6 @@
 
 h1, h2, h3, h4, h5, h6 {
 	color: #ee6e73;
-	font-weight: 350;
 }
 
 
@@ -31,18 +30,15 @@ div.input-field input[type="text"] {
 	height: 2rem;
 	margin: 0 0 4px 0;
 	font-size: 14px;
-	font-weight: 350;
 }
 textarea.materialize-textarea {
 	margin: 0 0 2px 0;
 	font-size: 14px;
-	font-weight: 350 !important;
 }
 .input-field > label {
 	color: black;
 	transform: translateY(0px);
 	font-size: 14px;
-	font-weight: 350;
 }
 span.helper-text {
 	padding-left: 0px !important;
@@ -80,9 +76,6 @@ table {
 }
 table thead {
 	font-weight: bold;
-}
-table tbody {
-	font-weight: 350;
 }
 
 
