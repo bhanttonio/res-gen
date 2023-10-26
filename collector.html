@@ -74,21 +74,21 @@
 
 
 			<!-- education -->
-			<section id="education" class="section col s12">
+			<section id="education" class="row section">
 
-				<form id="formEducation" class="col s4">
-					<fieldset>
+				<form id="formEducation" class="col s3">
+					<fieldset class="row">
 						<legend>Escolaridad</legend>
 						<input name="eduIndex" type="hidden" value="">
 						<div class="input-field col s12">
 							<input id="eduName" name="eduName" type="text" class="validate" data-length="75" maxlength="75">
 							<label for="eduName">Grado</label>
-							<span class="helper-text col s10">Ej. Licenciatura en Administraci&oacute;n</span>
+							<span class="helper-text col s10">Ej. Lic. en Administraci&oacute;n</span>
 						</div>
 						<div class="input-field col s12">
 							<input id="eduInstitute" name="eduInstitute" type="text" class="validate" data-length="75" maxlength="75">
 							<label for="eduInstitute">Instituci&oacute;n</label>
-							<span class="helper-text col s10">Ej. Instituto Polit&eacute;cnico Nacional</span>
+							<span class="helper-text col s10">Ej. UNAM</span>
 						</div>
 						<div class="input-field col s6">
 							<input id="eduStart" name="eduStart" type="text" class="validate" data-length="4" maxlength="4">
@@ -100,20 +100,20 @@
 							<label for="eduEnd">Fin</label>
 							<span class="helper-text col s8">Ej. 2020</span>
 						</div>
-						<div class="input-field col s12 push-s2 right-align">
+						<div class="input-field col s12">
 							<div class="row" style="margin-bottom: 0px;">
-								<div class="col s5">
+								<div class="col s6">
 									<button id="btnAuxEdu" name="btnAuxEdu" class="waves-effect btn-flat btn-small" tabindex="-1">Limpiar</button>
 								</div>
-								<div class="col s5">
+								<div class="col s6">
 									<button id="btnMainEdu" name="btnMainEdu" class="waves-effect btn-flat btn-small">A&ntilde;adir</button>
 								</div>
 							</div>
 						</div>
 					</fieldset>
 				</form>
-
-				<article class="col s8">
+				
+				<article class="col s9">
 					<table id="tableEdu" class="striped">
 						<thead>
 							<tr>
