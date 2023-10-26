@@ -27,25 +27,28 @@ div#wrap-tabs ul li a {
 /* FORM FIELDS */
 
 div.input-field input[type="text"] { 
-	height: 2rem;
-	margin: 0 0 4px 0;
-	font-size: 14px;
+	height: 2em;
+	margin: 0 0 2px 0;
+	font-size: 13px;
 }
 textarea.materialize-textarea {
-	margin: 0 0 2px 0;
-	font-size: 14px;
+	margin: 0 0 0 0;
+	padding-bottom: 0.5em;
+	font-size: 13px;
 }
 .input-field > label {
 	color: black;
 	transform: translateY(0px);
-	font-size: 14px;
+	font-size: 13px;
 }
 span.helper-text {
 	padding-left: 0px !important;
 	color: rgba(0, 0, 0, 0.44) !important;
+	font-size: 11px !important;
 }
 span.character-counter { 
 	color: rgba(0, 0, 0, 0.44); 
+	font-size: 11px !important;
 }
 
 /* button small */
@@ -63,10 +66,12 @@ span.character-counter {
 /* fieldset */
 fieldset {
 	border: 1px solid #e0e0e0;
+	
 }
 fieldset legend {
 	font-size: 14px;
 	font-weight: bold;
+	padding-bottom: 0.25em;
 }
 
 

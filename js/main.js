@@ -9,6 +9,15 @@ $(function() {
     new MainHandler()
     educationHandler = new EducationHandler()
 
+    let arr = window.location.href.split('?')
+    let keyValue = arr.length > 1 ? arr[1] : null
+    arr = keyValue ? keyValue.split('=') : new Array()
+    let tab = arr.length > 1 ? arr[1].trim().toLowerCase() : null
+    let tabsInstance = M.Tabs.getInstance(document.getElementById('tabs'))
+    if (['basic', 'education', 'courses', 'languages', 'skills', 'sectors', 'int-work-exp', 'ext-work-exp'].includes(tab)) {
+        tabsInstance.select(tab)
+    }
+
     console.log('finished')
 });
 
@@ -71,20 +80,6 @@ class MainHandler
 
 		})
     }
-
-    /*
-    #setTabOnLoad() {
-        console.log('\t\t tab on load')
-
-        let arr = window.location.href.split('?')
-        let keyValue = arr.length > 1 ? arr[1] : null
-        arr = keyValue ? keyValue.split('=') : new Array()
-        let tab = arr.length > 1 ? arr[1].trim().toLowerCase() : null
-        if (['basic', 'education', 'courses', 'languages', 'skills', 'sectors', 'int-work-exp', 'ext-work-exp'].includes(tab)) {
-            tabsInstance.select(tab)
-        }
-    }
-    */
 
 }//
 
