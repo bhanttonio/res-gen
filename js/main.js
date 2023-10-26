@@ -26,12 +26,14 @@ class MainHandler
 {
     #$tabs
     #$btnsNext
+    #$btnsPrev
 
     constructor() {
         console.log('\t main handler')
         this.#loadRefs()
         this.#setUpCharCounters()
         this.#setUpNextButtons()
+        this.#setUpPrevButtons()
         this.#setUpTabs()
     }
 
@@ -39,6 +41,7 @@ class MainHandler
         console.log('\t\t references')
         this.#$tabs = $('ul#tabs')
         this.#$btnsNext = $('button[id^="btnNext"]')
+        this.#$btnsPrev = $('button[id^="btnPrev"]')
     }
 
     #setUpCharCounters() {
@@ -58,9 +61,19 @@ class MainHandler
         console.log('\t\t next buttons')
         let tabsInstance = M.Tabs.getInstance(this.#$tabs)
 
-        this.#$btnsNext.on('click', function(e) {   // on click change tab
+        this.#$btnsNext.on('click', function(e) {   // on click change to next tab
             e.preventDefault()
+            let tab = e.target.getAttribute('data-tab')
+            tabsInstance.select(tab)
+        })
+    }
 
+    #setUpPrevButtons() {
+        console.log('\t\t prev buttons')
+        let tabsInstance = M.Tabs.getInstance(this.#$tabs)
+
+        this.#$btnsPrev.on('click', function(e) {   // on click change to previous tab
+            e.preventDefault()
             let tab = e.target.getAttribute('data-tab')
             tabsInstance.select(tab)
         })
