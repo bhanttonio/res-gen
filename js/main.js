@@ -24,7 +24,7 @@ $(function() {
 
 class MainHandler 
 {
-    #$tabs
+    #elTabs
     #$btnsNext
     #$btnsPrev
 
@@ -39,7 +39,7 @@ class MainHandler
 
     #loadRefs() {
         console.log('\t\t references')
-        this.#$tabs = $('ul#tabs')
+        this.#elTabs = document.getElementById('tabs')
         this.#$btnsNext = $('button[id^="btnNext"]')
         this.#$btnsPrev = $('button[id^="btnPrev"]')
     }
@@ -59,7 +59,7 @@ class MainHandler
 
     #setUpNextButtons() {
         console.log('\t\t next buttons')
-        let tabsInstance = M.Tabs.getInstance(this.#$tabs)
+        let tabsInstance = M.Tabs.getInstance(this.#elTabs)
 
         this.#$btnsNext.on('click', function(e) {   // on click change to next tab
             e.preventDefault()
@@ -70,7 +70,7 @@ class MainHandler
 
     #setUpPrevButtons() {
         console.log('\t\t prev buttons')
-        let tabsInstance = M.Tabs.getInstance(this.#$tabs)
+        let tabsInstance = M.Tabs.getInstance(this.#elTabs)
 
         this.#$btnsPrev.on('click', function(e) {   // on click change to previous tab
             e.preventDefault()
@@ -82,7 +82,7 @@ class MainHandler
     #setUpTabs() {
         console.log('\t\t tabs')
 
-		this.#$tabs.on('click', 'a', function(e) {   // on click leave tab's state consistent
+		$(this.#elTabs).on('click', 'a', function(e) {   // on click leave tab's state consistent
 			let href = e.target.getAttribute('href')
 			console.log(`>> section: ${href}`)
 
