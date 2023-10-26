@@ -25,9 +25,10 @@ class EducationHandler
 	static #BTN_MAIN_INSERT = 'A&ntilde;adir'
 	static #BTN_MAIN_UPDATE = 'Editar'
 
-	static #COL_PERIOD = 0
-	static #COL_NAME = 1
-	static #COL_INSTITUTE = 2
+	static #COL_START = 0
+	static #COL_END = 1
+	static #COL_NAME = 2
+	static #COL_INSTITUTE = 3
 
 	static #CSS_CLASS_ROW_REMOVED = 'resgen-removed'
 	static #CSS_CLASS_LINK_ENABLED = 'resgen-enabled'
@@ -119,7 +120,8 @@ class EducationHandler
 			let index = this.#$tableEduBody.children().length
 	        let newRow = 
 	        `<tr>
-	            <td>${start}-${end}</td>
+	            <td>${start}</td>
+				<td>${end}</td>
 	            <td>${name}</td>
 	            <td>${institute}</td>
 				<td><a href="#">&bigtriangleup;</a></td>
@@ -141,12 +143,10 @@ class EducationHandler
 			event.preventDefault()
 
 			this.#formInUpdateMode()
-
 			let $row = this.#$tableEduBody.children().eq(index).children()
-			let period = $row.eq(EducationHandler.#COL_PERIOD).text().split('-')
 
-			this.#eduStart.value = period[0]; this.#eduStart.focus()
-			this.#eduEnd.value = period[1]; this.#eduEnd.focus()
+			this.#eduStart.value = $row.eq(EducationHandler.#COL_START).text(); this.#eduStart.focus()
+			this.#eduEnd.value = $row.eq(EducationHandler.#COL_END).text(); this.#eduEnd.focus()
 			this.#eduInstitute.value = $row.eq(EducationHandler.#COL_INSTITUTE).text(); this.#eduInstitute.focus()
 			this.#eduName.value = $row.eq(EducationHandler.#COL_NAME).text(); this.#eduName.focus()
 			this.#eduIndex.value = index
@@ -164,7 +164,8 @@ class EducationHandler
 
 		if ( this.#isValidForm(name, institute, start, end) ) {
 			let updatedRow = 
-			`<td>${start}-${end}</td>
+			`<td>${start}</td>
+			 <td>${end}</td>
 	         <td>${name}</td>
 	         <td>${institute}</td>
 			 <td><a href="#">&bigtriangleup;</a></td>
@@ -285,9 +286,8 @@ class EducationHandler
 
 			let name = $row.eq(EducationHandler.#COL_NAME).text()
 			let institute = $row.eq(EducationHandler.#COL_INSTITUTE).text()
-			let period = $row.eq(EducationHandler.#COL_PERIOD).text().split('-')
-			let start = period[0]
-			let end = period[1]
+			let start = $row.eq(EducationHandler.#COL_START).text()
+			let end = $row.eq(EducationHandler.#COL_END).text()
 
 			eduList.push( new Education(name, institute, start, end) )
 		})
