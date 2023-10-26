@@ -122,6 +122,8 @@ class EducationHandler
 	            <td>${start}-${end}</td>
 	            <td>${name}</td>
 	            <td>${institute}</td>
+				<td><a href="#">&bigtriangleup;</a></td>
+				<td><a href="#">&bigtriangledown;</a></td>
 	            <td><a href="#" onclick="educationHandler.selectEducation(event, ${index})">Editar</a></td>
 	            <td><a href="#" onclick="educationHandler.removeEducation(event, ${index})">Eliminar</a></td>
 	        </tr>`
@@ -165,6 +167,8 @@ class EducationHandler
 			`<td>${start}-${end}</td>
 	         <td>${name}</td>
 	         <td>${institute}</td>
+			 <td><a href="#">&bigtriangleup;</a></td>
+			 <td><a href="#">&bigtriangledown;</a></td>
 	         <td><a href="#" onclick="educationHandler.selectEducation(event, ${index})">Editar</a></td>
 	         <td><a href="#" onclick="educationHandler.removeEducation(event, ${index})">Eliminar</a></td>`
 			 
