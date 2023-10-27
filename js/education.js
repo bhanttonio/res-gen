@@ -117,21 +117,22 @@ class EducationHandler
 	    let end = this.#eduEnd.value.trim()
 
 		if ( this.#isValidForm(name, institute, start, end) ) {
-			let index = this.#$tableEduBody.children().length
 	        let newRow = 
 	        `<tr>
 	            <td>${name}</td>
 	            <td>${institute}</td>
 				<td>${start}</td>
 				<td>${end}</td>
-				<td><a href="#" onclick="educationHandler.moveRowUp(event, ${index})">&bigtriangleup;</a></td>
-				<td><a href="#" onclick="educationHandler.moveRowDown(event, ${index})">&bigtriangledown;</a></td>
+				<td><a href="#" onclick="educationHandler.moveRowUp(event)">&bigtriangleup;</a></td>
+				<td><a href="#" onclick="educationHandler.moveRowDown(event)">&bigtriangledown;</a></td>
 	            <td><a href="#" onclick="educationHandler.selectEducation(event)">Editar</a></td>
 	            <td><a href="#" onclick="educationHandler.removeEducation(event)">Eliminar</a></td>
 	        </tr>`
 	        this.#$tableEduBody.append(newRow)
-
 			this.#resetForm()   // clean form only if everything was ok 
+
+			let index = this.#$tableEduBody.children().length - 1
+			console.log(`[education] row ${index} inserted!`)
 	    }
 	}
 
@@ -168,8 +169,8 @@ class EducationHandler
 	         <td>${institute}</td>
 			 <td>${start}</td>
 			 <td>${end}</td>
-			 <td><a href="#" onclick="educationHandler.moveRowUp(event, ${index})">&bigtriangleup;</a></td>
-			 <td><a href="#" onclick="educationHandler.moveRowDown(event, ${index})">&bigtriangledown;</a></td>
+			 <td><a href="#" onclick="educationHandler.moveRowUp(event)">&bigtriangleup;</a></td>
+			 <td><a href="#" onclick="educationHandler.moveRowDown(event)">&bigtriangledown;</a></td>
 	         <td><a href="#" onclick="educationHandler.selectEducation(event)">Editar</a></td>
 	         <td><a href="#" onclick="educationHandler.removeEducation(event)">Eliminar</a></td>`
 			 
@@ -178,6 +179,8 @@ class EducationHandler
 			this.#formInInsertMode()  // after an update, return form to insert mode, clean it and enable links in the table
 			this.#resetForm()
 			this.#enableOptions()
+
+			console.log(`[education] row ${index} updated!`)
 		}
 	}
 
