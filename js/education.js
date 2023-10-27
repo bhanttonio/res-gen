@@ -127,7 +127,7 @@ class EducationHandler
 				<td><a href="#" onclick="educationHandler.moveRowUp(event, ${index})">&bigtriangleup;</a></td>
 				<td><a href="#" onclick="educationHandler.moveRowDown(event, ${index})">&bigtriangledown;</a></td>
 	            <td><a href="#" onclick="educationHandler.selectEducation(event, ${index})">Editar</a></td>
-	            <td><a href="#" onclick="educationHandler.removeEducation(event, ${index})">Eliminar</a></td>
+	            <td><a href="#" onclick="educationHandler.removeEducation(event)">Eliminar</a></td>
 	        </tr>`
 	        this.#$tableEduBody.append(newRow)
 
@@ -170,7 +170,7 @@ class EducationHandler
 			 <td><a href="#" onclick="educationHandler.moveRowUp(event, ${index})">&bigtriangleup;</a></td>
 			 <td><a href="#" onclick="educationHandler.moveRowDown(event, ${index})">&bigtriangledown;</a></td>
 	         <td><a href="#" onclick="educationHandler.selectEducation(event, ${index})">Editar</a></td>
-	         <td><a href="#" onclick="educationHandler.removeEducation(event, ${index})">Eliminar</a></td>`
+	         <td><a href="#" onclick="educationHandler.removeEducation(event)">Eliminar</a></td>`
 			 
 			this.#$tableEduBody.children().eq(index).html(updatedRow)
 
@@ -180,18 +180,24 @@ class EducationHandler
 		}
 	}
 
-	removeEducation(event, index) {   // not a private method because it's called from the links in the table
-		if (this.#enabledMode)   // remove entry only if no update is in progress
+	removeEducation(event) {       // not a private method because it's called from the links in the table
+		if (this.#enabledMode)       // remove entry only if no update is in progress
 		{
 			event.preventDefault()
-			let $row = this.#$tableEduBody.children().eq(index)
+			let rowIndex = this.#rowIndexFrom(event)
+
+			let $row = this.#$tableEduBody.children().eq(rowIndex)
 			let eduName = $row.children().eq(EducationHandler.#COL_NAME).text()
 
 			if (confirm(`Confirma eliminaci\xF3n de '${eduName}'`)) {
-				$row.addClass( EducationHandler.#CSS_CLASS_ROW_REMOVED )
-				$row.hide()
+				$row.remove()
+				console.log(`[education] row ${rowIndex} removed!`)
 			}
 		}
+	}
+
+	#rowIndexFrom(event) {
+		return $(event.target).parent().parent().index();
 	}
 
 
