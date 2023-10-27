@@ -126,7 +126,7 @@ class EducationHandler
 				<td>${end}</td>
 				<td><a href="#" onclick="educationHandler.moveRowUp(event, ${index})">&bigtriangleup;</a></td>
 				<td><a href="#" onclick="educationHandler.moveRowDown(event, ${index})">&bigtriangledown;</a></td>
-	            <td><a href="#" onclick="educationHandler.selectEducation(event, ${index})">Editar</a></td>
+	            <td><a href="#" onclick="educationHandler.selectEducation(event)">Editar</a></td>
 	            <td><a href="#" onclick="educationHandler.removeEducation(event)">Eliminar</a></td>
 	        </tr>`
 	        this.#$tableEduBody.append(newRow)
@@ -135,22 +135,23 @@ class EducationHandler
 	    }
 	}
 
-	selectEducation(event, index) {   // not a private method because it's called from the links in the table
+	selectEducation(event) {   // not a private method because it's called from the links in the table
 		if (this.#enabledMode)   // select entry only if no update is in progress
 		{
-			console.log(`# select edu row [${index}]`)
 			event.preventDefault()
+			let rowIndex = this.#rowIndexFrom(event)
 
 			this.#formInUpdateMode()
-			let $row = this.#$tableEduBody.children().eq(index).children()
+			let $row = this.#$tableEduBody.children().eq(rowIndex).children()
 
 			this.#eduName.value = $row.eq(EducationHandler.#COL_NAME).text(); this.#eduName.focus()
 			this.#eduInstitute.value = $row.eq(EducationHandler.#COL_INSTITUTE).text(); this.#eduInstitute.focus()
 			this.#eduStart.value = $row.eq(EducationHandler.#COL_START).text(); this.#eduStart.focus()
 			this.#eduEnd.value = $row.eq(EducationHandler.#COL_END).text(); this.#eduEnd.focus()
-			this.#eduIndex.value = index
+			this.#eduIndex.value = rowIndex
 
 			this.#disableOptions()   // disable links in the table, while updating an entry
+			console.log(`[education] row ${rowIndex} selected!`)
 		}
 	}
 
@@ -169,7 +170,7 @@ class EducationHandler
 			 <td>${end}</td>
 			 <td><a href="#" onclick="educationHandler.moveRowUp(event, ${index})">&bigtriangleup;</a></td>
 			 <td><a href="#" onclick="educationHandler.moveRowDown(event, ${index})">&bigtriangledown;</a></td>
-	         <td><a href="#" onclick="educationHandler.selectEducation(event, ${index})">Editar</a></td>
+	         <td><a href="#" onclick="educationHandler.selectEducation(event)">Editar</a></td>
 	         <td><a href="#" onclick="educationHandler.removeEducation(event)">Eliminar</a></td>`
 			 
 			this.#$tableEduBody.children().eq(index).html(updatedRow)
