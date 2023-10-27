@@ -139,19 +139,19 @@ class EducationHandler
 		if (this.#enabledMode)   // select entry only if no update is in progress
 		{
 			event.preventDefault()
-			let rowIndex = this.#rowIndexFrom(event)
+			let index = this.#indexFrom(event)
 
 			this.#formInUpdateMode()
-			let $row = this.#$tableEduBody.children().eq(rowIndex).children()
+			let $row = this.#$tableEduBody.children().eq(index).children()
 
 			this.#eduName.value = $row.eq(EducationHandler.#COL_NAME).text(); this.#eduName.focus()
 			this.#eduInstitute.value = $row.eq(EducationHandler.#COL_INSTITUTE).text(); this.#eduInstitute.focus()
 			this.#eduStart.value = $row.eq(EducationHandler.#COL_START).text(); this.#eduStart.focus()
 			this.#eduEnd.value = $row.eq(EducationHandler.#COL_END).text(); this.#eduEnd.focus()
-			this.#eduIndex.value = rowIndex
+			this.#eduIndex.value = index
 
 			this.#disableOptions()   // disable links in the table, while updating an entry
-			console.log(`[education] row ${rowIndex} selected!`)
+			console.log(`[education] row ${index} selected!`)
 		}
 	}
 
@@ -185,19 +185,19 @@ class EducationHandler
 		if (this.#enabledMode)       // remove entry only if no update is in progress
 		{
 			event.preventDefault()
-			let rowIndex = this.#rowIndexFrom(event)
+			let index = this.#indexFrom(event)
 
-			let $row = this.#$tableEduBody.children().eq(rowIndex)
+			let $row = this.#$tableEduBody.children().eq(index)
 			let eduName = $row.children().eq(EducationHandler.#COL_NAME).text()
 
 			if (confirm(`Confirma eliminaci\xF3n de '${eduName}'`)) {
 				$row.remove()
-				console.log(`[education] row ${rowIndex} removed!`)
+				console.log(`[education] row ${index} removed!`)
 			}
 		}
 	}
 
-	#rowIndexFrom(event) {
+	#indexFrom(event) {
 		return $(event.target).parent().parent().index();
 	}
 
