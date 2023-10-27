@@ -251,7 +251,7 @@ class EducationHandler
 
 	#disableOptions() {
 		let $links = this.#$tableEduBody.find( EducationHandler.#ROWS_SELECTOR )
-		for (let i = 0; i < $links.length; i++) console.log( $links[i] )
+		// for (let i = 0; i < $links.length; i++) console.log( $links[i] )
 		
 		$links.removeClass( EducationHandler.#CSS_CLASS_LINK_ENABLED )
 		$links.addClass( EducationHandler.#CSS_CLASS_LINK_DISABLED )
@@ -283,7 +283,7 @@ class EducationHandler
 		let eduList = new Array()
 		let $activeRows = this.#$tableEduBody.find(`tr:not(".${EducationHandler.#CSS_CLASS_ROW_REMOVED}")`)
 
-		$activeRows.each( function(idx) {   // idx = iteration index (is NOT the index of row in the table)
+		$activeRows.each( function(iterationIndex) {   // iteration index != row index
 			let $row = $(this).children()
 
 			let name = $row.eq(EducationHandler.#COL_NAME).text()
@@ -292,8 +292,8 @@ class EducationHandler
 			let end = $row.eq(EducationHandler.#COL_END).text()
 
 			// the 'iteration index' will serve as the 'order criteria' to put the education entries in the resume
-			// the 'row index' is not used because a new clean sequence is required to mantain the rows ordered
-			eduList.push( new Education(name, institute, start, end, idx) )
+			// the 'row index' is not used because we need to send a 'clean' sequence to the server 
+			eduList.push( new Education(name, institute, start, end, iterationIndex) )
 		})
 
 		return eduList
@@ -302,37 +302,46 @@ class EducationHandler
 
 	/* row shifts */
 
-	moveRowUp(event, index) {
+	moveRowUp(event, index) {   // receives a ROW index
 		if (this.#enabledMode) { 
 			event.preventDefault()
 
 			let $activeRows = this.#$tableEduBody.find(`tr:not(".${EducationHandler.#CSS_CLASS_ROW_REMOVED}")`)
-			let firstIndex = $activeRows.filter(':first').index()
-			let prevIndex = index - 1
-
+			let firstIndex = $activeRows.filter(':first').index()   // assigns first ROW index
+			
 			if ($activeRows.length > 1 && index > firstIndex)
 			{
-				let $tds1 = $activeRows.eq(index).children()
-				let name1 = $tds1.eq( EducationHandler.#COL_NAME ).text()
-				let institute1 = $tds1.eq( EducationHandler.#COL_INSTITUTE ).text()
-				let start1 = $tds1.eq( EducationHandler.#COL_START ).text()
-				let end1 = $tds1.eq( EducationHandler.#COL_END ).text()
-				
-				let $tds2 = $activeRows.eq(prevIndex).children()
-				let name2 = $tds2.eq( EducationHandler.#COL_NAME ).text()
-				let institute2 = $tds2.eq( EducationHandler.#COL_INSTITUTE ).text()
-				let start2 = $tds2.eq( EducationHandler.#COL_START ).text()
-				let end2 = $tds2.eq( EducationHandler.#COL_END ).text()
+				let $prevRow
+				let $currRow
+				$activeRows.each( function() {
+					if ( $(this).index() != index ) {   // compares ROW indexes
+						$prevRow = $(this)
+					}
+					else {
+						$currRow = $(this)
+						return false
+					} 
+				})
 
-				$tds1.eq( EducationHandler.#COL_NAME ).text(name2)
-				$tds1.eq( EducationHandler.#COL_INSTITUTE ).text(institute2)
-				$tds1.eq( EducationHandler.#COL_START ).text(start2)
-				$tds1.eq( EducationHandler.#COL_END ).text(end2)
+				let prevNam = $prevRow.children().eq( EducationHandler.#COL_NAME ).text()
+				let prevIns = $prevRow.children().eq( EducationHandler.#COL_INSTITUTE ).text()
+				let prevSta = $prevRow.children().eq( EducationHandler.#COL_START ).text()
+				let prevEnd = $prevRow.children().eq( EducationHandler.#COL_END ).text()
 
-				$tds2.eq( EducationHandler.#COL_NAME ).text(name1)
-				$tds2.eq( EducationHandler.#COL_INSTITUTE ).text(institute1)
-				$tds2.eq( EducationHandler.#COL_START ).text(start1)
-				$tds2.eq( EducationHandler.#COL_END ).text(end1)
+				let currNam = $currRow.children().eq( EducationHandler.#COL_NAME ).text()
+				let currIns = $currRow.children().eq( EducationHandler.#COL_INSTITUTE ).text()
+				let currSta = $currRow.children().eq( EducationHandler.#COL_START ).text()
+				let currEnd = $currRow.children().eq( EducationHandler.#COL_END ).text()
+
+				$prevRow.children().eq( EducationHandler.#COL_NAME ).text( currNam )
+				$prevRow.children().eq( EducationHandler.#COL_INSTITUTE ).text( currIns )
+				$prevRow.children().eq( EducationHandler.#COL_START ).text( currSta )
+				$prevRow.children().eq( EducationHandler.#COL_END ).text( currEnd )
+
+				$currRow.children().eq( EducationHandler.#COL_NAME ).text( prevNam )
+				$currRow.children().eq( EducationHandler.#COL_INSTITUTE ).text( prevIns )
+				$currRow.children().eq( EducationHandler.#COL_START ).text( prevSta )
+				$currRow.children().eq( EducationHandler.#COL_END ).text( prevEnd )
 
 				console.log('↑ shift up')
 			}
@@ -340,41 +349,52 @@ class EducationHandler
 		}
 	}
 
-	moveRowDown(event, index) {
+	moveRowDown(event, index) {   // receives a ROW index
 		if (this.#enabledMode) { 
 			event.preventDefault()
 
 			let $activeRows = this.#$tableEduBody.find(`tr:not(".${EducationHandler.#CSS_CLASS_ROW_REMOVED}")`)
-			let lastIndex = $activeRows.filter(':last').index()
-			let nextIndex = index + 1
+			let lastIndex = $activeRows.filter(':last').index()   // assigns last ROW index
 
 			if ($activeRows.length > 1 && index < lastIndex) 
 			{
-				let $tds1 = $activeRows.eq(index).children()
-				let name1 = $tds1.eq( EducationHandler.#COL_NAME ).text()
-				let institute1 = $tds1.eq( EducationHandler.#COL_INSTITUTE ).text()
-				let start1 = $tds1.eq( EducationHandler.#COL_START ).text()
-				let end1 = $tds1.eq( EducationHandler.#COL_END ).text()
-				
-				let $tds2 = $activeRows.eq(nextIndex).children()
-				let name2 = $tds2.eq( EducationHandler.#COL_NAME ).text()
-				let institute2 = $tds2.eq( EducationHandler.#COL_INSTITUTE ).text()
-				let start2 = $tds2.eq( EducationHandler.#COL_START ).text()
-				let end2 = $tds2.eq( EducationHandler.#COL_END ).text()
+				let $currRow
+				let $nextRow
+				let found = false
+				$activeRows.each( function() {
+					if ( $(this).index() == index ) {
+						$currRow = $(this)
+						found = true
+					}
+					else if (found) {
+						$nextRow = $(this)
+						return false
+					}
+				})
 
-				$tds1.eq( EducationHandler.#COL_NAME ).text(name2)
-				$tds1.eq( EducationHandler.#COL_INSTITUTE ).text(institute2)
-				$tds1.eq( EducationHandler.#COL_START ).text(start2)
-				$tds1.eq( EducationHandler.#COL_END ).text(end2)
+				let currNam = $currRow.children().eq( EducationHandler.#COL_NAME ).text()
+				let currIns = $currRow.children().eq( EducationHandler.#COL_INSTITUTE ).text()
+				let currSta = $currRow.children().eq( EducationHandler.#COL_START ).text()
+				let currEnd = $currRow.children().eq( EducationHandler.#COL_END ).text()
 
-				$tds2.eq( EducationHandler.#COL_NAME ).text(name1)
-				$tds2.eq( EducationHandler.#COL_INSTITUTE ).text(institute1)
-				$tds2.eq( EducationHandler.#COL_START ).text(start1)
-				$tds2.eq( EducationHandler.#COL_END ).text(end1)
+				let nextNam = $nextRow.children().eq( EducationHandler.#COL_NAME ).text()
+				let nextIns = $nextRow.children().eq( EducationHandler.#COL_INSTITUTE ).text()
+				let nextSta = $nextRow.children().eq( EducationHandler.#COL_START ).text()
+				let nextEnd = $nextRow.children().eq( EducationHandler.#COL_END ).text()
+
+				$currRow.children().eq( EducationHandler.#COL_NAME ).text( nextNam )
+				$currRow.children().eq( EducationHandler.#COL_INSTITUTE ).text( nextIns )
+				$currRow.children().eq( EducationHandler.#COL_START ).text( nextSta )
+				$currRow.children().eq( EducationHandler.#COL_END ).text( nextEnd )
+
+				$nextRow.children().eq( EducationHandler.#COL_NAME ).text( currNam )
+				$nextRow.children().eq( EducationHandler.#COL_INSTITUTE ).text( currIns )
+				$nextRow.children().eq( EducationHandler.#COL_START ).text( currSta )
+				$nextRow.children().eq( EducationHandler.#COL_END ).text( currEnd )
 
 				console.log('↓ shift down')
 			}
-			else { console.log(JSON.stringify(this.getEducation(), null, 2)) }
+			// else { console.log(JSON.stringify(this.getEducation(), null, 2)) }
 		}
 	}
 
@@ -382,11 +402,11 @@ class EducationHandler
 
 
 class Education {
-	constructor(name, institute, start, end, index) {
+	constructor(name, institute, start, end, seqNum) {
 		this.name = name
 		this.institute = institute
 		this.start = start
 		this.end = end
-		this.index = index
+		this.seqNum = seqNum   // sequence number
 	}
 }
