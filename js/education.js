@@ -25,10 +25,10 @@ class EducationHandler
 	static #BTN_MAIN_INSERT = 'A&ntilde;adir'
 	static #BTN_MAIN_UPDATE = 'Editar'
 
-	static #COL_START = 0
-	static #COL_END = 1
-	static #COL_NAME = 2
-	static #COL_INSTITUTE = 3
+	static #COL_NAME = 0
+	static #COL_INSTITUTE = 1
+	static #COL_START = 2
+	static #COL_END = 3
 
 	static #CSS_CLASS_ROW_REMOVED = 'resgen-removed'
 	static #CSS_CLASS_LINK_ENABLED = 'resgen-enabled'
@@ -47,7 +47,7 @@ class EducationHandler
 	}
 
 
-	// config methods
+	/* config methods */
 
 	#loadRefs() {
 		console.log('\t\t references')
@@ -108,7 +108,7 @@ class EducationHandler
     }
 
 
-	// crud operations
+	/* crud operations */
 
 	#insertEducation() {
 	    let name = this.#eduName.value.trim()
@@ -120,12 +120,12 @@ class EducationHandler
 			let index = this.#$tableEduBody.children().length
 	        let newRow = 
 	        `<tr>
-	            <td>${start}</td>
-				<td>${end}</td>
 	            <td>${name}</td>
 	            <td>${institute}</td>
-				<td><a href="#">&bigtriangleup;</a></td>
-				<td><a href="#">&bigtriangledown;</a></td>
+				<td>${start}</td>
+				<td>${end}</td>
+				<td><a href="#" onclick="educationHandler.moveRowUp(event, ${index})">&bigtriangleup;</a></td>
+				<td><a href="#" onclick="educationHandler.moveRowDown(event, ${index})">&bigtriangledown;</a></td>
 	            <td><a href="#" onclick="educationHandler.selectEducation(event, ${index})">Editar</a></td>
 	            <td><a href="#" onclick="educationHandler.removeEducation(event, ${index})">Eliminar</a></td>
 	        </tr>`
@@ -133,7 +133,6 @@ class EducationHandler
 
 			this.#resetForm()   // clean form only if everything was ok 
 	    }
-		// console.log( JSON.stringify(this.getEducation(), null, 2) )
 	}
 
 	selectEducation(event, index) {   // not a private method because it's called from the links in the table
@@ -145,10 +144,10 @@ class EducationHandler
 			this.#formInUpdateMode()
 			let $row = this.#$tableEduBody.children().eq(index).children()
 
+			this.#eduName.value = $row.eq(EducationHandler.#COL_NAME).text(); this.#eduName.focus()
+			this.#eduInstitute.value = $row.eq(EducationHandler.#COL_INSTITUTE).text(); this.#eduInstitute.focus()
 			this.#eduStart.value = $row.eq(EducationHandler.#COL_START).text(); this.#eduStart.focus()
 			this.#eduEnd.value = $row.eq(EducationHandler.#COL_END).text(); this.#eduEnd.focus()
-			this.#eduInstitute.value = $row.eq(EducationHandler.#COL_INSTITUTE).text(); this.#eduInstitute.focus()
-			this.#eduName.value = $row.eq(EducationHandler.#COL_NAME).text(); this.#eduName.focus()
 			this.#eduIndex.value = index
 
 			this.#disableOptions()   // disable links in the table, while updating an entry
@@ -164,12 +163,12 @@ class EducationHandler
 
 		if ( this.#isValidForm(name, institute, start, end) ) {
 			let updatedRow = 
-			`<td>${start}</td>
-			 <td>${end}</td>
-	         <td>${name}</td>
+			`<td>${name}</td>
 	         <td>${institute}</td>
-			 <td><a href="#">&bigtriangleup;</a></td>
-			 <td><a href="#">&bigtriangledown;</a></td>
+			 <td>${start}</td>
+			 <td>${end}</td>
+			 <td><a href="#" onclick="educationHandler.moveRowUp(event, ${index})">&bigtriangleup;</a></td>
+			 <td><a href="#" onclick="educationHandler.moveRowDown(event, ${index})">&bigtriangledown;</a></td>
 	         <td><a href="#" onclick="educationHandler.selectEducation(event, ${index})">Editar</a></td>
 	         <td><a href="#" onclick="educationHandler.removeEducation(event, ${index})">Eliminar</a></td>`
 			 
@@ -196,7 +195,7 @@ class EducationHandler
 	}
 
 
-	// form validation
+	/* form validation */
 
 	#isValidForm(name, institute, start, end) {
 		let isValidName = true
@@ -228,7 +227,7 @@ class EducationHandler
 	}
 
 
-	// handle insert and updating modes of the form
+	/* handle insert and updating modes in form */
 
 	#resetForm() {
 		this.#formEdu.reset()
@@ -248,11 +247,11 @@ class EducationHandler
 	}
 
 
-	// handle enabled and disabled modes of the links in the table
+	/* handle enabled and disabled modes of links */
 
 	#disableOptions() {
 		let $links = this.#$tableEduBody.find( EducationHandler.#ROWS_SELECTOR )
-		//for (let i = 0; i < $links.length; i++) console.log( $links[i] )
+		for (let i = 0; i < $links.length; i++) console.log( $links[i] )
 		
 		$links.removeClass( EducationHandler.#CSS_CLASS_LINK_ENABLED )
 		$links.addClass( EducationHandler.#CSS_CLASS_LINK_DISABLED )
@@ -277,11 +276,14 @@ class EducationHandler
 		}
 	}
 
+
+	/* handle json object  */
+
 	getEducation() {
 		let eduList = new Array()
 		let $activeRows = this.#$tableEduBody.find(`tr:not(".${EducationHandler.#CSS_CLASS_ROW_REMOVED}")`)
 
-		$activeRows.each( function(index) {
+		$activeRows.each( function(idx) {   // idx = iteration index (is NOT the index of row in the table)
 			let $row = $(this).children()
 
 			let name = $row.eq(EducationHandler.#COL_NAME).text()
@@ -289,20 +291,102 @@ class EducationHandler
 			let start = $row.eq(EducationHandler.#COL_START).text()
 			let end = $row.eq(EducationHandler.#COL_END).text()
 
-			eduList.push( new Education(name, institute, start, end) )
+			// the 'iteration index' will serve as the 'order criteria' to put the education entries in the resume
+			// the 'row index' is not used because a new clean sequence is required to mantain the rows ordered
+			eduList.push( new Education(name, institute, start, end, idx) )
 		})
 
 		return eduList
+	}
+
+
+	/* row shifts */
+
+	moveRowUp(event, index) {
+		if (this.#enabledMode) { 
+			event.preventDefault()
+
+			let $activeRows = this.#$tableEduBody.find(`tr:not(".${EducationHandler.#CSS_CLASS_ROW_REMOVED}")`)
+			let firstIndex = $activeRows.filter(':first').index()
+			let prevIndex = index - 1
+
+			if ($activeRows.length > 1 && index > firstIndex)
+			{
+				let $tds1 = $activeRows.eq(index).children()
+				let name1 = $tds1.eq( EducationHandler.#COL_NAME ).text()
+				let institute1 = $tds1.eq( EducationHandler.#COL_INSTITUTE ).text()
+				let start1 = $tds1.eq( EducationHandler.#COL_START ).text()
+				let end1 = $tds1.eq( EducationHandler.#COL_END ).text()
+				
+				let $tds2 = $activeRows.eq(prevIndex).children()
+				let name2 = $tds2.eq( EducationHandler.#COL_NAME ).text()
+				let institute2 = $tds2.eq( EducationHandler.#COL_INSTITUTE ).text()
+				let start2 = $tds2.eq( EducationHandler.#COL_START ).text()
+				let end2 = $tds2.eq( EducationHandler.#COL_END ).text()
+
+				$tds1.eq( EducationHandler.#COL_NAME ).text(name2)
+				$tds1.eq( EducationHandler.#COL_INSTITUTE ).text(institute2)
+				$tds1.eq( EducationHandler.#COL_START ).text(start2)
+				$tds1.eq( EducationHandler.#COL_END ).text(end2)
+
+				$tds2.eq( EducationHandler.#COL_NAME ).text(name1)
+				$tds2.eq( EducationHandler.#COL_INSTITUTE ).text(institute1)
+				$tds2.eq( EducationHandler.#COL_START ).text(start1)
+				$tds2.eq( EducationHandler.#COL_END ).text(end1)
+
+				console.log('↑ shift up')
+			}
+			// else { console.log(JSON.stringify(this.getEducation(), null, 2)) }
+		}
+	}
+
+	moveRowDown(event, index) {
+		if (this.#enabledMode) { 
+			event.preventDefault()
+
+			let $activeRows = this.#$tableEduBody.find(`tr:not(".${EducationHandler.#CSS_CLASS_ROW_REMOVED}")`)
+			let lastIndex = $activeRows.filter(':last').index()
+			let nextIndex = index + 1
+
+			if ($activeRows.length > 1 && index < lastIndex) 
+			{
+				let $tds1 = $activeRows.eq(index).children()
+				let name1 = $tds1.eq( EducationHandler.#COL_NAME ).text()
+				let institute1 = $tds1.eq( EducationHandler.#COL_INSTITUTE ).text()
+				let start1 = $tds1.eq( EducationHandler.#COL_START ).text()
+				let end1 = $tds1.eq( EducationHandler.#COL_END ).text()
+				
+				let $tds2 = $activeRows.eq(nextIndex).children()
+				let name2 = $tds2.eq( EducationHandler.#COL_NAME ).text()
+				let institute2 = $tds2.eq( EducationHandler.#COL_INSTITUTE ).text()
+				let start2 = $tds2.eq( EducationHandler.#COL_START ).text()
+				let end2 = $tds2.eq( EducationHandler.#COL_END ).text()
+
+				$tds1.eq( EducationHandler.#COL_NAME ).text(name2)
+				$tds1.eq( EducationHandler.#COL_INSTITUTE ).text(institute2)
+				$tds1.eq( EducationHandler.#COL_START ).text(start2)
+				$tds1.eq( EducationHandler.#COL_END ).text(end2)
+
+				$tds2.eq( EducationHandler.#COL_NAME ).text(name1)
+				$tds2.eq( EducationHandler.#COL_INSTITUTE ).text(institute1)
+				$tds2.eq( EducationHandler.#COL_START ).text(start1)
+				$tds2.eq( EducationHandler.#COL_END ).text(end1)
+
+				console.log('↓ shift down')
+			}
+			else { console.log(JSON.stringify(this.getEducation(), null, 2)) }
+		}
 	}
 
 }//
 
 
 class Education {
-	constructor(name, institute, start, end) {
+	constructor(name, institute, start, end, index) {
 		this.name = name
 		this.institute = institute
 		this.start = start
 		this.end = end
+		this.index = index
 	}
 }
