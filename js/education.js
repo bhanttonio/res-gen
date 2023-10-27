@@ -13,7 +13,7 @@ class EducationHandler
 	#$btnMainEdu
 	#$tableEduBody
 
-	#enabledMode = true   // to control enabled (insertion) and disabled (updating) modes of table's links
+	#enabledMode = true   // to enable/disable links in the table
 
 
 	static #FORM_LEGEND_INSERT = 'Escolaridad'
@@ -30,18 +30,15 @@ class EducationHandler
 	static #COL_START = 2
 	static #COL_END = 3
 
-	static #CSS_CLASS_ROW_REMOVED = 'resgen-removed'
 	static #CSS_CLASS_LINK_ENABLED = 'resgen-enabled'
 	static #CSS_CLASS_LINK_DISABLED = 'resgen-disabled'
-
-	static #ROWS_SELECTOR   // selector for active (not deleted) rows in the table
 	
 
 	constructor() {
 		console.log('\t education handler')
 
 		this.#loadRefs()
-		this.#setUpCharCounters()
+		this.#setUpCharCounters(true)
 		this.#setUpAuxButton()
 		this.#setUpMainButton()
 	}
@@ -63,12 +60,11 @@ class EducationHandler
 		this.#$btnAuxEdu = $(this.#formEdu.elements.btnAuxEdu)
 		this.#$btnMainEdu = $(this.#formEdu.elements.btnMainEdu)
 		this.#$tableEduBody = $('table#tableEdu tbody')
-
-		EducationHandler.#ROWS_SELECTOR = `tr:not(".${EducationHandler.#CSS_CLASS_ROW_REMOVED}") td a` 
 	}
 
-	#setUpCharCounters() {
-		console.log('\t\t character counters')
+	#setUpCharCounters(firstCall) {
+		if (firstCall)
+			console.log('\t\t character counters')
 
 		$(this.#eduName).characterCounter()
 		$(this.#eduInstitute).characterCounter()
@@ -241,7 +237,7 @@ class EducationHandler
 
 	#resetForm() {
 		this.#formEdu.reset()
-		this.#setUpCharCounters()
+		this.#setUpCharCounters(false)
 	}
 
 	#formInInsertMode() {
@@ -260,7 +256,7 @@ class EducationHandler
 	/* handle enabled and disabled modes of links */
 
 	#disableOptions() {
-		let $links = this.#$tableEduBody.find( EducationHandler.#ROWS_SELECTOR )
+		let $links = this.#$tableEduBody.find('tr td a')
 		// for (let i = 0; i < $links.length; i++) console.log( $links[i] )
 		
 		$links.removeClass( EducationHandler.#CSS_CLASS_LINK_ENABLED )
@@ -271,7 +267,7 @@ class EducationHandler
 	}
 
 	#enableOptions() {
-		let $links = this.#$tableEduBody.find( EducationHandler.#ROWS_SELECTOR )
+		let $links = this.#$tableEduBody.find('tr td a')
 
 		$links.removeClass( EducationHandler.#CSS_CLASS_LINK_DISABLED )
 		$links.addClass( EducationHandler.#CSS_CLASS_LINK_ENABLED )
@@ -291,47 +287,32 @@ class EducationHandler
 
 	getEducation() {
 		let eduList = new Array()
-		let $activeRows = this.#$tableEduBody.find(`tr:not(".${EducationHandler.#CSS_CLASS_ROW_REMOVED}")`)
 
-		$activeRows.each( function(iterationIndex) {   // iteration index != row index
-			let $row = $(this).children()
-
-			let name = $row.eq(EducationHandler.#COL_NAME).text()
-			let institute = $row.eq(EducationHandler.#COL_INSTITUTE).text()
-			let start = $row.eq(EducationHandler.#COL_START).text()
-			let end = $row.eq(EducationHandler.#COL_END).text()
-
-			// the 'iteration index' will serve as the 'order criteria' to put the education entries in the resume
-			// the 'row index' is not used because we need to send a 'clean' sequence to the server 
-			eduList.push( new Education(name, institute, start, end, iterationIndex) )
+		this.#$tableEduBody.children().each( function(index) {	
+			let nam = $(this).children().eq(EducationHandler.#COL_NAME).text()
+			let ins = $(this).children().eq(EducationHandler.#COL_INSTITUTE).text()
+			let sta = $(this).children().eq(EducationHandler.#COL_START).text()
+			let end = $(this).children().eq(EducationHandler.#COL_END).text()
+			
+			eduList.push( new Education(nam, ins, sta, end, index) )
 		})
-
 		return eduList
 	}
 
 
 	/* row shifts */
 
-	moveRowUp(event, index) {   // receives a ROW index
+	moveRowUp(event) {
 		if (this.#enabledMode) { 
 			event.preventDefault()
 
-			let $activeRows = this.#$tableEduBody.find(`tr:not(".${EducationHandler.#CSS_CLASS_ROW_REMOVED}")`)
-			let firstIndex = $activeRows.filter(':first').index()   // assigns first ROW index
+			let size = this.#$tableEduBody.children().length
+			let index = this.#indexFrom(event)
+			let firstIndex = this.#$tableEduBody.children().filter(':first').index()
 			
-			if ($activeRows.length > 1 && index > firstIndex)
-			{
-				let $prevRow
-				let $currRow
-				$activeRows.each( function() {
-					if ( $(this).index() != index ) {   // compares ROW indexes
-						$prevRow = $(this)
-					}
-					else {
-						$currRow = $(this)
-						return false
-					} 
-				})
+			if (size > 1 && index > firstIndex) {
+				let $prevRow = this.#$tableEduBody.children().eq(index - 1)
+				let $currRow = this.#$tableEduBody.children().eq(index) 
 
 				let prevNam = $prevRow.children().eq( EducationHandler.#COL_NAME ).text()
 				let prevIns = $prevRow.children().eq( EducationHandler.#COL_INSTITUTE ).text()
@@ -359,28 +340,17 @@ class EducationHandler
 		}
 	}
 
-	moveRowDown(event, index) {   // receives a ROW index
+	moveRowDown(event) {
 		if (this.#enabledMode) { 
 			event.preventDefault()
 
-			let $activeRows = this.#$tableEduBody.find(`tr:not(".${EducationHandler.#CSS_CLASS_ROW_REMOVED}")`)
-			let lastIndex = $activeRows.filter(':last').index()   // assigns last ROW index
+			let size = this.#$tableEduBody.children().length
+			let index = this.#indexFrom(event)
+			let lastIndex = this.#$tableEduBody.children().filter(':last').index()
 
-			if ($activeRows.length > 1 && index < lastIndex) 
-			{
-				let $currRow
-				let $nextRow
-				let found = false
-				$activeRows.each( function() {
-					if ( $(this).index() == index ) {
-						$currRow = $(this)
-						found = true
-					}
-					else if (found) {
-						$nextRow = $(this)
-						return false
-					}
-				})
+			if (size > 1 && index < lastIndex) {
+				let $currRow = this.#$tableEduBody.children().eq(index)
+				let $nextRow = this.#$tableEduBody.children().eq(index + 1)
 
 				let currNam = $currRow.children().eq( EducationHandler.#COL_NAME ).text()
 				let currIns = $currRow.children().eq( EducationHandler.#COL_INSTITUTE ).text()
@@ -412,11 +382,11 @@ class EducationHandler
 
 
 class Education {
-	constructor(name, institute, start, end, seqNum) {
+	constructor(name, institute, start, end, index) {
 		this.name = name
 		this.institute = institute
 		this.start = start
 		this.end = end
-		this.seqNum = seqNum   // sequence number
+		this.index = index
 	}
 }
