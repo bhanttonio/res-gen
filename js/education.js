@@ -22,7 +22,7 @@ class EducationHandler
 	static #BTN_AUX_CLEAN = 'Limpiar'
 	static #BTN_AUX_CANCEL = 'Cancelar'
 
-	static #BTN_MAIN_INSERT = 'A&ntilde;adir'
+	static #BTN_MAIN_INSERT = 'Agregar'
 	static #BTN_MAIN_UPDATE = 'Editar'
 
 	static #COL_NAME = 0
