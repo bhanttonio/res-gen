@@ -11,7 +11,7 @@ class EducationHandler
 	#$legend
 	#$btnAuxEdu
 	#$btnMainEdu
-	#$tableEduBody
+	#$rowsEdu
 
 	#enabledMode = true   // to enable/disable links in the table
 
@@ -59,7 +59,7 @@ class EducationHandler
 		this.#$legend = $(this.#formEdu).find('legend')
 		this.#$btnAuxEdu = $(this.#formEdu.elements.btnAuxEdu)
 		this.#$btnMainEdu = $(this.#formEdu.elements.btnMainEdu)
-		this.#$tableEduBody = $('table#tableEdu tbody')
+		this.#$rowsEdu = $('table#tableEdu tbody tr')
 	}
 
 	#setUpCharCounters(firstCall) {
@@ -124,10 +124,10 @@ class EducationHandler
 	            <td><a href="#" onclick="educationHandler.selectEducation(event)">Editar</a></td>
 	            <td><a href="#" onclick="educationHandler.removeEducation(event)">Eliminar</a></td>
 	        </tr>`
-	        this.#$tableEduBody.append(newRow)
+	        this.#$rowsEdu.parent().append(newRow)
 			this.#resetForm()   // clean form only if everything was ok 
 
-			let index = this.#$tableEduBody.children().length - 1
+			let index = this.#$rowsEdu.length - 1
 			console.log(`[education] row ${index} inserted!`)
 	    }
 	}
@@ -139,7 +139,7 @@ class EducationHandler
 			let index = this.#indexFrom(event)
 
 			this.#formInUpdateMode()
-			let $row = this.#$tableEduBody.children().eq(index).children()
+			let $row = this.#$rowsEdu.eq(index).children()
 
 			this.#eduName.value = $row.eq(EducationHandler.#COL_NAME).text(); this.#eduName.focus()
 			this.#eduInstitute.value = $row.eq(EducationHandler.#COL_INSTITUTE).text(); this.#eduInstitute.focus()
@@ -170,7 +170,7 @@ class EducationHandler
 	         <td><a href="#" onclick="educationHandler.selectEducation(event)">Editar</a></td>
 	         <td><a href="#" onclick="educationHandler.removeEducation(event)">Eliminar</a></td>`
 			 
-			this.#$tableEduBody.children().eq(index).html(updatedRow)
+			this.#$rowsEdu.eq(index).html(updatedRow)
 
 			this.#formInInsertMode()  // after an update, return form to insert mode, clean it and enable links in the table
 			this.#resetForm()
@@ -186,7 +186,7 @@ class EducationHandler
 			event.preventDefault()
 			let index = this.#indexFrom(event)
 
-			let $row = this.#$tableEduBody.children().eq(index)
+			let $row = this.#$rowsEdu.eq(index)
 			let eduName = $row.children().eq(EducationHandler.#COL_NAME).text()
 
 			if (confirm(`Confirma eliminaci\xF3n de '${eduName}'`)) {
@@ -256,7 +256,7 @@ class EducationHandler
 	/* handle enabled and disabled modes of links */
 
 	#disableOptions() {
-		let $links = this.#$tableEduBody.find('tr td a')
+		let $links = this.#$rowsEdu.find('td a')
 		// for (let i = 0; i < $links.length; i++) console.log( $links[i] )
 		
 		$links.removeClass( EducationHandler.#CSS_CLASS_LINK_ENABLED )
@@ -267,7 +267,7 @@ class EducationHandler
 	}
 
 	#enableOptions() {
-		let $links = this.#$tableEduBody.find('tr td a')
+		let $links = this.#$rowsEdu.find('td a')
 
 		$links.removeClass( EducationHandler.#CSS_CLASS_LINK_DISABLED )
 		$links.addClass( EducationHandler.#CSS_CLASS_LINK_ENABLED )
@@ -288,7 +288,7 @@ class EducationHandler
 	getEducation() {
 		let eduList = new Array()
 
-		this.#$tableEduBody.children().each( function(index) {	
+		this.#$rowsEdu.each( function(index) {	
 			let nam = $(this).children().eq(EducationHandler.#COL_NAME).text()
 			let ins = $(this).children().eq(EducationHandler.#COL_INSTITUTE).text()
 			let sta = $(this).children().eq(EducationHandler.#COL_START).text()
@@ -306,13 +306,13 @@ class EducationHandler
 		if (this.#enabledMode) { 
 			event.preventDefault()
 
-			let size = this.#$tableEduBody.children().length
+			let size = this.#$rowsEdu.length
 			let index = this.#indexFrom(event)
-			let firstIndex = this.#$tableEduBody.children().filter(':first').index()
+			let firstIndex = this.#$rowsEdu.filter(':first').index()
 			
 			if (size > 1 && index > firstIndex) {
-				let $prevRow = this.#$tableEduBody.children().eq(index - 1)
-				let $currRow = this.#$tableEduBody.children().eq(index) 
+				let $prevRow = this.#$rowsEdu.eq(index - 1)
+				let $currRow = this.#$rowsEdu.eq(index) 
 
 				let prevNam = $prevRow.children().eq( EducationHandler.#COL_NAME ).text()
 				let prevIns = $prevRow.children().eq( EducationHandler.#COL_INSTITUTE ).text()
@@ -344,13 +344,13 @@ class EducationHandler
 		if (this.#enabledMode) { 
 			event.preventDefault()
 
-			let size = this.#$tableEduBody.children().length
+			let size = this.#$rowsEdu.length
 			let index = this.#indexFrom(event)
-			let lastIndex = this.#$tableEduBody.children().filter(':last').index()
+			let lastIndex = this.#$rowsEdu.filter(':last').index()
 
 			if (size > 1 && index < lastIndex) {
-				let $currRow = this.#$tableEduBody.children().eq(index)
-				let $nextRow = this.#$tableEduBody.children().eq(index + 1)
+				let $currRow = this.#$rowsEdu.eq(index)
+				let $nextRow = this.#$rowsEdu.eq(index + 1)
 
 				let currNam = $currRow.children().eq( EducationHandler.#COL_NAME ).text()
 				let currIns = $currRow.children().eq( EducationHandler.#COL_INSTITUTE ).text()
