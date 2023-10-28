@@ -256,7 +256,7 @@ class EducationHandler
 	/* handle enabled and disabled modes of links */
 
 	#disableOptions() {
-		let $links = this.#$tableBodyEdu.children().find('tr td a');
+		let $links = this.#$tableBodyEdu.find('tr td a');
 		// for (let i = 0; i < $links.length; i++) console.log( $links[i] );
 		
 		$links.removeClass( EducationHandler.#CSS_CLASS_LINK_ENABLED );
@@ -267,7 +267,7 @@ class EducationHandler
 	}
 
 	#enableOptions() {
-		let $links = this.#$tableBodyEdu.children().find('tr td a');
+		let $links = this.#$tableBodyEdu.find('tr td a');
 
 		$links.removeClass( EducationHandler.#CSS_CLASS_LINK_DISABLED );
 		$links.addClass( EducationHandler.#CSS_CLASS_LINK_ENABLED );
