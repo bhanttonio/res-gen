@@ -8,15 +8,6 @@ $(function() {
     new MainHandler()
     educationHandler = new EducationHandler()
 
-    let arr = window.location.href.split('?')
-    let keyValue = arr.length > 1 ? arr[1] : null
-    arr = keyValue ? keyValue.split('=') : new Array()
-    let tab = arr.length > 1 ? arr[1].trim().toLowerCase() : null
-    let tabsInstance = M.Tabs.getInstance(document.getElementById('tabs'))
-    if (['basic', 'education', 'courses', 'languages', 'skills', 'sectors', 'int-work-exp', 'ext-work-exp'].includes(tab)) {
-        tabsInstance.select(tab)
-    }
-
     console.log('finished')
 });
 
@@ -34,6 +25,7 @@ class MainHandler
         this.#setUpCharCounters()
         this.#setUpDirButtons()
         this.#setUpTabs()
+        this.#setUpTabOnLoad()
     }
 
     #loadRefs() {
@@ -83,6 +75,25 @@ class MainHandler
 				educationHandler.exitDisabledMode()
 			}
 		})
+    }
+
+    #setUpTabOnLoad() {
+        try {
+            let labels = ['basic', 'education', 'courses', 'languages', 'skills', 'sectors', 'int-work-exp', 'ext-work-exp']
+
+            let arr = window.location.href.split('?')
+            let queryStr = arr.length > 1 ? arr[1] : null
+            let params = queryStr ? queryStr.split('&') : null
+            let tabParam = params ? params[0].split('=') : null
+            let tab = tabParam ? tabParam[1].trim().toLowerCase() : null
+
+            if (labels.includes(tab)) {
+                this.#tabsInstance.select(tab)
+            }
+        } 
+        catch(err) {
+            console.warn('Unable to read \'tab\' param from the URL ')
+        }
     }
 
 }//
