@@ -11,7 +11,7 @@ class EducationHandler
 	#$legend
 	#$btnAuxEdu
 	#$btnMainEdu
-	#$rowsEdu
+	#$tableBodyEdu
 
 	#enabledMode = true   // to enable/disable links in the table
 
@@ -59,7 +59,7 @@ class EducationHandler
 		this.#$legend = $(this.#formEdu).find('legend')
 		this.#$btnAuxEdu = $(this.#formEdu.elements.btnAuxEdu)
 		this.#$btnMainEdu = $(this.#formEdu.elements.btnMainEdu)
-		this.#$rowsEdu = $('table#tableEdu tbody tr')
+		this.#$tableBodyEdu = $('table#tableEdu tbody')
 	}
 
 	#setUpCharCounters(firstCall) {
@@ -124,10 +124,10 @@ class EducationHandler
 	            <td><a href="#" onclick="educationHandler.selectEducation(event)">Editar</a></td>
 	            <td><a href="#" onclick="educationHandler.removeEducation(event)">Eliminar</a></td>
 	        </tr>`
-	        this.#$rowsEdu.parent().append(newRow)
+	        this.#$tableBodyEdu.append(newRow)
 			this.#resetForm()   // clean form only if everything was ok 
 
-			let index = this.#$rowsEdu.length - 1
+			let index = this.#$tableBodyEdu.children().length - 1
 			console.log(`[education] row ${index} inserted!`)
 	    }
 	}
@@ -139,7 +139,7 @@ class EducationHandler
 			let index = this.#indexFrom(event)
 
 			this.#formInUpdateMode()
-			let $row = this.#$rowsEdu.eq(index).children()
+			let $row = this.#$tableBodyEdu.children().eq(index).children()
 
 			this.#eduName.value = $row.eq(EducationHandler.#COL_NAME).text(); this.#eduName.focus()
 			this.#eduInstitute.value = $row.eq(EducationHandler.#COL_INSTITUTE).text(); this.#eduInstitute.focus()
@@ -170,7 +170,7 @@ class EducationHandler
 	         <td><a href="#" onclick="educationHandler.selectEducation(event)">Editar</a></td>
 	         <td><a href="#" onclick="educationHandler.removeEducation(event)">Eliminar</a></td>`
 			 
-			this.#$rowsEdu.eq(index).html(updatedRow)
+			this.#$tableBodyEdu.children().eq(index).html(updatedRow)
 
 			this.#formInInsertMode()  // after an update, return form to insert mode, clean it and enable links in the table
 			this.#resetForm()
@@ -186,7 +186,7 @@ class EducationHandler
 			event.preventDefault()
 			let index = this.#indexFrom(event)
 
-			let $row = this.#$rowsEdu.eq(index)
+			let $row = this.#$tableBodyEdu.children().eq(index)
 			let eduName = $row.children().eq(EducationHandler.#COL_NAME).text()
 
 			if (confirm(`Confirma eliminaci\xF3n de '${eduName}'`)) {
@@ -256,7 +256,7 @@ class EducationHandler
 	/* handle enabled and disabled modes of links */
 
 	#disableOptions() {
-		let $links = this.#$rowsEdu.find('td a')
+		let $links = this.#$tableBodyEdu.children().find('tr td a')
 		// for (let i = 0; i < $links.length; i++) console.log( $links[i] )
 		
 		$links.removeClass( EducationHandler.#CSS_CLASS_LINK_ENABLED )
@@ -267,7 +267,7 @@ class EducationHandler
 	}
 
 	#enableOptions() {
-		let $links = this.#$rowsEdu.find('td a')
+		let $links = this.#$tableBodyEdu.children().find('tr td a')
 
 		$links.removeClass( EducationHandler.#CSS_CLASS_LINK_DISABLED )
 		$links.addClass( EducationHandler.#CSS_CLASS_LINK_ENABLED )
@@ -288,7 +288,7 @@ class EducationHandler
 	getEducation() {
 		let eduList = new Array()
 
-		this.#$rowsEdu.each( function(index) {	
+		this.#$tableBodyEdu.children().each( function(index) {	
 			let nam = $(this).children().eq(EducationHandler.#COL_NAME).text()
 			let ins = $(this).children().eq(EducationHandler.#COL_INSTITUTE).text()
 			let sta = $(this).children().eq(EducationHandler.#COL_START).text()
@@ -306,35 +306,37 @@ class EducationHandler
 		if (this.#enabledMode) { 
 			event.preventDefault()
 
-			let size = this.#$rowsEdu.length
+			let size = this.#$tableBodyEdu.children().length
 			let index = this.#indexFrom(event)
-			let firstIndex = this.#$rowsEdu.filter(':first').index()
+			let firstIndex = this.#$tableBodyEdu.children().filter(':first').index()
 			
 			if (size > 1 && index > firstIndex) {
-				let $prevRow = this.#$rowsEdu.eq(index - 1)
-				let $currRow = this.#$rowsEdu.eq(index) 
+				let $prevRow = this.#$tableBodyEdu.children().eq(index - 1)
+				let $currRow = this.#$tableBodyEdu.children().eq(index) 
+				let $prevTds = $prevRow.children()
+				let $currTds = $currRow.children()
 
-				let prevNam = $prevRow.children().eq( EducationHandler.#COL_NAME ).text()
-				let prevIns = $prevRow.children().eq( EducationHandler.#COL_INSTITUTE ).text()
-				let prevSta = $prevRow.children().eq( EducationHandler.#COL_START ).text()
-				let prevEnd = $prevRow.children().eq( EducationHandler.#COL_END ).text()
+				let prevNam = $prevTds.eq( EducationHandler.#COL_NAME ).text()
+				let prevIns = $prevTds.eq( EducationHandler.#COL_INSTITUTE ).text()
+				let prevSta = $prevTds.eq( EducationHandler.#COL_START ).text()
+				let prevEnd = $prevTds.eq( EducationHandler.#COL_END ).text()
 
-				let currNam = $currRow.children().eq( EducationHandler.#COL_NAME ).text()
-				let currIns = $currRow.children().eq( EducationHandler.#COL_INSTITUTE ).text()
-				let currSta = $currRow.children().eq( EducationHandler.#COL_START ).text()
-				let currEnd = $currRow.children().eq( EducationHandler.#COL_END ).text()
+				let currNam = $currTds.eq( EducationHandler.#COL_NAME ).text()
+				let currIns = $currTds.eq( EducationHandler.#COL_INSTITUTE ).text()
+				let currSta = $currTds.eq( EducationHandler.#COL_START ).text()
+				let currEnd = $currTds.eq( EducationHandler.#COL_END ).text()
 
-				$prevRow.children().eq( EducationHandler.#COL_NAME ).text( currNam )
-				$prevRow.children().eq( EducationHandler.#COL_INSTITUTE ).text( currIns )
-				$prevRow.children().eq( EducationHandler.#COL_START ).text( currSta )
-				$prevRow.children().eq( EducationHandler.#COL_END ).text( currEnd )
+				$prevTds.eq( EducationHandler.#COL_NAME ).text( currNam )
+				$prevTds.eq( EducationHandler.#COL_INSTITUTE ).text( currIns )
+				$prevTds.eq( EducationHandler.#COL_START ).text( currSta )
+				$prevTds.eq( EducationHandler.#COL_END ).text( currEnd )
 
-				$currRow.children().eq( EducationHandler.#COL_NAME ).text( prevNam )
-				$currRow.children().eq( EducationHandler.#COL_INSTITUTE ).text( prevIns )
-				$currRow.children().eq( EducationHandler.#COL_START ).text( prevSta )
-				$currRow.children().eq( EducationHandler.#COL_END ).text( prevEnd )
+				$currTds.eq( EducationHandler.#COL_NAME ).text( prevNam )
+				$currTds.eq( EducationHandler.#COL_INSTITUTE ).text( prevIns )
+				$currTds.eq( EducationHandler.#COL_START ).text( prevSta )
+				$currTds.eq( EducationHandler.#COL_END ).text( prevEnd )
 
-				console.log('↑ shift up')
+				console.log('\u2191 shift up')
 			}
 			// else { console.log(JSON.stringify(this.getEducation(), null, 2)) }
 		}
@@ -344,35 +346,37 @@ class EducationHandler
 		if (this.#enabledMode) { 
 			event.preventDefault()
 
-			let size = this.#$rowsEdu.length
+			let size = this.#$tableBodyEdu.children().length
 			let index = this.#indexFrom(event)
-			let lastIndex = this.#$rowsEdu.filter(':last').index()
+			let lastIndex = this.#$tableBodyEdu.children().filter(':last').index()
 
 			if (size > 1 && index < lastIndex) {
-				let $currRow = this.#$rowsEdu.eq(index)
-				let $nextRow = this.#$rowsEdu.eq(index + 1)
+				let $currRow = this.#$tableBodyEdu.children().eq(index)
+				let $nextRow = this.#$tableBodyEdu.children().eq(index + 1)
+				let $currTds = $currRow.children()
+				let $nextTds = $nextRow.children()
 
-				let currNam = $currRow.children().eq( EducationHandler.#COL_NAME ).text()
-				let currIns = $currRow.children().eq( EducationHandler.#COL_INSTITUTE ).text()
-				let currSta = $currRow.children().eq( EducationHandler.#COL_START ).text()
-				let currEnd = $currRow.children().eq( EducationHandler.#COL_END ).text()
+				let currNam = $currTds.eq( EducationHandler.#COL_NAME ).text()
+				let currIns = $currTds.eq( EducationHandler.#COL_INSTITUTE ).text()
+				let currSta = $currTds.eq( EducationHandler.#COL_START ).text()
+				let currEnd = $currTds.eq( EducationHandler.#COL_END ).text()
 
-				let nextNam = $nextRow.children().eq( EducationHandler.#COL_NAME ).text()
-				let nextIns = $nextRow.children().eq( EducationHandler.#COL_INSTITUTE ).text()
-				let nextSta = $nextRow.children().eq( EducationHandler.#COL_START ).text()
-				let nextEnd = $nextRow.children().eq( EducationHandler.#COL_END ).text()
+				let nextNam = $nextTds.eq( EducationHandler.#COL_NAME ).text()
+				let nextIns = $nextTds.eq( EducationHandler.#COL_INSTITUTE ).text()
+				let nextSta = $nextTds.eq( EducationHandler.#COL_START ).text()
+				let nextEnd = $nextTds.eq( EducationHandler.#COL_END ).text()
 
-				$currRow.children().eq( EducationHandler.#COL_NAME ).text( nextNam )
-				$currRow.children().eq( EducationHandler.#COL_INSTITUTE ).text( nextIns )
-				$currRow.children().eq( EducationHandler.#COL_START ).text( nextSta )
-				$currRow.children().eq( EducationHandler.#COL_END ).text( nextEnd )
+				$currTds.eq( EducationHandler.#COL_NAME ).text( nextNam )
+				$currTds.eq( EducationHandler.#COL_INSTITUTE ).text( nextIns )
+				$currTds.eq( EducationHandler.#COL_START ).text( nextSta )
+				$currTds.eq( EducationHandler.#COL_END ).text( nextEnd )
 
-				$nextRow.children().eq( EducationHandler.#COL_NAME ).text( currNam )
-				$nextRow.children().eq( EducationHandler.#COL_INSTITUTE ).text( currIns )
-				$nextRow.children().eq( EducationHandler.#COL_START ).text( currSta )
-				$nextRow.children().eq( EducationHandler.#COL_END ).text( currEnd )
+				$nextTds.eq( EducationHandler.#COL_NAME ).text( currNam )
+				$nextTds.eq( EducationHandler.#COL_INSTITUTE ).text( currIns )
+				$nextTds.eq( EducationHandler.#COL_START ).text( currSta )
+				$nextTds.eq( EducationHandler.#COL_END ).text( currEnd )
 
-				console.log('↓ shift down')
+				console.log('\u2193 shift down')
 			}
 			// else { console.log(JSON.stringify(this.getEducation(), null, 2)) }
 		}
