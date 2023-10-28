@@ -1,6 +1,5 @@
 
-let educationHandler
-
+var educationHandler
 
 $(function() {
     console.log('loading')
@@ -25,6 +24,7 @@ $(function() {
 class MainHandler 
 {
     #elTabs
+    #tabsInstance
     #$btnsNext
     #$btnsPrev
 
@@ -32,21 +32,20 @@ class MainHandler
         console.log('\t main handler')
         this.#loadRefs()
         this.#setUpCharCounters()
-        this.#setUpNextButtons()
-        this.#setUpPrevButtons()
+        this.#setUpDirButtons()
         this.#setUpTabs()
     }
 
     #loadRefs() {
         console.log('\t\t references')
         this.#elTabs = document.getElementById('tabs')
-        this.#$btnsNext = $('button[id^="btnNext"]')
+        this.#tabsInstance = M.Tabs.getInstance(this.#elTabs)
         this.#$btnsPrev = $('button[id^="btnPrev"]')
+        this.#$btnsNext = $('button[id^="btnNext"]')
     }
 
     #setUpCharCounters() {
         console.log('\t\t character counters')
-        
         $('input#name, input#surname_1, input#surname_2, input#level, textarea#profile').characterCounter()
         $('input#course_name_1, input#course_institute_1, input#course_date_1').characterCounter()
         $('input#lang_name_1, input#lang_speaking_1, input#lang_reading_1, input#lang_writing_1').characterCounter()
@@ -54,28 +53,21 @@ class MainHandler
         $('input#sector_1').characterCounter()
         $('input#iwe_account_1, input#iwe_rol_1, input#iwe_project_1, input#iwe_period_1, input#iwe_task_1, input#iwe_tool_1').characterCounter()
         $('input#ewe_company_1, input#ewe_rol_1, input#ewe_period_1, input#ewe_task_1, input#ewe_tool_1').characterCounter()
-
     }
 
-    #setUpNextButtons() {
-        console.log('\t\t next buttons')
-        let tabsInstance = M.Tabs.getInstance(this.#elTabs)
-
-        this.#$btnsNext.on('click', function(e) {   // on click change to next tab
-            e.preventDefault()
-            let tab = e.target.getAttribute('data-tab')
-            tabsInstance.select(tab)
-        })
-    }
-
-    #setUpPrevButtons() {
+    #setUpDirButtons() {
         console.log('\t\t prev buttons')
-        let tabsInstance = M.Tabs.getInstance(this.#elTabs)
+        this.#setUpButtons(this.#$btnsPrev)
 
-        this.#$btnsPrev.on('click', function(e) {   // on click change to previous tab
+        console.log('\t\t next buttons')
+        this.#setUpButtons(this.#$btnsNext)
+    }
+
+    #setUpButtons($btns) {
+        $btns.on('click', e => {
             e.preventDefault()
             let tab = e.target.getAttribute('data-tab')
-            tabsInstance.select(tab)
+            this.#tabsInstance.select(tab)
         })
     }
 
@@ -84,13 +76,12 @@ class MainHandler
 
 		$(this.#elTabs).on('click', 'a', function(e) {   // on click leave tab's state consistent
 			let href = e.target.getAttribute('href')
-			console.log(`>> section: ${href}`)
+			console.log(`\u2192 ${href}`)
 
             // edu module
 			if (href !== '#education') {
 				educationHandler.exitDisabledMode()
 			}
-
 		})
     }
 
