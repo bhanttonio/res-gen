@@ -163,47 +163,83 @@
 
 
 			<!-- courses -->
-			<section id="courses" class="section">
-				<br>
-				<div class="row">
-					<div class="input-field col s5">
-			          	<input id="course_name_1" type="text" class="validate" data-length="75" maxlength="75">
-			          	<label for="course_name_1">Curso</label>
-			          	<span class="helper-text col s10">P. ej. &nbsp;Persistencia de datos con Java</span>
-			        </div>
-			        <div class="input-field col s4">
-			          	<input id="course_institute_1" type="text" class="validate" data-length="75" maxlength="75">
-			          	<label for="course_institute_1">Instituci&oacute;n</label>
-			          	<span class="helper-text col s10">P. ej. &nbsp;Udemy</span>
-			        </div>
-			        <div class="input-field col s3">
-			          	<input id="course_date_1" type="text" class="validate" data-length="25" maxlength="25">
-			          	<label for="course_date_1">Fecha</label>
-			          	<span class="helper-text col s10">P. ej. &nbsp;Septiembre 2017</span>
-			        </div>
-				</div>
-				<div class="row">
-					<div class="input-field col s5">
-			          	<input id="course_name_2" type="text" class="validate" data-length="75" maxlength="75">
-			          	<label for="course_name_2">Curso</label>
-			        </div>
-			        <div class="input-field col s4">
-			          	<input id="course_institute_2" type="text" class="validate" data-length="75" maxlength="75">
-			          	<label for="course_institute_2">Instituci&oacute;n</label>
-			        </div>
-			        <div class="input-field col s3">
-			          	<input id="course_date_2" type="text" class="validate" data-length="25" maxlength="25">
-			          	<label for="course_date_2">Fecha</label>
-			        </div>
-				</div>
-				<br>
-				<div class="row">
-					<div class="col s2 push-s10 right-align">
-						<button id="btnNextCourses" data-tab="languages" class="waves-effect waves-teal btn-flat btn-small">
-							Siguiente
-						</button>
+			<section id="courses" class="row section">
+				
+				<form id="formCourse" class="col s3">
+					<fieldset class="row">
+						<legend>Curso</legend>
+						<input name="courseIndex" type="hidden" value="">
+						<div class="input-field col s12">
+							<input id="courseName" name="courseName" type="text" class="validate" data-length="75" maxlength="75">
+							<label for="courseName">Nombre</label>
+							<span class="helper-text col s10">Ej. Introducci&oacute;n a ITIL v4</span>
+						</div>
+						<div class="input-field col s12">
+							<input id="courseLocation" name="courseLocation" type="text" class="validate" data-length="75" maxlength="75">
+							<label for="courseLocation">Lugar</label>
+							<span class="helper-text col s10">Ej. Udemy</span>
+						</div>
+						<div class="input-field col s12">
+							<input id="courseDate" name="courseDate" type="text" class="validate" data-length="25" maxlength="25">
+							<label for="courseDate">Fecha</label>
+							<span class="helper-text col s10">Ej. Enero 2019</span>
+						</div>
+						<div class="input-field col s12">
+							<div class="row" style="margin-bottom: 0px;">
+								<div class="col s6">
+									<button id="btnAuxCourse" name="btnAuxCourse" class="waves-effect btn-flat btn-small" tabindex="-1">Limpiar</button>
+								</div>
+								<div class="col s6">
+									<button id="btnMainCourse" name="btnMainCourse" class="waves-effect btn-flat btn-small">Agregar</button>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+				
+				<article class="col s9">
+					<table id="tableCourse" class="striped">
+						<thead>
+							<tr>
+								<th>Nombre</th>
+								<th>Lugar</th>
+								<th>Fecha</th>
+								<th colspan="4">Opciones</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>JIRA fundamentals</td>
+								<td>TCS internal courses</td>
+								<td>02/Jul/2022</td>
+								<td><a href="#" onclick="courseHandler.moveRowUp(event)">&bigtriangleup;</a></td>
+								<td><a href="#" onclick="courseHandler.moveRowDown(event)">&bigtriangledown;</a></td>
+								<td><a href="#" onclick="courseHandler.selectCourse(event)">Editar</a></td>
+								<td><a href="#" onclick="courseHandler.removeCourse(event)">Eliminar</a></td>
+							</tr>
+							<tr>
+								<td>Persistencia de datos con Java</td>
+								<td>Platzi</td>
+								<td>Septiembre 2020</td>
+								<td><a href="#" onclick="courseHandler.moveRowUp(event)">&bigtriangleup;</a></td>
+								<td><a href="#" onclick="courseHandler.moveRowDown(event)">&bigtriangledown;</a></td>
+								<td><a href="#" onclick="courseHandler.selectCourse(event)">Editar</a></td>
+								<td><a href="#" onclick="courseHandler.removeCourse(event)">Eliminar</a></td>
+							</tr>
+						</tbody>
+					</table>
+					<br><br><br>
+
+					<div class="row">
+						<div class="col s3 left-align">
+							<button id="btnPrevCourse" data-tab="education" class="waves-effect btn-flat btn-small">Anterior</button>
+						</div>
+						<div class="col s3 push-s6 right-align">
+							<button id="btnNextCourse" data-tab="languages" class="waves-effect btn-flat btn-small">Siguiente</button>
+						</div>
 					</div>
-				</div>
+				</article>
+
 			</section>
 
 
