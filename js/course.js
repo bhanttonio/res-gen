@@ -275,9 +275,11 @@ class CourseHandler
 		let courseList = new Array();
 
 		this.#$tableBodyCourse.children().each( function(idx) {	
-			let nam = $(this).children().eq(CourseHandler.#COL_NAME).text();
-			let loc = $(this).children().eq(CourseHandler.#COL_LOCATION).text();
-			let dat = $(this).children().eq(CourseHandler.#COL_DATE).text();
+			let $tds = $(this).children();
+
+			let nam = $tds.eq(CourseHandler.#COL_NAME).text();
+			let loc = $tds.eq(CourseHandler.#COL_LOCATION).text();
+			let dat = $tds.eq(CourseHandler.#COL_DATE).text();
 			
 			courseList.push( new Course(nam, loc, dat, idx) );
 		});
