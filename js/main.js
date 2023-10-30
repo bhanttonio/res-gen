@@ -1,12 +1,14 @@
 
 var educationHandler;
+var courseHandler;
 
 $(function() {
     console.log('loading');
     M.AutoInit();
 
-    new MainHandler();
     educationHandler = new EducationHandler();
+    courseHandler = new CourseHandler();
+    new MainHandler();
 
     console.log('finished');
 });
@@ -39,7 +41,6 @@ class MainHandler
     #setUpCharCounters() {
         console.log('\t\t character counters');
         $('input#name, input#surname_1, input#surname_2, input#level, textarea#profile').characterCounter();
-        $('input#course_name_1, input#course_institute_1, input#course_date_1').characterCounter();
         $('input#lang_name_1, input#lang_speaking_1, input#lang_reading_1, input#lang_writing_1').characterCounter();
         $('input#skill_1').characterCounter();
         $('input#sector_1').characterCounter();
@@ -74,6 +75,11 @@ class MainHandler
 			if (href !== '#education') {
 				educationHandler.exitDisabledMode();
 			}
+
+            // courses module
+            if (href != '#courses') {
+                courseHandler.exitDisabledMode();
+            }
 		});
     }
 
