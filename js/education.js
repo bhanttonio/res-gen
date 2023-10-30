@@ -313,10 +313,8 @@ class EducationHandler
 			let firstIndex = this.#$tableBodyEdu.children().filter(':first').index();
 			
 			if (size > 1 && index > firstIndex) {
-				let $prevRow = this.#$tableBodyEdu.children().eq(index - 1);
-				let $currRow = this.#$tableBodyEdu.children().eq(index);
-				let $prevTds = $prevRow.children();
-				let $currTds = $currRow.children();
+				let $prevTds = this.#$tableBodyEdu.children().eq(index - 1).children();
+				let $currTds = this.#$tableBodyEdu.children().eq(index).children();
 
 				let prevNam = $prevTds.eq( EducationHandler.#COL_NAME ).text();
 				let prevIns = $prevTds.eq( EducationHandler.#COL_INSTITUTE ).text();
@@ -353,10 +351,8 @@ class EducationHandler
 			let lastIndex = this.#$tableBodyEdu.children().filter(':last').index();
 
 			if (size > 1 && index < lastIndex) {
-				let $currRow = this.#$tableBodyEdu.children().eq(index);
-				let $nextRow = this.#$tableBodyEdu.children().eq(index + 1);
-				let $currTds = $currRow.children();
-				let $nextTds = $nextRow.children();
+				let $currTds = this.#$tableBodyEdu.children().eq(index).children();
+				let $nextTds = this.#$tableBodyEdu.children().eq(index + 1).children();
 
 				let currNam = $currTds.eq( EducationHandler.#COL_NAME ).text();
 				let currIns = $currTds.eq( EducationHandler.#COL_INSTITUTE ).text();

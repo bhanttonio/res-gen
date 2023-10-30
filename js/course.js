@@ -298,10 +298,8 @@ class CourseHandler
 			let firstIndex = this.#$tableBodyCourse.children().filter(':first').index();
 			
 			if (size > 1 && index > firstIndex) {
-				let $prevRow = this.#$tableBodyCourse.children().eq(index - 1);
-				let $currRow = this.#$tableBodyCourse.children().eq(index);
-				let $prevTds = $prevRow.children();
-				let $currTds = $currRow.children();
+				let $prevTds = this.#$tableBodyCourse.children().eq(index - 1).children();
+				let $currTds = this.#$tableBodyCourse.children().eq(index).children();
 
 				let prevNam = $prevTds.eq( CourseHandler.#COL_NAME ).text();
 				let prevLoc = $prevTds.eq( CourseHandler.#COL_LOCATION ).text();
@@ -334,10 +332,8 @@ class CourseHandler
 			let lastIndex = this.#$tableBodyCourse.children().filter(':last').index();
 
 			if (size > 1 && index < lastIndex) {
-				let $currRow = this.#$tableBodyCourse.children().eq(index);
-				let $nextRow = this.#$tableBodyCourse.children().eq(index + 1);
-				let $currTds = $currRow.children();
-				let $nextTds = $nextRow.children();
+				let $currTds = this.#$tableBodyCourse.children().eq(index).children();
+				let $nextTds = this.#$tableBodyCourse.children().eq(index + 1).children();
 
 				let currNam = $currTds.eq( CourseHandler.#COL_NAME ).text();
 				let currLoc = $currTds.eq( CourseHandler.#COL_LOCATION ).text();
