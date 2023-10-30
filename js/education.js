@@ -189,7 +189,7 @@ class EducationHandler
 			let $row = this.#$tableBodyEdu.children().eq(index);
 			let eduName = $row.children().eq(EducationHandler.#COL_NAME).text();
 
-			if (confirm(`Confirma eliminaci\xF3n de '${eduName}'`)) {
+			if (confirm(`Confirma eliminaci\xF3n de "${eduName}"`)) {
 				$row.remove();
 				console.log(`[education] row ${index} removed!`);
 			}
@@ -288,11 +288,13 @@ class EducationHandler
 	getEducation() {
 		let eduList = new Array();
 
-		this.#$tableBodyEdu.children().each( function(index) {	
-			let nam = $(this).children().eq(EducationHandler.#COL_NAME).text();
-			let ins = $(this).children().eq(EducationHandler.#COL_INSTITUTE).text();
-			let sta = $(this).children().eq(EducationHandler.#COL_START).text();
-			let end = $(this).children().eq(EducationHandler.#COL_END).text();
+		this.#$tableBodyEdu.children().each( function(index) {
+			let $tds = $(this).children();
+
+			let nam = $tds.eq(EducationHandler.#COL_NAME).text();
+			let ins = $tds.eq(EducationHandler.#COL_INSTITUTE).text();
+			let sta = $tds.eq(EducationHandler.#COL_START).text();
+			let end = $tds.eq(EducationHandler.#COL_END).text();
 			
 			eduList.push( new Education(nam, ins, sta, end, index) );
 		});
