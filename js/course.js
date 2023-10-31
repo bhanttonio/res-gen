@@ -103,16 +103,12 @@ class CourseHandler
 	/* crud operations */
 
 	#insertCourse() {
-	    let name = this.#courseName.value.trim();
-	    let location = this.#courseLocation.value.trim();
-	    let date = this.#courseDate.value.trim();
-
-		if ( this.#isValidForm(name, location, date) ) {
+		if ( this.#isValidForm() ) {
 	        let newRow = 
 	        `<tr>
-	            <td>${name}</td>
-	            <td>${location}</td>
-				<td>${date}</td>
+	            <td>${this.#courseName.value}</td>
+	            <td>${this.#courseLocation.value}</td>
+				<td>${this.#courseDate.value}</td>
 				<td><a href="#" onclick="courseHandler.moveRowUp(event)">&bigtriangleup;</a></td>
 				<td><a href="#" onclick="courseHandler.moveRowDown(event)">&bigtriangledown;</a></td>
 	            <td><a href="#" onclick="courseHandler.selectCourse(event)">Editar</a></td>
@@ -146,16 +142,13 @@ class CourseHandler
 	}
 
 	#updateCourse() {
-		let name = this.#courseName.value.trim();
-	    let location = this.#courseLocation.value.trim();
-	    let date = this.#courseDate.value.trim();
-		let index = this.#courseIndex.value.trim();
+		let index = this.#courseIndex.value;
 
-		if ( this.#isValidForm(name, location, date) ) {
+		if ( this.#isValidForm() ) {
 			let updatedRow = 
-			`<td>${name}</td>
-	         <td>${location}</td>
-			 <td>${date}</td>
+			`<td>${this.#courseName.value}</td>
+	         <td>${this.#courseLocation.value}</td>
+			 <td>${this.#courseDate.value}</td>
 			 <td><a href="#" onclick="courseHandler.moveRowUp(event)">&bigtriangleup;</a></td>
 			 <td><a href="#" onclick="courseHandler.moveRowDown(event)">&bigtriangledown;</a></td>
 	         <td><a href="#" onclick="courseHandler.selectCourse(event)">Editar</a></td>
@@ -194,28 +187,10 @@ class CourseHandler
 
 	/* form validation */
 
-	#isValidForm(name, location, date) {
-		let isValidName = true;
-		let isValidLocation = true;
-		let isValidDate = true;
-
-		if (name.trim() === '') {
-			this.#addInvalidStyle(this.#courseName);
-			isValidName = false;
-		}
-		if (location.trim() === '') {
-			this.#addInvalidStyle(this.#courseLocation);
-			isValidLocation = false;
-		}
-		if (date.trim() === '') { 
-			this.#addInvalidStyle(this.#courseDate);
-			isValidDate = false;
-		}
-		return isValidName && isValidLocation && isValidDate;
-	}
-
-	#addInvalidStyle(element) {
-		element.classList.add('invalid');
+	#isValidForm() {
+		return Validator.isInputNotEmpty(this.#courseName) *       // simulates 'non-shortcircuiting and'
+			   Validator.isInputNotEmpty(this.#courseLocation) *   // (necessary to apply all individual validations)
+			   Validator.isInputNotEmpty(this.#courseDate);
 	}
 
 
