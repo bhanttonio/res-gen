@@ -252,7 +252,7 @@
 						<input name="langIndex" type="hidden" value="">
 						<div class="input-field col s2">
 							<input id="langName" name="langName" type="text" class="validate" data-length="25" maxlength="25">
-							<label for="langName">Idioma</label>
+							<label for="langName">Nombre</label>
 						</div>
 						<div class="input-field col s2">
 							<input id="langSpeak" name="langSpeak" type="text" class="validate" data-length="3" maxlength="3">
@@ -323,35 +323,73 @@
 							<button id="btnNextLang" data-tab="skills" class="waves-effect btn-flat btn-small">Siguiente</button>
 						</div>
 					</div>
-				</article>				
+				</article>	
 
 			</section>
 
 
 			<!-- skills -->
-			<section id="skills" class="section">
-				<br>
-				<div class="row">
-					<div class="input-field col s6 push-s3">
-			          	<input id="skill_1" type="text" class="validate" data-length="100" maxlength="100">
-			          	<label for="skill_1">Conocimiento</label>
-			          	<span class="helper-text col s10">P. ej. &nbsp;Office avanzado &nbsp;/&nbsp; SAP m&oacute;dulos&colon; IM, QM, PP, FI</span>
-			        </div>
-				</div>
-				<div class="row">
-					<div class="input-field col s6 push-s3">
-			          	<input id="skill_2" type="text" class="validate" data-length="100" maxlength="100">
-			          	<label for="skill_2">Conocimiento</label>
-			        </div>
-				</div>
-				<br>
-				<div class="row">
-					<div class="col s2 push-s7 right-align">
-						<button id="btnNextSkills" data-tab="sectors" class="waves-effect waves-teal btn-flat btn-small">
-							Siguiente
-						</button>
+			<section id="skills" class="row section">
+				
+				<form id="formSkill" class="col s8 push-s2">
+					<fieldset class="row">
+						<legend>Conocimiento</legend>
+						<input name="skillIndex" type="hidden" value="">
+						<div class="input-field col s8">
+							<input id="skillDesc" name="skillDesc" type="text" class="validate" data-length="100" maxlength="100">
+							<label for="skillDesc">Descripci&oacute;n</label>
+							<span class="helper-text col s10">Ej. Manejo de m&oacute;dulos SAP&colon; SD, MM, PP, FI</span>
+						</div>
+						<div class="input-field col s4">
+							<div class="row" style="margin-bottom: 0px;">
+								<div class="col s6" style="text-align: right;">
+									<button id="btnAuxSkill" name="btnAuxSkill" class="waves-effect btn-flat btn-small" tabindex="-1">Limpiar</button>
+								</div>
+								<div class="col s6" style="text-align: right;">
+									<button id="btnMainSkill" name="btnMainSkill" class="waves-effect btn-flat btn-small">A&ntilde;adir</button>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+
+				<article class="col s8 push-s2">
+					<table id="tableSkill" class="striped">
+						<thead>
+							<tr>
+								<th>Conocimiento</th>
+								<th colspan="4">Opciones</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Ingeniería del software: ADOO, UML, Scrum</td>
+								<td><a href="#" onclick="skillHandler.moveUp(event)">&bigtriangleup;</a></td>
+								<td><a href="#" onclick="skillHandler.moveDown(event)">&bigtriangledown;</a></td>
+								<td><a href="#" onclick="skillHandler.select(event)">Editar</a></td>
+								<td><a href="#" onclick="skillHandler.remove(event)">Eliminar</a></td>
+							</tr>
+							<tr>
+								<td>Bases de datos: Oracle, PostgreSQL, MySQL, SQL Server, MongoDB</td>
+								<td><a href="#" onclick="skillHandler.moveUp(event)">&bigtriangleup;</a></td>
+								<td><a href="#" onclick="skillHandler.moveDown(event)">&bigtriangledown;</a></td>
+								<td><a href="#" onclick="skillHandler.select(event)">Editar</a></td>
+								<td><a href="#" onclick="skillHandler.remove(event)">Eliminar</a></td>
+							</tr>
+						</tbody>
+					</table>
+					<br><br><br>
+
+					<div class="row">
+						<div class="col s3 left-align">
+							<button id="btnPrevSkill" data-tab="languages" class="waves-effect btn-flat btn-small">Anterior</button>
+						</div>
+						<div class="col s3 push-s6 right-align">
+							<button id="btnNextSkill" data-tab="sectors" class="waves-effect btn-flat btn-small">Siguiente</button>
+						</div>
 					</div>
-				</div>
+				</article>
+
 			</section>
 
 
