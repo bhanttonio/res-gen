@@ -1,6 +1,7 @@
 
 class Validator 
 {
+    
     static isInputNotEmpty(elInput) {
         elInput.value = elInput.value.trim();
         if (elInput.value === '') {

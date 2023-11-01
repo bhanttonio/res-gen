@@ -36,7 +36,7 @@ class CourseHandler
 		console.log('\t course handler');
 
 		this.#loadRefs();
-		this.#setUpCharCounters(true);
+		this.#setUpCharCounters();
 		this.#setUpAuxButton();
 		this.#setUpMainButton();
 	}
@@ -59,13 +59,9 @@ class CourseHandler
 		this.#$tableBodyCourse = $('table#tableCourse tbody');
 	}
 
-	#setUpCharCounters(firstCall) {
-		if (firstCall)
-			console.log('\t\t character counters');
-
-		$(this.#courseName).characterCounter();
-		$(this.#courseLocation).characterCounter();
-		$(this.#courseDate).characterCounter();
+	#setUpCharCounters() {
+		console.log('\t\t character counters');
+		FormUtil.initCharCounters(this.#formCourse);
 	}
 
     #setUpAuxButton() {
@@ -78,7 +74,7 @@ class CourseHandler
 				_this.#formInInsertMode();
 				_this.#enableOptions();
 			}
-			_this.#resetForm();
+			FormUtil.reset(_this.#formCourse);
 			this.blur();
     	});
     }
@@ -115,7 +111,7 @@ class CourseHandler
 	            <td><a href="#" onclick="courseHandler.removeCourse(event)">Eliminar</a></td>
 	        </tr>`;
 	        this.#$tableBodyCourse.append(newRow);
-			this.#resetForm();
+			FormUtil.reset(this.#formCourse);
 
 			let index = this.#$tableBodyCourse.children().length - 1;
 			console.log(`[course] row ${index} inserted!`);
@@ -157,7 +153,7 @@ class CourseHandler
 			this.#$tableBodyCourse.children().eq(index).html(updatedRow);
 
 			this.#formInInsertMode();
-			this.#resetForm();
+			FormUtil.reset(this.#formCourse);
 			this.#enableOptions();
 
 			console.log(`[course] row ${index} updated!`);
@@ -195,11 +191,6 @@ class CourseHandler
 
 
 	/* handle insert and updating modes in form */
-
-	#resetForm() {
-		this.#formCourse.reset();
-		this.#setUpCharCounters(false);
-	}
 
 	#formInInsertMode() {
 		this.#$legend.html(CourseHandler.#FORM_LEGEND_INSERT);
