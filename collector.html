@@ -29,7 +29,7 @@
 					<li class="tab"><a href="#int-work-exp">Exp Int</a></li>
 					<li class="tab"><a href="#ext-work-exp">Exp Ext</a></li>
 				</ul>
-				<br><br>
+				<br>
 			</div>
 
 			<!-- basic -->
@@ -244,52 +244,87 @@
 
 
 			<!-- languages -->
-			<section id="languages" class="section">
-				<br>
-				<div class="row">
-					<div class="input-field col s2 push-s2">
-			          	<input id="lang_name_1" type="text" class="validate" data-length="25" maxlength="25" value="Ingl&eacute;s">
-						<label for="lang_name_1">Idioma</label>
-			        </div>
-					<div class="input-field col s2 push-s2">
-			          	<input id="lang_speaking_1" type="text" class="validate" data-length="3" maxlength="3">
-			          	<label for="lang_speaking_1">&percnt; Conversaci&oacute;n</label>
-			        </div>
-			        <div class="input-field col s2 push-s2">
-			          	<input id="lang_reading_1" type="text" class="validate" data-length="3" maxlength="3">
-			          	<label for="lang_reading_1">&percnt; Lectura</label>
-			        </div>
-			        <div class="input-field col s2 push-s2">
-			          	<input id="lang_writing_1" type="text" class="validate" data-length="3" maxlength="3">
-			          	<label for="lang_writing_1">&percnt; Escritura</label>
-			        </div>
-				</div>
-				<div class="row">
-					<div class="input-field col s2 push-s2">
-			          	<input id="lang_name_2" type="text" class="validate" data-length="25" maxlength="25">
-			          	<label for="lang_name_2">Idioma</label>
-			        </div>
-					<div class="input-field col s2 push-s2">
-			          	<input id="lang_speaking_2" type="text" class="validate" data-length="3" maxlength="3">
-			          	<label for="lang_speaking_2">&percnt; Conversaci&oacute;n</label>
-			        </div>
-			        <div class="input-field col s2 push-s2">
-			          	<input id="lang_reading_2" type="text" class="validate" data-length="3" maxlength="3">
-			          	<label for="lang_reading_2">&percnt; Lectura</label>
-			        </div>
-			        <div class="input-field col s2 push-s2">
-			          	<input id="lang_writing_2" type="text" class="validate" data-length="3" maxlength="3">
-			          	<label for="lang_writing_2">&percnt; Escritura</label>
-			        </div>
-				</div>
-				<br>
-				<div class="row">
-					<div class="col s2 push-s8 right-align">
-						<button id="btnNextLanguages" data-tab="skills" class="waves-effect waves-teal btn-flat btn-small">
-							Siguiente
-						</button>
+			<section id="languages" class="row section">
+				
+				<form id="formLang" class="col s8 push-s2">
+					<fieldset class="row">
+						<legend>Idioma</legend>
+						<input name="langIndex" type="hidden" value="">
+						<div class="input-field col s2">
+							<input id="langName" name="langName" type="text" class="validate" data-length="25" maxlength="25">
+							<label for="langName">Idioma</label>
+						</div>
+						<div class="input-field col s2">
+							<input id="langSpeak" name="langSpeak" type="text" class="validate" data-length="3" maxlength="3">
+							<label for="langSpeak">&percnt; Habla</label>
+						</div>
+						<div class="input-field col s2">
+							<input id="langRead" name="langRead" type="text" class="validate" data-length="3" maxlength="3">
+							<label for="langRead">&percnt; Lee</label>
+						</div>
+						<div class="input-field col s2">
+							<input id="langWrite" name="langWrite" type="text" class="validate" data-length="3" maxlength="3">
+							<label for="langWrite">&percnt; Escribe</label>
+						</div>
+						<div class="input-field col s4">
+							<div class="row" style="margin-bottom: 0px;">
+								<div class="col s6" style="text-align: right;">
+									<button id="btnAuxLang" name="btnAuxLang" class="waves-effect btn-flat btn-small" tabindex="-1">Limpiar</button>
+								</div>
+								<div class="col s6" style="text-align: right;">
+									<button id="btnMainLang" name="btnMainLang" class="waves-effect btn-flat btn-small">A&ntilde;adir</button>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+
+				<article class="col s8 push-s2">
+					<table id="tableLang" class="striped">
+						<thead>
+							<tr>
+								<th>Idioma</th>
+								<th>&percnt; Conversaci&oacute;n</th>
+								<th>&percnt; Lectura</th>
+								<th>&percnt; Escritura</th>
+								<th colspan="4">Opciones</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Inglés</td>
+								<td>50</td>
+								<td>75</td>
+								<td>75</td>
+								<td><a href="#" onclick="languageHandler.moveUp(event)">&bigtriangleup;</a></td>
+								<td><a href="#" onclick="languageHandler.moveDown(event)">&bigtriangledown;</a></td>
+								<td><a href="#" onclick="languageHandler.select(event)">Editar</a></td>
+								<td><a href="#" onclick="languageHandler.remove(event)">Eliminar</a></td>
+							</tr>
+							<tr>
+								<td>Portugués</td>
+								<td>25</td>
+								<td>25</td>
+								<td>25</td>
+								<td><a href="#" onclick="languageHandler.moveUp(event)">&bigtriangleup;</a></td>
+								<td><a href="#" onclick="languageHandler.moveDown(event)">&bigtriangledown;</a></td>
+								<td><a href="#" onclick="languageHandler.select(event)">Editar</a></td>
+								<td><a href="#" onclick="languageHandler.remove(event)">Eliminar</a></td>
+							</tr>
+						</tbody>
+					</table>
+					<br><br><br>
+
+					<div class="row">
+						<div class="col s3 left-align">
+							<button id="btnPrevLang" data-tab="courses" class="waves-effect btn-flat btn-small">Anterior</button>
+						</div>
+						<div class="col s3 push-s6 right-align">
+							<button id="btnNextLang" data-tab="skills" class="waves-effect btn-flat btn-small">Siguiente</button>
+						</div>
 					</div>
-				</div>
+				</article>				
+
 			</section>
 
 
