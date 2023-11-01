@@ -27,9 +27,6 @@ class CourseHandler
 	static #COL_NAME = 0;
 	static #COL_LOCATION = 1;
 	static #COL_DATE = 2;
-
-	static #CSS_CLASS_LINK_ENABLED  = 'resgen-enabled';
-	static #CSS_CLASS_LINK_DISABLED = 'resgen-disabled';
 	
 
 	constructor() {
@@ -204,23 +201,12 @@ class CourseHandler
 	/* handle enabled and disabled modes of links */
 
 	#disableOptions() {
-		let $links = this.#$tableBodyCourse.find('tr td a');
-		// for (let i = 0; i < $links.length; i++) console.log( $links[i] );
-		
-		$links.removeClass( CourseHandler.#CSS_CLASS_LINK_ENABLED );
-		$links.addClass( CourseHandler.#CSS_CLASS_LINK_DISABLED );
-		$links.removeAttr('href');
-
+		TableUtil.disableLinks( this.#$tableBodyCourse );
 		this.#enabledMode = false;
 	}
 
 	#enableOptions() {
-		let $links = this.#$tableBodyCourse.find('tr td a');
-
-		$links.removeClass( CourseHandler.#CSS_CLASS_LINK_DISABLED );
-		$links.addClass( CourseHandler.#CSS_CLASS_LINK_ENABLED );
-		$links.attr('href', '#');
-
+		TableUtil.enableLinks( this.#$tableBodyCourse );
 		this.#enabledMode = true;
 	}
 
@@ -253,69 +239,14 @@ class CourseHandler
 
 	moveRowUp(event) {
 		if (this.#enabledMode) { 
-			event.preventDefault();
-
-			let size = this.#$tableBodyCourse.children().length;
-			let index = TableUtil.indexOfRow(event);
-			let firstIndex = this.#$tableBodyCourse.children().filter(':first').index();
-			
-			if (size > 1 && index > firstIndex) {
-				let $prevTds = this.#$tableBodyCourse.children().eq(index - 1).children();
-				let $currTds = this.#$tableBodyCourse.children().eq(index).children();
-
-				let prevNam = $prevTds.eq( CourseHandler.#COL_NAME ).text();
-				let prevLoc = $prevTds.eq( CourseHandler.#COL_LOCATION ).text();
-				let prevDat = $prevTds.eq( CourseHandler.#COL_DATE ).text();
-
-				let currNam = $currTds.eq( CourseHandler.#COL_NAME ).text();
-				let currLoc = $currTds.eq( CourseHandler.#COL_LOCATION ).text();
-				let currDat = $currTds.eq( CourseHandler.#COL_DATE ).text();
-
-				$prevTds.eq( CourseHandler.#COL_NAME ).text( currNam );
-				$prevTds.eq( CourseHandler.#COL_LOCATION ).text( currLoc );
-				$prevTds.eq( CourseHandler.#COL_DATE ).text( currDat );
-
-				$currTds.eq( CourseHandler.#COL_NAME ).text( prevNam );
-				$currTds.eq( CourseHandler.#COL_LOCATION ).text( prevLoc );
-				$currTds.eq( CourseHandler.#COL_DATE ).text( prevDat );
-
-				console.log('\u2191 shift up');
-			}
-			// else { console.log(JSON.stringify(this.getCourses(), null, 2)); }
+			TableUtil.moveRowUp( this.#$tableBodyCourse, event );
+			// console.log(JSON.stringify(this.getCourses(), null, 2));
 		}
 	}
 
 	moveRowDown(event) {
 		if (this.#enabledMode) { 
-			event.preventDefault();
-
-			let size = this.#$tableBodyCourse.children().length;
-			let index = TableUtil.indexOfRow(event);
-			let lastIndex = this.#$tableBodyCourse.children().filter(':last').index();
-
-			if (size > 1 && index < lastIndex) {
-				let $currTds = this.#$tableBodyCourse.children().eq(index).children();
-				let $nextTds = this.#$tableBodyCourse.children().eq(index + 1).children();
-
-				let currNam = $currTds.eq( CourseHandler.#COL_NAME ).text();
-				let currLoc = $currTds.eq( CourseHandler.#COL_LOCATION ).text();
-				let currDat = $currTds.eq( CourseHandler.#COL_DATE ).text();
-
-				let nextNam = $nextTds.eq( CourseHandler.#COL_NAME ).text();
-				let nextLoc = $nextTds.eq( CourseHandler.#COL_LOCATION ).text();
-				let nextDat = $nextTds.eq( CourseHandler.#COL_DATE ).text();
-
-				$currTds.eq( CourseHandler.#COL_NAME ).text( nextNam );
-				$currTds.eq( CourseHandler.#COL_LOCATION ).text( nextLoc );
-				$currTds.eq( CourseHandler.#COL_DATE ).text( nextDat );
-
-				$nextTds.eq( CourseHandler.#COL_NAME ).text( currNam );
-				$nextTds.eq( CourseHandler.#COL_LOCATION ).text( currLoc );
-				$nextTds.eq( CourseHandler.#COL_DATE ).text( currDat );
-
-				console.log('\u2193 shift down');
-			}
-			// else { console.log(JSON.stringify(this.getCourses(), null, 2)); }
+			TableUtil.moveRowDown( this.#$tableBodyCourse, event );
 		}
 	}
 
