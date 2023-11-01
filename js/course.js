@@ -33,9 +33,9 @@ class CourseHandler
 		console.log('\t course handler');
 
 		this.#loadRefs();
-		this.#setUpCharCounters();
-		this.#setUpAuxButton();
-		this.#setUpMainButton();
+		this.#initCharCounters();
+		this.#initAuxBtn();
+		this.#initMainBtn();
 	}
 
 
@@ -56,12 +56,12 @@ class CourseHandler
 		this.#$tableBodyCourse = $('table#tableCourse tbody');
 	}
 
-	#setUpCharCounters() {
+	#initCharCounters() {
 		console.log('\t\t character counters');
 		FormUtil.initCharCounters(this.#formCourse);
 	}
 
-    #setUpAuxButton() {
+    #initAuxBtn() {
     	console.log('\t\t aux button');
 
 		let _this = this;
@@ -76,18 +76,16 @@ class CourseHandler
     	});
     }
 
-    #setUpMainButton() {
+    #initMainBtn() {
     	console.log('\t\t main button');
 
 		let _this = this;
     	_this.#$btnMainCourse.on('click', function(e) {
 	        e.preventDefault();
-			if (this.textContent === CourseHandler.#BTN_MAIN_UPDATE) {
-				_this.#updateCourse();
-			}
-			else {
-				_this.#insertCourse();
-			}
+			if (this.textContent === CourseHandler.#BTN_MAIN_UPDATE) 
+				_this.#update();
+			else 
+				_this.#insert();
 			this.blur();
 	    });
     }
@@ -95,17 +93,17 @@ class CourseHandler
 
 	/* crud operations */
 
-	#insertCourse() {
+	#insert() {
 		if ( this.#isValidForm() ) {
 	        let newRow = 
 	        `<tr>
 	            <td>${this.#courseName.value}</td>
 	            <td>${this.#courseLocation.value}</td>
 				<td>${this.#courseDate.value}</td>
-				<td><a href="#" onclick="courseHandler.moveRowUp(event)">&bigtriangleup;</a></td>
-				<td><a href="#" onclick="courseHandler.moveRowDown(event)">&bigtriangledown;</a></td>
-	            <td><a href="#" onclick="courseHandler.selectCourse(event)">Editar</a></td>
-	            <td><a href="#" onclick="courseHandler.removeCourse(event)">Eliminar</a></td>
+				<td><a href="#" onclick="courseHandler.moveUp(event)">&bigtriangleup;</a></td>
+				<td><a href="#" onclick="courseHandler.moveDown(event)">&bigtriangledown;</a></td>
+	            <td><a href="#" onclick="courseHandler.select(event)">Editar</a></td>
+	            <td><a href="#" onclick="courseHandler.remove(event)">Eliminar</a></td>
 	        </tr>`;
 	        this.#$tableBodyCourse.append(newRow);
 			FormUtil.reset(this.#formCourse);
@@ -115,9 +113,8 @@ class CourseHandler
 	    }
 	}
 
-	selectCourse(event) { 
-		if (this.#enabledMode) 
-		{
+	select(event) { 
+		if (this.#enabledMode) {
 			event.preventDefault();
 			let index = TableUtil.indexOfRow(event);
 
@@ -134,7 +131,7 @@ class CourseHandler
 		}
 	}
 
-	#updateCourse() {
+	#update() {
 		let index = this.#courseIndex.value;
 
 		if ( this.#isValidForm() ) {
@@ -142,10 +139,10 @@ class CourseHandler
 			`<td>${this.#courseName.value}</td>
 	         <td>${this.#courseLocation.value}</td>
 			 <td>${this.#courseDate.value}</td>
-			 <td><a href="#" onclick="courseHandler.moveRowUp(event)">&bigtriangleup;</a></td>
-			 <td><a href="#" onclick="courseHandler.moveRowDown(event)">&bigtriangledown;</a></td>
-	         <td><a href="#" onclick="courseHandler.selectCourse(event)">Editar</a></td>
-	         <td><a href="#" onclick="courseHandler.removeCourse(event)">Eliminar</a></td>`;
+			 <td><a href="#" onclick="courseHandler.moveUp(event)">&bigtriangleup;</a></td>
+			 <td><a href="#" onclick="courseHandler.moveDown(event)">&bigtriangledown;</a></td>
+	         <td><a href="#" onclick="courseHandler.select(event)">Editar</a></td>
+	         <td><a href="#" onclick="courseHandler.remove(event)">Eliminar</a></td>`;
 			 
 			this.#$tableBodyCourse.children().eq(index).html(updatedRow);
 
@@ -157,9 +154,8 @@ class CourseHandler
 		}
 	}
 
-	removeCourse(event) {  
-		if (this.#enabledMode) 
-		{
+	remove(event) {  
+		if (this.#enabledMode) {
 			event.preventDefault();
 			let index = TableUtil.indexOfRow(event);
 
@@ -211,9 +207,8 @@ class CourseHandler
 	}
 
 	exitDisabledMode() {  
-		if (this.#enabledMode == false) {
+		if (this.#enabledMode == false)
 			this.#$btnAuxCourse.trigger('click');
-		}
 	}
 
 
@@ -221,14 +216,10 @@ class CourseHandler
 
 	getCourses() {
 		let courseList = new Array();
-
 		this.#$tableBodyCourse.children().each( function(idx) {	
-			let $tds = $(this).children();
-
-			let nam = $tds.eq(CourseHandler.#COL_NAME).text();
-			let loc = $tds.eq(CourseHandler.#COL_LOCATION).text();
-			let dat = $tds.eq(CourseHandler.#COL_DATE).text();
-			
+			let nam = $(this).children().eq(CourseHandler.#COL_NAME).text();
+			let loc = $(this).children().eq(CourseHandler.#COL_LOCATION).text();
+			let dat = $(this).children().eq(CourseHandler.#COL_DATE).text();
 			courseList.push( new Course(nam, loc, dat, idx) );
 		});
 		return courseList;
@@ -237,17 +228,14 @@ class CourseHandler
 
 	/* row shifts */
 
-	moveRowUp(event) {
-		if (this.#enabledMode) { 
+	moveUp(event) {
+		if (this.#enabledMode)
 			TableUtil.moveRowUp( this.#$tableBodyCourse, event );
-			// console.log(JSON.stringify(this.getCourses(), null, 2));
-		}
 	}
 
-	moveRowDown(event) {
-		if (this.#enabledMode) { 
+	moveDown(event) {
+		if (this.#enabledMode) 
 			TableUtil.moveRowDown( this.#$tableBodyCourse, event );
-		}
 	}
 
 }//
