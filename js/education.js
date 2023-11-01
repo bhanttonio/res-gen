@@ -33,11 +33,10 @@ class EducationHandler
 
 	constructor() {
 		console.log('\t education handler');
-
 		this.#loadRefs();
 		this.#initCharCounters();
-		this.#setUpAuxButton();
-		this.#setUpMainButton();
+		this.#initAuxBtn();
+		this.#initMainBtn();
 	}
 
 
@@ -64,7 +63,7 @@ class EducationHandler
 		FormUtil.initCharCounters(this.#formEdu);
 	}
 
-    #setUpAuxButton() {
+    #initAuxBtn() {
     	console.log('\t\t aux button');
 
 		let _this = this;
@@ -79,17 +78,17 @@ class EducationHandler
     	});
     }
 
-    #setUpMainButton() {
+    #initMainBtn() {
     	console.log('\t\t main button');
 
 		let _this = this;
     	_this.#$btnMainEdu.on('click', function(e) {   // on click update entry or insert a new one
 	        e.preventDefault();
 			if (this.textContent === EducationHandler.#BTN_MAIN_UPDATE) {
-				_this.#updateEducation();
+				_this.#update();
 			}
 			else {
-				_this.#insertEducation();
+				_this.#insert();
 			}
 			this.blur();
 	    });
@@ -98,7 +97,7 @@ class EducationHandler
 
 	/* crud operations */
 
-	#insertEducation() {
+	#insert() {
 		if ( this.#isValidForm() ) {
 	        let newRow = 
 	        `<tr>
@@ -106,10 +105,10 @@ class EducationHandler
 	            <td>${this.#eduInstitute.value}</td>
 				<td>${this.#eduStart.value}</td>
 				<td>${this.#eduEnd.value}</td>
-				<td><a href="#" onclick="educationHandler.moveRowUp(event)">&bigtriangleup;</a></td>
-				<td><a href="#" onclick="educationHandler.moveRowDown(event)">&bigtriangledown;</a></td>
-	            <td><a href="#" onclick="educationHandler.selectEducation(event)">Editar</a></td>
-	            <td><a href="#" onclick="educationHandler.removeEducation(event)">Eliminar</a></td>
+				<td><a href="#" onclick="educationHandler.moveUp(event)">&bigtriangleup;</a></td>
+				<td><a href="#" onclick="educationHandler.moveDown(event)">&bigtriangledown;</a></td>
+	            <td><a href="#" onclick="educationHandler.select(event)">Editar</a></td>
+	            <td><a href="#" onclick="educationHandler.remove(event)">Eliminar</a></td>
 	        </tr>`;
 	        this.#$tableBodyEdu.append(newRow);
 			FormUtil.reset(this.#formEdu);   // clean form only if everything was ok 
@@ -119,7 +118,7 @@ class EducationHandler
 	    }
 	}
 
-	selectEducation(event) {   // not a private method because it's called from the links in the table
+	select(event) {   // not a private method because it's called from the links in the table
 		if (this.#enabledMode)   // select entry only if no update is in progress
 		{
 			event.preventDefault();
@@ -139,7 +138,7 @@ class EducationHandler
 		}
 	}
 
-	#updateEducation() {
+	#update() {
 		let index = this.#eduIndex.value;
 
 		if ( this.#isValidForm() ) {
@@ -148,10 +147,10 @@ class EducationHandler
 	         <td>${this.#eduInstitute.value}</td>
 			 <td>${this.#eduStart.value}</td>
 			 <td>${this.#eduEnd.value}</td>
-			 <td><a href="#" onclick="educationHandler.moveRowUp(event)">&bigtriangleup;</a></td>
-			 <td><a href="#" onclick="educationHandler.moveRowDown(event)">&bigtriangledown;</a></td>
-	         <td><a href="#" onclick="educationHandler.selectEducation(event)">Editar</a></td>
-	         <td><a href="#" onclick="educationHandler.removeEducation(event)">Eliminar</a></td>`;
+			 <td><a href="#" onclick="educationHandler.moveUp(event)">&bigtriangleup;</a></td>
+			 <td><a href="#" onclick="educationHandler.moveDown(event)">&bigtriangledown;</a></td>
+	         <td><a href="#" onclick="educationHandler.select(event)">Editar</a></td>
+	         <td><a href="#" onclick="educationHandler.remove(event)">Eliminar</a></td>`;
 			 
 			this.#$tableBodyEdu.children().eq(index).html(updatedRow);
 
@@ -163,7 +162,7 @@ class EducationHandler
 		}
 	}
 
-	removeEducation(event) {       // not a private method because it's called from the links in the table
+	remove(event) {       // not a private method because it's called from the links in the table
 		if (this.#enabledMode)       // remove entry only if no update is in progress
 		{
 			event.preventDefault();
@@ -223,6 +222,20 @@ class EducationHandler
 	}
 
 
+	/* row shifts */
+
+	moveUp(event) {
+		if (this.#enabledMode) 
+			TableUtil.moveRowUp(this.#$tableBodyEdu, event);
+	}
+
+	moveDown(event) {
+		// console.log(JSON.stringify(this.getEducation(), null, 2));
+		if (this.#enabledMode)
+			TableUtil.moveRowDown(this.#$tableBodyEdu, event);
+	}
+
+
 	/* handle json object  */
 
 	getEducation() {
@@ -239,20 +252,6 @@ class EducationHandler
 			eduList.push( new Education(nam, ins, sta, end, index) );
 		});
 		return eduList;
-	}
-
-
-	/* row shifts */
-
-	moveRowUp(event) {
-		if (this.#enabledMode) 
-			TableUtil.moveRowUp(this.#$tableBodyEdu, event);
-	}
-
-	moveRowDown(event) {
-		// console.log(JSON.stringify(this.getEducation(), null, 2));
-		if (this.#enabledMode)
-			TableUtil.moveRowDown(this.#$tableBodyEdu, event);
 	}
 
 }//
