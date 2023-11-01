@@ -65,32 +65,26 @@ class EducationHandler
 
     #initAuxBtn() {
     	console.log('\t\t aux button');
-
-		let _this = this;
-    	_this.#$btnAux.on('click', function(e) {   // on click cancel update or just clean form (in insert mode)
-        	e.preventDefault();
-			if (this.textContent === EducationHandler.#BTN_AUX_CANCEL) {
-				_this.#formInInsertMode();   // if an update is canceled, set the form in insert mode and enable links in the table
-				_this.#enableOptions();
+    	this.#$btnAux.on('click', event => {   // on click cancel update or just clean form (in insert mode)
+        	event.preventDefault();
+			if (event.target.textContent === EducationHandler.#BTN_AUX_CANCEL) {
+				this.#formInInsertMode();   // if an update is canceled, set the form in insert mode and enable links in the table
+				this.#enableOptions();
 			}
-			FormUtil.reset(_this.#elForm);
-			this.blur();
+			FormUtil.reset(this.#elForm);
+			event.target.blur();
     	});
     }
 
     #initMainBtn() {
     	console.log('\t\t main button');
-
-		let _this = this;
-    	_this.#$btnMain.on('click', function(e) {   // on click update entry or insert a new one
-	        e.preventDefault();
-			if (this.textContent === EducationHandler.#BTN_MAIN_UPDATE) {
-				_this.#update();
-			}
-			else {
-				_this.#insert();
-			}
-			this.blur();
+    	this.#$btnMain.on('click', event => {   // on click update entry or insert a new one
+	        event.preventDefault();
+			if (event.target.textContent === EducationHandler.#BTN_MAIN_UPDATE) 
+				this.#update();
+			else 
+				this.#insert();
+			event.target.blur();
 	    });
     }
 
@@ -216,9 +210,8 @@ class EducationHandler
 	}
 
 	exitDisabledMode() {  // not private because it's called from an external method that handles custom events on the tabs component
-		if (this.#enabledMode == false) {
+		if (this.#enabledMode == false) 
 			this.#$btnAux.trigger('click');  // trigger cancel button while updating an entry, if the user moves to another tab
-		}
 	}
 
 
@@ -240,16 +233,12 @@ class EducationHandler
 
 	getEducation() {
 		let eduList = new Array();
-
-		this.#$tableBody.children().each( function(index) {
-			let $tds = $(this).children();
-
-			let nam = $tds.eq(EducationHandler.#COL_NAME).text();
-			let ins = $tds.eq(EducationHandler.#COL_INSTITUTE).text();
-			let sta = $tds.eq(EducationHandler.#COL_START).text();
-			let end = $tds.eq(EducationHandler.#COL_END).text();
-			
-			eduList.push( new Education(nam, ins, sta, end, index) );
+		this.#$tableBody.children().each( function(idx) {
+			let nam = $(this).children().eq(EducationHandler.#COL_NAME).text();
+			let ins = $(this).children().eq(EducationHandler.#COL_INSTITUTE).text();
+			let sta = $(this).children().eq(EducationHandler.#COL_START).text();
+			let end = $(this).children().eq(EducationHandler.#COL_END).text();
+			eduList.push( new Education(nam, ins, sta, end, idx) );
 		});
 		return eduList;
 	}
