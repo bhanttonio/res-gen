@@ -19,9 +19,9 @@ class CourseHandler
 	static #FORM_LEGEND_UPDATE = 'Curso [Edici&oacute;n]';
 
 	static #BTN_AUX_CLEAN  = 'Limpiar';
-	static #BTN_AUX_CANCEL = 'Cancelar';
+	static #BTN_AUX_CANCEL = 'Anular';
 
-	static #BTN_MAIN_INSERT = 'Agregar';
+	static #BTN_MAIN_INSERT = 'A&ntilde;adir';
 	static #BTN_MAIN_UPDATE = 'Editar';
 
 	static #COL_NAME = 0;

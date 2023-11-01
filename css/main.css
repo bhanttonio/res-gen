@@ -55,7 +55,7 @@ span.character-counter {
 .btn-small {
 	height: 22px;
 	line-height: 22px;
-	font-size: 10.5px;
+	font-size: 10px;
 	border: 1px solid black;
 }
 .btn-small:hover, .btn-small:focus {
