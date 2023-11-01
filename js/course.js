@@ -38,8 +38,6 @@ class CourseHandler
 	}
 
 
-	/* config methods */
-
 	#loadRefs() {
 		console.log('\t\t references');
 
@@ -62,35 +60,29 @@ class CourseHandler
 
     #initAuxBtn() {
     	console.log('\t\t aux button');
-
-		let _this = this;
-    	_this.#$btnAux.on('click', function(e) { 
-        	e.preventDefault();
-			if (this.textContent === CourseHandler.#BTN_AUX_CANCEL) {
-				_this.#formInInsertMode();
-				_this.#enableOptions();
+    	this.#$btnAux.on('click', event => { 
+        	event.preventDefault();
+			if (event.target.textContent === CourseHandler.#BTN_AUX_CANCEL) {
+				this.#formInInsertMode();
+				this.#enableOptions();
 			}
-			FormUtil.reset(_this.#elForm);
-			this.blur();
+			FormUtil.reset(this.#elForm);
+			event.target.blur();
     	});
     }
 
     #initMainBtn() {
     	console.log('\t\t main button');
-
-		let _this = this;
-    	_this.#$btnMain.on('click', function(e) {
-	        e.preventDefault();
-			if (this.textContent === CourseHandler.#BTN_MAIN_UPDATE) 
-				_this.#update();
+    	this.#$btnMain.on('click', event => {
+	        event.preventDefault();
+			if (event.target.textContent === CourseHandler.#BTN_MAIN_UPDATE) 
+				this.#update();
 			else 
-				_this.#insert();
-			this.blur();
+				this.#insert();
+			event.target.blur();
 	    });
     }
 
-
-	/* crud operations */
 
 	#insert() {
 		if ( this.#isValidForm() ) {
@@ -169,16 +161,12 @@ class CourseHandler
 	}
 
 
-	/* form validation */
-
 	#isValidForm() {
 		return Validator.isInputNotEmpty(this.#elName) *       // simulates 'non-shortcircuiting and'
 			   Validator.isInputNotEmpty(this.#elLocation) *   // (necessary to apply all individual validations)
 			   Validator.isInputNotEmpty(this.#elDate);
 	}
 
-
-	/* handle insert and updating modes in form */
 
 	#formInInsertMode() {
 		this.#$legend.html(CourseHandler.#FORM_LEGEND_INSERT);
@@ -192,8 +180,6 @@ class CourseHandler
 		this.#$btnMain.html(CourseHandler.#BTN_MAIN_UPDATE);
 	}
 
-
-	/* handle enabled and disabled modes of links */
 
 	#disableOptions() {
 		TableUtil.disableLinks( this.#$tableBody );
@@ -211,7 +197,16 @@ class CourseHandler
 	}
 
 
-	/* handle json object  */
+	moveUp(event) {
+		if (this.#enabledMode)
+			TableUtil.moveRowUp( this.#$tableBody, event );
+	}
+
+	moveDown(event) {
+		if (this.#enabledMode) 
+			TableUtil.moveRowDown( this.#$tableBody, event );
+	}
+
 
 	getCourses() {
 		let courseList = new Array();
@@ -222,19 +217,6 @@ class CourseHandler
 			courseList.push( new Course(nam, loc, dat, idx) );
 		});
 		return courseList;
-	}
-
-
-	/* row shifts */
-
-	moveUp(event) {
-		if (this.#enabledMode)
-			TableUtil.moveRowUp( this.#$tableBody, event );
-	}
-
-	moveDown(event) {
-		if (this.#enabledMode) 
-			TableUtil.moveRowDown( this.#$tableBody, event );
 	}
 
 }//
