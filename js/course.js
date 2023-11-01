@@ -1,16 +1,16 @@
 
 class CourseHandler
 {
-	#formCourse;
-	#courseName;
-	#courseLocation;
-	#courseDate;
-	#courseIndex;
+	#elForm;
+	#elName;
+	#elLocation;
+	#elDate;
+	#elIndex;
 
 	#$legend;
-	#$btnAuxCourse;
-	#$btnMainCourse;
-	#$tableBodyCourse;
+	#$btnAux;
+	#$btnMain;
+	#$tableBody;
 
 	#enabledMode = true;
 
@@ -31,7 +31,6 @@ class CourseHandler
 
 	constructor() {
 		console.log('\t course handler');
-
 		this.#loadRefs();
 		this.#initCharCounters();
 		this.#initAuxBtn();
@@ -44,34 +43,34 @@ class CourseHandler
 	#loadRefs() {
 		console.log('\t\t references');
 
-		this.#formCourse = document.getElementById('formCourse');
-		this.#courseName = this.#formCourse.elements.courseName;
-		this.#courseLocation = this.#formCourse.elements.courseLocation;
-	    this.#courseDate = this.#formCourse.elements.courseDate;
-		this.#courseIndex = this.#formCourse.elements.courseIndex;
+		this.#elForm = document.getElementById('formCourse');
+		this.#elName = this.#elForm.elements.courseName;
+		this.#elLocation = this.#elForm.elements.courseLocation;
+	    this.#elDate = this.#elForm.elements.courseDate;
+		this.#elIndex = this.#elForm.elements.courseIndex;
 
-		this.#$legend = $(this.#formCourse).find('legend');
-		this.#$btnAuxCourse = $(this.#formCourse.elements.btnAuxCourse);
-		this.#$btnMainCourse = $(this.#formCourse.elements.btnMainCourse);
-		this.#$tableBodyCourse = $('table#tableCourse tbody');
+		this.#$legend = $(this.#elForm).find('legend');
+		this.#$btnAux = $(this.#elForm.elements.btnAuxCourse);
+		this.#$btnMain = $(this.#elForm.elements.btnMainCourse);
+		this.#$tableBody = $('table#tableCourse tbody');
 	}
 
 	#initCharCounters() {
 		console.log('\t\t character counters');
-		FormUtil.initCharCounters(this.#formCourse);
+		FormUtil.initCharCounters(this.#elForm);
 	}
 
     #initAuxBtn() {
     	console.log('\t\t aux button');
 
 		let _this = this;
-    	_this.#$btnAuxCourse.on('click', function(e) { 
+    	_this.#$btnAux.on('click', function(e) { 
         	e.preventDefault();
 			if (this.textContent === CourseHandler.#BTN_AUX_CANCEL) {
 				_this.#formInInsertMode();
 				_this.#enableOptions();
 			}
-			FormUtil.reset(_this.#formCourse);
+			FormUtil.reset(_this.#elForm);
 			this.blur();
     	});
     }
@@ -80,7 +79,7 @@ class CourseHandler
     	console.log('\t\t main button');
 
 		let _this = this;
-    	_this.#$btnMainCourse.on('click', function(e) {
+    	_this.#$btnMain.on('click', function(e) {
 	        e.preventDefault();
 			if (this.textContent === CourseHandler.#BTN_MAIN_UPDATE) 
 				_this.#update();
@@ -97,18 +96,18 @@ class CourseHandler
 		if ( this.#isValidForm() ) {
 	        let newRow = 
 	        `<tr>
-	            <td>${this.#courseName.value}</td>
-	            <td>${this.#courseLocation.value}</td>
-				<td>${this.#courseDate.value}</td>
+	            <td>${this.#elName.value}</td>
+	            <td>${this.#elLocation.value}</td>
+				<td>${this.#elDate.value}</td>
 				<td><a href="#" onclick="courseHandler.moveUp(event)">&bigtriangleup;</a></td>
 				<td><a href="#" onclick="courseHandler.moveDown(event)">&bigtriangledown;</a></td>
 	            <td><a href="#" onclick="courseHandler.select(event)">Editar</a></td>
 	            <td><a href="#" onclick="courseHandler.remove(event)">Eliminar</a></td>
 	        </tr>`;
-	        this.#$tableBodyCourse.append(newRow);
-			FormUtil.reset(this.#formCourse);
+	        this.#$tableBody.append(newRow);
+			FormUtil.reset(this.#elForm);
 
-			let index = this.#$tableBodyCourse.children().length - 1;
+			let index = this.#$tableBody.children().length - 1;
 			console.log(`[course] row ${index} inserted!`);
 	    }
 	}
@@ -119,35 +118,35 @@ class CourseHandler
 			let index = TableUtil.indexOfRow(event);
 
 			this.#formInUpdateMode();
-			let $row = this.#$tableBodyCourse.children().eq(index).children();
+			let $row = this.#$tableBody.children().eq(index).children();
 
-			this.#courseName.value = $row.eq(CourseHandler.#COL_NAME).text(); this.#courseName.focus();
-			this.#courseLocation.value = $row.eq(CourseHandler.#COL_LOCATION).text(); this.#courseLocation.focus();
-			this.#courseDate.value = $row.eq(CourseHandler.#COL_DATE).text(); this.#courseDate.focus();
-			this.#courseIndex.value = index;
+			this.#elName.value = $row.eq(CourseHandler.#COL_NAME).text(); this.#elName.focus();
+			this.#elLocation.value = $row.eq(CourseHandler.#COL_LOCATION).text(); this.#elLocation.focus();
+			this.#elDate.value = $row.eq(CourseHandler.#COL_DATE).text(); this.#elDate.focus();
+			this.#elIndex.value = index;
 
-			this.#disableOptions(); 
+			this.#disableOptions();
 			console.log(`[course] row ${index} selected!`);
 		}
 	}
 
 	#update() {
-		let index = this.#courseIndex.value;
+		let index = this.#elIndex.value;
 
 		if ( this.#isValidForm() ) {
 			let updatedRow = 
-			`<td>${this.#courseName.value}</td>
-	         <td>${this.#courseLocation.value}</td>
-			 <td>${this.#courseDate.value}</td>
+			`<td>${this.#elName.value}</td>
+	         <td>${this.#elLocation.value}</td>
+			 <td>${this.#elDate.value}</td>
 			 <td><a href="#" onclick="courseHandler.moveUp(event)">&bigtriangleup;</a></td>
 			 <td><a href="#" onclick="courseHandler.moveDown(event)">&bigtriangledown;</a></td>
 	         <td><a href="#" onclick="courseHandler.select(event)">Editar</a></td>
 	         <td><a href="#" onclick="courseHandler.remove(event)">Eliminar</a></td>`;
 			 
-			this.#$tableBodyCourse.children().eq(index).html(updatedRow);
+			this.#$tableBody.children().eq(index).html(updatedRow);
 
 			this.#formInInsertMode();
-			FormUtil.reset(this.#formCourse);
+			FormUtil.reset(this.#elForm);
 			this.#enableOptions();
 
 			console.log(`[course] row ${index} updated!`);
@@ -159,7 +158,7 @@ class CourseHandler
 			event.preventDefault();
 			let index = TableUtil.indexOfRow(event);
 
-			let $row = this.#$tableBodyCourse.children().eq(index);
+			let $row = this.#$tableBody.children().eq(index);
 			let courseName = $row.children().eq(CourseHandler.#COL_NAME).text();
 
 			if (confirm(`Confirma eliminaci\xF3n de "${courseName}"`)) {
@@ -173,9 +172,9 @@ class CourseHandler
 	/* form validation */
 
 	#isValidForm() {
-		return Validator.isInputNotEmpty(this.#courseName) *       // simulates 'non-shortcircuiting and'
-			   Validator.isInputNotEmpty(this.#courseLocation) *   // (necessary to apply all individual validations)
-			   Validator.isInputNotEmpty(this.#courseDate);
+		return Validator.isInputNotEmpty(this.#elName) *       // simulates 'non-shortcircuiting and'
+			   Validator.isInputNotEmpty(this.#elLocation) *   // (necessary to apply all individual validations)
+			   Validator.isInputNotEmpty(this.#elDate);
 	}
 
 
@@ -183,32 +182,32 @@ class CourseHandler
 
 	#formInInsertMode() {
 		this.#$legend.html(CourseHandler.#FORM_LEGEND_INSERT);
-		this.#$btnAuxCourse.html(CourseHandler.#BTN_AUX_CLEAN);
-		this.#$btnMainCourse.html(CourseHandler.#BTN_MAIN_INSERT);
+		this.#$btnAux.html(CourseHandler.#BTN_AUX_CLEAN);
+		this.#$btnMain.html(CourseHandler.#BTN_MAIN_INSERT);
 	}
 
 	#formInUpdateMode() {
 		this.#$legend.html(CourseHandler.#FORM_LEGEND_UPDATE);
-		this.#$btnAuxCourse.html(CourseHandler.#BTN_AUX_CANCEL);
-		this.#$btnMainCourse.html(CourseHandler.#BTN_MAIN_UPDATE);
+		this.#$btnAux.html(CourseHandler.#BTN_AUX_CANCEL);
+		this.#$btnMain.html(CourseHandler.#BTN_MAIN_UPDATE);
 	}
 
 
 	/* handle enabled and disabled modes of links */
 
 	#disableOptions() {
-		TableUtil.disableLinks( this.#$tableBodyCourse );
+		TableUtil.disableLinks( this.#$tableBody );
 		this.#enabledMode = false;
 	}
 
 	#enableOptions() {
-		TableUtil.enableLinks( this.#$tableBodyCourse );
+		TableUtil.enableLinks( this.#$tableBody );
 		this.#enabledMode = true;
 	}
 
 	exitDisabledMode() {  
 		if (this.#enabledMode == false)
-			this.#$btnAuxCourse.trigger('click');
+			this.#$btnAux.trigger('click');
 	}
 
 
@@ -216,7 +215,7 @@ class CourseHandler
 
 	getCourses() {
 		let courseList = new Array();
-		this.#$tableBodyCourse.children().each( function(idx) {	
+		this.#$tableBody.children().each( function(idx) {	
 			let nam = $(this).children().eq(CourseHandler.#COL_NAME).text();
 			let loc = $(this).children().eq(CourseHandler.#COL_LOCATION).text();
 			let dat = $(this).children().eq(CourseHandler.#COL_DATE).text();
@@ -230,12 +229,12 @@ class CourseHandler
 
 	moveUp(event) {
 		if (this.#enabledMode)
-			TableUtil.moveRowUp( this.#$tableBodyCourse, event );
+			TableUtil.moveRowUp( this.#$tableBody, event );
 	}
 
 	moveDown(event) {
 		if (this.#enabledMode) 
-			TableUtil.moveRowDown( this.#$tableBodyCourse, event );
+			TableUtil.moveRowDown( this.#$tableBody, event );
 	}
 
 }//
