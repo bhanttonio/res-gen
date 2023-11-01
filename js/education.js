@@ -107,18 +107,13 @@ class EducationHandler
 	/* crud operations */
 
 	#insertEducation() {
-	    let name = this.#eduName.value.trim();
-	    let institute = this.#eduInstitute.value.trim();
-	    let start = this.#eduStart.value.trim();
-	    let end = this.#eduEnd.value.trim();
-
-		if ( this.#isValidForm(name, institute, start, end) ) {
+		if ( this.#isValidForm() ) {
 	        let newRow = 
 	        `<tr>
-	            <td>${name}</td>
-	            <td>${institute}</td>
-				<td>${start}</td>
-				<td>${end}</td>
+	            <td>${this.#eduName.value}</td>
+	            <td>${this.#eduInstitute.value}</td>
+				<td>${this.#eduStart.value}</td>
+				<td>${this.#eduEnd.value}</td>
 				<td><a href="#" onclick="educationHandler.moveRowUp(event)">&bigtriangleup;</a></td>
 				<td><a href="#" onclick="educationHandler.moveRowDown(event)">&bigtriangledown;</a></td>
 	            <td><a href="#" onclick="educationHandler.selectEducation(event)">Editar</a></td>
@@ -153,18 +148,14 @@ class EducationHandler
 	}
 
 	#updateEducation() {
-		let name = this.#eduName.value.trim();
-	    let institute = this.#eduInstitute.value.trim();
-	    let start = this.#eduStart.value.trim();
-	    let end = this.#eduEnd.value.trim();
-		let index = this.#eduIndex.value.trim();
-
-		if ( this.#isValidForm(name, institute, start, end) ) {
+		let index = this.#eduIndex.value;
+		
+		if ( this.#isValidForm() ) {
 			let updatedRow = 
-			`<td>${name}</td>
-	         <td>${institute}</td>
-			 <td>${start}</td>
-			 <td>${end}</td>
+			`<td>${this.#eduName.value}</td>
+	         <td>${this.#eduInstitute.value}</td>
+			 <td>${this.#eduStart.value}</td>
+			 <td>${this.#eduEnd.value}</td>
 			 <td><a href="#" onclick="educationHandler.moveRowUp(event)">&bigtriangleup;</a></td>
 			 <td><a href="#" onclick="educationHandler.moveRowDown(event)">&bigtriangledown;</a></td>
 	         <td><a href="#" onclick="educationHandler.selectEducation(event)">Editar</a></td>
@@ -203,33 +194,10 @@ class EducationHandler
 
 	/* form validation */
 
-	#isValidForm(name, institute, start, end) {
-		let isValidName = true;
-		let isValidInstitute = true;
-		let isValidStart = true;
-		let isValidEnd = true;
-
-		if (name.trim() === '') {
-			this.#addInvalidStyle(this.#eduName);
-			isValidName = false;
-		}
-		if (institute.trim() === '') {
-			this.#addInvalidStyle(this.#eduInstitute);
-			isValidInstitute = false;
-		}
-		if (start.trim() === '' || isNaN(start) || start < 1000 || start > 9999) { 
-			this.#addInvalidStyle(this.#eduStart);
-			isValidStart = false;
-		}
-		if (end.trim() === '' || isNaN(end) || end < 1000 || end > 9999 || end < start) {
-			this.#addInvalidStyle(this.#eduEnd);
-			isValidEnd = false;
-		}
-		return isValidName && isValidInstitute && isValidStart && isValidEnd;
-	}
-
-	#addInvalidStyle(element) {
-		element.classList.add('invalid');
+	#isValidForm() {
+		return Validator.isInputNotEmpty(this.#eduName) * 
+			   Validator.isInputNotEmpty(this.#eduInstitute) * 
+			   Validator.isYearRangeValid(this.#eduStart, this.#eduEnd);
 	}
 
 
