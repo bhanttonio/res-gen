@@ -38,7 +38,7 @@ class EducationHandler
 		console.log('\t education handler');
 
 		this.#loadRefs();
-		this.#setUpCharCounters(true);
+		this.#initCharCounters();
 		this.#setUpAuxButton();
 		this.#setUpMainButton();
 	}
@@ -62,14 +62,9 @@ class EducationHandler
 		this.#$tableBodyEdu = $('table#tableEdu tbody');
 	}
 
-	#setUpCharCounters(firstCall) {
-		if (firstCall)
-			console.log('\t\t character counters');
-
-		$(this.#eduName).characterCounter();
-		$(this.#eduInstitute).characterCounter();
-		$(this.#eduStart).characterCounter();
-		$(this.#eduEnd).characterCounter();
+	#initCharCounters() {
+		console.log('\t\t character counters');
+		FormUtil.initCharCounters(this.#formEdu);
 	}
 
     #setUpAuxButton() {
@@ -82,7 +77,7 @@ class EducationHandler
 				_this.#formInInsertMode();   // if an update is canceled, set the form in insert mode and enable links in the table
 				_this.#enableOptions();
 			}
-			_this.#resetForm();
+			FormUtil.reset(_this.#formEdu);
 			this.blur();
     	});
     }
@@ -120,7 +115,7 @@ class EducationHandler
 	            <td><a href="#" onclick="educationHandler.removeEducation(event)">Eliminar</a></td>
 	        </tr>`;
 	        this.#$tableBodyEdu.append(newRow);
-			this.#resetForm();   // clean form only if everything was ok 
+			FormUtil.reset(this.#formEdu);   // clean form only if everything was ok 
 
 			let index = this.#$tableBodyEdu.children().length - 1;
 			console.log(`[education] row ${index} inserted!`);
@@ -149,7 +144,7 @@ class EducationHandler
 
 	#updateEducation() {
 		let index = this.#eduIndex.value;
-		
+
 		if ( this.#isValidForm() ) {
 			let updatedRow = 
 			`<td>${this.#eduName.value}</td>
@@ -164,7 +159,7 @@ class EducationHandler
 			this.#$tableBodyEdu.children().eq(index).html(updatedRow);
 
 			this.#formInInsertMode();  // after an update, return form to insert mode, clean it and enable links in the table
-			this.#resetForm();
+			FormUtil.reset(this.#formEdu);
 			this.#enableOptions();
 
 			console.log(`[education] row ${index} updated!`);
@@ -202,11 +197,6 @@ class EducationHandler
 
 
 	/* handle insert and updating modes in form */
-
-	#resetForm() {
-		this.#formEdu.reset();
-		this.#setUpCharCounters(false);
-	}
 
 	#formInInsertMode() {
 		this.#$legend.html(EducationHandler.#FORM_LEGEND_INSERT);
