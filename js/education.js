@@ -29,9 +29,6 @@ class EducationHandler
 	static #COL_INSTITUTE = 1;
 	static #COL_START = 2;
 	static #COL_END = 3;
-
-	static #CSS_CLASS_LINK_ENABLED = 'resgen-enabled';
-	static #CSS_CLASS_LINK_DISABLED = 'resgen-disabled';
 	
 
 	constructor() {
@@ -126,7 +123,7 @@ class EducationHandler
 		if (this.#enabledMode)   // select entry only if no update is in progress
 		{
 			event.preventDefault();
-			let index = this.#indexFrom(event);
+			let index = TableUtil.indexOfRow(event);
 
 			this.#formInUpdateMode();
 			let $row = this.#$tableBodyEdu.children().eq(index).children();
@@ -170,7 +167,7 @@ class EducationHandler
 		if (this.#enabledMode)       // remove entry only if no update is in progress
 		{
 			event.preventDefault();
-			let index = this.#indexFrom(event);
+			let index = TableUtil.indexOfRow(event);
 
 			let $row = this.#$tableBodyEdu.children().eq(index);
 			let eduName = $row.children().eq(EducationHandler.#COL_NAME).text();
@@ -180,10 +177,6 @@ class EducationHandler
 				console.log(`[education] row ${index} removed!`);
 			}
 		}
-	}
-
-	#indexFrom(event) {
-		return $(event.target).parent().parent().index();
 	}
 
 
@@ -214,23 +207,12 @@ class EducationHandler
 	/* handle enabled and disabled modes of links */
 
 	#disableOptions() {
-		let $links = this.#$tableBodyEdu.find('tr td a');
-		// for (let i = 0; i < $links.length; i++) console.log( $links[i] );
-		
-		$links.removeClass( EducationHandler.#CSS_CLASS_LINK_ENABLED );
-		$links.addClass( EducationHandler.#CSS_CLASS_LINK_DISABLED );
-		$links.removeAttr('href');
-
+		TableUtil.disableLinks( this.#$tableBodyEdu );
 		this.#enabledMode = false;
 	}
 
 	#enableOptions() {
-		let $links = this.#$tableBodyEdu.find('tr td a');
-
-		$links.removeClass( EducationHandler.#CSS_CLASS_LINK_DISABLED );
-		$links.addClass( EducationHandler.#CSS_CLASS_LINK_ENABLED );
-		$links.attr('href', '#');
-
+		TableUtil.enableLinks( this.#$tableBodyEdu );
 		this.#enabledMode = true;
 	}
 
@@ -263,79 +245,14 @@ class EducationHandler
 	/* row shifts */
 
 	moveRowUp(event) {
-		if (this.#enabledMode) { 
-			event.preventDefault();
-
-			let size = this.#$tableBodyEdu.children().length;
-			let index = this.#indexFrom(event);
-			let firstIndex = this.#$tableBodyEdu.children().filter(':first').index();
-			
-			if (size > 1 && index > firstIndex) {
-				let $prevTds = this.#$tableBodyEdu.children().eq(index - 1).children();
-				let $currTds = this.#$tableBodyEdu.children().eq(index).children();
-
-				let prevNam = $prevTds.eq( EducationHandler.#COL_NAME ).text();
-				let prevIns = $prevTds.eq( EducationHandler.#COL_INSTITUTE ).text();
-				let prevSta = $prevTds.eq( EducationHandler.#COL_START ).text();
-				let prevEnd = $prevTds.eq( EducationHandler.#COL_END ).text();
-
-				let currNam = $currTds.eq( EducationHandler.#COL_NAME ).text();
-				let currIns = $currTds.eq( EducationHandler.#COL_INSTITUTE ).text();
-				let currSta = $currTds.eq( EducationHandler.#COL_START ).text();
-				let currEnd = $currTds.eq( EducationHandler.#COL_END ).text();
-
-				$prevTds.eq( EducationHandler.#COL_NAME ).text( currNam );
-				$prevTds.eq( EducationHandler.#COL_INSTITUTE ).text( currIns );
-				$prevTds.eq( EducationHandler.#COL_START ).text( currSta );
-				$prevTds.eq( EducationHandler.#COL_END ).text( currEnd );
-
-				$currTds.eq( EducationHandler.#COL_NAME ).text( prevNam );
-				$currTds.eq( EducationHandler.#COL_INSTITUTE ).text( prevIns );
-				$currTds.eq( EducationHandler.#COL_START ).text( prevSta );
-				$currTds.eq( EducationHandler.#COL_END ).text( prevEnd );
-
-				console.log('\u2191 shift up');
-			}
-			// else { console.log(JSON.stringify(this.getEducation(), null, 2)); }
-		}
+		if (this.#enabledMode) 
+			TableUtil.moveRowUp(this.#$tableBodyEdu, event);
 	}
 
 	moveRowDown(event) {
-		if (this.#enabledMode) { 
-			event.preventDefault();
-
-			let size = this.#$tableBodyEdu.children().length;
-			let index = this.#indexFrom(event);
-			let lastIndex = this.#$tableBodyEdu.children().filter(':last').index();
-
-			if (size > 1 && index < lastIndex) {
-				let $currTds = this.#$tableBodyEdu.children().eq(index).children();
-				let $nextTds = this.#$tableBodyEdu.children().eq(index + 1).children();
-
-				let currNam = $currTds.eq( EducationHandler.#COL_NAME ).text();
-				let currIns = $currTds.eq( EducationHandler.#COL_INSTITUTE ).text();
-				let currSta = $currTds.eq( EducationHandler.#COL_START ).text();
-				let currEnd = $currTds.eq( EducationHandler.#COL_END ).text();
-
-				let nextNam = $nextTds.eq( EducationHandler.#COL_NAME ).text();
-				let nextIns = $nextTds.eq( EducationHandler.#COL_INSTITUTE ).text();
-				let nextSta = $nextTds.eq( EducationHandler.#COL_START ).text();
-				let nextEnd = $nextTds.eq( EducationHandler.#COL_END ).text();
-
-				$currTds.eq( EducationHandler.#COL_NAME ).text( nextNam );
-				$currTds.eq( EducationHandler.#COL_INSTITUTE ).text( nextIns );
-				$currTds.eq( EducationHandler.#COL_START ).text( nextSta );
-				$currTds.eq( EducationHandler.#COL_END ).text( nextEnd );
-
-				$nextTds.eq( EducationHandler.#COL_NAME ).text( currNam );
-				$nextTds.eq( EducationHandler.#COL_INSTITUTE ).text( currIns );
-				$nextTds.eq( EducationHandler.#COL_START ).text( currSta );
-				$nextTds.eq( EducationHandler.#COL_END ).text( currEnd );
-
-				console.log('\u2193 shift down');
-			}
-			// else { console.log(JSON.stringify(this.getEducation(), null, 2)); }
-		}
+		// console.log(JSON.stringify(this.getEducation(), null, 2));
+		if (this.#enabledMode)
+			TableUtil.moveRowDown(this.#$tableBodyEdu, event);
 	}
 
 }//
