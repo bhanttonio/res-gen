@@ -122,7 +122,7 @@ class CourseHandler
 		if (this.#enabledMode) 
 		{
 			event.preventDefault();
-			let index = this.#indexFrom(event);
+			let index = TableUtil.indexOfRow(event);
 
 			this.#formInUpdateMode();
 			let $row = this.#$tableBodyCourse.children().eq(index).children();
@@ -164,7 +164,7 @@ class CourseHandler
 		if (this.#enabledMode) 
 		{
 			event.preventDefault();
-			let index = this.#indexFrom(event);
+			let index = TableUtil.indexOfRow(event);
 
 			let $row = this.#$tableBodyCourse.children().eq(index);
 			let courseName = $row.children().eq(CourseHandler.#COL_NAME).text();
@@ -174,10 +174,6 @@ class CourseHandler
 				console.log(`[course] row ${index} removed!`);
 			}
 		}
-	}
-
-	#indexFrom(event) {
-		return $(event.target).parent().parent().index();
 	}
 
 
@@ -260,7 +256,7 @@ class CourseHandler
 			event.preventDefault();
 
 			let size = this.#$tableBodyCourse.children().length;
-			let index = this.#indexFrom(event);
+			let index = TableUtil.indexOfRow(event);
 			let firstIndex = this.#$tableBodyCourse.children().filter(':first').index();
 			
 			if (size > 1 && index > firstIndex) {
@@ -294,7 +290,7 @@ class CourseHandler
 			event.preventDefault();
 
 			let size = this.#$tableBodyCourse.children().length;
-			let index = this.#indexFrom(event);
+			let index = TableUtil.indexOfRow(event);
 			let lastIndex = this.#$tableBodyCourse.children().filter(':last').index();
 
 			if (size > 1 && index < lastIndex) {
