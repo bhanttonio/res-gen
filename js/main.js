@@ -3,6 +3,7 @@ var educationHandler;
 var courseHandler;
 var languageHandler;
 var skillHandler;
+var sectorHandler;
 
 
 $(function() {
@@ -13,6 +14,7 @@ $(function() {
     courseHandler = new CourseHandler();
     languageHandler = new LanguageHandler();
     skillHandler = new SkillHandler();
+    sectorHandler = new SectorHandler();
     new MainHandler();
 
     console.log('finished');
@@ -46,7 +48,6 @@ class MainHandler
     #setUpCharCounters() {
         console.log('\t\t character counters');
         $('input#name, input#surname_1, input#surname_2, input#level, textarea#profile').characterCounter();
-        $('input#sector_1').characterCounter();
         $('input#iwe_account_1, input#iwe_rol_1, input#iwe_project_1, input#iwe_period_1, input#iwe_task_1, input#iwe_tool_1').characterCounter();
         $('input#ewe_company_1, input#ewe_rol_1, input#ewe_period_1, input#ewe_task_1, input#ewe_tool_1').characterCounter();
     }
@@ -90,6 +91,9 @@ class MainHandler
                 skillHandler.exitDisabledMode();
             }
 
+            if (href != '#sectors') {   // sectors module
+                sectorHandler.exitDisabledMode();
+            }
 		});
     }
 
