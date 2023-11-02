@@ -1,6 +1,7 @@
 
 var educationHandler;
 var courseHandler;
+var languageHandler;
 
 $(function() {
     console.log('loading');
@@ -8,6 +9,7 @@ $(function() {
 
     educationHandler = new EducationHandler();
     courseHandler = new CourseHandler();
+    languageHandler = new LanguageHandler();
     new MainHandler();
 
     console.log('finished');
@@ -41,7 +43,6 @@ class MainHandler
     #setUpCharCounters() {
         console.log('\t\t character counters');
         $('input#name, input#surname_1, input#surname_2, input#level, textarea#profile').characterCounter();
-        $('input#lang_name_1, input#lang_speaking_1, input#lang_reading_1, input#lang_writing_1').characterCounter();
         $('input#skill_1').characterCounter();
         $('input#sector_1').characterCounter();
         $('input#iwe_account_1, input#iwe_rol_1, input#iwe_project_1, input#iwe_period_1, input#iwe_task_1, input#iwe_tool_1').characterCounter();
@@ -71,15 +72,18 @@ class MainHandler
 			let href = e.target.getAttribute('href');
 			console.log(`\u2192 ${href}`);
 
-            // edu module
-			if (href !== '#education') {
+			if (href !== '#education') {   // education module
 				educationHandler.exitDisabledMode();
 			}
 
-            // courses module
-            if (href != '#courses') {
+            if (href != '#courses') {   // courses module
                 courseHandler.exitDisabledMode();
             }
+
+            if (href != '#languages') {   // languages module
+                languageHandler.exitDisabledMode();
+            }
+            
 		});
     }
 
