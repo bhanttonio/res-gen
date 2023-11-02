@@ -85,7 +85,7 @@ class CourseHandler
 
 
 	#insert() {
-		if ( this.#isValidForm() ) {
+		if (this.#isValidForm()) {
 	        let newRow = 
 	        `<tr>
 	            <td>${this.#elName.value}</td>
@@ -125,7 +125,7 @@ class CourseHandler
 	#update() {
 		let index = this.#elIndex.value;
 
-		if ( this.#isValidForm() ) {
+		if (this.#isValidForm()) {
 			let updatedRow = 
 			`<td>${this.#elName.value}</td>
 	         <td>${this.#elLocation.value}</td>
@@ -182,12 +182,12 @@ class CourseHandler
 
 
 	#disableOptions() {
-		TableUtil.disableLinks( this.#$tableBody );
+		TableUtil.disableLinks(this.#$tableBody);
 		this.#enabledMode = false;
 	}
 
 	#enableOptions() {
-		TableUtil.enableLinks( this.#$tableBody );
+		TableUtil.enableLinks(this.#$tableBody);
 		this.#enabledMode = true;
 	}
 
