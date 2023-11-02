@@ -394,29 +394,69 @@
 
 
 			<!-- sectors -->
-			<section id="sectors" class="section">
-				<br>
+			<section id="sectors" class="row section">
+				
+				<form id="formSector" class="row">
+					<fieldset class="col s6 push-s3">
+						<legend>Sector</legend>
+						<input name="sectorIndex" type="hidden" value="">
+						<div class="input-field col s6">
+							<input id="sectorName" name="sectorName" type="text" class="validate" data-length="50" maxlength="50">
+							<label for="sectorName">Nombre</label>
+							<span class="helper-text col s10">Ej. Cadena de suministro</span>
+						</div>
+						<div class="input-field col s6">
+							<div class="row" style="margin-bottom: 0px;">
+								<div class="col s6" style="text-align: right;">
+									<button id="btnAuxSector" name="btnAuxSector" class="waves-effect btn-flat btn-small" tabindex="-1">Limpiar</button>
+								</div>
+								<div class="col s6" style="text-align: right;">
+									<button id="btnMainSector" name="btnMainSector" class="waves-effect btn-flat btn-small">A&ntilde;adir</button>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+				
 				<div class="row">
-					<div class="input-field col s4 push-s4">
-			          	<input id="sector_1" type="text" class="validate" data-length="50" maxlength="50">
-			          	<label for="sector_1">Sector</label>
-			          	<span class="helper-text col s10">P. ej. &nbsp;Bancario &nbsp;/&nbsp; Cadena de suministro</span>
-			        </div>
+					<article class="col s6 push-s3">
+						<table id="tableSector" class="striped">
+							<thead>
+								<tr>
+									<th>Sector</th>
+									<th colspan="4">Opciones</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Bancario</td>
+									<td><a href="#" onclick="sectorHandler.moveUp(event)">&bigtriangleup;</a></td>
+									<td><a href="#" onclick="sectorHandler.moveDown(event)">&bigtriangledown;</a></td>
+									<td><a href="#" onclick="sectorHandler.select(event)">Editar</a></td>
+									<td><a href="#" onclick="sectorHandler.remove(event)">Eliminar</a></td>
+								</tr>
+								<tr>
+									<td>Ventas al por menor</td>
+									<td><a href="#" onclick="sectorHandler.moveUp(event)">&bigtriangleup;</a></td>
+									<td><a href="#" onclick="sectorHandler.moveDown(event)">&bigtriangledown;</a></td>
+									<td><a href="#" onclick="sectorHandler.select(event)">Editar</a></td>
+									<td><a href="#" onclick="sectorHandler.remove(event)">Eliminar</a></td>
+								</tr>
+							</tbody>
+						</table>
+						<br><br><br>
+
+						<div class="row">
+							<div class="col s3 left-align">
+								<button id="btnPrevSector" data-tab="skills" class="waves-effect btn-flat btn-small">Anterior</button>
+							</div>
+							<div class="col s3 push-s6 right-align">
+								<button id="btnNextSector" data-tab="int-work-exp" class="waves-effect btn-flat btn-small">Siguiente</button>
+							</div>
+						</div>
+					</article>
 				</div>
-				<div class="row">
-					<div class="input-field col s4 push-s4">
-			          	<input id="sector_2" type="text" class="validate" data-length="50" maxlength="50">
-			          	<label for="sector_2">Sector</label>
-			        </div>
-				</div>
-				<br>
-				<div class="row">
-					<div class="col s2 push-s6 right-align">
-						<button id="btnNextSectors" data-tab="int-work-exp" class="waves-effect waves-teal btn-flat btn-small">
-							Siguiente
-						</button>
-					</div>
-				</div>
+				
 			</section>
 
 
