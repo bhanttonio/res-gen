@@ -30,10 +30,19 @@ class Validator
 
         return isValidStart && isValidEnd;
     }
-    
 
     static #isYearInvalid(year) {
         return year === '' || isNaN(year) || year < 1000 || year > 9999;
+    }
+
+
+    static isPercentageValid(elPct) {
+        elPct.value = elPct.value.trim();
+        if (elPct.value === '' || isNaN(elPct.value) || elPct.value < 0 || elPct.value > 100) {
+            Validator.#addInvalidStyle(elPct);
+            return false;
+        }
+        return true;
     }
 
 
