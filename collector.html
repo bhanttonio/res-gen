@@ -461,73 +461,138 @@
 
 
 			<!-- internal-work-experience -->
-			<section id="int-work-exp" class="section">
-				<br>
-				<div class="row">
-					<div class="input-field col s3">
-			          	<input id="iwe_account_1" type="text" class="validate" data-length="50" maxlength="50">
-			          	<label for="iwe_account_1">Cuenta</label>
-			          	<span class="helper-text col s10">P. ej. &nbsp;Banco Nacional</span>
-			        </div>
-			        <div class="input-field col s3">
-			          	<input id="iwe_rol_1" type="text" class="validate" data-length="50" maxlength="50">
-			          	<label for="iwe_rol_1">Puesto</label>
-			          	<span class="helper-text col s10">P. ej. &nbsp;Desarrollador backend</span>
-			        </div>
-			        <div class="input-field col s3">
-			          	<input id="iwe_project_1" type="text" class="validate" data-length="75" maxlength="75">
-			          	<label for="iwe_project_1">Proyecto</label>
-			          	<span class="helper-text col s10">P. ej. &nbsp;Migraci&oacute;n de datos</span>
-			        </div>
-			        <div class="input-field col s3">
-						<input id="iwe_period_1" type="text" class="validate" data-length="50" maxlength="50">
-						<label for="iwe_period_1">Per&iacute;odo</label>
-						<span class="helper-text col s10">P. ej. &nbsp;Enero 2017 - Junio 2020</span>
-					</div>
-				</div>
+			<section id="int-work-exp" class="row section">
+				<fieldset class="col s12">
+					<legend>Experiencia Interna</legend>
 
-				<br>
-				<div class="row">
-					<!-- activities -->
-					<div class="col s6">
-						<div class="row">
-							<h6 class="col s12">Actividades</h6>
-							<div class="input-field col s12">
-					          	<input id="iwe_task_1" type="text" class="validate" data-length="125" maxlength="125">
-					          	<label for="iwe_task_1">Actividad</label>
-					          	<span class="helper-text col s11">P. ej. &nbsp;An&aacute;lisis de requerimientos funcionales</span>
-			        		</div>
-			        		<div class="input-field col s12">
-				          		<input id="iwe_task_2" type="text" class="validate" data-length="125" maxlength="125">
-				          		<label for="iwe_task_2">Actividad</label>
-			        		</div>
+					<!-- first part -->
+					<form id="formIwe">
+						<input name="iweIndex" type="hidden" value="">
+						<div class="input-field col s3">
+							<input id="iweAccount" name="iweAccount" type="text" class="validate" data-length="50" maxlength="50">
+							<label for="iweAccount">Cuenta</label>
+							<span class="helper-text col s10">Ej. Banco Nacional</span>
+						</div>
+						<div class="input-field col s3">
+							<input id="iweRol" name="iweRol" type="text" class="validate" data-length="50" maxlength="50">
+							<label for="iweRol">Puesto</label>
+							<span class="helper-text col s10">Ej. Desarrollador backend</span>
+						</div>
+						<div class="input-field col s3">
+							<input id="iweProject" name="iweProject" type="text" class="validate" data-length="75" maxlength="75">
+							<label for="iweProject">Proyecto</label>
+							<span class="helper-text col s10">Ej. Migraci&oacute;n de código legacy</span>
+						</div>
+						<div class="input-field col s3">
+							<input id="iwePeriod" name="iwePeriod" type="text" class="validate" data-length="50" maxlength="50">
+							<label for="iwePeriod">Per&iacute;odo</label>
+							<span class="helper-text col s10">Ej. Enero 2017 - Junio 2020</span>
+						</div>
+					</form>
+
+					<!-- second part -->
+					<div class="row">
+
+						<!-- tasks -->
+						<div class="col s6">
+							<form id="formIweTask">
+								<h6 class="resgen-title">Actividades</h6>
+								<input id="iweTaskIndex" name="iweTaskIndex" type="hidden" value="">
+
+								<div class="input-field col s9">
+									<input id="iweTaskDesc" name="iweTaskDesc" type="text" class="validate" data-length="125" maxlength="125">
+									<label id="iweTaskLabel" for="iweTaskDesc">Descripci&oacute;n</label>
+									<span class="helper-text col s10">Ej. An&aacute;lisis de requerimientos funcionales</span>
+								</div>
+								<div class="input-field col s3">
+									<div class="row">
+										<div class="col s6">
+											<a id="linkAuxIweTask" name="linkAuxIweTask" href="#" tabindex="-1" class="resgen-simple">Limpiar</a>
+										</div>
+										<div class="col s6">
+											<a id="linkMainIweTask" name="linkMainIweTask" href="#" class="resgen-simple">A&ntilde;adir</a>
+										</div>
+									</div>
+								</div>
+							</form>
+
+							<table id="tableIweTask" class="striped">
+								<tbody>
+									<tr>
+										<td>Diseño e implementación de microservicios con Spring Boot</td>
+										<td><a href="#" onclick="iweTaskHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+										<td><a href="#" onclick="iweTaskHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+										<td><a href="#" onclick="iweTaskHandler.select(event)" title="editar">&#x1F589;</a></td>
+										<td><a href="#" onclick="iweTaskHandler.remove(event)" title="borrar">&#x2327;</a></td>
+									</tr>
+									<tr>
+										<td>Análisis de requerimientos y creación de diagramas de secuencia y máquinas de estado</td>
+										<td><a href="#" onclick="iweTaskHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+										<td><a href="#" onclick="iweTaskHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+										<td><a href="#" onclick="iweTaskHandler.select(event)" title="editar">&#x1F589;</a></td>
+										<td><a href="#" onclick="iweTaskHandler.remove(event)" title="borrar">&#x2327;</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div><!-- tasks -->
+
+						<!-- tools -->
+						<div class="col s6">
+							<form id="formIweTool">
+								<h6 class="resgen-title">Entorno T&eacute;cnico</h6>
+								<input name="iweToolIndex" type="hidden" value="">
+
+								<div class="input-field col s9">
+									<input id="iweToolDesc" name="iweToolDesc" type="text" class="validate" data-length="125" maxlength="125">
+									<label id="iweToolLabel" for="iweToolDesc">Descripci&oacute;n</label>
+									<span class="helper-text col s10">Ej. Herramientas utlizadas&colon; Confluence, Bitbucket</span>
+								</div>
+								<div class="input-field col s3">
+									<div class="row">
+										<div class="col s6">
+											<a id="btnAuxIweTool" name="btnAuxIweTool" href="#" tabindex="-1" class="resgen-simple">Limpiar</a>
+										</div>
+										<div class="col s6">
+											<a id="btnMainIweTool" name="btnMainIweTool" href="#" class="resgen-simple">A&ntilde;adir</a>
+										</div>
+									</div>
+								</div>
+							</form>
+
+							<table id="tableIweTool" class="striped">
+								<tbody>
+									<tr>
+										<td>Herramientas&colon; Eclipse IDE, WildFly, GitHub, Jira, Akeyless, Checkmarx, Sonarqube</td>
+										<td><a href="#" onclick="iweToolHandler.moveUp(event)" title="Subir">&bigtriangleup;</a></td>
+										<td><a href="#" onclick="iweToolHandler.moveDown(event)" title="Bajar">&bigtriangledown;</a></td>
+										<td><a href="#" onclick="iweToolHandler.select(event)" title="Editar">&#x1F589;</a></td>
+										<td><a href="#" onclick="iweToolHandler.remove(event)" title="Borrar">&#x2327;</a></td>
+									</tr>
+									<tr>
+										<td>Tecnolog&iacute;as&colon; Java, Spring Boot, JUnit, Git, Maven, Docker</td>
+										<td><a href="#" onclick="iweToolHandler.moveUp(event)" title="Subir">&bigtriangleup;</a></td>
+										<td><a href="#" onclick="iweToolHandler.moveDown(event)" title="Bajar">&bigtriangledown;</a></td>
+										<td><a href="#" onclick="iweToolHandler.select(event)" title="Editar">&#x1F589;</a></td>
+										<td><a href="#" onclick="iweToolHandler.remove(event)" title="Borrar">&#x2327;</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div> <!-- tools -->
+
+					</div> <!-- second part -->
+
+					<div class="row" style="margin-bottom: 8px;">
+						<div class="col s6 push-s6">
+							<div class="col s3 push-s6" style="text-align: right;">
+								<button id="btnAuxIwe" name="btnAuxIwe" class="waves-effect btn-flat btn-small" tabindex="-1">Limpiar</button>
+							</div>
+							<div class="col s3 push-s6" style="text-align: right;">
+								<button id="btnMainIwe" name="btnMainIwe" class="waves-effect btn-flat btn-small">A&ntilde;adir</button>
+							</div>
 						</div>
 					</div>
-					<!-- tools -->
-					<div class="col s6">
-						<div class="row">
-							<h6 class="col s12">Entorno T&eacute;cnico</h6>
-							<div class="input-field col s12">
-					          	<input id="iwe_tool_1" type="text" class="validate" data-length="125" maxlength="125">
-					          	<label for="iwe_tool_1">Descripci&oacute;n</label>
-					          	<span class="helper-text col s11">P. ej. &nbsp;Herramientas utlizadas&colon; JIRA, Confluence y Bitbucket</span>
-				        	</div>
-				        	<div class="input-field col s12">
-					          	<input id="iwe_tool_2" type="text" class="validate" data-length="125" maxlength="125">
-					          	<label for="iwe_tool_2">Descripci&oacute;n</label>
-				        	</div>
-				        </div>
-					</div>
-				</div>
 
-				<br>
-				<div class="row">
-					<div class="col s2 push-s10 right-align">
-						<button id="btnNextIwe" data-tab="ext-work-exp" class="waves-effect waves-teal btn-flat btn-small">
-							Siguiente
-						</button>
-					</div>
-				</div>
+				</fieldset>
 			</section>
 
 
@@ -602,6 +667,9 @@
 	<script type="text/javascript" src="js/language.js"></script>
 	<script type="text/javascript" src="js/skill.js"></script>
 	<script type="text/javascript" src="js/sector.js"></script>
+
+	<script type="text/javascript" src="js/iwe-task.js"></script>
+
 	<script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

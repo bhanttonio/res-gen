@@ -5,6 +5,8 @@ var languageHandler;
 var skillHandler;
 var sectorHandler;
 
+var iweTaskHandler;
+
 
 $(function() {
     console.log('loading');
@@ -15,6 +17,9 @@ $(function() {
     languageHandler = new LanguageHandler();
     skillHandler = new SkillHandler();
     sectorHandler = new SectorHandler();
+
+    iweTaskHandler = new IweTaskHandler();
+
     new MainHandler();
 
     console.log('finished');
@@ -48,8 +53,6 @@ class MainHandler
     #setUpCharCounters() {
         console.log('\t\t character counters');
         $('input#name, input#surname_1, input#surname_2, input#level, textarea#profile').characterCounter();
-        $('input#iwe_account_1, input#iwe_rol_1, input#iwe_project_1, input#iwe_period_1, input#iwe_task_1, input#iwe_tool_1').characterCounter();
-        $('input#ewe_company_1, input#ewe_rol_1, input#ewe_period_1, input#ewe_task_1, input#ewe_tool_1').characterCounter();
     }
 
     #setUpDirButtons() {
@@ -78,21 +81,21 @@ class MainHandler
 			if (href !== '#education') {   // education module
 				educationHandler.exitDisabledMode();
 			}
-
             if (href != '#courses') {   // courses module
                 courseHandler.exitDisabledMode();
             }
-
             if (href != '#languages') {   // languages module
                 languageHandler.exitDisabledMode();
             }
-            
             if (href != '#skills') {   // skills module
                 skillHandler.exitDisabledMode();
             }
-
             if (href != '#sectors') {   // sectors module
                 sectorHandler.exitDisabledMode();
+            }
+
+            if (href != '#int-work-exp') {
+                iweTaskHandler.exitDisabledMode();
             }
 		});
     }

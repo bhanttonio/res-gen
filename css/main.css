@@ -73,8 +73,15 @@ fieldset legend {
 	padding-bottom: 0.25em;
 }
 
+/* title */
+h6.resgen-title {
+	text-align: center;
+	font-size: 14px;
+}
+
 
 /* TABLES */
+
 table {
 	font-size: 13px;
 }
@@ -89,7 +96,11 @@ a.resgen-disabled {
 	color: #bdbdbd;
 	user-select: none;
 }
-
 a.resgen-enabled {
 	color: rgb(3, 155, 229);
+}
+a.resgen-simple {
+	color: rgb(3, 155, 229);
+	font-size: 12.5px;
+	font-weight: 400;
 }
