@@ -198,17 +198,10 @@ class SkillHandler
 		let skillList = new Array();
 		this.#$tableBody.children().each( function(idx) {	
 			let desc = $(this).children().eq(SkillHandler.#COL_DESC).text();
-			skillList.push(new Skill(desc, idx));
+			skillList.push( new Skill(desc, idx) );
 		});
 		return skillList;
 	}
 
 }//
 
-
-class Skill {
-	constructor(description, index) {
-		this.description = description;
-		this.index = index;
-	}
-}

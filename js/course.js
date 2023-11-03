@@ -221,12 +221,3 @@ class CourseHandler
 
 }//
 
-
-class Course {
-	constructor(name, location, date, index) {
-		this.name = name;
-		this.location = location;
-		this.date = date;
-		this.index = index;
-	}
-}

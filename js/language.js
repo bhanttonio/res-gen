@@ -229,13 +229,3 @@ class LanguageHandler
 
 }//
 
-
-class Language {
-	constructor(name, speak, read, write, index) {
-		this.name = name;
-		this.speak = speak;
-		this.read = read;
-        this.write = write;
-		this.index = index;
-	}
-}

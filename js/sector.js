@@ -198,17 +198,10 @@ class SectorHandler
 		let sectorList = new Array();
 		this.#$tableBody.children().each( function(idx) {	
 			let desc = $(this).children().eq(SectorHandler.#COL_DESC).text();
-			sectorList.push(new Sector(desc, idx));
+			sectorList.push( new Sector(desc, idx) );
 		});
 		return sectorList;
 	}
 
 }//
 
-
-class Sector {
-	constructor(description, index) {
-		this.description = description;
-		this.index = index;
-	}
-}

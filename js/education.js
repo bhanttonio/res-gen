@@ -245,13 +245,3 @@ class EducationHandler
 
 }//
 
-
-class Education {
-	constructor(name, institute, start, end, index) {
-		this.name = name;
-		this.institute = institute;
-		this.start = start;
-		this.end = end;
-		this.index = index;
-	}
-}

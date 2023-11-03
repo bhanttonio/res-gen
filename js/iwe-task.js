@@ -187,6 +187,7 @@ class IweTaskHandler
 	}
 
 	moveDown(event) {
+		// console.log(JSON.stringify(this.getTasks(), null, 2));
 		if (this.#enabledMode) 
 			TableUtil.moveRowDown(this.#$tableBody, event);
 	}
@@ -196,17 +197,10 @@ class IweTaskHandler
 		let taskList = new Array();
 		this.#$tableBody.children().each( function(idx) {	
 			let desc = $(this).children().eq(IweTaskHandler.#COL_DESC).text();
-			taskList.push(new IweTask(desc, idx));
+			taskList.push( new Task(desc, idx) );
 		});
 		return taskList;
 	}
 
 } 
 
-
-class IweTask {
-    constructor(description, index) {
-        this.description = description;
-        this.index = index;
-    }
-}
