@@ -1,70 +1,63 @@
 
-class Indexed {
-	constructor(index) {
+class Education {
+	constructor(name, institute, start, end, index) {
+		this.name = name;
+		this.institute = institute;
+		this.start = start;
+		this.end = end;
 		this.index = index;
 	}
 }
 
 
-class Education extends Indexed {
-	constructor(name, institute, start, end, index) {
-		super(index);
-		this.name = name;
-		this.institute = institute;
-		this.start = start;
-		this.end = end;
-	}
-}
-
-
-class Course extends Indexed {
+class Course {
 	constructor(name, location, date, index) {
-		super(index);
 		this.name = name;
 		this.location = location;
 		this.date = date;
+		this.index = index;
 	}
 }
 
 
-class Language extends Indexed {
+class Language {
 	constructor(name, speak, read, write, index) {
-		super(index);
 		this.name = name;
 		this.speak = speak;
 		this.read = read;
         this.write = write;
+		this.index = index;
 	}
 }
 
 
-class Skill extends Indexed {
+class Skill {
 	constructor(description, index) {
-		super(index);
 		this.description = description;
+		this.index = index;
 	}
 }
 
 
-class Sector extends Indexed {
+class Sector {
 	constructor(description, index) {
-		super(index);
 		this.description = description;
+		this.index = index;
 	}
 }
 
 
-class Task extends Indexed {
+class Task {
     constructor(description, index) {
-		super(index);
         this.description = description;
+		this.index = index;
     }
 }
 
 
-class Tool extends Indexed {
+class Tool {
 	constructor(description, index) {
-		super(index);
 		this.description = description;
+		this.index = index;
 	}
 }
