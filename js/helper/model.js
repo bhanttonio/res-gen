@@ -60,3 +60,11 @@ class Task extends Indexed {
         this.description = description;
     }
 }
+
+
+class Tool extends Indexed {
+	constructor(description, index) {
+		super(index);
+		this.description = description;
+	}
+}

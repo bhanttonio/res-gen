@@ -538,7 +538,7 @@
 
 						<!-- tools -->
 						<div class="col s6">
-							<form id="formIweTool">
+							<form id="formIweTool" onsubmit="return false;">
 								<h6 class="resgen-title">Entorno T&eacute;cnico</h6>
 								<input name="iweToolIndex" type="hidden" value="">
 
@@ -550,10 +550,10 @@
 								<div class="input-field col s3">
 									<div class="row">
 										<div class="col s6">
-											<a id="btnAuxIweTool" name="btnAuxIweTool" href="#" tabindex="-1" class="resgen-simple">Limpiar</a>
+											<a id="linkAuxIweTool" name="linkAuxIweTool" href="#" tabindex="-1" class="resgen-simple">Limpiar</a>
 										</div>
 										<div class="col s6">
-											<a id="btnMainIweTool" name="btnMainIweTool" href="#" class="resgen-simple">A&ntilde;adir</a>
+											<a id="linkMainIweTool" name="linkMainIweTool" href="#" class="resgen-simple">Agregar</a>
 										</div>
 									</div>
 								</div>
@@ -563,17 +563,17 @@
 								<tbody>
 									<tr>
 										<td>Herramientas&colon; Eclipse IDE, WildFly, GitHub, Jira, Akeyless, Checkmarx, Sonarqube</td>
-										<td><a href="#" onclick="iweToolHandler.moveUp(event)" title="Subir">&bigtriangleup;</a></td>
-										<td><a href="#" onclick="iweToolHandler.moveDown(event)" title="Bajar">&bigtriangledown;</a></td>
-										<td><a href="#" onclick="iweToolHandler.select(event)" title="Editar">&#x1F589;</a></td>
-										<td><a href="#" onclick="iweToolHandler.remove(event)" title="Borrar">&#x2327;</a></td>
+										<td><a href="#" onclick="iweToolHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+										<td><a href="#" onclick="iweToolHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+										<td><a href="#" onclick="iweToolHandler.select(event)" title="editar">&#x1F589;</a></td>
+										<td><a href="#" onclick="iweToolHandler.remove(event)" title="borrar">&#x2327;</a></td>
 									</tr>
 									<tr>
 										<td>Tecnolog&iacute;as&colon; Java, Spring Boot, JUnit, Git, Maven, Docker</td>
-										<td><a href="#" onclick="iweToolHandler.moveUp(event)" title="Subir">&bigtriangleup;</a></td>
-										<td><a href="#" onclick="iweToolHandler.moveDown(event)" title="Bajar">&bigtriangledown;</a></td>
-										<td><a href="#" onclick="iweToolHandler.select(event)" title="Editar">&#x1F589;</a></td>
-										<td><a href="#" onclick="iweToolHandler.remove(event)" title="Borrar">&#x2327;</a></td>
+										<td><a href="#" onclick="iweToolHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+										<td><a href="#" onclick="iweToolHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+										<td><a href="#" onclick="iweToolHandler.select(event)" title="editar">&#x1F589;</a></td>
+										<td><a href="#" onclick="iweToolHandler.remove(event)" title="borrar">&#x2327;</a></td>
 									</tr>
 								</tbody>
 							</table>
@@ -587,7 +587,7 @@
 								<button id="btnAuxIwe" name="btnAuxIwe" class="waves-effect btn-flat btn-small" tabindex="-1">Limpiar</button>
 							</div>
 							<div class="col s3 push-s6" style="text-align: right;">
-								<button id="btnMainIwe" name="btnMainIwe" class="waves-effect btn-flat btn-small">A&ntilde;adir</button>
+								<button id="btnMainIwe" name="btnMainIwe" class="waves-effect btn-flat btn-small">Agregar</button>
 							</div>
 						</div>
 					</div>
@@ -670,6 +670,8 @@
 	<script type="text/javascript" src="js/sector.js"></script>
 
 	<script type="text/javascript" src="js/iwe-task.js"></script>
+	<script type="text/javascript" src="js/handler.js"></script>
+	<script type="text/javascript" src="js/iwe-tool.js"></script>
 
 	<script type="text/javascript" src="js/main.js"></script>
 </body>

@@ -6,6 +6,7 @@ var skillHandler;
 var sectorHandler;
 
 var iweTaskHandler;
+var iweToolHandler;
 
 
 $(function() {
@@ -19,6 +20,7 @@ $(function() {
     sectorHandler = new SectorHandler();
 
     iweTaskHandler = new IweTaskHandler();
+    iweToolHandler = new IweToolHandler();
 
     new MainHandler();
 
