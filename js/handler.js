@@ -14,9 +14,9 @@ class ModuleHandler
     
 	// AUX FIELDS
     formLegend;
-    refColumn;            // reference column (to confirm row deletion)
+    refColumn = 0;   // to confirm row deletion (by default is the 1st col in the table)
+	rowType;
     handlerName;
-	reducedRows;          // boolean to indicate the row type
 
     #insertMode = true;   // controls the mode of the form
 
@@ -83,7 +83,7 @@ class ModuleHandler
 
 	#insert() {
 		if (this.isValidForm()) {
-			let tdsHtml = TableUtil.formRowContent(this.fields, this.handlerName, this.reducedRows);
+			let tdsHtml = TableUtil.formRowContent(this.fields, this.handlerName, this.rowType);
 	        let newRow = `<tr>${tdsHtml}</tr>`;
 
 	        this.$tableBody.append(newRow);
@@ -102,7 +102,7 @@ class ModuleHandler
 			this.#toUpdateMode();
 			let $tds = this.$tableBody.children().eq(index).children();
 			
-			TableUtil.fillFields($tds, this.fields);
+			FormUtil.fill(this.fields, $tds);
 			this.elIndex.value = index;
 
 			this.disableLinks();
@@ -113,7 +113,7 @@ class ModuleHandler
     #update() {
 		let index = this.elIndex.value;
 		if (this.isValidForm()) {
-			let updatedRow = TableUtil.formRowContent(this.fields, this.handlerName, this.reducedRows);
+			let updatedRow = TableUtil.formRowContent(this.fields, this.handlerName, this.rowType);
 			this.$tableBody.children().eq(index).html(updatedRow);
 
 			FormUtil.reset(this.elForm);

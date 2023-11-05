@@ -1,4 +1,13 @@
 
+const TABLE_OPTIONS_SIZE = 4;
+
+const RowType = {
+	REDUCED: 1, 
+	NORMAL: 2, 
+	EXTENDED: 3
+}
+
+
 class Education {
 	constructor(name, institute, start, end, index) {
 		this.name = name;
@@ -61,3 +70,4 @@ class Tool {
 		this.index = index;
 	}
 }
+

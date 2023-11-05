@@ -1,8 +1,6 @@
 
 class TableUtil
 {
-
-    static #OPTIONS_NUMBER = 4;
     static #ROWS_SELECTOR = 'tr td a';
 
     static #CSS_CLASS_LINK_ENABLED  = 'resgen-enabled';
@@ -49,7 +47,7 @@ class TableUtil
 	}
 
     static #swapTds($tds1, $tds2) { 
-        for (let i = 0; i < $tds1.length - TableUtil.#OPTIONS_NUMBER; i++) {
+        for (let i = 0; i < $tds1.length - TABLE_OPTIONS_SIZE; i++) {
             let tmp = $tds1.eq(i).text();
             $tds1.eq(i).text( $tds2.eq(i).text() );
             $tds2.eq(i).text(tmp);
@@ -72,12 +70,19 @@ class TableUtil
     }
 
 
-    static formRowContent(fields, handlerName, reducedRows) {
+    static formRowContent(fields, handlerName, rowType) {
         let rowStr = '';
         fields.forEach(element => {
             rowStr += `<td>${element.value}</td>\n`;
         });
-        rowStr += reducedRows ? TableUtil.#reducedLinkRows(handlerName) : TableUtil.#linkRows(handlerName);
+
+        switch(rowType) {
+            case RowType.REDUCED: 
+                rowStr += TableUtil.#reducedLinkRows(handlerName);
+                break;
+            default: 
+                rowStr += TableUtil.#linkRows(handlerName);
+        }
         return rowStr;
     }
 
@@ -93,14 +98,6 @@ class TableUtil
                 <td><a href="#" onclick="${handlerName}.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
                 <td><a href="#" onclick="${handlerName}.select(event)" title="editar">&#x1F589;</a></td>
                 <td><a href="#" onclick="${handlerName}.remove(event)" title="borrar">&#x2327;</a></td>`;
-    }
-
-
-    static fillFields($tds, fields) {
-        for (let idx = 0; idx < $tds.length - TableUtil.#OPTIONS_NUMBER; idx++) {
-            fields[idx].value = $tds.eq(idx).text();
-            fields[idx].focus();
-        }
     }
 
 }//

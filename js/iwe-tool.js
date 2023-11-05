@@ -21,16 +21,15 @@ class IweToolHandler extends ModuleHandler
         this.fields = [elDesc];
         
         // jquery objects
-        this.$legend  = $('#iweToolLabel');
-        this.$btnAux  = $('#linkAuxIweTool');
-        this.$btnMain = $('#linkMainIweTool');
+        this.$legend    = $('#iweToolLabel');
+        this.$btnAux    = $('#linkAuxIweTool');
+        this.$btnMain   = $('#linkMainIweTool');
         this.$tableBody = $('table#tableIweTool tbody');
 
         // aux fields
-        this.formLegend  = 'Descripci&oacute;n';
-        this.refColumn   = IweToolHandler.#COL_DESC;
+        this.formLegend  = 'Descripci&oacute;n';        
+        this.rowType     = RowType.REDUCED;
         this.handlerName = 'iweToolHandler';
-        this.reducedRows = true;
     }
 
 
