@@ -68,6 +68,8 @@ class Validator
             Validator.#addInvalidStyle(elPct);
             return false;
         }
+
+        elPct.value = Math.round(elPct.value);
         return true;
     }
 

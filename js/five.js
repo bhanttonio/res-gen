@@ -1,4 +1,61 @@
 
+
+class LanguageHandler extends ModuleHandler
+{
+    static #NAME  = 0;
+	static #SPEAK = 1;
+	static #READ  = 2;
+    static #WRITE = 3;
+    static #INDEX = 4;
+
+    constructor() {
+        super();
+    }
+
+    initRefs() {
+        // dom elements
+        this.elForm  = document.getElementById('formLang');
+        this.elIndex = this.elForm.elements.indexLang;
+
+        let elName   = this.elForm.elements.nameLang;
+        let elSpeak  = this.elForm.elements.speakLang;
+        let elRead   = this.elForm.elements.readLang;
+        let elWrite  = this.elForm.elements.writeLang;
+        this.fields = [elName, elSpeak, elRead, elWrite];
+        
+        // jquery objects
+        this.$legend    = $(this.elForm).find('legend');
+        this.$btnAux    = $('#btnAuxLang');
+        this.$btnMain   = $('#btnMainLang');
+        this.$tableBody = $('table#tableLang tbody');
+
+        // aux fields
+        this.formLegend  = 'Idioma';
+        this.rowType     = RowType.REDUCED;
+        this.handlerName = 'languageHandler';
+    }
+
+    isValidForm() {
+        return Validator.isInputNotEmpty( this.fields[LanguageHandler.#NAME] ) * 
+             Validator.isPercentageValid( this.fields[LanguageHandler.#SPEAK] ) * 
+             Validator.isPercentageValid( this.fields[LanguageHandler.#READ] ) * 
+             Validator.isPercentageValid( this.fields[LanguageHandler.#WRITE] );
+    }
+
+    getObject(data) {
+        return new Language(
+            data[LanguageHandler.#NAME],
+            data[LanguageHandler.#SPEAK],
+            data[LanguageHandler.#READ],
+            data[LanguageHandler.#WRITE], 
+            data[LanguageHandler.#INDEX] 
+        );
+    }
+
+}//
+
+
+
 class SkillHandler extends ModuleHandler
 {
     static #DESC  = 0;
@@ -11,8 +68,9 @@ class SkillHandler extends ModuleHandler
     initRefs() {
         // dom elements
         this.elForm  = document.getElementById('formSkill');
-        let elDesc  = this.elForm.elements.descSkill;
         this.elIndex = this.elForm.elements.indexSkill;
+        
+        let elDesc  = this.elForm.elements.descSkill;
         this.fields = [elDesc];
         
         // jquery objects
@@ -54,8 +112,9 @@ class SectorHandler extends ModuleHandler
     initRefs() {
         // dom elements
         this.elForm  = document.getElementById('formSector');
-        let elDesc  = this.elForm.elements.descSector;
         this.elIndex = this.elForm.elements.indexSector;
+        
+        let elDesc  = this.elForm.elements.descSector;
         this.fields = [elDesc];
         
         // jquery objects

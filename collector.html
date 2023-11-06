@@ -249,22 +249,23 @@
 				<form id="formLang" class="col s8 push-s2">
 					<fieldset class="row">
 						<legend>Idioma</legend>
-						<input name="langIndex" type="hidden" value="">
+						<input name="indexLang" type="hidden" value="">
 						<div class="input-field col s2">
-							<input id="langName" name="langName" type="text" class="validate" data-length="25" maxlength="25">
-							<label for="langName">Nombre</label>
+							<input id="nameLang" name="nameLang" type="text" class="validate" data-length="25" maxlength="25">
+							<label for="nameLang">Nombre</label>
+							<span class="helper-text col s6"></span>
 						</div>
 						<div class="input-field col s2">
-							<input id="langSpeak" name="langSpeak" type="text" class="validate" data-length="3" maxlength="3">
-							<label for="langSpeak">&percnt; Habla</label>
+							<input id="speakLang" name="speakLang" type="text" class="validate" data-length="3" maxlength="3">
+							<label for="speakLang">&percnt; Habla</label>
 						</div>
 						<div class="input-field col s2">
-							<input id="langRead" name="langRead" type="text" class="validate" data-length="3" maxlength="3">
-							<label for="langRead">&percnt; Lee</label>
+							<input id="readLang" name="readLang" type="text" class="validate" data-length="3" maxlength="3">
+							<label for="readLang">&percnt; Lee</label>
 						</div>
 						<div class="input-field col s2">
-							<input id="langWrite" name="langWrite" type="text" class="validate" data-length="3" maxlength="3">
-							<label for="langWrite">&percnt; Escribe</label>
+							<input id="writeLang" name="writeLang" type="text" class="validate" data-length="3" maxlength="3">
+							<label for="writeLang">&percnt; Escribe</label>
 						</div>
 						<div class="input-field col s4">
 							<div class="row" style="margin-bottom: 0px;">
@@ -272,7 +273,7 @@
 									<button id="btnAuxLang" name="btnAuxLang" class="waves-effect btn-flat btn-small" tabindex="-1">Limpiar</button>
 								</div>
 								<div class="col s6" style="text-align: right;">
-									<button id="btnMainLang" name="btnMainLang" class="waves-effect btn-flat btn-small">A&ntilde;adir</button>
+									<button id="btnMainLang" name="btnMainLang" class="waves-effect btn-flat btn-small">Agregar</button>
 								</div>
 							</div>
 						</div>
@@ -296,20 +297,20 @@
 								<td>50</td>
 								<td>75</td>
 								<td>75</td>
-								<td><a href="#" onclick="languageHandler.moveUp(event)">&bigtriangleup;</a></td>
-								<td><a href="#" onclick="languageHandler.moveDown(event)">&bigtriangledown;</a></td>
-								<td><a href="#" onclick="languageHandler.select(event)">Editar</a></td>
-								<td><a href="#" onclick="languageHandler.remove(event)">Eliminar</a></td>
+								<td><a href="#" onclick="languageHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+								<td><a href="#" onclick="languageHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+								<td><a href="#" onclick="languageHandler.select(event)" title="editar">&#x1F589;</a></td>
+								<td><a href="#" onclick="languageHandler.remove(event)" title="borrar">&#x2327;</a></td>
 							</tr>
 							<tr>
 								<td>Portugués</td>
 								<td>25</td>
 								<td>25</td>
 								<td>25</td>
-								<td><a href="#" onclick="languageHandler.moveUp(event)">&bigtriangleup;</a></td>
-								<td><a href="#" onclick="languageHandler.moveDown(event)">&bigtriangledown;</a></td>
-								<td><a href="#" onclick="languageHandler.select(event)">Editar</a></td>
-								<td><a href="#" onclick="languageHandler.remove(event)">Eliminar</a></td>
+								<td><a href="#" onclick="languageHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+								<td><a href="#" onclick="languageHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+								<td><a href="#" onclick="languageHandler.select(event)" title="editar">&#x1F589;</a></td>
+								<td><a href="#" onclick="languageHandler.remove(event)" title="borrar">&#x2327;</a></td>
 							</tr>
 						</tbody>
 					</table>
@@ -668,7 +669,6 @@
 
 	<script type="text/javascript" src="js/education.js"></script>
 	<script type="text/javascript" src="js/course.js"></script>
-	<script type="text/javascript" src="js/language.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

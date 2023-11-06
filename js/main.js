@@ -89,7 +89,8 @@ class MainHandler
             }
             
             if (href != '#languages') {
-                languageHandler.exitDisabledMode();
+                languageHandler.exitEditMode();
+                // console.log( JSON.stringify(languageHandler.getObjectList(), null, 2) );
             }
             if (href != '#skills') {
                 skillHandler.exitEditMode();
