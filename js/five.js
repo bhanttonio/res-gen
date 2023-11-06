@@ -1,5 +1,59 @@
 
 
+class CourseHandler extends ModuleHandler
+{
+    static #NAME = 0;
+	static #LOCATION = 1;
+	static #DATE = 2;
+    static #INDEX = 3;
+
+    constructor() {
+        super();
+    }
+
+    initRefs() {
+        // dom elements
+        this.elForm  = document.getElementById('formCourse');
+        this.elIndex = this.elForm.elements.indexCourse;
+
+        let elName   = this.elForm.elements.nameCourse;
+        let elLocation  = this.elForm.elements.locationCourse;
+        let elDate   = this.elForm.elements.dateCourse;
+        this.fields = [elName, elLocation, elDate];
+        
+        // jquery objects
+        this.$legend    = $(this.elForm).find('legend');
+        this.$btnAux    = $('#btnAuxCourse');
+        this.$btnMain   = $('#btnMainCourse');
+        this.$tableBody = $('table#tableCourse tbody');
+
+        // aux fields
+        this.formLegend  = 'Curso';
+        this.rowType     = RowType.REDUCED;
+        this.handlerName = 'courseHandler';
+    }
+
+    isValidForm() {
+        // simulates 'non-shortcircuiting and'
+        // (necessary to apply all individual validations)
+        return Validator.isInputNotEmpty( this.fields[CourseHandler.#NAME] ) * 
+               Validator.isInputNotEmpty( this.fields[CourseHandler.#LOCATION] ) * 
+               Validator.isInputNotEmpty( this.fields[CourseHandler.#DATE] );
+    }
+
+    getObject(data) {
+        return new Language(
+            data[CourseHandler.#NAME],
+            data[CourseHandler.#LOCATION],
+            data[CourseHandler.#DATE],
+            data[CourseHandler.#INDEX] 
+        );
+    }
+
+}//
+
+
+
 class LanguageHandler extends ModuleHandler
 {
     static #NAME  = 0;
@@ -113,7 +167,7 @@ class SectorHandler extends ModuleHandler
         // dom elements
         this.elForm  = document.getElementById('formSector');
         this.elIndex = this.elForm.elements.indexSector;
-        
+
         let elDesc  = this.elForm.elements.descSector;
         this.fields = [elDesc];
         

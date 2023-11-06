@@ -168,20 +168,20 @@
 				<form id="formCourse" class="col s3">
 					<fieldset class="row">
 						<legend>Curso</legend>
-						<input name="courseIndex" type="hidden" value="">
+						<input name="indexCourse" type="hidden" value="">
 						<div class="input-field col s12">
-							<input id="courseName" name="courseName" type="text" class="validate" data-length="75" maxlength="75">
-							<label for="courseName">Nombre</label>
+							<input id="nameCourse" name="nameCourse" type="text" class="validate" data-length="75" maxlength="75">
+							<label for="nameCourse">Nombre</label>
 							<span class="helper-text col s10">Ej. Introducci&oacute;n a ITIL v4</span>
 						</div>
 						<div class="input-field col s12">
-							<input id="courseLocation" name="courseLocation" type="text" class="validate" data-length="75" maxlength="75">
-							<label for="courseLocation">Lugar</label>
+							<input id="locationCourse" name="locationCourse" type="text" class="validate" data-length="75" maxlength="75">
+							<label for="locationCourse">Lugar</label>
 							<span class="helper-text col s10">Ej. Udemy</span>
 						</div>
 						<div class="input-field col s12">
-							<input id="courseDate" name="courseDate" type="text" class="validate" data-length="25" maxlength="25">
-							<label for="courseDate">Fecha</label>
+							<input id="dateCourse" name="dateCourse" type="text" class="validate" data-length="25" maxlength="25">
+							<label for="dateCourse">Fecha</label>
 							<span class="helper-text col s10">Ej. Enero 2019</span>
 						</div>
 						<div class="input-field col s12">
@@ -190,7 +190,7 @@
 									<button id="btnAuxCourse" name="btnAuxCourse" class="waves-effect btn-flat btn-small" tabindex="-1">Limpiar</button>
 								</div>
 								<div class="col s6">
-									<button id="btnMainCourse" name="btnMainCourse" class="waves-effect btn-flat btn-small">A&ntilde;adir</button>
+									<button id="btnMainCourse" name="btnMainCourse" class="waves-effect btn-flat btn-small">Agregar</button>
 								</div>
 							</div>
 						</div>
@@ -212,19 +212,19 @@
 								<td>JIRA fundamentals</td>
 								<td>TCS internal courses</td>
 								<td>02/Jul/2022</td>
-								<td><a href="#" onclick="courseHandler.moveUp(event)">&bigtriangleup;</a></td>
-								<td><a href="#" onclick="courseHandler.moveDown(event)">&bigtriangledown;</a></td>
-								<td><a href="#" onclick="courseHandler.select(event)">Editar</a></td>
-								<td><a href="#" onclick="courseHandler.remove(event)">Eliminar</a></td>
+								<td><a href="#" onclick="courseHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+								<td><a href="#" onclick="courseHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+								<td><a href="#" onclick="courseHandler.select(event)" title="editar">&#x1F589;</a></td>
+								<td><a href="#" onclick="courseHandler.remove(event)" title="borrar">&#x2327;</a></td>
 							</tr>
 							<tr>
 								<td>Persistencia de datos con Java</td>
 								<td>Platzi</td>
 								<td>Septiembre 2020</td>
-								<td><a href="#" onclick="courseHandler.moveUp(event)">&bigtriangleup;</a></td>
-								<td><a href="#" onclick="courseHandler.moveDown(event)">&bigtriangledown;</a></td>
-								<td><a href="#" onclick="courseHandler.select(event)">Editar</a></td>
-								<td><a href="#" onclick="courseHandler.remove(event)">Eliminar</a></td>
+								<td><a href="#" onclick="courseHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+								<td><a href="#" onclick="courseHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+								<td><a href="#" onclick="courseHandler.select(event)" title="editar">&#x1F589;</a></td>
+								<td><a href="#" onclick="courseHandler.remove(event)" title="borrar">&#x2327;</a></td>
 							</tr>
 						</tbody>
 					</table>
@@ -668,7 +668,6 @@
 	<script type="text/javascript" src="js/int-work-exp.js"></script>
 
 	<script type="text/javascript" src="js/education.js"></script>
-	<script type="text/javascript" src="js/course.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

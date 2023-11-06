@@ -82,10 +82,12 @@ class MainHandler
 
 			if (href !== '#education') {
                 educationHandler.exitDisabledMode();
+                // console.log( JSON.stringify(educationHandler.getObjectList(), null, 2) );
             }
 			
             if (href != '#courses') {
-                courseHandler.exitDisabledMode();
+                courseHandler.exitEditMode();
+                // console.log( JSON.stringify(courseHandler.getObjectList(), null, 2) );
             }
             
             if (href != '#languages') {
