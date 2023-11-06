@@ -81,7 +81,7 @@ class MainHandler
 			console.log(`\u2192 ${href}`);
 
 			if (href !== '#education') {
-                educationHandler.exitDisabledMode();
+                educationHandler.exitEditMode();
                 // console.log( JSON.stringify(educationHandler.getObjectList(), null, 2) );
             }
 			

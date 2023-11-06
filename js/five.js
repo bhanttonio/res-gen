@@ -1,4 +1,58 @@
 
+class EducationHandler extends ModuleHandler
+{
+    static #NAME = 0;
+	static #INSTITUTE = 1;
+	static #START = 2;
+    static #END = 3;
+    static #INDEX = 4;
+
+    constructor() {
+        super();
+    }
+
+    initRefs() {
+        // dom elements
+        this.elForm  = document.getElementById('formEdu');
+        this.elIndex = this.elForm.elements.indexEdu;
+
+        let elName   = this.elForm.elements.nameEdu;
+        let elInstitute  = this.elForm.elements.instituteEdu;
+        let elStart   = this.elForm.elements.startEdu;
+        let elEnd   = this.elForm.elements.endEdu;
+        this.fields = [elName, elInstitute, elStart, elEnd];
+        
+        // jquery objects
+        this.$legend    = $(this.elForm).find('legend');
+        this.$btnAux    = $('#btnAuxEdu');
+        this.$btnMain   = $('#btnMainEdu');
+        this.$tableBody = $('table#tableEdu tbody');
+
+        // aux fields
+        this.formLegend  = 'Escolaridad';
+        this.rowType     = RowType.REDUCED;
+        this.handlerName = 'educationHandler';
+    }
+
+    isValidForm() {
+        return Validator.isInputNotEmpty( this.fields[EducationHandler.#NAME] ) * 
+        Validator.isInputNotEmpty( this.fields[EducationHandler.#INSTITUTE] ) * 
+        Validator.isYearRangeValid( this.fields[EducationHandler.#START], this.fields[EducationHandler.#END] );
+    }
+
+    getObject(data) {
+        return new Education(
+            data[EducationHandler.#NAME],
+            data[EducationHandler.#INSTITUTE],
+            data[EducationHandler.#START],
+            data[EducationHandler.#END],
+            data[EducationHandler.#INDEX] 
+        );
+    }
+
+}//
+
+
 
 class CourseHandler extends ModuleHandler
 {
@@ -42,7 +96,7 @@ class CourseHandler extends ModuleHandler
     }
 
     getObject(data) {
-        return new Language(
+        return new Course(
             data[CourseHandler.#NAME],
             data[CourseHandler.#LOCATION],
             data[CourseHandler.#DATE],
