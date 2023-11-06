@@ -14,7 +14,7 @@ class ModuleHandler
     
 	// AUX FIELDS
     formLegend;
-    refColumn = 0;   // to confirm row deletion (by default is the 1st col in the table)
+    refColumn = 0;        // used to confirm row deletion (by default is the 1st col in table)
 	rowType;
     handlerName;
 
@@ -49,13 +49,11 @@ class ModuleHandler
 	}
 
 	#initCharCounters() {
-		console.log('\t\t character counters');
 		FormUtil.initCharCounters(this.elForm);
 	}
 
 	#initAuxBtn() {
-    	console.log('\t\t aux button');
-    	this.$btnAux.on('click', event => {
+    	this.$btnAux.on('click', event => {       // on click cancel update or just clean form (in insert mode)
         	event.preventDefault();
 			if (event.target.textContent === ModuleHandler.#AUX_CANCEL) {
 				this.#toInsertMode();
@@ -67,8 +65,7 @@ class ModuleHandler
     }
 
 	#initMainBtn() {
-    	console.log('\t\t main button');
-    	this.$btnMain.on('click', event => {
+    	this.$btnMain.on('click', event => {       // on click update entry or insert a new one
 	        event.preventDefault();
 			if (event.target.textContent === ModuleHandler.#MAIN_UPDATE) 
 				this.#update();
@@ -87,7 +84,7 @@ class ModuleHandler
 	        let newRow = `<tr>${tdsHtml}</tr>`;
 
 	        this.$tableBody.append(newRow);
-			FormUtil.reset(this.elForm);
+			FormUtil.reset(this.elForm);       // if everything was ok, clean form
 
 			let index = this.$tableBody.children().length - 1;
 			console.log(`[${this.handlerName}] row ${index} inserted!`);
@@ -95,7 +92,7 @@ class ModuleHandler
 	}
 
 	select(event) { 
-		if (this.#insertMode) {
+		if (this.#insertMode) {       // if no update is already in progress, select entry
 			event.preventDefault();
 			let index = TableUtil.indexOfRow(event);
 
@@ -105,7 +102,7 @@ class ModuleHandler
 			FormUtil.fill(this.fields, $tds);
 			this.elIndex.value = index;
 
-			this.disableLinks();
+			this.disableLinks();       // while updating an entry, disable links in table
 			console.log(`[${this.handlerName}] row ${index} selected!`);
 		}
 	}
@@ -125,7 +122,7 @@ class ModuleHandler
 	}
 
     remove(event) {
-		if (this.#insertMode) {
+		if (this.#insertMode) {       // if no update is in progress, remove entry
 			event.preventDefault();
 			let index = TableUtil.indexOfRow(event);
 
@@ -158,8 +155,8 @@ class ModuleHandler
 		this.$btnMain.html(ModuleHandler.#MAIN_UPDATE);
 	}
 
-    exitEditMode() {
-		if (this.#insertMode == false) 
+    exitEditMode() {       // while updating an entry, if the user moves to another tab, trigger cancel buton
+		if (this.#insertMode == false)
 			this.$btnAux.trigger('click');
 	}
 
@@ -184,6 +181,23 @@ class ModuleHandler
     moveDown(event) {
 		if (this.#insertMode)
 			TableUtil.moveRowDown(this.$tableBody, event);
+	}
+
+	getObjectList() {       // get table data as an object list
+		let list = [];
+		let _this = this;
+
+		this.$tableBody.children().each( function(index) {
+            let rowData = TableUtil.obtainRowData( $(this).children() );
+			rowData.push(index);
+
+			list.push( _this.getObject(rowData) );
+        });
+        return list;
+	}
+
+	getObject(data) {
+		throw new Error('Abstract method must be implemented!');
 	}
 
 }//

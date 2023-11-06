@@ -50,7 +50,7 @@ class TableUtil
         for (let i = 0; i < $tds1.length - TABLE_OPTIONS_SIZE; i++) {
             let tmp = $tds1.eq(i).text();
             $tds1.eq(i).text( $tds2.eq(i).text() );
-            $tds2.eq(i).text(tmp);
+            $tds2.eq(i).text( tmp );
         }
     }
 
@@ -98,6 +98,14 @@ class TableUtil
                 <td><a href="#" onclick="${handlerName}.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
                 <td><a href="#" onclick="${handlerName}.select(event)" title="editar">&#x1F589;</a></td>
                 <td><a href="#" onclick="${handlerName}.remove(event)" title="borrar">&#x2327;</a></td>`;
+    }
+
+
+    static obtainRowData($tds) {
+        let values = [];
+        for (let i = 0; i < $tds.length - TABLE_OPTIONS_SIZE; i++)
+            values.push( $tds.eq(i).text() );
+        return values;
     }
 
 }//

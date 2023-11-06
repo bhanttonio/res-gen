@@ -98,6 +98,8 @@ class MainHandler
 
             if (href != '#int-work-exp') {
                 iweTaskHandler.exitDisabledMode();
+                iweToolHandler.exitEditMode();
+                // console.log( JSON.stringify(iweToolHandler.getObjectList(), null, 2) );
             }
 		});
     }

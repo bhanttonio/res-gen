@@ -1,17 +1,14 @@
 
 class IweToolHandler extends ModuleHandler
 {
-
-    static #COL_DESC = 0;
-
+    static #DESC  = 0;
+    static #INDEX = 1;
 
     constructor() {
         super();
     }
 
-
-    initRefs() 
-    {
+    initRefs() {
         // dom elements
         this.elForm  = document.getElementById('formIweTool');
         this.elIndex = this.elForm.elements.iweToolIndex;
@@ -32,19 +29,15 @@ class IweToolHandler extends ModuleHandler
         this.handlerName = 'iweToolHandler';
     }
 
-
     isValidForm() {
-        return Validator.isInputNotEmpty( this.fields[IweToolHandler.#COL_DESC] );
+        return Validator.isInputNotEmpty( this.fields[IweToolHandler.#DESC] );
     }
 
-
-    getTools() {
-        let tools = new Array();
-        this.$tableBody.children().each( function(index) {
-            let desc = $(this).children().eq(IweToolHandler.#COL_DESC).text();
-            tools.push( new Tool(desc, index) );
-        });
-        return tools;
+    getObject(data) {
+        return new Tool(
+            data[IweToolHandler.#DESC], 
+            data[IweToolHandler.#INDEX] 
+        );
     }
 
 }
