@@ -334,10 +334,10 @@
 				<form id="formSkill" class="col s8 push-s2">
 					<fieldset class="row">
 						<legend>Conocimiento</legend>
-						<input name="skillIndex" type="hidden" value="">
+						<input name="indexSkill" type="hidden" value="">
 						<div class="input-field col s8">
-							<input id="skillDesc" name="skillDesc" type="text" class="validate" data-length="100" maxlength="100">
-							<label for="skillDesc">Descripci&oacute;n</label>
+							<input id="descSkill" name="descSkill" type="text" class="validate" data-length="100" maxlength="100">
+							<label for="descSkill">Descripci&oacute;n</label>
 							<span class="helper-text col s10">Ej. Manejo de m&oacute;dulos SAP&colon; SD, MM, PP, FI</span>
 						</div>
 						<div class="input-field col s4">
@@ -346,7 +346,7 @@
 									<button id="btnAuxSkill" name="btnAuxSkill" class="waves-effect btn-flat btn-small" tabindex="-1">Limpiar</button>
 								</div>
 								<div class="col s6" style="text-align: right;">
-									<button id="btnMainSkill" name="btnMainSkill" class="waves-effect btn-flat btn-small">A&ntilde;adir</button>
+									<button id="btnMainSkill" name="btnMainSkill" class="waves-effect btn-flat btn-small">Agregar</button>
 								</div>
 							</div>
 						</div>
@@ -364,17 +364,17 @@
 						<tbody>
 							<tr>
 								<td>Ingeniería del software: ADOO, UML, Scrum</td>
-								<td><a href="#" onclick="skillHandler.moveUp(event)">&bigtriangleup;</a></td>
-								<td><a href="#" onclick="skillHandler.moveDown(event)">&bigtriangledown;</a></td>
-								<td><a href="#" onclick="skillHandler.select(event)">Editar</a></td>
-								<td><a href="#" onclick="skillHandler.remove(event)">Eliminar</a></td>
+								<td><a href="#" onclick="skillHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+								<td><a href="#" onclick="skillHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+								<td><a href="#" onclick="skillHandler.select(event)" title="editar">&#x1F589;</a></td>
+								<td><a href="#" onclick="skillHandler.remove(event)" title="borrar">&#x2327;</a></td>
 							</tr>
 							<tr>
 								<td>Bases de datos: Oracle, PostgreSQL, MySQL, SQL Server, MongoDB</td>
-								<td><a href="#" onclick="skillHandler.moveUp(event)">&bigtriangleup;</a></td>
-								<td><a href="#" onclick="skillHandler.moveDown(event)">&bigtriangledown;</a></td>
-								<td><a href="#" onclick="skillHandler.select(event)">Editar</a></td>
-								<td><a href="#" onclick="skillHandler.remove(event)">Eliminar</a></td>
+								<td><a href="#" onclick="skillHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+								<td><a href="#" onclick="skillHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+								<td><a href="#" onclick="skillHandler.select(event)" title="editar">&#x1F589;</a></td>
+								<td><a href="#" onclick="skillHandler.remove(event)" title="borrar">&#x2327;</a></td>
 							</tr>
 						</tbody>
 					</table>
@@ -669,7 +669,6 @@
 	<script type="text/javascript" src="js/education.js"></script>
 	<script type="text/javascript" src="js/course.js"></script>
 	<script type="text/javascript" src="js/language.js"></script>
-	<script type="text/javascript" src="js/skill.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

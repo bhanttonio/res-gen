@@ -81,19 +81,23 @@ class MainHandler
 			console.log(`\u2192 ${href}`);
 
 			if (href !== '#education') {
-				educationHandler.exitDisabledMode();
-			}
+                educationHandler.exitDisabledMode();
+            }
+			
             if (href != '#courses') {
                 courseHandler.exitDisabledMode();
             }
+            
             if (href != '#languages') {
                 languageHandler.exitDisabledMode();
             }
             if (href != '#skills') {
-                skillHandler.exitDisabledMode();
+                skillHandler.exitEditMode();
+                // console.log( JSON.stringify(skillHandler.getObjectList(), null, 2) );
             }
             if (href != '#sectors') {
                 sectorHandler.exitEditMode();
+                // console.log( JSON.stringify(sectorHandler.getObjectList(), null, 2) );
             }
 
             if (href != '#int-work-exp') {
