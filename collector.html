@@ -399,10 +399,10 @@
 				<form id="formSector" class="row">
 					<fieldset class="col s6 push-s3">
 						<legend>Sector</legend>
-						<input name="sectorIndex" type="hidden" value="">
+						<input name="indexSector" type="hidden" value="">
 						<div class="input-field col s6">
-							<input id="sectorDesc" name="sectorDesc" type="text" class="validate" data-length="50" maxlength="50">
-							<label for="sectorDesc">Descripci&oacute;n</label>
+							<input id="descSector" name="descSector" type="text" class="validate" data-length="50" maxlength="50">
+							<label for="descSector">Descripci&oacute;n</label>
 							<span class="helper-text col s10">Ej. Cadena de suministro</span>
 						</div>
 						<div class="input-field col s6">
@@ -411,7 +411,7 @@
 									<button id="btnAuxSector" name="btnAuxSector" class="waves-effect btn-flat btn-small" tabindex="-1">Limpiar</button>
 								</div>
 								<div class="col s6" style="text-align: right;">
-									<button id="btnMainSector" name="btnMainSector" class="waves-effect btn-flat btn-small">A&ntilde;adir</button>
+									<button id="btnMainSector" name="btnMainSector" class="waves-effect btn-flat btn-small">Agregar</button>
 								</div>
 							</div>
 						</div>
@@ -430,17 +430,17 @@
 							<tbody>
 								<tr>
 									<td>Bancario</td>
-									<td><a href="#" onclick="sectorHandler.moveUp(event)">&bigtriangleup;</a></td>
-									<td><a href="#" onclick="sectorHandler.moveDown(event)">&bigtriangledown;</a></td>
-									<td><a href="#" onclick="sectorHandler.select(event)">Editar</a></td>
-									<td><a href="#" onclick="sectorHandler.remove(event)">Eliminar</a></td>
+									<td><a href="#" onclick="sectorHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+									<td><a href="#" onclick="sectorHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+									<td><a href="#" onclick="sectorHandler.select(event)" title="editar">&#x1F589;</a></td>
+									<td><a href="#" onclick="sectorHandler.remove(event)" title="borrar">&#x2327;</a></td>
 								</tr>
 								<tr>
 									<td>Ventas al por menor</td>
-									<td><a href="#" onclick="sectorHandler.moveUp(event)">&bigtriangleup;</a></td>
-									<td><a href="#" onclick="sectorHandler.moveDown(event)">&bigtriangledown;</a></td>
-									<td><a href="#" onclick="sectorHandler.select(event)">Editar</a></td>
-									<td><a href="#" onclick="sectorHandler.remove(event)">Eliminar</a></td>
+									<td><a href="#" onclick="sectorHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+									<td><a href="#" onclick="sectorHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+									<td><a href="#" onclick="sectorHandler.select(event)" title="editar">&#x1F589;</a></td>
+									<td><a href="#" onclick="sectorHandler.remove(event)" title="borrar">&#x2327;</a></td>
 								</tr>
 							</tbody>
 						</table>
@@ -497,7 +497,7 @@
 						<div class="col s6">
 							<form id="formIweTask" onsubmit="return false;">
 								<h6 class="resgen-title">Actividades</h6>
-								<input id="indexIweTask" name="indexIweTask" type="hidden" value="">
+								<input name="indexIweTask" type="hidden" value="">
 
 								<div class="input-field col s9">
 									<input id="descIweTask" name="descIweTask" type="text" class="validate" data-length="125" maxlength="125">
@@ -663,13 +663,13 @@
 	<script type="text/javascript" src="js/helper/table-util.js"></script>
 
 	<script type="text/javascript" src="js/handler.js"></script>
+	<script type="text/javascript" src="js/five.js"></script>
 	<script type="text/javascript" src="js/int-work-exp.js"></script>
 
 	<script type="text/javascript" src="js/education.js"></script>
 	<script type="text/javascript" src="js/course.js"></script>
 	<script type="text/javascript" src="js/language.js"></script>
 	<script type="text/javascript" src="js/skill.js"></script>
-	<script type="text/javascript" src="js/sector.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

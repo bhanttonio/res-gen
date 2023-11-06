@@ -80,24 +80,24 @@ class MainHandler
 			let href = e.target.getAttribute('href');
 			console.log(`\u2192 ${href}`);
 
-			if (href !== '#education') {   // education module
+			if (href !== '#education') {
 				educationHandler.exitDisabledMode();
 			}
-            if (href != '#courses') {   // courses module
+            if (href != '#courses') {
                 courseHandler.exitDisabledMode();
             }
-            if (href != '#languages') {   // languages module
+            if (href != '#languages') {
                 languageHandler.exitDisabledMode();
             }
-            if (href != '#skills') {   // skills module
+            if (href != '#skills') {
                 skillHandler.exitDisabledMode();
             }
-            if (href != '#sectors') {   // sectors module
-                sectorHandler.exitDisabledMode();
+            if (href != '#sectors') {
+                sectorHandler.exitEditMode();
             }
 
             if (href != '#int-work-exp') {
-                iweTaskHandler.exitDisabledMode();
+                iweTaskHandler.exitEditMode();
                 iweToolHandler.exitEditMode();
                 // console.log( JSON.stringify(iweToolHandler.getObjectList(), null, 2) );
             }
