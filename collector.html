@@ -497,11 +497,11 @@
 						<div class="col s6">
 							<form id="formIweTask" onsubmit="return false;">
 								<h6 class="resgen-title">Actividades</h6>
-								<input id="iweTaskIndex" name="iweTaskIndex" type="hidden" value="">
+								<input id="indexIweTask" name="indexIweTask" type="hidden" value="">
 
 								<div class="input-field col s9">
-									<input id="iweTaskDesc" name="iweTaskDesc" type="text" class="validate" data-length="125" maxlength="125">
-									<label id="iweTaskLabel" for="iweTaskDesc">Descripci&oacute;n</label>
+									<input id="descIweTask" name="descIweTask" type="text" class="validate" data-length="125" maxlength="125">
+									<label id="labelIweTask" for="descIweTask">Descripci&oacute;n</label>
 									<span class="helper-text col s10">Ej. An&aacute;lisis de requerimientos funcionales</span>
 								</div>
 								<div class="input-field col s3">
@@ -510,7 +510,7 @@
 											<a id="linkAuxIweTask" name="linkAuxIweTask" href="#" tabindex="-1" class="resgen-simple">Limpiar</a>
 										</div>
 										<div class="col s6">
-											<a id="linkMainIweTask" name="linkMainIweTask" href="#" class="resgen-simple">A&ntilde;adir</a>
+											<a id="linkMainIweTask" name="linkMainIweTask" href="#" class="resgen-simple">Agregar</a>
 										</div>
 									</div>
 								</div>
@@ -540,11 +540,11 @@
 						<div class="col s6">
 							<form id="formIweTool" onsubmit="return false;">
 								<h6 class="resgen-title">Entorno T&eacute;cnico</h6>
-								<input name="iweToolIndex" type="hidden" value="">
+								<input name="indexIweTool" type="hidden" value="">
 
 								<div class="input-field col s9">
-									<input id="iweToolDesc" name="iweToolDesc" type="text" class="validate" data-length="125" maxlength="125">
-									<label id="iweToolLabel" for="iweToolDesc">Descripci&oacute;n</label>
+									<input id="descIweTool" name="descIweTool" type="text" class="validate" data-length="125" maxlength="125">
+									<label id="labelIweTool" for="descIweTool">Descripci&oacute;n</label>
 									<span class="helper-text col s10">Ej. Herramientas utlizadas&colon; Confluence, Bitbucket</span>
 								</div>
 								<div class="input-field col s3">
@@ -663,8 +663,7 @@
 	<script type="text/javascript" src="js/helper/table-util.js"></script>
 
 	<script type="text/javascript" src="js/handler.js"></script>
-	<script type="text/javascript" src="js/iwe-tool.js"></script>
-	<script type="text/javascript" src="js/iwe-task.js"></script>
+	<script type="text/javascript" src="js/int-work-exp.js"></script>
 
 	<script type="text/javascript" src="js/education.js"></script>
 	<script type="text/javascript" src="js/course.js"></script>
