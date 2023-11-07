@@ -246,33 +246,36 @@
 			<!-- languages -->
 			<section id="languages" class="row section">
 				
-				<form id="formLang" class="col s8 push-s2">
+				<form id="formLang" class="col s3">
 					<fieldset class="row">
 						<legend>Idioma</legend>
 						<input name="indexLang" type="hidden" value="">
-						<div class="input-field col s2">
+						<div class="input-field col s6">
 							<input id="nameLang" name="nameLang" type="text" class="validate" data-length="25" maxlength="25">
 							<label for="nameLang">Nombre</label>
-							<span class="helper-text col s6"></span>
+							<span class="helper-text col s8"></span>
 						</div>
-						<div class="input-field col s2">
+						<div class="input-field col s6">
 							<input id="speakLang" name="speakLang" type="text" class="validate" data-length="3" maxlength="3">
 							<label for="speakLang">&percnt; Habla</label>
+							<span class="helper-text col s8">Ej. 75</span>
 						</div>
-						<div class="input-field col s2">
+						<div class="input-field col s6">
 							<input id="readLang" name="readLang" type="text" class="validate" data-length="3" maxlength="3">
 							<label for="readLang">&percnt; Lee</label>
+							<span class="helper-text col s8">Ej. 100</span>
 						</div>
-						<div class="input-field col s2">
+						<div class="input-field col s6">
 							<input id="writeLang" name="writeLang" type="text" class="validate" data-length="3" maxlength="3">
 							<label for="writeLang">&percnt; Escribe</label>
+							<span class="helper-text col s8">Ej. 50</span>
 						</div>
-						<div class="input-field col s4">
+						<div class="input-field col s12">
 							<div class="row" style="margin-bottom: 0px;">
-								<div class="col s6" style="text-align: right;">
+								<div class="col s6">
 									<button id="btnAuxLang" name="btnAuxLang" class="waves-effect btn-flat btn-small" tabindex="-1">Limpiar</button>
 								</div>
-								<div class="col s6" style="text-align: right;">
+								<div class="col s6">
 									<button id="btnMainLang" name="btnMainLang" class="waves-effect btn-flat btn-small">Agregar</button>
 								</div>
 							</div>
@@ -280,15 +283,15 @@
 					</fieldset>
 				</form>
 
-				<article class="col s8 push-s2">
-					<table id="tableLang" class="striped">
+				<article class="col s6">
+					<table id="tableLang" class="highlight centered">
 						<thead>
 							<tr>
 								<th>Idioma</th>
-								<th>&percnt; Conversaci&oacute;n</th>
-								<th>&percnt; Lectura</th>
-								<th>&percnt; Escritura</th>
-								<th colspan="4">Opciones</th>
+								<th>&percnt; Habla</th>
+								<th>&percnt; Lee</th>
+								<th>&percnt; Escribe</th>
+								<th colspan="4">&nbsp;</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -318,10 +321,10 @@
 
 					<div class="row">
 						<div class="col s3 left-align">
-							<button id="btnPrevLang" data-tab="courses" class="waves-effect btn-flat btn-small">Anterior</button>
+							<button id="btnPrevLang" data-tab="courses" class="waves-effect btn-flat btn-small">Ant</button>
 						</div>
 						<div class="col s3 push-s6 right-align">
-							<button id="btnNextLang" data-tab="skills" class="waves-effect btn-flat btn-small">Siguiente</button>
+							<button id="btnNextLang" data-tab="skills" class="waves-effect btn-flat btn-small">Sig</button>
 						</div>
 					</div>
 				</article>	
