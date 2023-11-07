@@ -147,7 +147,7 @@
 							</tr>
 						</tbody>
 					</table>
-					<br><br><br>
+					<br><br>
 
 					<div class="row">
 						<div class="col s3 left-align">
@@ -228,7 +228,7 @@
 							</tr>
 						</tbody>
 					</table>
-					<br><br><br>
+					<br><br>
 
 					<div class="row">
 						<div class="col s3 left-align">
@@ -317,7 +317,7 @@
 							</tr>
 						</tbody>
 					</table>
-					<br><br><br>
+					<br><br>
 
 					<div class="row">
 						<div class="col s3 left-align">
@@ -358,7 +358,7 @@
 					</fieldset>
 				</form>
 
-				<article class="col s8">
+				<article class="col s7">
 					<table id="tableSkill" class="highlight">
 						<thead>
 							<tr>
@@ -383,7 +383,7 @@
 							</tr>
 						</tbody>
 					</table>
-					<br><br><br>
+					<br><br>
 
 					<div class="row">
 						<div class="col s3 left-align">
@@ -401,21 +401,21 @@
 			<!-- sectors -->
 			<section id="sectors" class="row section">
 				
-				<form id="formSector" class="row">
-					<fieldset class="col s6 push-s3">
+				<form id="formSector" class="col s3">
+					<fieldset class="row">
 						<legend>Sector</legend>
 						<input name="indexSector" type="hidden" value="">
-						<div class="input-field col s6">
+						<div class="input-field col s12">
 							<input id="descSector" name="descSector" type="text" class="validate" data-length="50" maxlength="50">
 							<label for="descSector">Descripci&oacute;n</label>
 							<span class="helper-text col s10">Ej. Cadena de suministro</span>
 						</div>
-						<div class="input-field col s6">
+						<div class="input-field col s12">
 							<div class="row" style="margin-bottom: 0px;">
-								<div class="col s6" style="text-align: right;">
+								<div class="col s6 right-align">
 									<button id="btnAuxSector" name="btnAuxSector" class="waves-effect btn-flat btn-small" tabindex="-1">Limpiar</button>
 								</div>
-								<div class="col s6" style="text-align: right;">
+								<div class="col s6 right-align">
 									<button id="btnMainSector" name="btnMainSector" class="waves-effect btn-flat btn-small">Agregar</button>
 								</div>
 							</div>
@@ -423,44 +423,42 @@
 					</fieldset>
 				</form>
 				
-				<div class="row">
-					<article class="col s6 push-s3">
-						<table id="tableSector" class="striped">
-							<thead>
-								<tr>
-									<th>Sector</th>
-									<th colspan="4">Opciones</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>Bancario</td>
-									<td><a href="#" onclick="sectorHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
-									<td><a href="#" onclick="sectorHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
-									<td><a href="#" onclick="sectorHandler.select(event)" title="editar">&#x1F589;</a></td>
-									<td><a href="#" onclick="sectorHandler.remove(event)" title="borrar">&#x2327;</a></td>
-								</tr>
-								<tr>
-									<td>Ventas al por menor</td>
-									<td><a href="#" onclick="sectorHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
-									<td><a href="#" onclick="sectorHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
-									<td><a href="#" onclick="sectorHandler.select(event)" title="editar">&#x1F589;</a></td>
-									<td><a href="#" onclick="sectorHandler.remove(event)" title="borrar">&#x2327;</a></td>
-								</tr>
-							</tbody>
-						</table>
-						<br><br><br>
+				<article class="col s4">
+					<table id="tableSector" class="highlight">
+						<thead>
+							<tr>
+								<th>Sector</th>
+								<th colspan="4">&nbsp;</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Bancario</td>
+								<td><a href="#" onclick="sectorHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+								<td><a href="#" onclick="sectorHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+								<td><a href="#" onclick="sectorHandler.select(event)" title="editar">&#x1F589;</a></td>
+								<td><a href="#" onclick="sectorHandler.remove(event)" title="borrar">&#x2327;</a></td>
+							</tr>
+							<tr>
+								<td>Ventas al por menor</td>
+								<td><a href="#" onclick="sectorHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+								<td><a href="#" onclick="sectorHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+								<td><a href="#" onclick="sectorHandler.select(event)" title="editar">&#x1F589;</a></td>
+								<td><a href="#" onclick="sectorHandler.remove(event)" title="borrar">&#x2327;</a></td>
+							</tr>
+						</tbody>
+					</table>
+					<br><br>
 
-						<div class="row">
-							<div class="col s3 left-align">
-								<button id="btnPrevSector" data-tab="skills" class="waves-effect btn-flat btn-small">Anterior</button>
-							</div>
-							<div class="col s3 push-s6 right-align">
-								<button id="btnNextSector" data-tab="int-work-exp" class="waves-effect btn-flat btn-small">Siguiente</button>
-							</div>
+					<div class="row">
+						<div class="col s3 left-align">
+							<button id="btnPrevSector" data-tab="skills" class="waves-effect btn-flat btn-small">Ant</button>
 						</div>
-					</article>
-				</div>
+						<div class="col s3 push-s6 right-align">
+							<button id="btnNextSector" data-tab="int-work-exp" class="waves-effect btn-flat btn-small">Sig</button>
+						</div>
+					</div>
+				</article>
 				
 			</section>
 
