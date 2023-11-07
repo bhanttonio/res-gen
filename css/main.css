@@ -3,14 +3,20 @@
 @import url("materialize.min.css");
 
 
-/* GENERAL */
+
+/* titles */
 
 h1, h2, h3, h4, h5, h6 {
 	color: #ee6e73;
 }
+h6.resgen-title {
+	text-align: center;
+	font-size: 14px;
+}
 
 
-/* TABS */
+
+/* tabs */
 
 div#wrap-tabs ul {
 	height: 28px;
@@ -24,23 +30,47 @@ div#wrap-tabs ul li a {
 }
 
 
-/* FORM FIELDS */
 
+/* fieldset */
+
+fieldset {
+	border: 1px solid #e0e0e0;
+}
+fieldset legend {
+	font-size: 14px;
+	font-weight: bold;
+}
+
+
+
+/* forms */
+
+div.input-field {
+	margin-bottom: 0.25em;
+}
 div.input-field input[type="text"] { 
-	height: 2em;
+	height: 1.5em;
 	margin: 0 0 2px 0;
-	font-size: 13px;
+	font-size: 12.5px;
 }
 textarea.materialize-textarea {
 	margin: 0 0 0 0;
 	padding-bottom: 0.5em;
-	font-size: 13px;
+	font-size: 12.5px;
 }
 .input-field > label {
 	color: black;
 	transform: translateY(0px);
-	font-size: 13px;
+	font-size: 12.5px;
 }
+.input-field>label:not(.label-icon).active {
+	transform: translateY(-10px) scale(0.95);
+}
+
+
+
+/* helpers */
+
 span.helper-text {
 	padding-left: 0px !important;
 	color: rgba(0, 0, 0, 0.44) !important;
@@ -51,7 +81,10 @@ span.character-counter {
 	font-size: 11px !important;
 }
 
-/* button small */
+
+
+/* buttons */
+
 .btn-small {
 	height: 22px;
 	line-height: 22px;
@@ -63,34 +96,23 @@ span.character-counter {
 	background-color: #ef9a9a;
 }
 
-/* fieldset */
-fieldset {
-	border: 1px solid #e0e0e0;
-}
-fieldset legend {
-	font-size: 14px;
-	font-weight: bold;
-	padding-bottom: 0.25em;
-}
-
-/* title */
-h6.resgen-title {
-	text-align: center;
-	font-size: 14px;
-}
 
 
-/* TABLES */
+/* tables */
 
 table {
-	font-size: 13px;
+	font-size: 12.5px;
 }
-table thead {
+th {
 	font-weight: bold;
 }
+th, td {
+	padding: 10px 5px;
+}
 
 
-/* LINKS */
+
+/* links */
 
 a.resgen-disabled {
 	color: #bdbdbd;
@@ -104,3 +126,4 @@ a.resgen-simple {
 	font-size: 12.5px;
 	font-weight: 400;
 }
+
