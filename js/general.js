@@ -1,4 +1,65 @@
 
+class BasicHandler
+{
+    #elForm; 
+    #elName;
+    #elSurname1;
+    #elSurname2;
+    #elLevel;
+    #elProfile;
+
+    #$btnAux;
+
+    constructor() {
+        console.log('\t basicHandler');
+        this.#initRefs();
+        this.#initCharCounters();
+        this.#initAuxBtn();
+    }
+
+    #initRefs() {
+        this.#elForm = document.getElementById('formBasic');
+        this.#elName     = this.#elForm.elements.nameBasic;
+        this.#elSurname1 = this.#elForm.elements.surname1Basic;
+        this.#elSurname2 = this.#elForm.elements.surname2Basic;
+        this.#elLevel    = this.#elForm.elements.levelBasic;
+        this.#elProfile  = this.#elForm.elements.profileBasic;
+        this.$btnAux = $('#btnAuxBasic');
+    }
+
+    #initCharCounters() {
+		FormUtil.initCharCounters(this.#elForm);
+	}
+
+    #initAuxBtn() {
+    	this.$btnAux.on('click', event => {
+        	event.preventDefault();
+			FormUtil.reset(this.#elForm);
+			event.target.blur();
+    	});
+    }
+
+    isValidForm() {
+        return Validator.isInputNotEmpty(this.#elName) * 
+               Validator.isInputNotEmpty(this.#elSurname1) * 
+               Validator.isInputNotEmpty(this.#elSurname2) * 
+               Validator.isInputNotEmpty(this.#elLevel) * 
+               Validator.isInputNotEmpty(this.#elProfile);
+    }
+
+    getObject() {
+        return new Basic(
+            this.#elName.value, 
+            this.#elSurname1.value, 
+            this.#elSurname2.value, 
+            this.#elLevel.value, 
+            this.#elProfile.value);
+    }
+
+}//
+
+
+
 class EducationHandler extends ModuleHandler
 {
     static #NAME = 0;

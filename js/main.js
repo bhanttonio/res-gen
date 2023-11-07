@@ -1,4 +1,5 @@
 
+var basicHandler;
 var educationHandler;
 var courseHandler;
 var languageHandler;
@@ -13,6 +14,7 @@ $(function() {
     console.log('loading');
     M.AutoInit();
 
+    basicHandler = new BasicHandler();
     educationHandler = new EducationHandler();
     courseHandler = new CourseHandler();
     languageHandler = new LanguageHandler();
@@ -38,7 +40,6 @@ class MainHandler
     constructor() {
         console.log('\t main handler');
         this.#loadRefs();
-        this.#setUpCharCounters();
         this.#setUpDirButtons();
         this.#setUpTabs();
         this.#setUpTabOnLoad();
@@ -52,11 +53,6 @@ class MainHandler
         this.#$btnsNext = $('button[id^="btnNext"]');
     }
 
-    #setUpCharCounters() {
-        console.log('\t\t character counters');
-        $('input#name, input#surname_1, input#surname_2, input#level, textarea#profile').characterCounter();
-    }
-
     #setUpDirButtons() {
         console.log('\t\t prev buttons');
         this.#setUpButtons(this.#$btnsPrev);
@@ -66,9 +62,9 @@ class MainHandler
     }
 
     #setUpButtons($btns) {
-        $btns.on('click', e => {
-            e.preventDefault();
-            let tab = e.target.getAttribute('data-tab');
+        $btns.on('click', event => {
+            event.preventDefault();
+            let tab = event.target.getAttribute('data-tab');
             this.#tabsInstance.select(tab);
         });
     }
@@ -76,9 +72,14 @@ class MainHandler
     #setUpTabs() {
         console.log('\t\t tabs');
 
-		$(this.#elTabs).on('click', 'a', function(e) {   // on click leave tab's state consistent
-			let href = e.target.getAttribute('href');
+		$(this.#elTabs).on('click', 'a', function(event) {   // on click leave tab's state consistent
+			let href = event.target.getAttribute('href');
 			console.log(`\u2192 ${href}`);
+
+            if (href !== '#basic') {
+                basicHandler.isValidForm();
+                // console.log( JSON.stringify(basicHandler.getObject(), null, 2) );
+            }
 
 			if (href !== '#education') {
                 educationHandler.exitEditMode();
