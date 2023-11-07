@@ -33,43 +33,52 @@
 			</div>
 
 			<!-- basic -->
-			<section id="basic" class="section col s12">
+			<section id="basic" class="row section">
+
+				<form id="formBasic" class="col s12">
+					<fieldset class="row">
+						<legend>Nombre y Perfil</legend>
+						<div class="input-field col s3">
+							<input id="nameBasic" name="nameBasic" type="text" class="validate" autocomplete="off" data-length="50" maxlength="50">
+							<label for="nameBasic">Nombre&lpar;s&rpar;</label>
+						</div>
+						<div class="input-field col s2">
+							<input id="surname1Basic" name="surname1Basic" type="text" class="validate" data-length="50" maxlength="50">
+							<label for="surname1Basic">Apellido Paterno</label>
+						</div>
+						<div class="input-field col s2">
+							<input id="surname2Basic" name="surname2Basic" type="text" class="validate" data-length="50" maxlength="50">
+							<label for="surname2Basic">Apellido Materno</label>
+						</div>
+						<div class="input-field col s4 push-s1">
+							<input id="levelBasic" name="levelBasic" type="text" class="validate" data-length="50" maxlength="50">
+							<label for="levelBasic">Nivel</label>
+							<span class="helper-text col s10">Ej. Consultor Senior</span>
+						</div>
+						<div class="input-field col s12">
+							<textarea id="profileBasic" name="profileBasic" class="materialize-textarea validate" data-length="300" maxlength="300"></textarea>
+							<label for="profileBasic">Perfil Profesional</label>
+							<span class="helper-text col s11">Ej. Consultor senior biling&uuml;e del PP SAP, m&aacute;s de 10 
+							a&ntilde;os con SAP ECC, S4Hana y servicios en la nube. Experiencia trabajando de forma remota y en el sitio
+							con clientes en el extranjero y diferentes zonas horarias. Trabaje bien con enfoques Agile y Waterfall.</span>
+						</div>
+						<div class="input-field col s12">
+							<div class="row" style="margin-bottom: 0px;">
+								<div class="col s6">
+									<button id="btnAuxBasic" name="btnAuxBasic" class="waves-effect btn-flat btn-small" tabindex="-1">Limpiar</button>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+					<br>
+				</form>
+
 				<div class="row">
-					<div class="input-field col s3">
-			          	<input id="name" type="text" class="validate" autocomplete="off" data-length="50" maxlength="50">
-			          	<label for="name">Nombre</label>
-			        </div>
-					<div class="input-field col s2">
-			          	<input id="surname_1" type="text" class="validate" data-length="50" maxlength="50">
-			          	<label for="surname_1">Apellido Paterno</label>
-			        </div>
-			        <div class="input-field col s2">
-			          	<input id="surname_2" type="text" class="validate" data-length="50" maxlength="50">
-			          	<label for="surname_2">Apellido Materno</label>
-			        </div>
-			        <div class="input-field col s4 push-s1">
-						<input id="level" type="text" class="validate" data-length="50" maxlength="50">
-			          	<label for="level">Nivel</label>
-			          	<span class="helper-text col s10">P. ej. &nbsp;Consultor Senior</span>
-			        </div>
-				</div>
-				<div class="row">
-					<div class="input-field col s12">
-						<textarea id="profile" class="materialize-textarea validate" data-length="300" maxlength="300"></textarea>
-						<label for="profile">Perfil Profesional</label>
-						<span class="helper-text col s11">P. ej. &nbsp;Consultor senior biling&uuml;e del PP SAP, m&aacute;s de 10 
-						a&ntilde;os con SAP ECC, S4Hana y servicios en la nube. Experiencia trabajando de forma remota y en el sitio
-						con clientes en el extranjero y diferentes zonas horarias. Trabaje bien con enfoques Agile y Waterfall.</span>
+					<div class="col s3 push-s9 right-align">
+						<button id="btnNextBasic" data-tab="education" class="waves-effect btn-flat btn-small">Sig</button>
 					</div>
 				</div>
-				<br>
-				<div class="row">
-					<div class="col s2 push-s10 right-align">
-						<button id="btnNextBasic" data-tab="education" class="waves-effect waves-teal btn-flat btn-small">
-							Siguiente
-						</button>
-					</div>
-				</div>
+
 			</section>
 
 
