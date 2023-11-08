@@ -22,10 +22,10 @@ class IweTaskHandler extends ModuleHandler
         this.$tableBody = $('table#tableIweTask tbody');
 
         // aux fields
-        this.formLegend  = 'Actividad';
+        this.FORM_LEGEND  = 'Actividad';
         this.INSERT_LEGEND = ' &lsqb;Nueva&rsqb;';
-        this.rowType     = RowType.REDUCED;
-        this.handlerName = 'iweTaskHandler';
+        this.ROW_TYPE     = RowType.REDUCED;
+        this.HANDLER_NAME = 'iweTaskHandler';
     }
 
     isValidForm() {
@@ -66,10 +66,10 @@ class IweToolHandler extends ModuleHandler
         this.$tableBody = $('table#tableIweTool tbody');
 
         // aux fields
-        this.formLegend  = 'Entorno';
+        this.FORM_LEGEND  = 'Entorno';
         this.INSERT_LEGEND = ' &lsqb;Nuevo&rsqb;';
-        this.rowType     = RowType.REDUCED;
-        this.handlerName = 'iweToolHandler';
+        this.ROW_TYPE     = RowType.REDUCED;
+        this.HANDLER_NAME = 'iweToolHandler';
     }
 
     isValidForm() {

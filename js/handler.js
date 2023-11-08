@@ -13,11 +13,11 @@ class ModuleHandler
     $tableBody;
     
 	// AUX FIELDS
-    formLegend;
+    FORM_LEGEND;
 	INSERT_LEGEND;
-    refColumn = 0;        // used to confirm row deletion (by default is the 1st col in table)
-	rowType;
-    handlerName;
+    REF_COLUMN = 0;        // used to confirm row deletion (by default is the 1st col in table)
+	ROW_TYPE;
+    HANDLER_NAME;
 
     #insertMode = true;   // controls the mode of the form
 
@@ -35,7 +35,7 @@ class ModuleHandler
 			throw new Error('Abstract class must be implemented!');
 
 		this.initRefs();		
-		console.log(`\t ${this.handlerName}`);
+		console.log(`\t ${this.HANDLER_NAME}`);
 
 		this.#initCharCounters();
 		this.#initAuxBtn();
@@ -81,14 +81,14 @@ class ModuleHandler
 
 	#insert() {
 		if (this.isValidForm()) {
-			let tdsHtml = TableUtil.formRowContent(this.fields, this.handlerName, this.rowType);
+			let tdsHtml = TableUtil.formRowContent(this.fields, this.HANDLER_NAME, this.ROW_TYPE);
 	        let newRow = `<tr>${tdsHtml}</tr>`;
 
 	        this.$tableBody.append(newRow);
 			FormUtil.reset(this.elForm);       // if everything was ok, clean form
 
 			let index = this.$tableBody.children().length - 1;
-			console.log(`[${this.handlerName}] row ${index} inserted!`);
+			console.log(`[${this.HANDLER_NAME}] row ${index} inserted!`);
 	    }
 	}
 
@@ -104,21 +104,21 @@ class ModuleHandler
 			this.elIndex.value = index;
 
 			this.disableLinks();       // while updating an entry, disable links in table
-			console.log(`[${this.handlerName}] row ${index} selected!`);
+			console.log(`[${this.HANDLER_NAME}] row ${index} selected!`);
 		}
 	}
 
     #update() {
 		let index = this.elIndex.value;
 		if (this.isValidForm()) {
-			let updatedRow = TableUtil.formRowContent(this.fields, this.handlerName, this.rowType);
+			let updatedRow = TableUtil.formRowContent(this.fields, this.HANDLER_NAME, this.ROW_TYPE);
 			this.$tableBody.children().eq(index).html(updatedRow);
 
 			FormUtil.reset(this.elForm);
 			this.#toInsertMode();
 			this.enableLinks();
 
-			console.log(`[${this.handlerName}] row ${index} updated!`);
+			console.log(`[${this.HANDLER_NAME}] row ${index} updated!`);
 		}
 	}
 
@@ -128,11 +128,11 @@ class ModuleHandler
 			let index = TableUtil.indexOfRow(event);
 
 			let $row = this.$tableBody.children().eq(index);
-			let refName = $row.children().eq( this.refColumn ).text();
+			let refName = $row.children().eq( this.REF_COLUMN ).text();
 
 			if (confirm(`Se eliminar\xE1 "${refName}"`)) {
 				$row.remove();
-				console.log(`[${this.handlerName}] row ${index} removed!`);
+				console.log(`[${this.HANDLER_NAME}] row ${index} removed!`);
 			}
 		}
 	}
@@ -145,13 +145,13 @@ class ModuleHandler
     // FORM MODE METHODS
 
     #toInsertMode() {
-		this.$legend.html(this.formLegend + this.INSERT_LEGEND);
+		this.$legend.html(this.FORM_LEGEND + this.INSERT_LEGEND);
 		this.$btnAux.html(ModuleHandler.#AUX_CLEAN);
 		this.$btnMain.html(ModuleHandler.#MAIN_INSERT);
 	}
 
 	#toUpdateMode() {
-		this.$legend.html(this.formLegend + ModuleHandler.#EDIT_LEGEND);
+		this.$legend.html(this.FORM_LEGEND + ModuleHandler.#EDIT_LEGEND);
 		this.$btnAux.html(ModuleHandler.#AUX_CANCEL);
 		this.$btnMain.html(ModuleHandler.#MAIN_UPDATE);
 	}

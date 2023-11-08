@@ -90,10 +90,10 @@ class EducationHandler extends ModuleHandler
         this.$tableBody = $('table#tableEdu tbody');
 
         // aux fields
-        this.formLegend  = 'Escolaridad';
+        this.FORM_LEGEND  = 'Escolaridad';
         this.INSERT_LEGEND = ' &lsqb;Nueva&rsqb;';
-        this.rowType     = RowType.REDUCED;
-        this.handlerName = 'educationHandler';
+        this.ROW_TYPE     = RowType.REDUCED;
+        this.HANDLER_NAME = 'educationHandler';
     }
 
     isValidForm() {
@@ -144,10 +144,10 @@ class CourseHandler extends ModuleHandler
         this.$tableBody = $('table#tableCourse tbody');
 
         // aux fields
-        this.formLegend  = 'Curso';
+        this.FORM_LEGEND  = 'Curso';
         this.INSERT_LEGEND = ' &lsqb;Nuevo&rsqb;';
-        this.rowType     = RowType.REDUCED;
-        this.handlerName = 'courseHandler';
+        this.ROW_TYPE     = RowType.REDUCED;
+        this.HANDLER_NAME = 'courseHandler';
     }
 
     isValidForm() {
@@ -201,10 +201,10 @@ class LanguageHandler extends ModuleHandler
         this.$tableBody = $('table#tableLang tbody');
 
         // aux fields
-        this.formLegend  = 'Idioma';
+        this.FORM_LEGEND  = 'Idioma';
         this.INSERT_LEGEND = ' &lsqb;Nuevo&rsqb;';
-        this.rowType     = RowType.REDUCED;
-        this.handlerName = 'languageHandler';
+        this.ROW_TYPE     = RowType.REDUCED;
+        this.HANDLER_NAME = 'languageHandler';
     }
 
     isValidForm() {
@@ -252,10 +252,10 @@ class SkillHandler extends ModuleHandler
         this.$tableBody = $('table#tableSkill tbody');
 
         // aux fields
-        this.formLegend  = 'Conocimiento';
+        this.FORM_LEGEND  = 'Conocimiento';
         this.INSERT_LEGEND = ' &lsqb;Nuevo&rsqb;';
-        this.rowType     = RowType.REDUCED;
-        this.handlerName = 'skillHandler';
+        this.ROW_TYPE     = RowType.REDUCED;
+        this.HANDLER_NAME = 'skillHandler';
     }
 
     isValidForm() {
@@ -297,10 +297,10 @@ class SectorHandler extends ModuleHandler
         this.$tableBody = $('table#tableSector tbody');
 
         // aux fields
-        this.formLegend  = 'Sector';
+        this.FORM_LEGEND  = 'Sector';
         this.INSERT_LEGEND = ' &lsqb;Nuevo&rsqb;';
-        this.rowType     = RowType.REDUCED;
-        this.handlerName = 'sectorHandler';
+        this.ROW_TYPE     = RowType.REDUCED;
+        this.HANDLER_NAME = 'sectorHandler';
     }
 
     isValidForm() {
