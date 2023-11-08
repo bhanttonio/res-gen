@@ -21,7 +21,7 @@ class IweTaskHandler extends ModuleHandler
         this.$btnMain   = $('#linkMainIweTask');
         this.$tableBody = $('table#tableIweTask tbody');
 
-        // aux fields
+        // aux values
         this.FORM_LEGEND  = 'Actividad';
         this.INSERT_LEGEND = ' &lsqb;Nueva&rsqb;';
         this.ROW_TYPE     = RowType.REDUCED;
@@ -65,7 +65,7 @@ class IweToolHandler extends ModuleHandler
         this.$btnMain   = $('#linkMainIweTool');
         this.$tableBody = $('table#tableIweTool tbody');
 
-        // aux fields
+        // aux values
         this.FORM_LEGEND  = 'Entorno';
         this.INSERT_LEGEND = ' &lsqb;Nuevo&rsqb;';
         this.ROW_TYPE     = RowType.REDUCED;

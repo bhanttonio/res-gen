@@ -89,7 +89,7 @@ class EducationHandler extends ModuleHandler
         this.$btnMain   = $('#btnMainEdu');
         this.$tableBody = $('table#tableEdu tbody');
 
-        // aux fields
+        // aux values
         this.FORM_LEGEND  = 'Escolaridad';
         this.INSERT_LEGEND = ' &lsqb;Nueva&rsqb;';
         this.ROW_TYPE     = RowType.REDUCED;
@@ -143,7 +143,7 @@ class CourseHandler extends ModuleHandler
         this.$btnMain   = $('#btnMainCourse');
         this.$tableBody = $('table#tableCourse tbody');
 
-        // aux fields
+        // aux values
         this.FORM_LEGEND  = 'Curso';
         this.INSERT_LEGEND = ' &lsqb;Nuevo&rsqb;';
         this.ROW_TYPE     = RowType.REDUCED;
@@ -200,7 +200,7 @@ class LanguageHandler extends ModuleHandler
         this.$btnMain   = $('#btnMainLang');
         this.$tableBody = $('table#tableLang tbody');
 
-        // aux fields
+        // aux values
         this.FORM_LEGEND  = 'Idioma';
         this.INSERT_LEGEND = ' &lsqb;Nuevo&rsqb;';
         this.ROW_TYPE     = RowType.REDUCED;
@@ -251,7 +251,7 @@ class SkillHandler extends ModuleHandler
         this.$btnMain   = $('#btnMainSkill');
         this.$tableBody = $('table#tableSkill tbody');
 
-        // aux fields
+        // aux values
         this.FORM_LEGEND  = 'Conocimiento';
         this.INSERT_LEGEND = ' &lsqb;Nuevo&rsqb;';
         this.ROW_TYPE     = RowType.REDUCED;
@@ -296,7 +296,7 @@ class SectorHandler extends ModuleHandler
         this.$btnMain   = $('#btnMainSector');
         this.$tableBody = $('table#tableSector tbody');
 
-        // aux fields
+        // aux values
         this.FORM_LEGEND  = 'Sector';
         this.INSERT_LEGEND = ' &lsqb;Nuevo&rsqb;';
         this.ROW_TYPE     = RowType.REDUCED;

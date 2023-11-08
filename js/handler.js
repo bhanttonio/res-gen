@@ -12,15 +12,15 @@ class ModuleHandler
 	$btnMain;
     $tableBody;
     
-	// AUX FIELDS
+	// AUX VALUES
     FORM_LEGEND;
 	INSERT_LEGEND;
     REF_COLUMN = 0;        // used to confirm row deletion (by default is the 1st col in table)
 	ROW_TYPE;
     HANDLER_NAME;
 
+	
     #insertMode = true;   // controls the mode of the form
-
 
     // FORM LABELS
     static #EDIT_LEGEND = ' [Edici&oacute;n]';
