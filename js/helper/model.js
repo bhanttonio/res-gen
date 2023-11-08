@@ -1,13 +1,4 @@
 
-const TABLE_OPTIONS_SIZE = 4;
-
-const RowType = {
-	REDUCED: 1, 
-	NORMAL: 2, 
-	EXTENDED: 3
-}
-
-
 class Basic {
 	constructor(name, surname1, surname2, level, profile) {
 		this.name = name; 

@@ -1,11 +1,18 @@
 
+const TABLE_OPTIONS_SIZE = 4;
+const ROWS_SELECTOR = 'tr td a';
+const CSS_CLASS_LINK_ENABLED  = 'resgen-enabled';
+const CSS_CLASS_LINK_DISABLED = 'resgen-disabled';
+
+const RowType = {
+	REDUCED: 1, 
+	NORMAL: 2, 
+	EXTENDED: 3
+}
+
+
 class TableUtil
 {
-    static #ROWS_SELECTOR = 'tr td a';
-
-    static #CSS_CLASS_LINK_ENABLED  = 'resgen-enabled';
-	static #CSS_CLASS_LINK_DISABLED = 'resgen-disabled';
-
 
     static indexOfRow(event) {
         return $(event.target).parent().parent().index();
@@ -56,16 +63,16 @@ class TableUtil
 
 
     static disableLinks($tableBody) {
-        let $links = $tableBody.find( TableUtil.#ROWS_SELECTOR );
-		$links.removeClass( TableUtil.#CSS_CLASS_LINK_ENABLED );
-		$links.addClass( TableUtil.#CSS_CLASS_LINK_DISABLED );
+        let $links = $tableBody.find(ROWS_SELECTOR);
+		$links.removeClass(CSS_CLASS_LINK_ENABLED);
+		$links.addClass(CSS_CLASS_LINK_DISABLED);
 		$links.removeAttr('href');
     }
 
     static enableLinks($tableBody) {
-        let $links = $tableBody.find( TableUtil.#ROWS_SELECTOR );
-		$links.removeClass( TableUtil.#CSS_CLASS_LINK_DISABLED );
-		$links.addClass( TableUtil.#CSS_CLASS_LINK_ENABLED );
+        let $links = $tableBody.find(ROWS_SELECTOR);
+		$links.removeClass(CSS_CLASS_LINK_DISABLED);
+		$links.addClass(CSS_CLASS_LINK_ENABLED);
 		$links.attr('href', '#');
     }
 
