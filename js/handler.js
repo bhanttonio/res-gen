@@ -1,4 +1,12 @@
 
+// FORM LABELS
+const EDIT_LEGEND = ' [Edici&oacute;n]';
+const AUX_CLEAN   = 'Limpiar';
+const AUX_CANCEL  = 'Cancelar';
+const MAIN_INSERT = 'Agregar';
+const MAIN_UPDATE = 'Editar';
+
+
 class ModuleHandler 
 {
     // DOM ELEMENTS
@@ -15,19 +23,12 @@ class ModuleHandler
 	// AUX VALUES
     FORM_LEGEND;
 	INSERT_LEGEND;
-    REF_COLUMN = 0;        // used to confirm row deletion (by default is the 1st col in table)
+    REF_COLUMN = 0;          // used to confirm row deletion (by default is the 1st col in table)
 	ROW_TYPE;
     HANDLER_NAME;
 
-	
-    #insertMode = true;   // controls the mode of the form
-
-    // FORM LABELS
-    static #EDIT_LEGEND = ' [Edici&oacute;n]';
-    static #AUX_CLEAN   = 'Limpiar';
-	static #AUX_CANCEL  = 'Cancelar';
-	static #MAIN_INSERT = 'Agregar';
-	static #MAIN_UPDATE = 'Editar';
+	// AUX FIELDS
+    insertMode = true;       // controls the mode of the form
 
 
 	constructor() {
@@ -56,7 +57,7 @@ class ModuleHandler
 	#initAuxBtn() {
     	this.$btnAux.on('click', event => {       // on click cancel update or just clean form (in insert mode)
         	event.preventDefault();
-			if (event.target.textContent === ModuleHandler.#AUX_CANCEL) {
+			if (event.target.textContent === AUX_CANCEL) {
 				this.#toInsertMode();
 				this.enableLinks();
 			}
@@ -68,7 +69,7 @@ class ModuleHandler
 	#initMainBtn() {
     	this.$btnMain.on('click', event => {       // on click update entry or insert a new one
 	        event.preventDefault();
-			if (event.target.textContent === ModuleHandler.#MAIN_UPDATE) 
+			if (event.target.textContent === MAIN_UPDATE) 
 				this.#update();
 			else 
 				this.#insert();
@@ -93,7 +94,7 @@ class ModuleHandler
 	}
 
 	select(event) { 
-		if (this.#insertMode) {       // if no update is already in progress, select entry
+		if (this.insertMode) {       // if no update is already in progress, select entry
 			event.preventDefault();
 			let index = TableUtil.indexOfRow(event);
 
@@ -123,7 +124,7 @@ class ModuleHandler
 	}
 
     remove(event) {
-		if (this.#insertMode) {       // if no update is in progress, remove entry
+		if (this.insertMode) {       // if no update is in progress, remove entry
 			event.preventDefault();
 			let index = TableUtil.indexOfRow(event);
 
@@ -146,18 +147,18 @@ class ModuleHandler
 
     #toInsertMode() {
 		this.$legend.html(this.FORM_LEGEND + this.INSERT_LEGEND);
-		this.$btnAux.html(ModuleHandler.#AUX_CLEAN);
-		this.$btnMain.html(ModuleHandler.#MAIN_INSERT);
+		this.$btnAux.html(AUX_CLEAN);
+		this.$btnMain.html(MAIN_INSERT);
 	}
 
 	#toUpdateMode() {
-		this.$legend.html(this.FORM_LEGEND + ModuleHandler.#EDIT_LEGEND);
-		this.$btnAux.html(ModuleHandler.#AUX_CANCEL);
-		this.$btnMain.html(ModuleHandler.#MAIN_UPDATE);
+		this.$legend.html(this.FORM_LEGEND + EDIT_LEGEND);
+		this.$btnAux.html(AUX_CANCEL);
+		this.$btnMain.html(MAIN_UPDATE);
 	}
 
     exitEditMode() {       // while updating an entry, if the user moves to another tab, trigger cancel buton
-		if (this.#insertMode == false)
+		if (this.insertMode == false)
 			this.$btnAux.trigger('click');
 	}
 
@@ -166,21 +167,21 @@ class ModuleHandler
     
 	disableLinks() {
 		TableUtil.disableLinks(this.$tableBody);
-		this.#insertMode = false;
+		this.insertMode = false;
 	}
 
 	enableLinks() {
 		TableUtil.enableLinks(this.$tableBody);
-		this.#insertMode = true;
+		this.insertMode = true;
 	}
 
     moveUp(event) {
-		if (this.#insertMode) 
+		if (this.insertMode) 
 			TableUtil.moveRowUp(this.$tableBody, event);
 	}
 
     moveDown(event) {
-		if (this.#insertMode)
+		if (this.insertMode)
 			TableUtil.moveRowDown(this.$tableBody, event);
 	}
 
