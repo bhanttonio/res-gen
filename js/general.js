@@ -91,6 +91,7 @@ class EducationHandler extends ModuleHandler
 
         // aux fields
         this.formLegend  = 'Escolaridad';
+        this.INSERT_LEGEND = ' &lsqb;Nueva&rsqb;';
         this.rowType     = RowType.REDUCED;
         this.handlerName = 'educationHandler';
     }
@@ -144,6 +145,7 @@ class CourseHandler extends ModuleHandler
 
         // aux fields
         this.formLegend  = 'Curso';
+        this.INSERT_LEGEND = ' &lsqb;Nuevo&rsqb;';
         this.rowType     = RowType.REDUCED;
         this.handlerName = 'courseHandler';
     }
@@ -200,6 +202,7 @@ class LanguageHandler extends ModuleHandler
 
         // aux fields
         this.formLegend  = 'Idioma';
+        this.INSERT_LEGEND = ' &lsqb;Nuevo&rsqb;';
         this.rowType     = RowType.REDUCED;
         this.handlerName = 'languageHandler';
     }
@@ -250,6 +253,7 @@ class SkillHandler extends ModuleHandler
 
         // aux fields
         this.formLegend  = 'Conocimiento';
+        this.INSERT_LEGEND = ' &lsqb;Nuevo&rsqb;';
         this.rowType     = RowType.REDUCED;
         this.handlerName = 'skillHandler';
     }
@@ -294,6 +298,7 @@ class SectorHandler extends ModuleHandler
 
         // aux fields
         this.formLegend  = 'Sector';
+        this.INSERT_LEGEND = ' &lsqb;Nuevo&rsqb;';
         this.rowType     = RowType.REDUCED;
         this.handlerName = 'sectorHandler';
     }

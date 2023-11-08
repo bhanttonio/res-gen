@@ -14,6 +14,7 @@ class ModuleHandler
     
 	// AUX FIELDS
     formLegend;
+	INSERT_LEGEND;
     refColumn = 0;        // used to confirm row deletion (by default is the 1st col in table)
 	rowType;
     handlerName;
@@ -144,7 +145,7 @@ class ModuleHandler
     // FORM MODE METHODS
 
     #toInsertMode() {
-		this.$legend.html(this.formLegend);
+		this.$legend.html(this.formLegend + this.INSERT_LEGEND);
 		this.$btnAux.html(ModuleHandler.#AUX_CLEAN);
 		this.$btnMain.html(ModuleHandler.#MAIN_INSERT);
 	}

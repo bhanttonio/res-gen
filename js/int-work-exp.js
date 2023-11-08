@@ -22,7 +22,8 @@ class IweTaskHandler extends ModuleHandler
         this.$tableBody = $('table#tableIweTask tbody');
 
         // aux fields
-        this.formLegend  = 'Descripci&oacute;n';        
+        this.formLegend  = 'Actividad';
+        this.INSERT_LEGEND = ' &lsqb;Nueva&rsqb;';
         this.rowType     = RowType.REDUCED;
         this.handlerName = 'iweTaskHandler';
     }
@@ -65,7 +66,8 @@ class IweToolHandler extends ModuleHandler
         this.$tableBody = $('table#tableIweTool tbody');
 
         // aux fields
-        this.formLegend  = 'Descripci&oacute;n';        
+        this.formLegend  = 'Entorno';
+        this.INSERT_LEGEND = ' &lsqb;Nuevo&rsqb;';
         this.rowType     = RowType.REDUCED;
         this.handlerName = 'iweToolHandler';
     }
