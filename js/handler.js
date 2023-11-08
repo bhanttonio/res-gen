@@ -38,9 +38,9 @@ class ModuleHandler
 		this.initRefs();		
 		console.log(`\t ${this.HANDLER_NAME}`);
 
-		this.#initCharCounters();
-		this.#initAuxBtn();
-		this.#initMainBtn();
+		this.initCharCounters();
+		this.initAuxBtn();
+		this.initMainBtn();
 	}
     
 
@@ -50,15 +50,15 @@ class ModuleHandler
 		throw new Error('Abstract method must be implemented!');
 	}
 
-	#initCharCounters() {
+	initCharCounters() {
 		FormUtil.initCharCounters(this.elForm);
 	}
 
-	#initAuxBtn() {
+	initAuxBtn() {
     	this.$btnAux.on('click', event => {       // on click cancel update or just clean form (in insert mode)
         	event.preventDefault();
 			if (event.target.textContent === AUX_CANCEL) {
-				this.#toInsertMode();
+				this.toInsertMode();
 				this.enableLinks();
 			}
 			FormUtil.reset(this.elForm);
@@ -66,13 +66,13 @@ class ModuleHandler
     	});
     }
 
-	#initMainBtn() {
+	initMainBtn() {
     	this.$btnMain.on('click', event => {       // on click update entry or insert a new one
 	        event.preventDefault();
 			if (event.target.textContent === MAIN_UPDATE) 
-				this.#update();
+				this.update();
 			else 
-				this.#insert();
+				this.insert();
 			event.target.blur();
 	    });
     }
@@ -80,7 +80,7 @@ class ModuleHandler
 
     // CRUD OPERATIONS
 
-	#insert() {
+	insert() {
 		if (this.isValidForm()) {
 			let tdsHtml = TableUtil.formRowContent(this.fields, this.HANDLER_NAME, this.ROW_TYPE);
 	        let newRow = `<tr>${tdsHtml}</tr>`;
@@ -98,7 +98,7 @@ class ModuleHandler
 			event.preventDefault();
 			let index = TableUtil.indexOfRow(event);
 
-			this.#toUpdateMode();
+			this.toUpdateMode();
 			let $tds = this.$tableBody.children().eq(index).children();
 			
 			FormUtil.fill(this.fields, $tds);
@@ -109,14 +109,14 @@ class ModuleHandler
 		}
 	}
 
-    #update() {
+    update() {
 		let index = this.elIndex.value;
 		if (this.isValidForm()) {
 			let updatedRow = TableUtil.formRowContent(this.fields, this.HANDLER_NAME, this.ROW_TYPE);
 			this.$tableBody.children().eq(index).html(updatedRow);
 
 			FormUtil.reset(this.elForm);
-			this.#toInsertMode();
+			this.toInsertMode();
 			this.enableLinks();
 
 			console.log(`[${this.HANDLER_NAME}] row ${index} updated!`);
@@ -145,13 +145,13 @@ class ModuleHandler
 
     // FORM MODE METHODS
 
-    #toInsertMode() {
+    toInsertMode() {
 		this.$legend.html(this.FORM_LEGEND + this.INSERT_LEGEND);
 		this.$btnAux.html(AUX_CLEAN);
 		this.$btnMain.html(MAIN_INSERT);
 	}
 
-	#toUpdateMode() {
+	toUpdateMode() {
 		this.$legend.html(this.FORM_LEGEND + EDIT_LEGEND);
 		this.$btnAux.html(AUX_CANCEL);
 		this.$btnMain.html(MAIN_UPDATE);
