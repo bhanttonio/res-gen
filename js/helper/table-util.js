@@ -71,7 +71,7 @@ class TableUtil
     }
 
 
-    static obtainRowHtml(fields, handlerName) {
+    static formTdsHtml(fields, handlerName) {
         let rowStr = '';
         fields.forEach(element => {
             rowStr += `<td>${element.value}</td>\n`;

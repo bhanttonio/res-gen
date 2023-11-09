@@ -81,7 +81,7 @@ class ModuleHandler
 
 	insert() {
 		if (this.isValidForm()) {
-			let tdsHtml = TableUtil.obtainRowHtml(this.fields, this.HANDLER_NAME);
+			let tdsHtml = TableUtil.formTdsHtml(this.fields, this.HANDLER_NAME);
 	        let newRow = `<tr>${tdsHtml}</tr>`;
 
 	        this.$tableBody.append(newRow);
@@ -111,8 +111,8 @@ class ModuleHandler
     update() {
 		let index = this.elIndex.value;
 		if (this.isValidForm()) {
-			let updatedRow = TableUtil.obtainRowHtml(this.fields, this.HANDLER_NAME);
-			this.$tableBody.children().eq(index).html(updatedRow);
+			let updatedTds = TableUtil.formTdsHtml(this.fields, this.HANDLER_NAME);
+			this.$tableBody.children().eq(index).html(updatedTds);
 
 			this.resetForm();
 			this.toInsertMode();
