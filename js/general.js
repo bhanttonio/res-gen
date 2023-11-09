@@ -92,7 +92,6 @@ class EducationHandler extends ModuleHandler
         // aux values
         this.FORM_LEGEND  = 'Escolaridad';
         this.INSERT_LEGEND = ' &lsqb;Nueva&rsqb;';
-        this.ROW_TYPE     = RowType.REDUCED;
         this.HANDLER_NAME = 'educationHandler';
     }
 
@@ -146,7 +145,6 @@ class CourseHandler extends ModuleHandler
         // aux values
         this.FORM_LEGEND  = 'Curso';
         this.INSERT_LEGEND = ' &lsqb;Nuevo&rsqb;';
-        this.ROW_TYPE     = RowType.REDUCED;
         this.HANDLER_NAME = 'courseHandler';
     }
 
@@ -203,7 +201,6 @@ class LanguageHandler extends ModuleHandler
         // aux values
         this.FORM_LEGEND  = 'Idioma';
         this.INSERT_LEGEND = ' &lsqb;Nuevo&rsqb;';
-        this.ROW_TYPE     = RowType.REDUCED;
         this.HANDLER_NAME = 'languageHandler';
     }
 
@@ -254,7 +251,6 @@ class SkillHandler extends ModuleHandler
         // aux values
         this.FORM_LEGEND  = 'Conocimiento';
         this.INSERT_LEGEND = ' &lsqb;Nuevo&rsqb;';
-        this.ROW_TYPE     = RowType.REDUCED;
         this.HANDLER_NAME = 'skillHandler';
     }
 
@@ -299,7 +295,6 @@ class SectorHandler extends ModuleHandler
         // aux values
         this.FORM_LEGEND  = 'Sector';
         this.INSERT_LEGEND = ' &lsqb;Nuevo&rsqb;';
-        this.ROW_TYPE     = RowType.REDUCED;
         this.HANDLER_NAME = 'sectorHandler';
     }
 

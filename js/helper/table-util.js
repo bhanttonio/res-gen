@@ -4,12 +4,6 @@ const ROWS_SELECTOR = 'tr td a';
 const CSS_CLASS_LINK_ENABLED  = 'resgen-enabled';
 const CSS_CLASS_LINK_DISABLED = 'resgen-disabled';
 
-const RowType = {
-	REDUCED: 1, 
-	NORMAL: 2, 
-	EXTENDED: 3
-}
-
 
 class TableUtil
 {
@@ -77,36 +71,20 @@ class TableUtil
     }
 
 
-    static formRowContent(fields, handlerName, rowType) {
+    static obtainRowHtml(fields, handlerName) {
         let rowStr = '';
         fields.forEach(element => {
             rowStr += `<td>${element.value}</td>\n`;
         });
 
-        switch(rowType) {
-            case RowType.REDUCED: 
-                rowStr += TableUtil.#reducedLinkRows(handlerName);
-                break;
-            default: 
-                rowStr += TableUtil.#linkRows(handlerName);
-        }
+        rowStr += 
+        `<td><a href="#" onclick="${handlerName}.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+         <td><a href="#" onclick="${handlerName}.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+         <td><a href="#" onclick="${handlerName}.select(event)" title="editar">&#x1F589;</a></td>
+         <td><a href="#" onclick="${handlerName}.remove(event)" title="borrar">&#x2327;</a></td>`;
+
         return rowStr;
     }
-
-    static #linkRows(handlerName) {
-        return `<td><a href="#" onclick="${handlerName}.moveUp(event)">Subir</a></td>
-                <td><a href="#" onclick="${handlerName}.moveDown(event)">Bajar</a></td>
-                <td><a href="#" onclick="${handlerName}.select(event)">Editar</a></td>
-                <td><a href="#" onclick="${handlerName}.remove(event)">Borrar</a></td>`;
-    }
-
-    static #reducedLinkRows(handlerName) {
-        return `<td><a href="#" onclick="${handlerName}.moveUp(event)" title="subir">&bigtriangleup;</a></td>
-                <td><a href="#" onclick="${handlerName}.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
-                <td><a href="#" onclick="${handlerName}.select(event)" title="editar">&#x1F589;</a></td>
-                <td><a href="#" onclick="${handlerName}.remove(event)" title="borrar">&#x2327;</a></td>`;
-    }
-
 
     static obtainRowData($tds) {
         let values = [];

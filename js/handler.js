@@ -24,7 +24,6 @@ class ModuleHandler
     FORM_LEGEND;
 	INSERT_LEGEND;
     REF_COLUMN = 0;          // used to confirm row deletion (by default is the 1st col in table)
-	ROW_TYPE;
     HANDLER_NAME;
 
 	// AUX FIELDS
@@ -82,7 +81,7 @@ class ModuleHandler
 
 	insert() {
 		if (this.isValidForm()) {
-			let tdsHtml = TableUtil.formRowContent(this.fields, this.HANDLER_NAME, this.ROW_TYPE);
+			let tdsHtml = TableUtil.obtainRowHtml(this.fields, this.HANDLER_NAME);
 	        let newRow = `<tr>${tdsHtml}</tr>`;
 
 	        this.$tableBody.append(newRow);
@@ -112,7 +111,7 @@ class ModuleHandler
     update() {
 		let index = this.elIndex.value;
 		if (this.isValidForm()) {
-			let updatedRow = TableUtil.formRowContent(this.fields, this.HANDLER_NAME, this.ROW_TYPE);
+			let updatedRow = TableUtil.obtainRowHtml(this.fields, this.HANDLER_NAME);
 			this.$tableBody.children().eq(index).html(updatedRow);
 
 			this.resetForm();

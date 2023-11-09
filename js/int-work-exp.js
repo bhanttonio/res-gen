@@ -25,7 +25,6 @@ class IweTaskHandler extends ModuleHandler
         // aux values
         this.FORM_LEGEND  = 'Actividad';
         this.INSERT_LEGEND = ' &lsqb;Nueva&rsqb;';
-        this.ROW_TYPE     = RowType.REDUCED;
         this.HANDLER_NAME = 'iweHandler.taskHandler';
     }
 
@@ -70,7 +69,6 @@ class IweToolHandler extends ModuleHandler
         // aux values
         this.FORM_LEGEND  = 'Entorno';
         this.INSERT_LEGEND = ' &lsqb;Nuevo&rsqb;';
-        this.ROW_TYPE     = RowType.REDUCED;
         this.HANDLER_NAME = 'iweHandler.toolHandler';
     }
 
@@ -121,7 +119,6 @@ class IweHandler extends MultipleModuleHandler
         // aux values
         this.FORM_LEGEND = 'Experiencia Interna';
         this.INSERT_LEGEND = ' &lsqb;Nueva&rsqb;';
-        this.ROW_TYPE = RowType.REDUCED;
         this.HANDLER_NAME = 'iweHandler';
     }
 

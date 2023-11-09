@@ -1,10 +1,11 @@
 
 class MultipleModuleHandler extends ModuleHandler
 {
-	
+
     // NESTED HANDLERS
     taskHandler = new IweTaskHandler();
     toolHandler = new IweToolHandler();
+
 
     constructor() {
         super();
@@ -41,6 +42,7 @@ class MultipleModuleHandler extends ModuleHandler
     	});
     }
 
+
 	/*
 	initMainBtn() {
     	this.$btnMain.on('click', event => { 
@@ -58,7 +60,7 @@ class MultipleModuleHandler extends ModuleHandler
 
 	insert() {
 		if (this.isValidForm()) {
-			let tdsHtml = TableUtil.formRowContent(this.fields, this.HANDLER_NAME, this.ROW_TYPE);
+			let tdsHtml = TableUtil.obtainRowHtml(this.fields, this.HANDLER_NAME);
 	        let newRow = `<tr>${tdsHtml}</tr>`;
 
 	        this.$tableBody.append(newRow);
@@ -88,7 +90,7 @@ class MultipleModuleHandler extends ModuleHandler
     update() {
 		let index = this.elIndex.value;
 		if (this.isValidForm()) {
-			let updatedRow = TableUtil.formRowContent(this.fields, this.HANDLER_NAME, this.ROW_TYPE);
+			let updatedRow = TableUtil.obtainRowHtml(this.fields, this.HANDLER_NAME);
 			this.$tableBody.children().eq(index).html(updatedRow);
 
 			FormUtil.reset(this.elForm);
