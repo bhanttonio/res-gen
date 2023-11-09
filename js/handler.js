@@ -61,7 +61,7 @@ class ModuleHandler
 				this.toInsertMode();
 				this.enableLinks();
 			}
-			FormUtil.reset(this.elForm);
+			this.resetForm();
 			event.target.blur();
     	});
     }
@@ -86,7 +86,7 @@ class ModuleHandler
 	        let newRow = `<tr>${tdsHtml}</tr>`;
 
 	        this.$tableBody.append(newRow);
-			FormUtil.reset(this.elForm);       // if everything was ok, clean form
+			this.resetForm();                 // if everything was ok, clean form
 
 			let index = this.$tableBody.children().length - 1;
 			console.log(`[${this.HANDLER_NAME}] row ${index} inserted!`);
@@ -115,7 +115,7 @@ class ModuleHandler
 			let updatedRow = TableUtil.formRowContent(this.fields, this.HANDLER_NAME, this.ROW_TYPE);
 			this.$tableBody.children().eq(index).html(updatedRow);
 
-			FormUtil.reset(this.elForm);
+			this.resetForm();
 			this.toInsertMode();
 			this.enableLinks();
 
@@ -140,6 +140,10 @@ class ModuleHandler
 
     isValidForm() {
         throw new Error('Abstract method must be implemented!');
+	}
+
+	resetForm() {
+		FormUtil.reset(this.elForm);
 	}
 
 
@@ -200,6 +204,14 @@ class ModuleHandler
 
 	getObject(data) {
 		throw new Error('Abstract method must be implemented!');
+	}
+
+	isTableFilled() {
+		return this.$tableBody.children().length > 0;
+	}
+
+	deleteTableRows() {
+		this.$tableBody.children().remove();
 	}
 
 }//
