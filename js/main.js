@@ -6,6 +6,7 @@ var languageHandler;
 var skillHandler;
 var sectorHandler;
 
+var iweHandler;
 var iweTaskHandler;
 var iweToolHandler;
 
@@ -21,6 +22,7 @@ $(function() {
     skillHandler = new SkillHandler();
     sectorHandler = new SectorHandler();
 
+    iweHandler = new IweHandler();
     iweTaskHandler = new IweTaskHandler();
     iweToolHandler = new IweToolHandler();
 
@@ -105,6 +107,7 @@ class MainHandler
             }
 
             if (href != '#int-work-exp') {
+                iweHandler.exitEditMode();
                 iweTaskHandler.exitEditMode();
                 iweToolHandler.exitEditMode();
                 // console.log( JSON.stringify(iweToolHandler.getObjectList(), null, 2) );

@@ -73,3 +73,13 @@ class Tool {
 	}
 }
 
+
+class InternalWorkExperience {
+	constructor(account, role, project, period) {
+		this.account = account;
+		this.role = role; 
+		this.project = project;
+		this.period = period;
+	}
+}
+
