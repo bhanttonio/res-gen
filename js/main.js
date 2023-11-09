@@ -5,10 +5,7 @@ var courseHandler;
 var languageHandler;
 var skillHandler;
 var sectorHandler;
-
 var iweHandler;
-var iweTaskHandler;
-var iweToolHandler;
 
 
 $(function() {
@@ -21,13 +18,9 @@ $(function() {
     languageHandler = new LanguageHandler();
     skillHandler = new SkillHandler();
     sectorHandler = new SectorHandler();
-
     iweHandler = new IweHandler();
-    iweTaskHandler = new IweTaskHandler();
-    iweToolHandler = new IweToolHandler();
 
     new MainHandler();
-
     console.log('finished');
 });
 
@@ -108,9 +101,9 @@ class MainHandler
 
             if (href != '#int-work-exp') {
                 iweHandler.exitEditMode();
-                iweTaskHandler.exitEditMode();
-                iweToolHandler.exitEditMode();
-                // console.log( JSON.stringify(iweToolHandler.getObjectList(), null, 2) );
+                iweHandler.taskHandler.exitEditMode();
+                iweHandler.toolHandler.exitEditMode();
+                // console.log( JSON.stringify(iweHandler.getObject(), null, 2) );
             }
 		});
     }
