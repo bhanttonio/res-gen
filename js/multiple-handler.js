@@ -1,9 +1,10 @@
 
 class MultipleModuleHandler extends ModuleHandler
 {
+	
     // NESTED HANDLERS
-    taskHandler;
-    toolHandler;
+    taskHandler = new IweTaskHandler();
+    toolHandler = new IweToolHandler();
 
     constructor() {
         super();
@@ -15,15 +16,32 @@ class MultipleModuleHandler extends ModuleHandler
 	initAuxBtn() {
     	this.$btnAux.on('click', event => { 
         	event.preventDefault();
+
 			if (event.target.textContent === AUX_CANCEL) {
 				this.toInsertMode();
 				this.enableLinks();
+
+				this.taskHandler.deleteTableRows();
+				this.toolHandler.deleteTableRows();
 			}
-			FormUtil.reset(this.elForm);
+			else {
+				if (this.taskHandler.isTableFilled() || this.toolHandler.isTableFilled()) {
+					if (confirm(`\xBFEliminar tambi\xE9n contenido de tablas\x3F`)) {
+						this.taskHandler.deleteTableRows();
+						this.toolHandler.deleteTableRows();
+					}
+				}
+			}
+
+			this.resetForm();
+			this.taskHandler.resetForm();
+			this.toolHandler.resetForm();
+
 			event.target.blur();
     	});
     }
 
+	/*
 	initMainBtn() {
     	this.$btnMain.on('click', event => { 
 	        event.preventDefault();
@@ -159,5 +177,5 @@ class MultipleModuleHandler extends ModuleHandler
 	getObject(data) {
 		throw new Error('Abstract method must be implemented!');
 	}
-
+	*/
 }//
