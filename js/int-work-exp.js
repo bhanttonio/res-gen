@@ -93,7 +93,9 @@ class IweHandler extends MultipleModuleHandler
     static #ROLE = 1;
     static #PROJECT = 2;
     static #PERIOD  = 3;
-    static #INDEX = 4;
+    static #TASKS = 4;
+    static #TOOLS = 5;
+    static #INDEX = 6;
 
     constructor() {
         super();
@@ -135,6 +137,8 @@ class IweHandler extends MultipleModuleHandler
             data[IweHandler.#ROLE], 
             data[IweHandler.#PROJECT], 
             data[IweHandler.#PERIOD], 
+            data[IweHandler.#TASKS], 
+            data[IweHandler.#TOOLS], 
             data[IweHandler.#INDEX]
         );
     }

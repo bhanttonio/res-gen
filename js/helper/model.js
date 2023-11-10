@@ -75,11 +75,14 @@ class Tool {
 
 
 class InternalWorkExperience {
-	constructor(account, role, project, period) {
+	constructor(account, role, project, period, tasks, tools, index) {
 		this.account = account;
 		this.role = role; 
 		this.project = project;
 		this.period = period;
+		this.tasks = tasks;
+		this.tools = tools;
+		this.index = index;
 	}
 }
 

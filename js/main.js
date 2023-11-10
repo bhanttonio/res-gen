@@ -103,7 +103,7 @@ class MainHandler
                 iweHandler.exitEditMode();
                 iweHandler.taskHandler.exitEditMode();
                 iweHandler.toolHandler.exitEditMode();
-                // console.log( JSON.stringify(iweHandler.getObject(), null, 2) );
+                // console.log( JSON.stringify(iweHandler.getObjectList(), null, 2) );
             }
 		});
     }
@@ -123,7 +123,7 @@ class MainHandler
             }
         } 
         catch(err) {
-            console.warn('Unable to read \'tab\' param from the URL ');
+            console.warn('Unable to read \'tab\' param from the URL');
         }
     }
 
