@@ -2,6 +2,7 @@
 class TableComponent
 {
 
+    static OPTION_COLUMNS = 4;
     static LINKS_SELECTOR = 'tr td a';
     static LINKS_ENABLED_CLASS = 'resgen-enabled';
     static LINKS_DISABLED_CLASS = 'resgen-disabled';
@@ -9,36 +10,23 @@ class TableComponent
 
     $tableBody;
     handlerName;
-    refColumn = 0;       // used to confirm row deletion (by default is the 1st col in the table)
-    optionsNumber = 4;
-
-    objectType;
-    propertyNames;
-
-    objectArray = [];
+    tableData;           // handles the table data as an array of objects
 
 
     constructor(config) {
         this.$tableBody = config.$tableBody;
         this.handlerName = config.handlerName;
-
-        if (config.refColumn) 
-            this.refColumn = config.refColumn;
-        if (config.optionsNumber) 
-            this.optionsNumber = config.optionsNumber;
-
-        this.objectType = config.objectType;
-        this.propertyNames = Object.getOwnPropertyNames(this.objectType);
+        this.tableData = new TableData(config);
     }
 
 
-    // INSERT ROW
+    // INSERT ROW OP
 
     insertRow(fieldArray) {
         let rowHtml = this.fieldRowHtml(fieldArray);
         this.$tableBody.append(rowHtml);
 
-        this.insertObject(fieldArray);
+        this.tableData.insertObject(fieldArray);
     }
 
     fieldRowHtml(fieldArray) {
@@ -66,58 +54,60 @@ class TableComponent
     }
 
 
-    // SELECT ROW
+    // SELECT ROW OP
 
     rowIndexFrom(event) {
         return $(event.target).parent().parent().index();
     }
 
-    $tds(rowIndex) {
+    $tds(rowIndex, trailingColumnsToDiscard = 0) 
+    {
         let $tds = this.$tableBody.children().eq(rowIndex).children();
-        let dataTdsNumber = $tds.length - this.optionsNumber;
-        return $tds.slice(0, dataTdsNumber);
+        let columnsToTake = $tds.length - trailingColumnsToDiscard - TableComponent.OPTION_COLUMNS;
+
+        return $tds.slice(0, columnsToTake);
     }
 
     disableOptions() {
-        let $links = this.$tableBody.find(TableComponent.LINKS_SELECTOR);
-		$links.removeClass(TableComponent.LINKS_ENABLED_CLASS);
-		$links.addClass(TableComponent.LINKS_DISABLED_CLASS);
+        let $links = this.$tableBody.find( TableComponent.LINKS_SELECTOR );
+		$links.removeClass( TableComponent.LINKS_ENABLED_CLASS );
+		$links.addClass( TableComponent.LINKS_DISABLED_CLASS );
 		$links.removeAttr('href');
     }
 
 
-    // UPDATE ROW
+    // UPDATE ROW OP
 
-    updateRow(fieldArray, handlerName, rowIndex) {
-        let tdsHtml = this.tdsHtml(fieldArray);
+    updateRow(fieldArray, rowIndex) {
+        let tdsHtml = this.fieldTdsHtml(fieldArray) + this.linkTdsHtml();
         this.$tableBody.children().eq(rowIndex).html(tdsHtml);
 
-        this.updateObject(fieldArray, rowIndex);
+        this.tableData.updateObject(fieldArray, rowIndex);
     }
 
     enableOptions() {
-        let $links = this.$tableBody.find(TableComponent.LINKS_SELECTOR);
-		$links.removeClass(TableComponent.LINKS_DISABLED_CLASS);
-		$links.addClass(TableComponent.LINKS_ENABLED_CLASS);
+        let $links = this.$tableBody.find( TableComponent.LINKS_SELECTOR );
+		$links.removeClass( TableComponent.LINKS_DISABLED_CLASS );
+		$links.addClass( TableComponent.LINKS_ENABLED_CLASS );
 		$links.attr('href', '#');
     }
 
 
-    // REMOVE ROW
+    // REMOVE ROW OP
 
-    referenceName(rowIndex) {
+    referenceName(rowIndex, refColumn = 0) {
         let $row = this.$tableBody.children().eq(rowIndex);
-        return $row.children().eq(this.refColumn).text();
+        return $row.children().eq( refColumn ).text();
     }
 
     deleteRow(rowIndex) {
         this.$tableBody.children().eq(rowIndex).remove();
 
-        this.removeObject(rowIndex);
+        this.tableData.deleteObject(rowIndex);
     }
 
 
-    // MOVE ROW
+    // MOVE ROW OPS
 
     moveRowUp(event) {
         let index = this.rowIndexFrom(event);
@@ -132,7 +122,7 @@ class TableComponent
             this.swapTds($prevTds, $currTds);
             console.log('\u2191 shift up');
 
-            this.swapObjects(index - 1, index);
+            this.tableData.swapObjects(index - 1, index);
         }
     }
 
@@ -149,12 +139,12 @@ class TableComponent
             this.swapTds($currTds, $nextTds);
             console.log('\u2193 shift down');
 
-            this.swapObjects(index, index + 1);
+            this.tableData.swapObjects(index, index + 1);
         }
     }
 
     swapTds($tds1, $tds2) { 
-        for (let i = 0; i < $tds1.length - this.optionSize; i++) {
+        for (let i = 0; i < $tds1.length - TableComponent.OPTION_COLUMNS; i++) {
             let tmp = $tds1.eq(i).text();
             $tds1.eq(i).text( $tds2.eq(i).text() );
             $tds2.eq(i).text( tmp );
@@ -162,14 +152,49 @@ class TableComponent
     }
 
     
-    // DATA
+    // HELPER OPS
+    
+    hasRows() {
+        return this.$tableBody.children().length > 0;
+    }
+
+    deleteRows() {
+        this.$tableBody.children().remove();
+    }
+
+
+    // DATA OPS
+
+    objectArray() {
+        return this.tableData.objectArray();
+    }
+
+    loadObjectArray(objectArray) {
+        this.tableData.loadObjectArray(objectArray, this.linkTdsHtml());
+    }
+
+}//
+
+
+
+class TableData 
+{
+    objectType;
+    propertyNames;
+
+    objectArray = [];
+
+    constructor(config) {
+        this.objectType = config.objectType;
+        this.propertyNames = Object.getOwnPropertyNames( this.objectType );
+    }
+
+    // CRUD OPS
 
     objectFrom(fieldArray) {
         let object = window[ this.objectType ];
-        for (let i = 0; i < this.propNames.length; i++) {
-            let propName = this.propNames[i];
-            object[propName] = fieldArray[i].value;
-        }
+        for (let i = 0; i < this.propNames.length; i++) 
+            object[ this.propNames[i] ] = fieldArray[i].value;
         return object;
     }
 
@@ -181,9 +206,11 @@ class TableComponent
         this.objectArray[index] = this.objectFrom(fieldArray);
     }
 
-    removeObject(index) {
+    deleteObject(index) {
         this.objectArray.splice(index, 1);
     }
+
+    // MOVE OBJECT OPS
 
     swapObjects(index1, index2) {
         let tmp = this.objectArray[index1];
@@ -191,20 +218,22 @@ class TableComponent
         this.objectArray[index2] = tmp;
     }
 
-    getObjectArray() {
+    // INPUT/OUTPUT OPS
+
+    get objectArray() {
         return [...this.objectArray];
     }
 
-    loadObjectArray(objectArray) {
+    loadObjectArray(objectArray, linkTdsHtml) {
         let rowsHtml = '';
         objectArray.forEach( object => {
-            rowsHtml += this.propRowHtml(object);
+            rowsHtml += this.propRowHtml(object, linkTdsHtml);
         });
         this.$tableBody.html(rowsHtml);
     }
 
-    propRowHtml(object) {
-        let tdsHtml = this.propTdsHtml(object) + this.linkTdsHtml();
+    propRowHtml(object, linkTdsHtml) {
+        let tdsHtml = this.propTdsHtml(object) + linkTdsHtml;
         return `<tr>\n${tdsHtml}</tr>\n`;
     }
 
@@ -216,19 +245,5 @@ class TableComponent
         return tdsHtml;
     }
 
+}// 
 
-    // HELPER
-
-    get optionSize() {
-        return this.optionSize;
-    }
-    
-    hasRows() {
-        return this.$tableBody.children().length > 0;
-    }
-
-    deleteRows() {
-        this.$tableBody.children().remove();
-    }
-
-}//
