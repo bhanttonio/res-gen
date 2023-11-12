@@ -1,71 +1,65 @@
 
-class TableComponent
+class Table
 {
-
     static OPTION_COLUMNS = 4;
     static LINKS_SELECTOR = 'tr td a';
     static LINKS_ENABLED_CLASS = 'resgen-enabled';
     static LINKS_DISABLED_CLASS = 'resgen-disabled';
 
-
     $tableBody;
-    handlerName;
-    tableData;           // handles the table data as an array of objects
-
+    handler;
+    tableData;
 
     constructor(config) {
         this.$tableBody = config.$tableBody;
-        this.handlerName = config.handlerName;
+        this.handler = config.handler;
         this.tableData = new TableData(config);
     }
 
-
     // INSERT ROW
 
-    insertRow(fieldArray) {
-        let rowHtml = this.fieldRowHtml(fieldArray);
-        this.$tableBody.append(rowHtml);
-
-        this.tableData.insertObject(fieldArray);
+    insert(values) {
+        this.$tableBody.append( this.rowHtml(values) );
+        this.tableData.insert(values);
     }
 
-    fieldRowHtml(fieldArray) {
-        let tdsHtml = this.fieldTdsHtml(fieldArray) + this.linkTdsHtml();
+    insertRow(values) {
+        this.$tableBody.append( this.rowHtml(values) );
+    }
+
+    rowHtml(values) {
+        let tdsHtml = this.valueTdsHtml(values) + this.linkTdsHtml();
         return `<tr>\n${tdsHtml}</tr>\n`;
     }
 
-    fieldTdsHtml(fieldArray) {
+    valueTdsHtml(values) {
         let tdsHtml = '';
-        fieldArray.forEach( field => {
-            tdsHtml += `\t<td>${field.value}</td>\n`;
+        values.forEach( value => {
+            tdsHtml += `\t<td>${value}</td>\n`;
         });
         return tdsHtml;
     }
 
     linkTdsHtml() {
-        return `\t<td><a href="#" onclick="${this.handlerName}.moveUp(event)" title="subir">&bigtriangleup;</a></td>\n` + 
-               `\t<td><a href="#" onclick="${this.handlerName}.moveDown(event)" title="bajar">&bigtriangledown;</a></td>\n` + 
-               `\t<td><a href="#" onclick="${this.handlerName}.select(event)" title="editar">&#x1F589;</a></td>\n` + 
-               `\t<td><a href="#" onclick="${this.handlerName}.remove(event)" title="borrar">&#x2327;</a></td>\n`;
+        return `\t<td><a href="#" onclick="${this.handler}.moveUp(event)" title="subir">&bigtriangleup;</a></td>\n` + 
+               `\t<td><a href="#" onclick="${this.handler}.moveDown(event)" title="bajar">&bigtriangledown;</a></td>\n` + 
+               `\t<td><a href="#" onclick="${this.handler}.select(event)" title="editar">&#x1F589;</a></td>\n` + 
+               `\t<td><a href="#" onclick="${this.handler}.remove(event)" title="borrar">&#x2327;</a></td>\n`;
     }
 
-    rowsNumber() {
+    size() {
         return this.$tableBody.children().length;
     }
 
-
     // SELECT ROW
 
-    rowIndexFrom(event) {
+    indexFrom(event) {
         return $(event.target).parent().parent().index();
     }
 
-    $tds(rowIndex, trailingColumnsToDiscard = 0) 
-    {
-        let $tds = this.$tableBody.children().eq(rowIndex).children();
-        let columnsToTake = $tds.length - trailingColumnsToDiscard - TableComponent.OPTION_COLUMNS;
-
-        return $tds.slice(0, columnsToTake);
+    $tds(index, trailingColumnsToDiscard = 0) {
+        let $tds = this.$tableBody.children().eq(index).children();
+        return $tds.slice(0, $tds.length - trailingColumnsToDiscard - TableComponent.OPTION_COLUMNS);
     }
 
     disableOptions() {
@@ -75,14 +69,12 @@ class TableComponent
 		$links.removeAttr('href');
     }
 
-
     // UPDATE ROW
 
-    updateRow(fieldArray, rowIndex) {
-        let tdsHtml = this.fieldTdsHtml(fieldArray) + this.linkTdsHtml();
-        this.$tableBody.children().eq(rowIndex).html(tdsHtml);
-
-        this.tableData.updateObject(fieldArray, rowIndex);
+    update(values, index) {
+        let tdsHtml = this.valueTdsHtml(values) + this.linkTdsHtml();
+        this.$tableBody.children().eq(index).html(tdsHtml);
+        this.tableData.update(values, index);
     }
 
     enableOptions() {
@@ -92,43 +84,39 @@ class TableComponent
 		$links.attr('href', '#');
     }
 
-
     // REMOVE ROW
 
-    referenceName(rowIndex, refColumn = 0) {
-        let $row = this.$tableBody.children().eq(rowIndex);
-        return $row.children().eq( refColumn ).text();
+    referenceName(index, refColumn = 0) {
+        let $row = this.$tableBody.children().eq(index);
+        return $row.children().eq(refColumn).text();
     }
 
-    deleteRow(rowIndex) {
-        this.$tableBody.children().eq(rowIndex).remove();
-
-        this.tableData.deleteObject(rowIndex);
+    delete(index) {
+        this.$tableBody.children().eq(index).remove();
+        this.tableData.delete(index);
     }
-
 
     // MOVE ROW
 
-    moveRowUp(event) {
-        let index = this.rowIndexFrom(event);
+    moveUp(event) {
         let $rows = this.$tableBody.children();
+        let index = this.indexFrom(event);
         let firstIndex = $rows.filter(':first').index();
-
+        
         if ($rows.length > 1 && index > firstIndex) 
         {
             let $prevTds = $rows.eq(index - 1).children();
             let $currTds = $rows.eq(index).children();
             
             this.swapTds($prevTds, $currTds);
+            this.tableData.swap(index - 1, index);
             console.log('\u2191 shift up');
-
-            this.tableData.swapObjects(index - 1, index);
         }
     }
 
-    moveRowDown(event) {
-        let index = this.rowIndexFrom(event);
+    moveDown(event) {
         let $rows = this.$tableBody.children();
+        let index = this.indexFrom(event);
         let lastIndex = $rows.filter(':last').index();
 
         if ($rows.length > 1 && index < lastIndex) 
@@ -137,9 +125,8 @@ class TableComponent
             let $nextTds = $rows.eq(index + 1).children();
 
             this.swapTds($currTds, $nextTds);
+            this.tableData.swap(index, index + 1);
             console.log('\u2193 shift down');
-
-            this.tableData.swapObjects(index, index + 1);
         }
     }
 
@@ -150,7 +137,6 @@ class TableComponent
             $tds2.eq(i).text( tmp );
         }
     }
-
     
     // HELPER
     
@@ -162,15 +148,17 @@ class TableComponent
         this.$tableBody.children().remove();
     }
 
-
     // DATA
 
-    objectArray() {
-        return this.tableData.objectArray();
+    data() {
+        return this.tableData.data;
     }
 
-    loadObjectArray(objectArray) {
-        this.tableData.loadObjectArray(objectArray, this.linkTdsHtml());
+    load(data) {
+        data.forEach(object => {
+            this.insertRow( this.tableData.valuesFrom(object) );
+            this.tableData.insertObj(object);
+        });
     }
 
 }//
@@ -179,71 +167,51 @@ class TableComponent
 
 class TableData 
 {
-    objectType;
-    propertyNames;
-
-    objectArray = [];
+    object;
+    propNames;   // object property names
+    data = [];   // table data as an array of objects
 
     constructor(config) {
-        this.objectType = config.objectType;
-        this.propertyNames = Object.getOwnPropertyNames( this.objectType );
+        this.object = config.object;
+        this.propNames = Object.getOwnPropertyNames(config.object);
     }
 
-    // CRUD
-
-    objectFrom(fieldArray) {
-        let object = window[ this.objectType ];
-        for (let i = 0; i < this.propNames.length; i++) 
-            object[ this.propNames[i] ] = fieldArray[i].value;
-        return object;
+    insert(values) {
+        this.data.push( this.objectFrom(values) );
     }
 
-    insertObject(fieldArray) {
-        this.objectArray.push( this.objectFrom(fieldArray) );
+    insertObj(object) {
+        this.data.push(object);
     }
 
-    updateObject(fieldArray, index) {
-        this.objectArray[index] = this.objectFrom(fieldArray);
+    update(values, index) {
+        this.data[index] = this.objectFrom(values);
     }
 
-    deleteObject(index) {
-        this.objectArray.splice(index, 1);
+    delete(index) {
+        this.data.splice(index, 1);
     }
 
-    // MOVE OBJECT
-
-    swapObjects(index1, index2) {
-        let tmp = this.objectArray[index1];
-        this.objectArray[index1] = this.objectArray[index2];
-        this.objectArray[index2] = tmp;
+    swap(index1, index2) {
+        let tmp = this.data[index1];
+        this.data[index1] = this.data[index2];
+        this.data[index2] = tmp;
     }
 
-    // INPUT/OUTPUT
-
-    get objectArray() {
-        return [...this.objectArray];
-    }
-
-    loadObjectArray(objectArray, linkTdsHtml) {
-        let rowsHtml = '';
-        objectArray.forEach( object => {
-            rowsHtml += this.propRowHtml(object, linkTdsHtml);
+    objectFrom(values) {
+        let newObj = JSON.parse(JSON.stringify(this.instance));
+        this.propNames.forEach( propName => {
+            newObj[propName] = values.shift();
         });
-        this.$tableBody.html(rowsHtml);
-        this.objectArray = objectArray;
+        return newObj;
     }
 
-    propRowHtml(object, linkTdsHtml) {
-        let tdsHtml = this.propTdsHtml(object) + linkTdsHtml;
-        return `<tr>\n${tdsHtml}</tr>\n`;
-    }
-
-    propTdsHtml(object) {
-        let tdsHtml = '';
-        this.propNames.forEach(propName => {
-            tdsHtml += `\t<td>${object[propName]}</td>\n`;
+    valuesFrom(object) {
+        let values = [];
+        this.propNames.forEach( propName => {
+            values.push( object[propName] );
         });
-        return tdsHtml;
+        return values;
     }
 
 }// 
