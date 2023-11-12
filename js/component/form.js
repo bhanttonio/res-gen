@@ -12,8 +12,7 @@ class FormComponent
     elIndex;
     fieldArray;
     formLegend;
-    insertLegend = '&nbsp;&lsqb;Nuevo&rsqb;';
-    editLegend = '&nbsp;&lsqb;Edici&oacute;n&rsqb;';
+    insertLegend = 'Nuevo';
 
     $legend;
 	$btnAux;
@@ -25,11 +24,7 @@ class FormComponent
         this.elIndex = config.elIndex;
         this.fieldArray = config.fieldArray;
         this.formLegend = config.formLegend;
-        
-        if (config.insertLegend)
-            this.insertLegend = config.insertLegend;
-        if (config.editLegend)
-            this.editLegend = config.editLegend;
+        if (config.insertLegend) this.insertLegend = config.insertLegend;
 
         this.$legend = config.$legend;
         this.$btnAux = config.$btnAux;
@@ -46,7 +41,7 @@ class FormComponent
     }
 
     toInsertMode() {
-		this.$legend.html(this.formLegend + this.insertLegend);
+		this.$legend.html(this.formLegend + ` [${this.insertLegend}]`);
 		this.$btnAux.html(FormComponent.AUX_CLEAN);
 		this.$btnMain.html(FormComponent.MAIN_INSERT);
 	}
@@ -59,8 +54,8 @@ class FormComponent
 
     // SELECT ROW
 
-    toUpdateMode() {
-		this.$legend.html(this.formLegend + this.editLegend);
+    toUpdateMode(editLegend = 'Edici&oacute;n') {
+		this.$legend.html(this.formLegend + ` [${editLegend}]`);
 		this.$btnAux.html(FormComponent.AUX_CANCEL);
 		this.$btnMain.html(FormComponent.MAIN_UPDATE);
 	}

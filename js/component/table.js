@@ -20,7 +20,7 @@ class TableComponent
     }
 
 
-    // INSERT ROW OP
+    // INSERT ROW
 
     insertRow(fieldArray) {
         let rowHtml = this.fieldRowHtml(fieldArray);
@@ -54,7 +54,7 @@ class TableComponent
     }
 
 
-    // SELECT ROW OP
+    // SELECT ROW
 
     rowIndexFrom(event) {
         return $(event.target).parent().parent().index();
@@ -76,7 +76,7 @@ class TableComponent
     }
 
 
-    // UPDATE ROW OP
+    // UPDATE ROW
 
     updateRow(fieldArray, rowIndex) {
         let tdsHtml = this.fieldTdsHtml(fieldArray) + this.linkTdsHtml();
@@ -93,7 +93,7 @@ class TableComponent
     }
 
 
-    // REMOVE ROW OP
+    // REMOVE ROW
 
     referenceName(rowIndex, refColumn = 0) {
         let $row = this.$tableBody.children().eq(rowIndex);
@@ -107,7 +107,7 @@ class TableComponent
     }
 
 
-    // MOVE ROW OPS
+    // MOVE ROW
 
     moveRowUp(event) {
         let index = this.rowIndexFrom(event);
@@ -152,7 +152,7 @@ class TableComponent
     }
 
     
-    // HELPER OPS
+    // HELPER
     
     hasRows() {
         return this.$tableBody.children().length > 0;
@@ -163,7 +163,7 @@ class TableComponent
     }
 
 
-    // DATA OPS
+    // DATA
 
     objectArray() {
         return this.tableData.objectArray();
@@ -189,7 +189,7 @@ class TableData
         this.propertyNames = Object.getOwnPropertyNames( this.objectType );
     }
 
-    // CRUD OPS
+    // CRUD
 
     objectFrom(fieldArray) {
         let object = window[ this.objectType ];
@@ -210,7 +210,7 @@ class TableData
         this.objectArray.splice(index, 1);
     }
 
-    // MOVE OBJECT OPS
+    // MOVE OBJECT
 
     swapObjects(index1, index2) {
         let tmp = this.objectArray[index1];
@@ -218,7 +218,7 @@ class TableData
         this.objectArray[index2] = tmp;
     }
 
-    // INPUT/OUTPUT OPS
+    // INPUT/OUTPUT
 
     get objectArray() {
         return [...this.objectArray];
@@ -230,6 +230,7 @@ class TableData
             rowsHtml += this.propRowHtml(object, linkTdsHtml);
         });
         this.$tableBody.html(rowsHtml);
+        this.objectArray = objectArray;
     }
 
     propRowHtml(object, linkTdsHtml) {
