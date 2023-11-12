@@ -3,9 +3,9 @@ class FormUtil
 {
 
     static initCharCounters(elForm) {
-        for (let i = 0; i < elForm.elements.length; i++) 
-            if (elForm.elements[i].type == 'text' || elForm.elements[i].type == 'textarea') 
-                $(elForm.elements[i]).characterCounter();
+        [...elForm.elements]
+            .filter(el => ['text', 'textarea'].includes(el.type))
+            .forEach(el => $(el).characterCounter());
     }
 
     static reset(elForm) {
