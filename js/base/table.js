@@ -172,11 +172,14 @@ class TableData
 {
     object;
     propNames;   // object property names
-    data = [];   // table data as an array of objects
+    data = [];   // table data as an array of objects or strings
 
     constructor(config) {
         this.object = config.object;
-        this.propNames = Object.getOwnPropertyNames(config.object);
+        if (typeof this.object === 'string' || this.object instanceof String)
+            this.propNames = null;
+        else
+            this.propNames = Object.getOwnPropertyNames(this.object);
     }
 
     insert(values) {
@@ -202,6 +205,9 @@ class TableData
     }
 
     objectFrom(values) {
+        if (!this.propNames) 
+            return values;
+
         let newObj = JSON.parse(JSON.stringify(this.object));
         this.propNames.forEach( propName => {
             newObj[propName] = values.shift();
