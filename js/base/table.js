@@ -60,15 +60,15 @@ class Table
     tdValues(index, trailingColumnsToDiscard = 0) {
         let $tds = this.$tableBody.children().eq(index).children();
         return $tds
-            .slice(0, $tds.length - trailingColumnsToDiscard - TableComponent.OPTION_COLUMNS)
+            .slice(0, $tds.length - trailingColumnsToDiscard - Table.OPTION_COLUMNS)
             .toArray()
-            .map(td => td.innerText);
+            .map(td => td.textContent);
     }
 
     disableOptions() {
-        let $links = this.$tableBody.find( TableComponent.LINKS_SELECTOR );
-		$links.removeClass( TableComponent.LINKS_ENABLED_CLASS );
-		$links.addClass( TableComponent.LINKS_DISABLED_CLASS );
+        let $links = this.$tableBody.find( Table.LINKS_SELECTOR );
+		$links.removeClass( Table.LINKS_ENABLED_CLASS );
+		$links.addClass( Table.LINKS_DISABLED_CLASS );
 		$links.removeAttr('href');
     }
 
@@ -81,9 +81,9 @@ class Table
     }
 
     enableOptions() {
-        let $links = this.$tableBody.find( TableComponent.LINKS_SELECTOR );
-		$links.removeClass( TableComponent.LINKS_DISABLED_CLASS );
-		$links.addClass( TableComponent.LINKS_ENABLED_CLASS );
+        let $links = this.$tableBody.find( Table.LINKS_SELECTOR );
+		$links.removeClass( Table.LINKS_DISABLED_CLASS );
+		$links.addClass( Table.LINKS_ENABLED_CLASS );
 		$links.attr('href', '#');
     }
 
@@ -134,7 +134,7 @@ class Table
     }
 
     swapTds($tds1, $tds2) { 
-        for (let i = 0; i < $tds1.length - TableComponent.OPTION_COLUMNS; i++) {
+        for (let i = 0; i < $tds1.length - Table.OPTION_COLUMNS; i++) {
             let tmp = $tds1.eq(i).text();
             $tds1.eq(i).text( $tds2.eq(i).text() );
             $tds2.eq(i).text( tmp );
@@ -158,9 +158,9 @@ class Table
     }
 
     load(data) {
-        data.forEach(object => {
-            this.insertRow( this.tableData.valuesFrom(object) );
-            this.tableData.insertObj(object);
+        data.forEach(obj => {
+            this.insertRow( Object.values(obj) );
+            this.tableData.insertObj(obj);
         });
     }
 
@@ -207,14 +207,6 @@ class TableData
             newObj[propName] = values.shift();
         });
         return newObj;
-    }
-
-    valuesFrom(object) {
-        let values = [];
-        this.propNames.forEach( propName => {
-            values.push( object[propName] );
-        });
-        return values;
     }
 
 }// 

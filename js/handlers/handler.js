@@ -1,27 +1,24 @@
 
-class EducationB {
-    name; institute; start; end;
-    constructor() { }
-}
-
-
 class Handler 
 {
+    static INDEX = 0;   // index of index field
+
     form;
     table;
-    insertMode = true;   // controls the mode of the form    
+    insertMode = true;   // controls the mode of the form
 
-    constructor(formConfig, tableConfig) {
+    constructor(formConfig, tableConfig, tableData) {
         if (this.constructor == Handler)
 			throw new Error('Abstract class must be implemented!');
 
-        console.log(`\t ${tableConfig.handlerName}`);
+        console.log(`\t ${tableConfig.handler}`);
         this.form  = new Form(formConfig);
         this.table = new Table(tableConfig);
 
         this.initCharCounters();
 		this.initAuxBtn();
 		this.initMainBtn();
+		this.load(tableData);
     }
  
     initCharCounters() {
@@ -51,11 +48,18 @@ class Handler
 	    });
     }
 
+	load(tableData) {
+		if (tableData)
+			this.table.load(tableData);
+	}
+
     insert() {
 		if (this.isValidForm()) {
             this.table.insert(this.form.values());
 			this.form.reset();
-			console.log(`[${this.table.handler}] row ${this.table.size() - 1} inserted!`);
+
+            let index = this.table.size() - 1;
+			console.log(`[${this.table.handler}] row ${index} inserted!`);
 	    }
 	}
 
@@ -66,13 +70,13 @@ class Handler
     select(event) { 
 		if (this.insertMode) {
 			event.preventDefault();
-
             let index = this.table.indexFrom(event);
-            let values = this.table.tdValues(index);
-            values.unshift(index);
 
-            this.form.fillWith(values);
+            let values = this.table.tdValues(index);   // values = index value + td values
+            values.unshift(index);                     // add index value at the very beginning
+
             this.form.toUpdateMode();
+            this.form.fillWith(values);
 			this.disableOptions();
 
 			console.log(`[${this.table.handler}] row ${index} selected!`);
@@ -81,11 +85,11 @@ class Handler
 
     update() {
 		if (this.isValidForm()) {
-            let index = this.fields[0].value;
+            let index = this.form.fields[Handler.INDEX].value;
             this.table.update(this.form.values(), index);
 
-			this.form.reset();
             this.form.toInsertMode();
+			this.form.reset();
 			this.enableOptions();
 
 			console.log(`[${this.table.handler}] row ${index} updated!`);
@@ -105,11 +109,6 @@ class Handler
 		}
 	}
 
-    exitEditMode() {
-		if (this.insertMode == false)
-            this.form.cancelUpdate();
-	}
-
     disableOptions() {
 		this.table.disableOptions();
 		this.insertMode = false;
@@ -118,6 +117,11 @@ class Handler
 	enableOptions() {
 		this.table.enableOptions();
 		this.insertMode = true;
+	}
+
+    exitEditMode() {
+		if (this.insertMode == false)
+            this.form.cancelUpdate();
 	}
 
     moveUp(event) {
@@ -132,27 +136,8 @@ class Handler
 			this.table.moveDown(event);
 	}
 
-}//
-
-
-class EducationHandlerB extends Handler 
-{
-    constructor() { 
-        super({ 
-                elForm: document.getElementById('formEdu'),
-                insertLegend: 'Nueva' 
-            }, {
-                $tableBody: $('table#tableEdu tbody'),
-                handler: 'educationHandler', 
-                object: new EducationB()
-            }
-        ); 
+	tableData() {
+        return this.table.data();
     }
-
-    isValidForm() {
-        return Validator.isInputNotEmpty(this.form.elForm.nameEdu) * 
-               Validator.isInputNotEmpty(this.form.elForm.instituteEdu) * 
-               Validator.isYearRangeValid(this.form.elForm.startEdu, this.form.elForm.endEdu);
-    }
-
+    
 }//

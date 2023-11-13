@@ -7,8 +7,8 @@ class Form
     static MAIN_UPDATE = 'Editar';
 
     elForm;
-    fields = [];
-    legendLabel;
+    fields = [];   // index field + other text fields
+    formLegend;
     insertLegend = 'Nuevo';
 
     $legend;
@@ -17,6 +17,7 @@ class Form
 
     constructor(config) {
         this.elForm = config.elForm;
+        this.formLegend = config.formLegend;
         if (config.insertLegend)
             this.insertLegend = config.insertLegend;
         this.initRefs();
@@ -26,9 +27,8 @@ class Form
 
     initRefs() {
         [...this.elForm.elements].forEach(element => {
-            console.log(element);
             if (element.type == 'hidden')
-                this.fields.push(element);
+                this.fields.push(element);   // first add index field
             else if (element.type == 'text')
                 this.fields.push(element);
             else if (element.name.startsWith('btnAux'))
@@ -46,7 +46,7 @@ class Form
     }
 
     toInsertMode() {
-		this.$legend.html(this.legendLabel + ` [${this.insertLegend}]`);
+		this.$legend.html(this.formLegend + ` [${this.insertLegend}]`);
 		this.$btnAux.html(Form.AUX_CLEAN);
 		this.$btnMain.html(Form.MAIN_INSERT);
 	}
@@ -59,14 +59,14 @@ class Form
     // SELECT ROW
 
     toUpdateMode(editLegend = 'Edici&oacute;n') {
-		this.$legend.html(this.legendLabel + ` [${editLegend}]`);
+		this.$legend.html(this.formLegend + ` [${editLegend}]`);
 		this.$btnAux.html(Form.AUX_CANCEL);
 		this.$btnMain.html(Form.MAIN_UPDATE);
 	}
 
-    fillWith(tdValues) {
-        this.fields.forEach( field => {
-            field.value = tdValues.shift();
+    fillWith(values) {
+        this.fields.forEach( field => {   // set values of fields (including the index field)
+            field.value = values.shift();
             field.focus();
         });
     }
