@@ -57,10 +57,10 @@ class Table
         return $(event.target).parent().parent().index();
     }
 
-    tdValues(index, trailingColumnsToDiscard = 0) {
+    tdValues(index) {
         let $tds = this.$tableBody.children().eq(index).children();
         return $tds
-            .slice(0, $tds.length - trailingColumnsToDiscard - Table.OPTION_COLUMNS)
+            .slice(0, $tds.length - Table.OPTION_COLUMNS)
             .toArray()
             .map(td => td.textContent);
     }
