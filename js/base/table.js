@@ -1,4 +1,78 @@
 
+
+class TableExtended extends Table
+{
+    static BULLET_POINT = '*';
+    static LINE_BREAK = '<br>';
+
+    simpleCols;   // number of columns containing simple values
+
+    constructor(config) {
+        super(config);
+        this.simpleCols = config.simpleCols;
+    }
+
+    // INSERT ROW
+
+    rowHtml(values) {
+        let vals = values.slice(0, this.simpleCols);
+        let arrays = values.slice(this.simpleCols);
+        let tdsHtml = super.valueTdsHtml(vals) + this.multiTdsHtml(arrays) + super.linkTdsHtml();
+        return `<tr>\n${tdsHtml}</tr>\n`;
+    }
+
+    multiTdsHtml(arrays) {
+        let tdsHtml = '';
+        arrays.forEach(arr => {
+            let content = '';
+            arr.forEach(val => {
+                content += `${TableExtended.BULLET_POINT} ${val} ${TableExtended.LINE_BREAK}`
+            });
+            tdsHtml += `\t<td>${content}</td>\n`;
+        });
+        return tdsHtml;
+    }
+
+    // SELECT ROW
+
+    tdValues(index) {
+        let tdValues = [];
+        let $tds = this.$tableBody.children().eq(index).children();
+
+        $tds.slice(0, this.simpleColumns)
+            .toArray()
+            .forEach(td => tdValues.push(td.textContent));
+
+        $tds.slice(this.simpleCols, $tds.length - Table.OPTION_COLUMNS)
+            .toArray()
+            .forEach(td => {
+                let arr = []
+                if (td.textContent.trim() != '') 
+                    td.textContent.split( TableExtended.LINE_BREAK ).forEach(line => {
+                        if (line.trim() != '') 
+                            arr.push( line.replace(TableExtended.BULLET_POINT, '').trim() );
+                    });
+                tdValues.push(arr);
+            });
+
+        return tdValues;
+    }   
+
+    // UPDATE ROW
+
+    update(values, index) {
+        let vals = values.slice(0, this.simpleCols);
+        let arrays = values.slice(this.simpleCols);
+        let tdsHtml = super.valueTdsHtml(vals) + this.multiTdsHtml(arrays) + super.linkTdsHtml();
+
+        this.$tableBody.children().eq(index).html(tdsHtml);
+        this.tableData.update(values, index);
+    }
+
+}// 
+
+
+
 class Table
 {
     static OPTION_COLUMNS = 4;
