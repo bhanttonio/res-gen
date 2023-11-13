@@ -57,9 +57,12 @@ class Table
         return $(event.target).parent().parent().index();
     }
 
-    $tds(index, trailingColumnsToDiscard = 0) {
+    tdValues(index, trailingColumnsToDiscard = 0) {
         let $tds = this.$tableBody.children().eq(index).children();
-        return $tds.slice(0, $tds.length - trailingColumnsToDiscard - TableComponent.OPTION_COLUMNS);
+        return $tds
+            .slice(0, $tds.length - trailingColumnsToDiscard - TableComponent.OPTION_COLUMNS)
+            .toArray()
+            .map(td => td.innerText);
     }
 
     disableOptions() {
@@ -199,7 +202,7 @@ class TableData
     }
 
     objectFrom(values) {
-        let newObj = JSON.parse(JSON.stringify(this.instance));
+        let newObj = JSON.parse(JSON.stringify(this.object));
         this.propNames.forEach( propName => {
             newObj[propName] = values.shift();
         });

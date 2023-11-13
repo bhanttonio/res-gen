@@ -1,49 +1,54 @@
 
-class FormComponent
+class Form
 {
-
     static AUX_CLEAN   = 'Limpiar';    // aux button labels
     static AUX_CANCEL  = 'Cancelar';
     static MAIN_INSERT = 'Agregar';    // main button labels
     static MAIN_UPDATE = 'Editar';
 
-    
     elForm;
-    elIndex;
-    fieldArray;
-    formLegend;
+    fields = [];
+    legendLabel;
     insertLegend = 'Nuevo';
 
     $legend;
 	$btnAux;
 	$btnMain;
 
-
     constructor(config) {
         this.elForm = config.elForm;
-        this.elIndex = config.elIndex;
-        this.fieldArray = config.fieldArray;
-        this.formLegend = config.formLegend;
-        if (config.insertLegend) this.insertLegend = config.insertLegend;
-
-        this.$legend = config.$legend;
-        this.$btnAux = config.$btnAux;
-        this.$btnMain = config.$btnMain;
+        if (config.insertLegend)
+            this.insertLegend = config.insertLegend;
+        this.initRefs();
     }
 
-
     // CONFIG
+
+    initRefs() {
+        [...this.elForm.elements].forEach(element => {
+            console.log(element);
+            if (element.type == 'hidden')
+                this.fields.push(element);
+            else if (element.type == 'text')
+                this.fields.push(element);
+            else if (element.name.startsWith('btnAux'))
+                this.$btnAux = $(element);
+            else if (element.name.startsWith('btnMain')) 
+                this.$btnMain = $(element);
+        });
+        this.$legend = $(this.elForm).find('legend');
+    }
     
     initCharCounters() {
         [...this.elForm.elements]
-            .filter(element => element.type.startsWith('text'))
+            .filter(element => element.type == 'text')
             .forEach(element => $(element).characterCounter());
     }
 
     toInsertMode() {
-		this.$legend.html(this.formLegend + ` [${this.insertLegend}]`);
-		this.$btnAux.html(FormComponent.AUX_CLEAN);
-		this.$btnMain.html(FormComponent.MAIN_INSERT);
+		this.$legend.html(this.legendLabel + ` [${this.insertLegend}]`);
+		this.$btnAux.html(Form.AUX_CLEAN);
+		this.$btnMain.html(Form.MAIN_INSERT);
 	}
 
     reset() {
@@ -51,25 +56,28 @@ class FormComponent
 		this.initCharCounters();
 	}
 
-
     // SELECT ROW
 
     toUpdateMode(editLegend = 'Edici&oacute;n') {
-		this.$legend.html(this.formLegend + ` [${editLegend}]`);
-		this.$btnAux.html(FormComponent.AUX_CANCEL);
-		this.$btnMain.html(FormComponent.MAIN_UPDATE);
+		this.$legend.html(this.legendLabel + ` [${editLegend}]`);
+		this.$btnAux.html(Form.AUX_CANCEL);
+		this.$btnMain.html(Form.MAIN_UPDATE);
 	}
 
-    fillWith($tds, index) {
-        for (let i = 0; i < $tds.length; i++) {
-            this.fieldArray[i].value = $tds.eq(i).text();
-            this.fieldArray[i].focus();
-        }
-        this.elIndex.value = index;
+    fillWith(tdValues) {
+        this.fields.forEach( field => {
+            field.value = tdValues.shift();
+            field.focus();
+        });
     }
 
-
     // HELPER
+
+    values() {
+        let values = [];
+        this.fields.slice(1).forEach( field => values.push(field.value) );   // ignores index field
+        return values;
+    }
 
     cancelUpdate() {
         this.$btnAux.trigger('click');

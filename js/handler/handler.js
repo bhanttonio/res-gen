@@ -1,6 +1,6 @@
 
 class EducationB {
-    name; institute; start; end; index;
+    name; institute; start; end;
     constructor() { }
 }
 
@@ -11,38 +11,27 @@ class Handler
     table;
     insertMode = true;   // controls the mode of the form    
 
-    constructor() {
+    constructor(formConfig, tableConfig) {
         if (this.constructor == Handler)
 			throw new Error('Abstract class must be implemented!');
 
-        let formConfig  = this.formConfig();
-        let tableConfig = this.tableConfig()
         console.log(`\t ${tableConfig.handlerName}`);
-
-        this.form  = new FormComponent(formConfig);
-        this.table = new TableComponent(tableConfig);
+        this.form  = new Form(formConfig);
+        this.table = new Table(tableConfig);
 
         this.initCharCounters();
 		this.initAuxBtn();
 		this.initMainBtn();
     }
-
-    formConfig() {
-        throw new Error('Abstract method must be implemented!');
-    }
-
-    tableConfig() {
-        throw new Error('Abstract method must be implemented!');
-    }
  
     initCharCounters() {
-		this.form.initCharCounters(this.elForm);
+		this.form.initCharCounters();
 	}
 
 	initAuxBtn() {
     	this.form.$btnAux.on('click', event => {
         	event.preventDefault();
-			if (event.target.textContent === FormComponent.AUX_CANCEL) {
+			if (event.target.textContent === Form.AUX_CANCEL) {
 				this.form.toInsertMode();
 				this.enableOptions();
 			}
@@ -54,7 +43,7 @@ class Handler
 	initMainBtn() {
     	this.form.$btnMain.on('click', event => {
 	        event.preventDefault();
-			if (event.target.textContent === FormComponent.MAIN_UPDATE) 
+			if (event.target.textContent === Form.MAIN_UPDATE) 
 				this.update();
 			else 
 				this.insert();
@@ -64,10 +53,9 @@ class Handler
 
     insert() {
 		if (this.isValidForm()) {
-            this.table.insertRow( this.form.fieldArray );
-			this.form.resetForm();
-
-			console.log(`[${this.table.handlerName}] row ${this.table.rowsNumber - 1} inserted!`);
+            this.table.insert(this.form.values());
+			this.form.reset();
+			console.log(`[${this.table.handler}] row ${this.table.size() - 1} inserted!`);
 	    }
 	}
 
@@ -78,38 +66,41 @@ class Handler
     select(event) { 
 		if (this.insertMode) {
 			event.preventDefault();
-            let rowIndex = this.table.rowIndexFrom(event);
-            let $tds = this.table.$tds(rowIndex);
 
-            this.form.fillWith($tds, rowIndex);
+            let index = this.table.indexFrom(event);
+            let values = this.table.tdValues(index);
+            values.unshift(index);
+
+            this.form.fillWith(values);
             this.form.toUpdateMode();
 			this.disableOptions();
 
-			console.log(`[${this.table.handlerName}] row ${rowIndex} selected!`);
+			console.log(`[${this.table.handler}] row ${index} selected!`);
 		}
 	}
 
     update() {
 		if (this.isValidForm()) {
-            let rowIndex = this.form.elIndex.value;
-            this.table.updateRow(this.form.fieldArray, rowIndex);
+            let index = this.fields[0].value;
+            this.table.update(this.form.values(), index);
+
 			this.form.reset();
             this.form.toInsertMode();
 			this.enableOptions();
 
-			console.log(`[${this.table.handlerName}] row ${rowIndex} updated!`);
+			console.log(`[${this.table.handler}] row ${index} updated!`);
 		}
 	}
 
     remove(event) {
 		if (this.insertMode) {
 			event.preventDefault();
-			let rowIndex = this.table.rowIndexFrom(event);
-            let refName = this.table.referenceName(rowIndex);
+			let index = this.table.indexFrom(event);
+            let refName = this.table.referenceName(index);
 
 			if (confirm(`Se eliminar\xE1 "${refName}"`)) {
-				this.table.deleteRow(rowIndex);
-				console.log(`[${this.table.handlerName}] row ${rowIndex} removed!`);
+				this.table.delete(index);
+				console.log(`[${this.table.handler}] row ${index} removed!`);
 			}
 		}
 	}
@@ -132,13 +123,13 @@ class Handler
     moveUp(event) {
         event.preventDefault();
 		if (this.insertMode) 
-			this.table.moveRowUp(event);
+			this.table.moveUp(event);
 	}
 
     moveDown(event) {
         event.preventDefault();
 		if (this.insertMode)
-			this.table.moveRowDown(event);
+			this.table.moveDown(event);
 	}
 
 }//
@@ -146,39 +137,22 @@ class Handler
 
 class EducationHandlerB extends Handler 
 {
-
     constructor() { 
-        super(); 
-    }
-
-    formConfig() {
-        return {
-            elForm: document.getElementById('formEdu'), 
-            elIndex: document.getElementById('indexEdu'), 
-            fields: [document.getElementById('nameEdu'), 
-                     document.getElementById('instituteEdu'), 
-                     document.getElementById('startEdu'), 
-                     document.getElementById('endEdu')],
-            formLegend: 'Escolaridad', 
-            insertLegend: 'Nueva', 
-            $legend: $('#formEdu').find('legend'),
-	        $btnAux: $('#btnAuxEdu'),
-	        $btnMain: $('#btnMainEdu')
-        };
-    }
-
-    tableConfig() {
-        return {
-            $tableBody: $('table#tableEdu tbody'), 
-            handlerName: 'educationHandler', 
-            objectType: EducationB
-        };
+        super({ 
+                elForm: document.getElementById('formEdu'),
+                insertLegend: 'Nueva' 
+            }, {
+                $tableBody: $('table#tableEdu tbody'),
+                handler: 'educationHandler', 
+                object: new EducationB()
+            }
+        ); 
     }
 
     isValidForm() {
-        return Validator.isInputNotEmpty(this.form.indexEdu) * 
-               Validator.isInputNotEmpty(this.form.instituteEdu) * 
-               Validator.isYearRangeValid(this.form.startEdu, this.form.endEdu);
+        return Validator.isInputNotEmpty(this.form.elForm.nameEdu) * 
+               Validator.isInputNotEmpty(this.form.elForm.instituteEdu) * 
+               Validator.isYearRangeValid(this.form.elForm.startEdu, this.form.elForm.endEdu);
     }
 
 }//

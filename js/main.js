@@ -13,7 +13,7 @@ $(function() {
     M.AutoInit();
 
     basicHandler = new BasicHandler();
-    educationHandler = new EducationHandler();
+    educationHandler = new EducationHandlerB();
     courseHandler = new CourseHandler();
     languageHandler = new LanguageHandler();
     skillHandler = new SkillHandler();
