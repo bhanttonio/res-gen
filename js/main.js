@@ -1,10 +1,10 @@
 
-var basicHandler;
+// var basicHandler;
 var eduHandler;
-var courseHandler;
-var languageHandler;
-var skillHandler;
-var sectorHandler;
+// var courseHandler;
+// var languageHandler;
+// var skillHandler;
+// var sectorHandler;
 var iweHandler;
 
 
@@ -12,18 +12,28 @@ $(function() {
     console.log('loading');
     M.AutoInit();
 
-    basicHandler = new BasicHandler();
+    // basicHandler = new BasicHandler();
 
     eduHandler = new EduHandler([
         {name: 'Licenciatura en Informática Administrativa', institute: 'Universidad Nacional Autónoma de México', start: 2015, end: 2020}, 
         {name: 'Maestría en Administración', institute: 'Universidad del Valle de México', start: 2020, end: 2023}
     ]);
     
-    courseHandler = new CourseHandler();
-    languageHandler = new LanguageHandler();
-    skillHandler = new SkillHandler();
-    sectorHandler = new SectorHandler();
-    iweHandler = new IweHandler();
+    // courseHandler = new CourseHandler();
+    // languageHandler = new LanguageHandler();
+    // skillHandler = new SkillHandler();
+    // sectorHandler = new SectorHandler();
+    iweHandler = new IweHandler( [
+        { account: 'Banorte', role: 'Desarrollador Java', project: 'Migración de código', period: 'Enero 2020 - Febrero 2022', 
+          tasks: ['Implementación de microservicios con Spring Boot', 'Elaboración de diagramas UML'], 
+          tools: ['Herramientas: Eclipse, Visual Paradigm CE, GitHub', 'Tecnologías: Java v8, Maven, Git, JSON'] }, 
+        { account: 'Banamex', role: 'Desarrollador SQL', project: 'Migración de datos', period: 'Abril 2022 - Septiembre 2022', 
+          tasks: ['Migración de store procedures de Informix a Oracle', 'Diseño y creación de nuevas tablas'], 
+          tools: ['Herramientas: DBeaver CE, SQL Developer, Notepad++', 'Tecnologías: Oracle DB v12, Git'] }
+    ], 
+    ['Diseño e implementación de microservicios con Spring Boot', 'Análisis de requerimientos y creación de diagramas de secuencia y máquinas de estado'], 
+    ['Herramientas: Eclipse IDE, WildFly, GitHub, Jira, Akeyless, Checkmarx, Sonarqube', 'Tecnologías: Java, Spring Boot, JUnit, Git, Maven, Docker'] 
+    );
 
     new MainHandler();
     console.log('finished');
@@ -76,40 +86,20 @@ class MainHandler
 			let href = event.target.getAttribute('href');
 			console.log(`\u2192 ${href}`);
 
-            if (href !== '#basic') {
-                basicHandler.isValidForm();
-                // console.log( JSON.stringify(basicHandler.getObject(), null, 2) );
-            }
-
-			if (href !== '#education') {
+            // if (href !== '#basic')
+            //     basicHandler.isValidForm();
+			if (href !== '#education') 
                 eduHandler.exitEditMode();
-                // console.log( JSON.stringify(educationHandler.getObjectList(), null, 2) );
-            }
-			
-            if (href != '#courses') {
-                courseHandler.exitEditMode();
-                // console.log( JSON.stringify(courseHandler.getObjectList(), null, 2) );
-            }
-            
-            if (href != '#languages') {
-                languageHandler.exitEditMode();
-                // console.log( JSON.stringify(languageHandler.getObjectList(), null, 2) );
-            }
-            if (href != '#skills') {
-                skillHandler.exitEditMode();
-                // console.log( JSON.stringify(skillHandler.getObjectList(), null, 2) );
-            }
-            if (href != '#sectors') {
-                sectorHandler.exitEditMode();
-                // console.log( JSON.stringify(sectorHandler.getObjectList(), null, 2) );
-            }
-
-            if (href != '#int-work-exp') {
+            // if (href != '#courses')
+            //     courseHandler.exitEditMode();
+            // if (href != '#languages') 
+            //     languageHandler.exitEditMode();
+            // if (href != '#skills')
+            //     skillHandler.exitEditMode();
+            // if (href != '#sectors') 
+            //     sectorHandler.exitEditMode();
+            if (href != '#int-work-exp')
                 iweHandler.exitEditMode();
-                iweHandler.taskHandler.exitEditMode();
-                iweHandler.toolHandler.exitEditMode();
-                // console.log( JSON.stringify(iweHandler.getObjectList(), null, 2) );
-            }
 		});
     }
 

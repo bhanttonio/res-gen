@@ -34,6 +34,9 @@ class Table
     }
 
     valueTdsHtml(values) {
+        if (typeof values == 'string')
+            return `\t<td>${values}</td>\n`;
+
         let tdsHtml = '';
         values.forEach( value => {
             tdsHtml += `\t<td>${value}</td>\n`;
@@ -150,6 +153,7 @@ class Table
 
     deleteRows() {
         this.$tableBody.children().remove();
+        this.tableData.clear();
     }
 
     // DATA
@@ -160,9 +164,10 @@ class Table
 
     load(data) {
         data.forEach(obj => {
-            this.insertRow( Object.values(obj) );
+            this.insertRow( typeof obj != 'string' ? Object.values(obj) : obj );
             this.tableData.insertObj(obj);
         });
+        console.log(`@tableData: ${this.tableData.data}`);
     }
 
 }//
@@ -216,6 +221,10 @@ class TableData
         return newObj;
     }
 
+    clear() {
+        this.data = [];
+    }
+
 }// 
 
 
@@ -225,18 +234,18 @@ class ExtendedTable extends Table
     static BULLET_POINT = '*';
     static LINE_BREAK = '<br>';
 
-    simpleCols;   // number of columns containing simple values
+    simpleColsSize;   // number of columns with simple values
 
     constructor(config) {
         super(config);
-        this.simpleCols = config.simpleCols;
+        this.simpleColsSize = config.simpleColsSize;
     }
 
     // INSERT ROW
 
     rowHtml(values) {
-        let vals = values.slice(0, this.simpleCols);
-        let arrays = values.slice(this.simpleCols);
+        let vals = values.slice(0, this.simpleColsSize);
+        let arrays = values.slice(this.simpleColsSize);
         let tdsHtml = super.valueTdsHtml(vals) + this.multiTdsHtml(arrays) + super.linkTdsHtml();
         return `<tr>\n${tdsHtml}</tr>\n`;
     }
@@ -258,20 +267,22 @@ class ExtendedTable extends Table
     tdValues(index) {
         let tdValues = [];
         let $tds = this.$tableBody.children().eq(index).children();
-
-        $tds.slice(0, this.simpleColumns)
+        
+        $tds.slice(0, this.simpleColsSize)
             .toArray()
             .forEach(td => tdValues.push(td.textContent));
 
-        $tds.slice(this.simpleCols, $tds.length - Table.OPTION_COLUMNS)
+        $tds.slice(this.simpleColsSize, $tds.length - Table.OPTION_COLUMNS)
             .toArray()
             .forEach(td => {
-                let arr = []
-                if (td.textContent.trim() != '') 
-                    td.textContent.split( ExtendedTable.LINE_BREAK ).forEach(line => {
-                        if (line.trim() != '') 
+                let arr = new Array();
+                if (td.innerHTML.trim() != '') {
+                    td.innerHTML.split( ExtendedTable.LINE_BREAK ).forEach(line => {
+                        if (line.trim() != '') {
                             arr.push( line.replace(ExtendedTable.BULLET_POINT, '').trim() );
+                        }
                     });
+                }
                 tdValues.push(arr);
             });
 
@@ -281,8 +292,8 @@ class ExtendedTable extends Table
     // UPDATE ROW
 
     update(values, index) {
-        let vals = values.slice(0, this.simpleCols);
-        let arrays = values.slice(this.simpleCols);
+        let vals = values.slice(0, this.simpleColsSize);
+        let arrays = values.slice(this.simpleColsSize);
         let tdsHtml = super.valueTdsHtml(vals) + this.multiTdsHtml(arrays) + super.linkTdsHtml();
 
         this.$tableBody.children().eq(index).html(tdsHtml);

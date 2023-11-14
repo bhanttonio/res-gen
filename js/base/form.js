@@ -18,9 +18,11 @@ class Form
     constructor(config) {
         this.elForm = config.elForm;
         this.formLegend = config.formLegend;
-        if (config.insertLegend)
-            this.insertLegend = config.insertLegend;
+        if (config.insertLegend) this.insertLegend = config.insertLegend;
         this.initRefs();
+
+        if (config.$btnAux) this.$btnAux = config.$btnAux;
+        if (config.$btnMain) this.$btnMain = config.$btnMain;
     }
 
     // CONFIG

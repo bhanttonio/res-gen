@@ -7,7 +7,7 @@ class Handler
     table;
     insertMode = true;   // controls the mode of the form
 
-    constructor(form, table, tableData) {
+    constructor(form, table, data) {
         if (this.constructor == Handler)
 			throw new Error('Abstract class must be implemented!');
 
@@ -18,7 +18,7 @@ class Handler
         this.initCharCounters();
 		this.initAuxBtn();
 		this.initMainBtn();
-		this.initTable(tableData);
+		this.initTable(data);
     }
  
     initCharCounters() {
@@ -48,14 +48,14 @@ class Handler
 	    });
     }
 
-	initTable(tableData) {
-		if (tableData && tableData.length > 0)
-			this.table.load(tableData);
+	initTable(data) {
+		if (data && data.length > 0)
+			this.table.load(data);
 	}
 
     insert() {
 		if (this.isValidForm()) {
-            this.table.insert(this.form.values());
+            this.table.insert( this.form.values() );
 			this.form.reset();
 
             let index = this.table.size() - 1;
@@ -72,13 +72,12 @@ class Handler
 			event.preventDefault();
             let index = this.table.indexFrom(event);
 
-            let values = this.table.tdValues(index);   // values = index value + td values
-            values.unshift(index);                     // add index value at the very beginning
-
-            this.form.toUpdateMode();
+			let values = [index];   // values = index + td values
+			values.push( ...this.table.tdValues(index) );
             this.form.fillWith(values);
-			this.disableOptions();
 
+			this.form.toUpdateMode();
+			this.disableOptions();
 			console.log(`[${this.table.handler}] row ${index} selected!`);
 		}
 	}
@@ -91,7 +90,6 @@ class Handler
             this.form.toInsertMode();
 			this.form.reset();
 			this.enableOptions();
-
 			console.log(`[${this.table.handler}] row ${index} updated!`);
 		}
 	}
@@ -140,4 +138,121 @@ class Handler
         return this.table.data();
     }
     
+}//
+
+
+
+class CompositeHandler extends Handler
+{
+	taskHandler;
+	toolHandler;
+	
+	constructor(form, extTable, data, taskData, toolData) {
+		super(form, extTable, data);
+		this.taskHandler = new IweTaskHandler(taskData);
+		this.toolHandler = new IweToolHandler(toolData);
+	}
+
+	initAuxBtn() {
+    	this.form.$btnAux.on('click', event => {
+        	event.preventDefault();
+			if (event.target.textContent === Form.AUX_CANCEL) {
+				this.form.toInsertMode();
+				this.enableOptions();
+				this.taskHandler.table.deleteRows();
+				this.toolHandler.table.deleteRows();
+			}
+			else {
+				if (this.taskHandler.table.hasRows() || this.toolHandler.table.hasRows()) {
+					if (confirm(`\xBFEliminar tambi\xE9n contenido de tablas\x3F`)) {
+						this.taskHandler.table.deleteRows();
+						this.toolHandler.table.deleteRows();
+					}
+				}
+			}
+			this.form.reset();
+			this.taskHandler.form.reset();
+			this.toolHandler.form.reset();
+			event.target.blur();
+    	});
+    }
+
+	insert() {
+		if (this.isValidForm()) {
+			let values = this.form.values();
+			values.push( this.taskHandler.table.data() );
+			values.push( this.toolHandler.table.data() );
+            this.table.insert(values);
+
+			this.form.reset();
+			this.taskHandler.form.reset();
+			this.toolHandler.form.reset();
+
+			this.taskHandler.table.deleteRows();
+			this.toolHandler.table.deleteRows();
+
+            let index = this.table.size() - 1;
+			console.log("### " + JSON.stringify(this.table.data(), null, 2));
+			console.log(`[${this.table.handler}] row ${index} inserted!`);
+	    }
+	}
+
+	select(event) { 
+		if (this.insertMode) {
+			event.preventDefault();
+            let index = this.table.indexFrom(event);
+
+			let values = [index];   // values = index + td values
+			values.push( ...this.table.tdValues(index) );
+
+			let fieldsNumber = this.table.simpleColsSize + 1;   // fieldsNumber = index + fields
+            this.form.fillWith( values.slice(0, fieldsNumber) );
+
+			this.taskHandler.exitEditMode();
+			if (this.taskHandler.table.hasRows())
+				this.taskHandler.table.deleteRows();
+			this.taskHandler.table.load( values[fieldsNumber] );   // fill tables
+			
+			this.toolHandler.exitEditMode();
+			if (this.toolHandler.table.hasRows())
+				this.toolHandler.table.deleteRows();
+			this.toolHandler.table.load( values[fieldsNumber + 1] );
+
+			this.form.toUpdateMode();
+			this.disableOptions();
+			console.log(`[${this.table.handler}] row ${index} selected!`);
+		}
+	}
+
+	update() {
+		if (this.isValidForm()) {
+            let index = this.form.fields[Handler.INDEX].value;
+
+			let values = this.form.values();
+			values.push( this.taskHandler.table.data() );
+			values.push( this.toolHandler.table.data() );
+            this.table.update(values, index);
+
+			this.form.reset();
+			this.taskHandler.form.reset();
+			this.toolHandler.form.reset();
+
+			this.taskHandler.table.deleteRows();
+			this.toolHandler.table.deleteRows();
+
+			this.form.toInsertMode();
+			this.enableOptions();
+			console.log("### " + JSON.stringify(this.table.data(), null, 2));
+			console.log(`[${this.table.handler}] row ${index} updated!`);
+		}
+	}
+
+	exitEditMode() {
+		if (this.insertMode == false) {
+			this.form.cancelUpdate();
+			this.taskHandler.form.cancelUpdate();
+			this.toolHandler.form.cancelUpdate();
+		}
+	}
+
 }//
