@@ -8,15 +8,15 @@ class EduHandler extends Handler
     static END = 4;
 
     constructor(tableData) { 
-        super({ 
+        super( new Form({ 
                 elForm: document.getElementById('formEdu'),
                 formLegend: 'Escolaridad',
                 insertLegend: 'Nueva' 
-            }, {
+            }), new Table({
                 $tableBody: $('table#tableEdu tbody'),
                 handler: 'eduHandler', 
                 object: new Education()
-            },
+            }),
             tableData
         ); 
     }
@@ -35,15 +35,15 @@ class IweTaskHandler extends Handler
     static DESC = 1; 
 
     constructor(tableData) {
-        super({
+        super( new Form({
             elForm:  document.getElementById('formIweTask'), 
             formLegend: 'Actividad',
             insertLegend: 'Nueva' 
-        }, {
+        }), new Table({
             $tableBody: $('table#tableIweTask tbody'),
             handler: 'iweHandler.taskHandler', 
             object: new Task()
-        }, 
+        }), 
         tableData);
     }
 
@@ -58,14 +58,14 @@ class IweToolHandler extends Handler
     static DESC = 1; 
 
     constructor(tableData) {
-        super({
+        super( new Form({
             elForm:  document.getElementById('formIweTool'), 
             formLegend: 'Entorno'
-        }, {
+        }), new Table({
             $tableBody: $('table#tableIweTool tbody'),
             handler: 'iweHandler.toolHandler', 
             object: new Tool()
-        }, 
+        }), 
         tableData);
     }
 

@@ -220,7 +220,7 @@ class TableData
 
 
 
-class TableExtended extends Table
+class ExtendedTable extends Table
 {
     static BULLET_POINT = '*';
     static LINE_BREAK = '<br>';
@@ -246,7 +246,7 @@ class TableExtended extends Table
         arrays.forEach(arr => {
             let content = '';
             arr.forEach(val => {
-                content += `${TableExtended.BULLET_POINT} ${val} ${TableExtended.LINE_BREAK}`
+                content += `${ExtendedTable.BULLET_POINT} ${val} ${ExtendedTable.LINE_BREAK}`
             });
             tdsHtml += `\t<td>${content}</td>\n`;
         });
@@ -268,9 +268,9 @@ class TableExtended extends Table
             .forEach(td => {
                 let arr = []
                 if (td.textContent.trim() != '') 
-                    td.textContent.split( TableExtended.LINE_BREAK ).forEach(line => {
+                    td.textContent.split( ExtendedTable.LINE_BREAK ).forEach(line => {
                         if (line.trim() != '') 
-                            arr.push( line.replace(TableExtended.BULLET_POINT, '').trim() );
+                            arr.push( line.replace(ExtendedTable.BULLET_POINT, '').trim() );
                     });
                 tdValues.push(arr);
             });

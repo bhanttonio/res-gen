@@ -7,18 +7,18 @@ class Handler
     table;
     insertMode = true;   // controls the mode of the form
 
-    constructor(formConfig, tableConfig, tableData) {
+    constructor(form, table, tableData) {
         if (this.constructor == Handler)
 			throw new Error('Abstract class must be implemented!');
 
-        console.log(`\t ${tableConfig.handler}`);
-        this.form  = new Form(formConfig);
-        this.table = new Table(tableConfig);
+        console.log(`\t ${table.handler}`);
+        this.form  = form;
+        this.table = table;
 
         this.initCharCounters();
 		this.initAuxBtn();
 		this.initMainBtn();
-		this.load(tableData);
+		this.initTable(tableData);
     }
  
     initCharCounters() {
@@ -48,8 +48,8 @@ class Handler
 	    });
     }
 
-	load(tableData) {
-		if (tableData)
+	initTable(tableData) {
+		if (tableData && tableData.length > 0)
 			this.table.load(tableData);
 	}
 
