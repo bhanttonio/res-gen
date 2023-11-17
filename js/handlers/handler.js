@@ -1,11 +1,12 @@
 
 class Handler 
 {
-    static INDEX = 0;   // index of index field
+    static INDEX = 0;    // index of index field
 
     form;
     table;
-    insertMode = true;   // controls the mode of the form
+    insertMode = true;   // to control mode of the form
+	handlerName;
 
     constructor(form, table, data) {
         if (this.constructor == Handler)
@@ -15,24 +16,18 @@ class Handler
         this.form  = form;
         this.table = table;
 
-        this.initCharCounters();
 		this.initAuxBtn();
 		this.initMainBtn();
 		this.initTable(data);
     }
- 
-    initCharCounters() {
-		this.form.initCharCounters();
-	}
 
 	initAuxBtn() {
     	this.form.$btnAux.on('click', event => {
         	event.preventDefault();
-			if (event.target.textContent === Form.AUX_CANCEL) {
-				this.form.toInsertMode();
-				this.enableOptions();
-			}
-			this.form.reset();
+			if (!this.insertMode)
+				this.toInsertMode();
+			else
+				this.form.reset();
 			event.target.blur();
     	});
     }
@@ -40,7 +35,7 @@ class Handler
 	initMainBtn() {
     	this.form.$btnMain.on('click', event => {
 	        event.preventDefault();
-			if (event.target.textContent === Form.MAIN_UPDATE) 
+			if (!this.insertMode) 
 				this.update();
 			else 
 				this.insert();
@@ -59,7 +54,7 @@ class Handler
 			this.form.reset();
 
             let index = this.table.size() - 1;
-			console.log(`[${this.table.handler}] row ${index} inserted!`);
+			console.log(`[${this.handlerName}] row ${index} inserted!`);
 	    }
 	}
 
@@ -71,14 +66,12 @@ class Handler
 		if (this.insertMode) {
 			event.preventDefault();
             let index = this.table.indexFrom(event);
-
-			let values = [index];   // values = index + td values
-			values.push( ...this.table.tdValues(index) );
+			
+			let values = [index, ...this.table.tdValues(index)];   // values = index + td values
             this.form.fillWith(values);
 
-			this.form.toUpdateMode();
-			this.disableOptions();
-			console.log(`[${this.table.handler}] row ${index} selected!`);
+			this.toEditMode();
+			console.log(`[${this.handlerName}] row ${index} selected!`);
 		}
 	}
 
@@ -87,10 +80,8 @@ class Handler
             let index = this.form.fields[Handler.INDEX].value;
             this.table.update(this.form.values(), index);
 
-            this.form.toInsertMode();
-			this.form.reset();
-			this.enableOptions();
-			console.log(`[${this.table.handler}] row ${index} updated!`);
+            this.toInsertMode();
+			console.log(`[${this.handlerName}] row ${index} updated!`);
 		}
 	}
 
@@ -102,24 +93,26 @@ class Handler
 
 			if (confirm(`Se eliminar\xE1 "${refName}"`)) {
 				this.table.delete(index);
-				console.log(`[${this.table.handler}] row ${index} removed!`);
+				console.log(`[${this.handlerName}] row ${index} removed!`);
 			}
 		}
 	}
 
-    disableOptions() {
-		this.table.disableOptions();
-		this.insertMode = false;
-	}
-
-	enableOptions() {
+	toInsertMode() {
+		this.form.toInsertMode();
 		this.table.enableOptions();
 		this.insertMode = true;
 	}
 
+    toEditMode() {
+		this.form.toEditMode();
+		this.table.disableOptions();
+		this.insertMode = false;
+	}
+
     exitEditMode() {
 		if (this.insertMode == false)
-            this.form.cancelUpdate();
+            this.form.cancelEdition();
 	}
 
     moveUp(event) {

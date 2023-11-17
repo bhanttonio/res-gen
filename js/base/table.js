@@ -139,9 +139,9 @@ class Table
 
     swapTds($tds1, $tds2) { 
         for (let i = 0; i < $tds1.length - Table.OPTION_COLUMNS; i++) {
-            let tmp = $tds1.eq(i).text();
-            $tds1.eq(i).text( $tds2.eq(i).text() );
-            $tds2.eq(i).text( tmp );
+            let tmp = $tds1.eq(i).html();
+            $tds1.eq(i).html( $tds2.eq(i).html() );
+            $tds2.eq(i).html( tmp );
         }
     }
     
