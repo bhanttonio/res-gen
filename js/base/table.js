@@ -2,18 +2,18 @@
 
 class Table
 {
-    static OPTION_COLUMNS = 4;
-    static LINKS_SELECTOR = 'tr td a';
-    static LINKS_ENABLED_CLASS = 'resgen-enabled';
-    static LINKS_DISABLED_CLASS = 'resgen-disabled';
+    static #OPTION_COLUMNS = 4;
+    static #LINKS_SELECTOR = 'tr td a';
+    static #LINKS_ENABLED_CLASS = 'resgen-enabled';
+    static #LINKS_DISABLED_CLASS = 'resgen-disabled';
 
     $tableBody;
-    handler;
+    handlerName;
     tableData;
 
     constructor(config) {
         this.$tableBody = config.$tableBody;
-        this.handler = config.handler;
+        this.handlerName = config.handlerName;
         this.tableData = new TableData(config);
     }
 
@@ -24,35 +24,20 @@ class Table
         this.tableData.insert(values);
     }
 
-    insertRow(values) {
-        this.$tableBody.append( this.rowHtml(values) );
-    }
-
     rowHtml(values) {
         let tdsHtml = this.valueTdsHtml(values) + this.linkTdsHtml();
         return `<tr>\n${tdsHtml}</tr>\n`;
     }
 
     valueTdsHtml(values) {
-        if (typeof values == 'string')
-            return `\t<td>${values}</td>\n`;
-
-        let tdsHtml = '';
-        values.forEach( value => {
-            tdsHtml += `\t<td>${value}</td>\n`;
-        });
-        return tdsHtml;
+        return values.map(value => `\t<td>${value}</td>\n`).join('');
     }
 
     linkTdsHtml() {
-        return `\t<td><a href="#" onclick="${this.handler}.moveUp(event)" title="subir">&bigtriangleup;</a></td>\n` + 
-               `\t<td><a href="#" onclick="${this.handler}.moveDown(event)" title="bajar">&bigtriangledown;</a></td>\n` + 
-               `\t<td><a href="#" onclick="${this.handler}.select(event)" title="editar">&#x1F589;</a></td>\n` + 
-               `\t<td><a href="#" onclick="${this.handler}.remove(event)" title="borrar">&#x2327;</a></td>\n`;
-    }
-
-    size() {
-        return this.$tableBody.children().length;
+        return `\t<td><a href="#" onclick="${this.handlerName}.moveUp(event)" title="subir">&bigtriangleup;</a></td>\n` + 
+               `\t<td><a href="#" onclick="${this.handlerName}.moveDown(event)" title="bajar">&bigtriangledown;</a></td>\n` + 
+               `\t<td><a href="#" onclick="${this.handlerName}.select(event)" title="editar">&#x1F589;</a></td>\n` + 
+               `\t<td><a href="#" onclick="${this.handlerName}.remove(event)" title="borrar">&#x2327;</a></td>\n`;
     }
 
     // SELECT ROW
@@ -64,15 +49,15 @@ class Table
     tdValues(index) {
         let $tds = this.$tableBody.children().eq(index).children();
         return $tds
-            .slice(0, $tds.length - Table.OPTION_COLUMNS)
+            .slice(0, $tds.length - Table.#OPTION_COLUMNS)
             .toArray()
             .map(td => td.textContent);
     }
 
     disableOptions() {
-        let $links = this.$tableBody.find( Table.LINKS_SELECTOR );
-		$links.removeClass( Table.LINKS_ENABLED_CLASS );
-		$links.addClass( Table.LINKS_DISABLED_CLASS );
+        let $links = this.$tableBody.find( Table.#LINKS_SELECTOR );
+		$links.removeClass( Table.#LINKS_ENABLED_CLASS );
+		$links.addClass( Table.#LINKS_DISABLED_CLASS );
 		$links.removeAttr('href');
     }
 
@@ -85,9 +70,9 @@ class Table
     }
 
     enableOptions() {
-        let $links = this.$tableBody.find( Table.LINKS_SELECTOR );
-		$links.removeClass( Table.LINKS_DISABLED_CLASS );
-		$links.addClass( Table.LINKS_ENABLED_CLASS );
+        let $links = this.$tableBody.find( Table.#LINKS_SELECTOR );
+		$links.removeClass( Table.#LINKS_DISABLED_CLASS );
+		$links.addClass( Table.#LINKS_ENABLED_CLASS );
 		$links.attr('href', '#');
     }
 
@@ -110,8 +95,7 @@ class Table
         let index = this.indexFrom(event);
         let firstIndex = $rows.filter(':first').index();
         
-        if ($rows.length > 1 && index > firstIndex) 
-        {
+        if ($rows.length > 1 && index > firstIndex) {
             let $prevTds = $rows.eq(index - 1).children();
             let $currTds = $rows.eq(index).children();
             
@@ -126,8 +110,7 @@ class Table
         let index = this.indexFrom(event);
         let lastIndex = $rows.filter(':last').index();
 
-        if ($rows.length > 1 && index < lastIndex) 
-        {
+        if ($rows.length > 1 && index < lastIndex) {
             let $currTds = $rows.eq(index).children();
             let $nextTds = $rows.eq(index + 1).children();
 
@@ -138,17 +121,21 @@ class Table
     }
 
     swapTds($tds1, $tds2) { 
-        for (let i = 0; i < $tds1.length - Table.OPTION_COLUMNS; i++) {
+        for (let i = 0; i < $tds1.length - Table.#OPTION_COLUMNS; i++) {
             let tmp = $tds1.eq(i).html();
             $tds1.eq(i).html( $tds2.eq(i).html() );
-            $tds2.eq(i).html( tmp );
+            $tds2.eq(i).html(tmp);
         }
     }
     
     // HELPER
+
+    size() {   // number of rows
+        return this.$tableBody.children().length;
+    }
     
     hasRows() {
-        return this.$tableBody.children().length > 0;
+        return this.tableData.data().length > 0;
     }
 
     deleteRows() {
@@ -156,18 +143,15 @@ class Table
         this.tableData.clear();
     }
 
-    // DATA
-
     data() {
-        return this.tableData.data;
+        return this.tableData.data();
     }
 
     load(data) {
-        data.forEach(obj => {
-            this.insertRow( typeof obj != 'string' ? Object.values(obj) : obj );
-            this.tableData.insertObj(obj);
+        data.forEach(object => {
+            let values = (typeof object == 'string') ? [object] : Object.values(object);
+            this.insert(values);
         });
-        console.log(`@tableData: ${this.tableData.data}`);
     }
 
 }//
@@ -176,56 +160,52 @@ class Table
 
 class TableData 
 {
-    object;
-    propNames;   // object property names
-    data = [];   // table data as an array of objects or strings
+    #object;
+    #propNames;
+    #data = [];
 
     constructor(config) {
-        this.object = config.object;
-        if (typeof this.object === 'string' || this.object instanceof String)
-            this.propNames = null;
-        else
-            this.propNames = Object.getOwnPropertyNames(this.object);
+        this.#object = config.object;
+        this.#propNames = (this.#object instanceof String) ? null : Object.getOwnPropertyNames(this.#object);
     }
 
     insert(values) {
-        this.data.push( this.objectFrom(values) );
-    }
-
-    insertObj(object) {
-        this.data.push(object);
+        this.#data.push( this.objectFrom(values) );
     }
 
     update(values, index) {
-        this.data[index] = this.objectFrom(values);
+        this.#data[index] = this.objectFrom(values);
     }
 
     delete(index) {
-        this.data.splice(index, 1);
+        this.#data.splice(index, 1);
     }
 
     swap(index1, index2) {
-        let tmp = this.data[index1];
-        this.data[index1] = this.data[index2];
-        this.data[index2] = tmp;
+        let tmp = this.#data[index1];
+        this.#data[index1] = this.#data[index2];
+        this.#data[index2] = tmp;
     }
 
     objectFrom(values) {
-        if (!this.propNames) 
-            return values;
-
-        let newObj = JSON.parse(JSON.stringify(this.object));
-        this.propNames.forEach( propName => {
-            newObj[propName] = values.shift();
-        });
-        return newObj;
+        if (this.#propNames) {                             // object from values
+            let newObject = Object.create(this.#object);   
+            this.#propNames.forEach( propName => newObject[propName] = values.shift() );
+            return newObject;
+        }
+        else
+            return values[0];                              // string from value
     }
 
     clear() {
-        this.data = [];
+        this.#data = [];
     }
 
-}// 
+    data() {
+        return [...this.#data];
+    }
+
+}//
 
 
 

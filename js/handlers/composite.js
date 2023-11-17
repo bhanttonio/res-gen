@@ -16,7 +16,7 @@ class IweTaskHandler extends Handler
             new Table({
                 $tableBody: $('table#tableIweTask tbody'),
                 handler: 'iweHandler.taskHandler', 
-                object: ''
+                object: new String()
             }
         ), 
         data);
@@ -44,7 +44,7 @@ class IweToolHandler extends Handler
             new Table({
                 $tableBody: $('table#tableIweTool tbody'),
                 handler: 'iweHandler.toolHandler', 
-                object: ''
+                object: new String()
             }
         ), 
         data);

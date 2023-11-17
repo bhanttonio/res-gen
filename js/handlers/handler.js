@@ -12,7 +12,7 @@ class Handler
         if (this.constructor == Handler)
 			throw new Error('Abstract class must be implemented!');
 
-        console.log(`\t ${table.handler}`);
+		console.log(`\t ${table.handlerName}`);
         this.form  = form;
         this.table = table;
 

@@ -16,7 +16,7 @@ class EduHandler extends Handler
                 insertLegend: 'Nueva' 
             }), new Table({
                 $tableBody: $('table#tableEdu tbody'),
-                handler: EduHandler.#HANDLER_NAME, 
+                handlerName: EduHandler.#HANDLER_NAME, 
                 object: new Education()
             }),
             data
