@@ -112,7 +112,7 @@ class Handler
 
     exitEditMode() {
 		if (this.insertMode == false)
-            this.form.cancelEdition();
+            this.toInsertMode();
 	}
 
     moveUp(event) {
@@ -149,7 +149,7 @@ class CompositeHandler extends Handler
 	initAuxBtn() {
     	this.form.$btnAux.on('click', event => {
         	event.preventDefault();
-			if (event.target.textContent === Form.AUX_CANCEL) {
+			if (!super.insertMode) {
 				super.toInsertMode();
 				this.taskHandler.table.deleteRows();
 				this.toolHandler.table.deleteRows();
@@ -192,25 +192,22 @@ class CompositeHandler extends Handler
 	select(event) { 
 		if (this.insertMode) {
 			event.preventDefault();
-            let index = this.table.indexFrom(event);
-
-			let values = [index];   // values = index + td values
-			values.push( ...this.table.tdValues(index) );
-
-			let fieldsNumber = this.table.simpleCols + 1;   // fieldsNumber = index + fields
-            this.form.fillWith( values.slice(0, fieldsNumber) );
 
 			this.taskHandler.exitEditMode();
-			if (this.taskHandler.table.hasRows())
-				this.taskHandler.table.deleteRows();
-			this.taskHandler.table.load( values[fieldsNumber] );   // fill tables
-			
+			this.taskHandler.table.deleteRows();
 			this.toolHandler.exitEditMode();
-			if (this.toolHandler.table.hasRows())
-				this.toolHandler.table.deleteRows();
+			this.toolHandler.table.deleteRows();
+			this.toEditMode();
+
+            let index = this.table.indexFrom(event);
+			let values = [index];   // values = index + td values
+			values.push( ...this.table.tdValues(index) );
+			let fieldsNumber = this.table.simpleCols + 1;   // fieldsNumber = index + fields
+
+            this.form.fillWith( values.slice(0, fieldsNumber) );
+			this.taskHandler.table.load( values[fieldsNumber] );   // fill tables
 			this.toolHandler.table.load( values[fieldsNumber + 1] );
 
-			this.toEditMode();
 			console.log(`[${this.handlerName}] row ${index} selected!`);
 		}
 	}

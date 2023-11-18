@@ -72,8 +72,59 @@ class Form
         return this.fields.slice(1).map(field => field.value);   // ignores index field
     }
 
-    cancelEdition() {
-        this.$btnAux.trigger('click');
+}//
+
+
+
+class ExtendedForm extends Form
+{
+    #taskHandler; 
+    #toolHandler; 
+
+    constructor(config, taskData, toolData) {
+        super(config);
+        this.#taskHandler = new IweTaskHandler(taskData);
+        this.#toolHandler = new IweToolHandler(toolData);
     }
 
-}//
+    toInsertMode() {
+        super.toInsertMode();
+        this.handlersToInsertMode();
+    }
+
+    toEditMode() {
+        super.toEditMode();
+        this.handlersToInsertMode();
+    }
+
+    handlersToInsertMode() {
+        this.#taskHandler.form.toInsertMode();
+        this.#toolHandler.form.toInsertMode();
+        this.clearTables();
+    }
+
+    clearTables() {
+        this.#taskHandler.table.deleteRows();
+        this.#toolHandler.table.deleteRows();
+    }
+
+    reset() {
+        super.reset();
+        this.#taskHandler.form.reset();
+        this.#toolHandler.form.reset();
+    }
+
+    fillWith(values, taskValues, toolValues) {
+        super.fullWith(values);                     // set simple fields (including index field)
+        this.#taskHandler.table.load(taskValues);   // set related tasks
+        this.#toolHandler.table.load(toolValues);   // set related tools
+    }
+
+    values() {
+        let simpleValues = super.values();
+        let taskValues = this.#taskHandler.table.data();
+        let toolValues = this.#toolHandler.table.data();
+        return [simpleValues, taskValues, toolValues];
+    }
+
+}// 
