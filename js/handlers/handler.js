@@ -150,8 +150,7 @@ class CompositeHandler extends Handler
     	this.form.$btnAux.on('click', event => {
         	event.preventDefault();
 			if (event.target.textContent === Form.AUX_CANCEL) {
-				this.form.toInsertMode();
-				this.enableOptions();
+				super.toInsertMode();
 				this.taskHandler.table.deleteRows();
 				this.toolHandler.table.deleteRows();
 			}
@@ -162,10 +161,10 @@ class CompositeHandler extends Handler
 						this.toolHandler.table.deleteRows();
 					}
 				}
+				this.form.reset();
+				this.taskHandler.form.reset();
+				this.toolHandler.form.reset();
 			}
-			this.form.reset();
-			this.taskHandler.form.reset();
-			this.toolHandler.form.reset();
 			event.target.blur();
     	});
     }
@@ -186,7 +185,7 @@ class CompositeHandler extends Handler
 
             let index = this.table.size() - 1;
 			console.log("### " + JSON.stringify(this.table.data(), null, 2));
-			console.log(`[${this.table.handler}] row ${index} inserted!`);
+			console.log(`[${this.handlerName}] row ${index} inserted!`);
 	    }
 	}
 
@@ -198,7 +197,7 @@ class CompositeHandler extends Handler
 			let values = [index];   // values = index + td values
 			values.push( ...this.table.tdValues(index) );
 
-			let fieldsNumber = this.table.simpleColsSize + 1;   // fieldsNumber = index + fields
+			let fieldsNumber = this.table.simpleCols + 1;   // fieldsNumber = index + fields
             this.form.fillWith( values.slice(0, fieldsNumber) );
 
 			this.taskHandler.exitEditMode();
@@ -211,9 +210,8 @@ class CompositeHandler extends Handler
 				this.toolHandler.table.deleteRows();
 			this.toolHandler.table.load( values[fieldsNumber + 1] );
 
-			this.form.toUpdateMode();
-			this.disableOptions();
-			console.log(`[${this.table.handler}] row ${index} selected!`);
+			this.toEditMode();
+			console.log(`[${this.handlerName}] row ${index} selected!`);
 		}
 	}
 
@@ -233,18 +231,17 @@ class CompositeHandler extends Handler
 			this.taskHandler.table.deleteRows();
 			this.toolHandler.table.deleteRows();
 
-			this.form.toInsertMode();
-			this.enableOptions();
+			this.toInsertMode();
 			console.log("### " + JSON.stringify(this.table.data(), null, 2));
-			console.log(`[${this.table.handler}] row ${index} updated!`);
+			console.log(`[${this.handlerName}] row ${index} updated!`);
 		}
 	}
 
 	exitEditMode() {
 		if (this.insertMode == false) {
-			this.form.cancelUpdate();
-			this.taskHandler.form.cancelUpdate();
-			this.toolHandler.form.cancelUpdate();
+			this.form.cancelEdition();
+			this.taskHandler.form.cancelEdition();
+			this.toolHandler.form.cancelEdition();
 		}
 	}
 

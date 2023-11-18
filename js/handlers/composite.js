@@ -2,6 +2,7 @@
 
 class IweTaskHandler extends Handler
 {
+    static #HANDLER_NAME = 'iweHandler.taskHandler';
     static DESC = 1; 
 
     constructor(data) {
@@ -15,11 +16,12 @@ class IweTaskHandler extends Handler
             }), 
             new Table({
                 $tableBody: $('table#tableIweTask tbody'),
-                handler: 'iweHandler.taskHandler', 
+                handlerName: IweTaskHandler.#HANDLER_NAME, 
                 object: new String()
-            }
-        ), 
-        data);
+            }), 
+            data
+        );
+        this.handlerName = IweTaskHandler.#HANDLER_NAME;
     }
 
     isValidForm() {
@@ -31,6 +33,7 @@ class IweTaskHandler extends Handler
 
 class IweToolHandler extends Handler
 {
+    static #HANDLER_NAME = 'iweHandler.toolHandler';
     static DESC = 1; 
 
     constructor(data) {
@@ -43,11 +46,12 @@ class IweToolHandler extends Handler
             }), 
             new Table({
                 $tableBody: $('table#tableIweTool tbody'),
-                handler: 'iweHandler.toolHandler', 
+                handlerName: IweToolHandler.#HANDLER_NAME, 
                 object: new String()
-            }
-        ), 
-        data);
+            }), 
+            data
+        );
+        this.handlerName = IweToolHandler.#HANDLER_NAME;
     }
 
     isValidForm() {
@@ -59,6 +63,8 @@ class IweToolHandler extends Handler
 
 class IweHandler extends CompositeHandler
 {
+    static #HANDLER_NAME = 'iweHandler';
+
     static ACCOUNT = 1;
     static ROLE = 2;
     static PROJECT = 3;
@@ -75,12 +81,13 @@ class IweHandler extends CompositeHandler
             }), 
             new ExtendedTable({
                 $tableBody: $('table#tableIwe tbody'),
-                handler: 'iweHandler', 
+                handlerName: IweHandler.#HANDLER_NAME, 
                 object: new IntWorkExp(), 
-                simpleColsSize: 4
+                simpleCols: 4
             }),
             data, taskData, toolData
         ); 
+        this.handlerName = IweHandler.#HANDLER_NAME;
     }
 
     isValidForm() {

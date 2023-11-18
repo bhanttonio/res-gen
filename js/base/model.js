@@ -4,14 +4,6 @@ class Education {
     constructor() { }
 }
 
-class Task {
-    description;
-}
-
-class Tool {
-    description;
-}
-
 class IntWorkExp {
     account; role; project; period; tasks = []; tools = [];
 }
