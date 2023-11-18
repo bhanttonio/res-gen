@@ -222,14 +222,21 @@ class ExtendedTable extends Table
     }
 
     rowHtml(values) {
-        let valueTdsHtml = super.valueTdsHtml( values.slice(0, this.simpleCols) );
-        let multivalueTdsHtml = this.multivalueTdsHtml( values.slice(this.simpleCols) );
-        return '<tr>\n' + valueTdsHtml + multivalueTdsHtml + super.linkTdsHtml() + '</tr>\n';
+        let simpleValues = values.slice(0, this.simpleCols);
+        let arrayValues = values.slice(this.simpleCols); 
+
+        let valueTdsHtml = super.valueTdsHtml(simpleValues);
+        let multivalueTdsHtml = this.multivalueTdsHtml(arrayValues);
+
+        let tdsHtml = valueTdsHtml + multivalueTdsHtml + super.linkTdsHtml();
+        return `<tr>\n${tdsHtml}</tr>\n`;
     }
 
     multivalueTdsHtml(arrays) {
-        return arrays.map( arr => 
-            '\t<td>' + arr.map(val => `${ExtendedTable.BULLET_POINT} ${val} ${ExtendedTable.LINE_BREAK}`).join('') + '</td>\n' );
+        return arrays.map( arr => {
+            let content = arr.map(val => `${ExtendedTable.BULLET_POINT} ${val} ${ExtendedTable.LINE_BREAK}`).join('');
+            return `\t<td>${content}</td>\n`;
+        });
     }
 
     tdValues(index) {
@@ -249,8 +256,11 @@ class ExtendedTable extends Table
     }
 
     update(values, index) {
-        let valueTdsHtml = super.valueTdsHtml( values.slice(0, this.simpleCols) );
-        let multivalueTdsHtml = this.multivalueTdsHtml( values.slice(this.simpleCols) );
+        let simpleValues = values.slice(0, this.simpleCols);
+        let arrayValues = values.slice(this.simpleCols); 
+
+        let valueTdsHtml = super.valueTdsHtml(simpleValues);
+        let multivalueTdsHtml = this.multivalueTdsHtml(arrayValues);
         let tdsHtml = valueTdsHtml + multivalueTdsHtml + super.linkTdsHtml();
         
         this.$tableBody.children().eq(index).html(tdsHtml);
