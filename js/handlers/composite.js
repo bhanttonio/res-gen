@@ -78,14 +78,14 @@ class IweHandler extends CompositeHandler
                 insertLegend: 'Nueva', 
                 $btnAux: $('#btnAuxIwe'), 
                 $btnMain: $('#btnMainIwe')
-            }), 
+            }, taskData, toolData), 
             new ExtendedTable({
                 $tableBody: $('table#tableIwe tbody'),
                 handlerName: IweHandler.#HANDLER_NAME, 
                 object: new IntWorkExp(), 
                 simpleCols: 4
             }),
-            data, taskData, toolData
+            data
         ); 
         this.handlerName = IweHandler.#HANDLER_NAME;
     }

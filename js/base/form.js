@@ -80,30 +80,25 @@ class ExtendedForm extends Form
 {
     #taskHandler; 
     #toolHandler; 
+    #simpleFields;   // number of simple fields
 
     constructor(config, taskData, toolData) {
         super(config);
         this.#taskHandler = new IweTaskHandler(taskData);
         this.#toolHandler = new IweToolHandler(toolData);
+        this.#simpleFields = config.simpleFields;
     }
 
     toInsertMode() {
         super.toInsertMode();
-        this.handlersToInsertMode();
+        this.#taskHandler.form.toInsertMode();
+        this.#toolHandler.form.toInsertMode();
     }
 
     toEditMode() {
         super.toEditMode();
-        this.handlersToInsertMode();
-    }
-
-    handlersToInsertMode() {
         this.#taskHandler.form.toInsertMode();
         this.#toolHandler.form.toInsertMode();
-        this.clearTables();
-    }
-
-    clearTables() {
         this.#taskHandler.table.deleteRows();
         this.#toolHandler.table.deleteRows();
     }
@@ -112,12 +107,14 @@ class ExtendedForm extends Form
         super.reset();
         this.#taskHandler.form.reset();
         this.#toolHandler.form.reset();
+        this.#taskHandler.table.deleteRows();
+        this.#toolHandler.table.deleteRows();
     }
 
-    fillWith(values, taskValues, toolValues) {
-        super.fullWith(values);                     // set simple fields (including index field)
-        this.#taskHandler.table.load(taskValues);   // set related tasks
-        this.#toolHandler.table.load(toolValues);   // set related tools
+    fillWith(values) { 
+        super.fullWith( values.slice(0, this.#simpleFields) );            // set simple fields (including index field)
+        this.#taskHandler.table.load( values[this.#simpleFields] );       // set related tasks
+        this.#toolHandler.table.load( values[this.#simpleFields + 1] );   // set related tools
     }
 
     values() {
@@ -125,6 +122,10 @@ class ExtendedForm extends Form
         let taskValues = this.#taskHandler.table.data();
         let toolValues = this.#toolHandler.table.data();
         return [simpleValues, taskValues, toolValues];
+    }
+
+    innerTablesHasRows() {
+        return this.#taskHandler.table.hasRows() || this.#toolHandler.table.hasRows();
     }
 
 }// 
