@@ -4,8 +4,8 @@ let eduHandler;
 let courseHandler;
 let langHandler;
 let skillHandler;
-// var sectorHandler;
-var iweHandler;
+let sectorHandler;
+let iweHandler;
 
 
 $(function() {
@@ -13,29 +13,20 @@ $(function() {
     M.AutoInit();
 
     basicHandler = new BasicHandler();
-
     eduHandler = new EducationHandler([
         {name: 'Licenciatura en Informática Administrativa', institute: 'Universidad Nacional Autónoma de México', start: 2015, end: 2020}, 
         {name: 'Maestría en Administración', institute: 'Universidad del Valle de México', start: 2020, end: 2023}
     ]);
-    
     courseHandler = new CourseHandler([
         {name: 'JIRA fundamentals', location: 'TCS internal courses', data: '02/Jul/2022'}, 
         {name: 'Persistencia de datos con Java', location: 'Platzi', data: 'Septiembre 2020'}
     ]);
-
-
     langHandler = new LanguageHandler([
         {name: 'Inglés', speak: 50, read: 75, write: 75}, 
         {name: 'Portugués', speak: 25, read: 25, write: 25}
     ]);
-
-    skillHandler = new SkillHandler([
-        'Ingeniería del software: ADOO, UML, Scrum',
-        'Bases de datos: Oracle, PostgreSQL, MySQL, SQL Server, MongoDB' 
-    ]);
-
-    // sectorHandler = new SectorHandler();
+    skillHandler = new SkillHandler(['Ingeniería del software: ADOO, UML, Scrum', 'Bases de datos: Oracle, PostgreSQL, MySQL, SQL Server, MongoDB' ]);
+    sectorHandler = new SectorHandler(['Bancario', 'Ventas al por menor']);
 
     iweHandler = new IweHandler( [
         { account: 'Banorte', role: 'Desarrollador Java', project: 'Migración de código', period: 'Enero 2020 - Febrero 2022', 
@@ -115,8 +106,8 @@ class MainHandler
             if (href != '#skills')
                 skillHandler.exitEditMode();
 
-            // if (href != '#sectors') 
-            //     sectorHandler.exitEditMode();
+            if (href != '#sectors') 
+                sectorHandler.exitEditMode();
 
             if (href != '#int-work-exp') {
                 iweHandler.exitEditMode();
