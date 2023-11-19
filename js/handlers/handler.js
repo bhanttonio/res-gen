@@ -1,24 +1,26 @@
 
 class Handler 
 {
-    static INDEX = 0;    // index of index field
+    static #INDEX = 0;    // index of index field
 
     form;
     table;
     insertMode = true;   // to control mode of the form
 	handlerName;
 
-    constructor(form, table, data) {
+    constructor(config) {
         if (this.constructor == Handler)
 			throw new Error('Abstract class must be implemented!');
 
-		console.log(`\t ${table.handlerName}`);
-        this.form  = form;
-        this.table = table;
+		this.handlerName = config.handlerName;
+		console.log(`\t ${this.handlerName}`);
+		
+        this.form  = config.form;
+        this.table = config.table;
 
 		this.initAuxBtn();
 		this.initMainBtn();
-		this.initTable(data);
+		this.initTable(config.data);
     }
 
 	initAuxBtn() {
@@ -77,7 +79,7 @@ class Handler
 
     update() {
 		if (this.isValidForm()) {
-            let index = this.form.fields[Handler.INDEX].value;
+            let index = this.form.fields[Handler.#INDEX].value;
             this.table.update(this.form.values(), index);
 
             this.toInsertMode();

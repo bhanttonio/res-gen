@@ -98,8 +98,11 @@ class MainHandler
             //     skillHandler.exitEditMode();
             // if (href != '#sectors') 
             //     sectorHandler.exitEditMode();
-            if (href != '#int-work-exp')
+            if (href != '#int-work-exp') {
                 iweHandler.exitEditMode();
+                iweHandler.form.taskHandler.exitEditMode();
+                iweHandler.form.toolHandler.exitEditMode();
+            }
 		});
     }
 

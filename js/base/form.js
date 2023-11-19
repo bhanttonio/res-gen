@@ -78,54 +78,54 @@ class Form
 
 class ExtendedForm extends Form
 {
-    #taskHandler; 
-    #toolHandler; 
+    taskHandler; 
+    toolHandler; 
     #simpleFields;   // number of simple fields
 
     constructor(config, taskData, toolData) {
         super(config);
-        this.#taskHandler = new IweTaskHandler(taskData);
-        this.#toolHandler = new IweToolHandler(toolData);
+        this.taskHandler = new IweTaskHandler(taskData);
+        this.toolHandler = new IweToolHandler(toolData);
         this.#simpleFields = config.simpleFields;
     }
 
     toInsertMode() {
         super.toInsertMode();
-        this.#taskHandler.form.toInsertMode();
-        this.#toolHandler.form.toInsertMode();
+        this.taskHandler.toInsertMode();
+        this.toolHandler.toInsertMode();
     }
 
     toEditMode() {
         super.toEditMode();
-        this.#taskHandler.form.toInsertMode();
-        this.#toolHandler.form.toInsertMode();
-        this.#taskHandler.table.deleteRows();
-        this.#toolHandler.table.deleteRows();
+        this.taskHandler.toInsertMode();
+        this.toolHandler.toInsertMode();
+        this.taskHandler.table.deleteRows();
+        this.toolHandler.table.deleteRows();
     }
 
     reset() {
         super.reset();
-        this.#taskHandler.form.reset();
-        this.#toolHandler.form.reset();
-        this.#taskHandler.table.deleteRows();
-        this.#toolHandler.table.deleteRows();
+        this.taskHandler.form.reset();
+        this.toolHandler.form.reset();
+        this.taskHandler.table.deleteRows();
+        this.toolHandler.table.deleteRows();
     }
 
     fillWith(values) { 
-        super.fullWith( values.slice(0, this.#simpleFields) );            // set simple fields (including index field)
-        this.#taskHandler.table.load( values[this.#simpleFields] );       // set related tasks
-        this.#toolHandler.table.load( values[this.#simpleFields + 1] );   // set related tools
+        super.fillWith( values.slice(0, this.#simpleFields) );           // set simple fields (including index field)
+        this.taskHandler.table.load( values[this.#simpleFields] );       // set related tasks
+        this.toolHandler.table.load( values[this.#simpleFields + 1] );   // set related tools
     }
 
     values() {
         let simpleValues = super.values();
-        let taskValues = this.#taskHandler.table.data();
-        let toolValues = this.#toolHandler.table.data();
-        return [simpleValues, taskValues, toolValues];
+        let taskValues = this.taskHandler.table.data();
+        let toolValues = this.toolHandler.table.data();
+        return [...simpleValues, taskValues, toolValues];
     }
 
     innerTablesHasRows() {
-        return this.#taskHandler.table.hasRows() || this.#toolHandler.table.hasRows();
+        return this.taskHandler.table.hasRows() || this.toolHandler.table.hasRows();
     }
 
 }// 
