@@ -1,7 +1,7 @@
 
-// var basicHandler;
-var eduHandler;
-// var courseHandler;
+let basicHandler;
+let eduHandler;
+let courseHandler;
 // var languageHandler;
 // var skillHandler;
 // var sectorHandler;
@@ -12,14 +12,19 @@ $(function() {
     console.log('loading');
     M.AutoInit();
 
-    // basicHandler = new BasicHandler();
+    basicHandler = new BasicHandler();
 
     eduHandler = new EducationHandler([
         {name: 'Licenciatura en Informática Administrativa', institute: 'Universidad Nacional Autónoma de México', start: 2015, end: 2020}, 
         {name: 'Maestría en Administración', institute: 'Universidad del Valle de México', start: 2020, end: 2023}
     ]);
     
-    // courseHandler = new CourseHandler();
+    courseHandler = new CourseHandler([
+        {name: 'JIRA fundamentals', location: 'TCS internal courses', data: '02/Jul/2022'}, 
+        {name: 'Persistencia de datos con Java', location: 'Platzi', data: 'Septiembre 2020'}
+    ]);
+
+
     // languageHandler = new LanguageHandler();
     // skillHandler = new SkillHandler();
     // sectorHandler = new SectorHandler();
@@ -86,18 +91,22 @@ class MainHandler
 			let href = event.target.getAttribute('href');
 			console.log(`\u2192 ${href}`);
 
-            // if (href !== '#basic')
-            //     basicHandler.isValidForm();
+            if (href !== '#basic')
+                basicHandler.isValidForm();
+
 			if (href !== '#education') 
                 eduHandler.exitEditMode();
-            // if (href != '#courses')
-            //     courseHandler.exitEditMode();
+
+            if (href != '#courses')
+                courseHandler.exitEditMode();
+
             // if (href != '#languages') 
             //     languageHandler.exitEditMode();
             // if (href != '#skills')
             //     skillHandler.exitEditMode();
             // if (href != '#sectors') 
             //     sectorHandler.exitEditMode();
+
             if (href != '#int-work-exp') {
                 iweHandler.exitEditMode();
                 iweHandler.form.taskHandler.exitEditMode();
