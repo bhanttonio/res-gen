@@ -79,13 +79,15 @@ class IweHandler extends Handler
         super({ 
             form: 
                 new ExtendedForm({ 
-                    elForm: document.getElementById('formIwe'), 
-                    formLegend: 'Experiencia Interna', 
-                    insertLegend: 'Nueva', 
-                    $btnAux: $('#btnAuxIwe'), 
-                    $btnMain: $('#btnMainIwe'), 
-                    simpleFields: 5               // including index
-                }, taskData, toolData), 
+                        elForm: document.getElementById('formIwe'), 
+                        formLegend: 'Experiencia Interna', 
+                        insertLegend: 'Nueva', 
+                        $btnAux: $('#btnAuxIwe'), 
+                        $btnMain: $('#btnMainIwe'), 
+                        simpleFields: 5   // including index
+                    }, 
+                    new IweTaskHandler(taskData), 
+                    new IweToolHandler(toolData) ), 
             table: 
                 new ExtendedTable({
                     $tableBody: $('table#tableIwe tbody'),

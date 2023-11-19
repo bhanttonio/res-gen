@@ -499,7 +499,7 @@
 							<span class="helper-text col s10">Ej. Desarrollador backend</span>
 						</div>
 						<div class="input-field col s3">
-							<input id="projectIwe" name="projectIwe" type="text" class="validate" data-length="75" maxlength="75">
+							<input id="projectIwe" name="projectIwe" type="text" class="validate" data-length="50" maxlength="50">
 							<label for="projectIwe">Proyecto</label>
 							<span class="helper-text col s10">Ej. Migraci&oacute;n de código legacy</span>
 						</div>
@@ -694,63 +694,214 @@
 						<button id="btnNextIwe" data-tab="ext-work-exp" class="waves-effect waves-light btn-flat btn-small">Siguiente</button>
 					</div>
 				</div>
-
 			</section>
 
 
 			<!-- external-work-experience -->
 			<section id="ext-work-exp" class="section">
-				<br>
-				<div class="row">
-					<div class="input-field col s4">
-			          	<input id="ewe_company_1" type="text" class="validate" data-length="50" maxlength="50">
-			          	<label for="ewe_company_1">Empresa</label>
-			          	<span class="helper-text col s10">P. ej. &nbsp;Consultancy Services Group</span>
-			        </div>
-			        <div class="input-field col s4">
-			          	<input id="ewe_rol_1" type="text" class="validate" data-length="50" maxlength="50">
-			          	<label for="ewe_rol_1">Puesto</label>
-			          	<span class="helper-text col s10">P. ej. &nbsp;Analista de sistemas</span>
-			        </div>
-			        <div class="input-field col s4">
-						<input id="ewe_period_1" type="text" class="validate" data-length="50" maxlength="50">
-						<label for="ewe_period_1">Per&iacute;odo</label>
-						<span class="helper-text col s10">P. ej. &nbsp;Marzo/2018 a Octubre/2019</span>
-					</div>
-				</div>
+				<fieldset class="row">
+					<legend id="formLegendEwe">Experiencia Externa &lsqb;Nueva&rsqb;</legend>
 
-				<br>
-				<div class="row">
-					<!-- activities -->
-					<div class="col s6">
-						<div class="row">
-							<h6 class="col s12">Actividades</h6>
-							<div class="input-field col s12">
-					          	<input id="ewe_task_1" type="text" class="validate" data-length="125" maxlength="125">
-					          	<label for="ewe_task_1">Descripci&oacute;n</label>
-					          	<span class="helper-text col s11">P. ej. &nbsp;Elaboraci&oacute;n de diagramas UML</span>
-			        		</div>
-			        		<div class="input-field col s12">
-				          		<input id="ewe_task_2" type="text" class="validate" data-length="125" maxlength="125">
-				          		<label for="ewe_task_2">Descripci&oacute;n</label>
-			        		</div>
+					<!-- first form -->
+					<form id="formEwe" class="row">
+						<input name="indexEwe" type="hidden" value="">
+						<div class="input-field col s4">
+							<input id="companyEwe" name="companyEwe" type="text" class="validate" data-length="50" maxlength="50">
+							<label for="companyEwe">Empresa</label>
+							<span class="helper-text col s10">Ej. Consultancy Services Group</span>
 						</div>
+						<div class="input-field col s4">
+							<input id="roleEwe" name="roleEwe" type="text" class="validate" data-length="50" maxlength="50">
+							<label for="roleEwe">Puesto</label>
+							<span class="helper-text col s10">Ej. Analista de sistemas</span>
+						</div>
+						<div class="input-field col s4">
+							<input id="periodEwe" name="periodEwe" type="text" class="validate" data-length="50" maxlength="50">
+							<label for="periodEwe">Per&iacute;odo</label>
+							<span class="helper-text col s10">Ej. Marzo/2018 a Octubre/2019</span>
+						</div>
+					</form>
+
+					<!-- tasks -->
+					<div class="col s6">
+						<form id="formEweTask" onsubmit="return false;">
+							<fieldset>
+								<legend>Actividades</legend>
+
+								<div class="row">
+									<input name="indexEweTask" type="hidden" value="">
+									<div class="input-field col s8">
+										<input id="descEweTask" name="descEweTask" type="text" class="validate" data-length="125" maxlength="125">
+										<label id="labelEweTask" for="descEweTask">Actividad &lsqb;Nueva&rsqb;</label>
+										<span class="helper-text col s10">Ej. Elaboraci&oacute;n de diagramas UML</span>
+									</div>
+									<div class="input-field col s4">
+										<div class="col s6 left-align">
+											<a id="linkAuxEweTask" name="linkAuxEweTask" href="#" tabindex="-1" class="resgen-simple">Limpiar</a>
+										</div>
+										<div class="col s6 right-align">
+											<a id="linkMainEweTask" name="linkMainEweTask" href="#" class="resgen-simple">Agregar</a>
+										</div>
+									</div>
+								</div>
+								
+								<table id="tableEweTask" class="striped">
+									<thead>
+										<tr>
+											<th>Descripci&oacute;n</th>
+											<th colspan="4">Opciones</th>
+										</tr>
+									</thead>
+									<tbody>
+										<!-- 
+										<tr>
+											<td>Análisis, diseño y programación de nuevo módulo web</td>
+											<td><a href="#" onclick="eweHandler.form.taskHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+											<td><a href="#" onclick="eweHandler.form.taskHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+											<td><a href="#" onclick="eweHandler.form.taskHandler.select(event)" title="editar">&#x1F589;</a></td>
+											<td><a href="#" onclick="eweHandler.form.taskHandler.remove(event)" title="borrar">&#x2327;</a></td>
+										</tr>
+										<tr>
+											<td>Refactorización de aplicaciones standalone</td>
+											<td><a href="#" onclick="eweHandler.form.taskHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+											<td><a href="#" onclick="eweHandler.form.taskHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+											<td><a href="#" onclick="eweHandler.form.taskHandler.select(event)" title="editar">&#x1F589;</a></td>
+											<td><a href="#" onclick="eweHandler.form.taskHandler.remove(event)" title="borrar">&#x2327;</a></td>
+										</tr>
+										-->
+									</tbody>
+								</table>
+
+							</fieldset>
+						</form>
 					</div>
+					
 					<!-- tools -->
 					<div class="col s6">
-						<div class="row">
-							<h6 class="col s12">Entorno T&eacute;cnico</h6>
-							<div class="input-field col s12">
-					          	<input id="ewe_tool_1" type="text" class="validate" data-length="125" maxlength="125">
-					          	<label for="ewe_tool_1">Descripci&oacute;n</label>
-					          	<span class="helper-text col s11">P. ej. &nbsp;Herramientas&colon; Visual Paradigm, UMLet</span>
-				        	</div>
-				        	<div class="input-field col s12">
-					          	<input id="ewe_tool_2" type="text" class="validate" data-length="125" maxlength="125">
-					          	<label for="ewe_tool_2">Descripci&oacute;n</label>
-				        	</div>
-				        </div>
+						<form id="formEweTool" onsubmit="return false;">
+							<fieldset>
+								<legend>Entorno T&eacute;cnico</legend>
+
+								<div class="row">
+									<input name="indexEweTool" type="hidden" value="">
+									<div class="input-field col s8">
+										<input id="descEweTool" name="descEweTool" type="text" class="validate" data-length="125" maxlength="125">
+										<label id="labelEweTool" for="descEweTool">Entorno  &lsqb;Nuevo&rsqb;</label>
+										<span class="helper-text col s10">Ej. Herramientas&colon; Visual Paradigm, UMLet</span>
+									</div>
+									<div class="input-field col s4">
+										<div class="col s6 left-align">
+											<a id="linkAuxEweTool" name="linkAuxEweTool" href="#" tabindex="-1" class="resgen-simple">Limpiar</a>
+										</div>
+										<div class="col s6 right-align">
+											<a id="linkMainEweTool" name="linkMainEweTool" href="#" class="resgen-simple">Agregar</a>
+										</div>
+									</div>
+								</div>
+
+								<table id="tableEweTool" class="striped">
+									<thead>
+										<tr>
+											<th>Descripci&oacute;n</th>
+											<th colspan="4">Opciones</th>
+										</tr>
+									</thead>
+									<tbody>
+										<!-- 
+										<tr>
+											<td>Herramientas: GitHub, DBeaver, JBoss, Tomcat</td>
+											<td><a href="#" onclick="eweHandler.form.toolHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+											<td><a href="#" onclick="eweHandler.form.toolHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+											<td><a href="#" onclick="eweHandler.form.toolHandler.select(event)" title="editar">&#x1F589;</a></td>
+											<td><a href="#" onclick="eweHandler.form.toolHandler.remove(event)" title="borrar">&#x2327;</a></td>
+										</tr>
+										<tr>
+											<td>Tecnologías: JSP, JAX-RS, HTML, CSS, JavaScript</td>
+											<td><a href="#" onclick="eweHandler.form.toolHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+											<td><a href="#" onclick="eweHandler.form.toolHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+											<td><a href="#" onclick="eweHandler.form.toolHandler.select(event)" title="editar">&#x1F589;</a></td>
+											<td><a href="#" onclick="eweHandler.form.toolHandler.remove(event)" title="borrar">&#x2327;</a></td>
+										</tr>
+										-->
+									</tbody>
+								</table>
+
+							</fieldset>
+						</form>
+					</div> 
+				</fieldset>
+
+				<div class="row">
+					<div class="col s6 push-s6">
+						<div class="col s3 push-s6" style="text-align: right;">
+							<button id="btnAuxEwe" name="btnAuxEwe" class="waves-effect waves-light btn-flat btn-small" tabindex="-1">Limpiar</button>
+						</div>
+						<div class="col s3 push-s6" style="text-align: right;">
+							<button id="btnMainEwe" name="btnMainEwe" class="waves-effect waves-light btn-flat btn-small">Agregar</button>
+						</div>
 					</div>
+				</div>
+				<br><br>
+
+				<table id="tableEwe" class="highlight">
+					<thead>
+						<tr>
+							<th>Empresa</th>
+							<th>Puesto</th>
+							<th>Per&iacute;odo</th>
+							<th>Actividades</th>
+							<th>Entorno T&eacute;cnico</th>
+							<th colspan="4">Opciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- 
+						<tr>
+							<td>GFI</td>
+							<td>Desarrollador Python</td>
+							<td>Abril 2017 - Marzo 2018</td>
+							<td>
+								* Refactorización y optimización de código <br>
+								* Desarrollo de aplicaciones de prcesamiento de datos
+							</td>
+							<td>
+								* Herramientas: PyCharm, Bitbucket, Jira <br>
+								* Tecnologías: Python v3, Pandas, Flask, RedisGraph
+							</td>
+							<td><a href="#" onclick="eweHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+							<td><a href="#" onclick="eweHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+							<td><a href="#" onclick="eweHandler.select(event)" title="editar">&#x1F589;</a></td>
+							<td><a href="#" onclick="eweHandler.remove(event)" title="borrar">&#x2327;</a></td>
+						</tr>
+						<tr>
+							<td>BCM</td>
+							<td>Desarrollador JavaScript</td>
+							<td>Octubre 2021 - Agosto 2023</td>
+							<td>
+								* Análisis y documentación de CGIs <br>
+								* Diseño e implementación de servicios REST
+							</td>
+							<td>
+								* Herramientas: Sublime Text, Visual Studio Code <br>
+								* Tecnologías: HTML, CSS, JavaScript, jQuery
+							</td>
+							<td><a href="#" onclick="eweHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+							<td><a href="#" onclick="eweHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+							<td><a href="#" onclick="eweHandler.select(event)" title="editar">&#x1F589;</a></td>
+							<td><a href="#" onclick="eweHandler.remove(event)" title="borrar">&#x2327;</a></td>
+						</tr>
+						-->
+					</tbody>
+				</table>
+				<br><br>
+
+				<div class="row">
+					<div class="col s2 left-align">
+						<button id="btnPrevEwe" data-tab="int-work-exp" class="waves-effect waves-light btn-flat btn-small">Anterior</button>
+					</div>
+					<!-- <div class="col s2 push-s8 right-align">
+						<button id="btnNextEwe" data-tab="" class="waves-effect waves-light btn-flat btn-small">Siguiente</button>
+					</div> -->
 				</div>
 			</section>
 
@@ -769,7 +920,8 @@
 	<script type="text/javascript" src="js/base/table.js"></script>
 	<script type="text/javascript" src="js/handlers/handler.js"></script>
 	<script type="text/javascript" src="js/handlers/simple.js"></script>
-	<script type="text/javascript" src="js/handlers/composite.js"></script>
+	<script type="text/javascript" src="js/handlers/int-work-exp.js"></script>
+	<script type="text/javascript" src="js/handlers/ext-work-exp.js"></script>
 	
 	<script type="text/javascript" src="js/main.js"></script>
 </body>

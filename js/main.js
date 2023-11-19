@@ -6,6 +6,7 @@ let langHandler;
 let skillHandler;
 let sectorHandler;
 let iweHandler;
+let eweHandler;
 
 
 $(function() {
@@ -38,6 +39,18 @@ $(function() {
     ], 
     ['Diseño e implementación de microservicios con Spring Boot', 'Análisis de requerimientos y creación de diagramas de secuencia y máquinas de estado'], 
     ['Herramientas: Eclipse IDE, WildFly, GitHub, Jira, Akeyless, Checkmarx, Sonarqube', 'Tecnologías: Java, Spring Boot, JUnit, Git, Maven, Docker'] 
+    );
+
+    eweHandler = new EweHandler( [
+        { company: 'GFI', role: 'Desarrollador Python', period: 'Abril 2017 - Marzo 2018', 
+          tasks: ['Refactorización y optimización de código', 'Desarrollo de aplicaciones de prcesamiento de datos'], 
+          tools: ['Herramientas: PyCharm, Bitbucket, Jira', 'Tecnologías: Python v3, Pandas, Flask, RedisGraph'] }, 
+        { company: 'BCM', role: 'Desarrollador JavaScript', period: 'Octubre 2021 - Agosto 2023', 
+          tasks: ['Análisis y documentación de CGIs', 'Diseño e implementación de servicios REST'], 
+          tools: ['Herramientas: Sublime Text, Visual Studio Code', 'Tecnologías: HTML, CSS, JavaScript, jQuery'] }
+    ], 
+    ['Análisis, diseño y programación de nuevo módulo web', 'Refactorización de aplicaciones standalone'], 
+    ['Herramientas: GitHub, DBeaver, JBoss, Tomcat', 'Tecnologías: JSP, JAX-RS, HTML, CSS, JavaScript'] 
     );
 
     new MainHandler();
@@ -113,6 +126,12 @@ class MainHandler
                 iweHandler.exitEditMode();
                 iweHandler.form.taskHandler.exitEditMode();
                 iweHandler.form.toolHandler.exitEditMode();
+            }
+
+            if (href != '#ext-work-exp') {
+                eweHandler.exitEditMode();
+                eweHandler.form.taskHandler.exitEditMode();
+                eweHandler.form.toolHandler.exitEditMode();
             }
 		});
     }

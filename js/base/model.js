@@ -25,3 +25,6 @@ class IntWorkExp {
     account; role; project; period; tasks = []; tools = [];
 }
 
+class EweWorkExp {
+    company; role; period; tasks = []; tools = [];
+}

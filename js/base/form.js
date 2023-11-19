@@ -82,10 +82,10 @@ class ExtendedForm extends Form
     toolHandler; 
     #simpleFields;   // number of simple fields
 
-    constructor(config, taskData, toolData) {
+    constructor(config, taskHandler, toolHandler) {
         super(config);
-        this.taskHandler = new IweTaskHandler(taskData);
-        this.toolHandler = new IweToolHandler(toolData);
+        this.taskHandler = taskHandler;
+        this.toolHandler = toolHandler;
         this.#simpleFields = config.simpleFields;
     }
 
