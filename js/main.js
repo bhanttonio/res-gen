@@ -3,7 +3,7 @@ let basicHandler;
 let eduHandler;
 let courseHandler;
 let langHandler;
-// var skillHandler;
+let skillHandler;
 // var sectorHandler;
 var iweHandler;
 
@@ -30,8 +30,13 @@ $(function() {
         {name: 'Portugués', speak: 25, read: 25, write: 25}
     ]);
 
-    // skillHandler = new SkillHandler();
+    skillHandler = new SkillHandler([
+        'Ingeniería del software: ADOO, UML, Scrum',
+        'Bases de datos: Oracle, PostgreSQL, MySQL, SQL Server, MongoDB' 
+    ]);
+
     // sectorHandler = new SectorHandler();
+
     iweHandler = new IweHandler( [
         { account: 'Banorte', role: 'Desarrollador Java', project: 'Migración de código', period: 'Enero 2020 - Febrero 2022', 
           tasks: ['Implementación de microservicios con Spring Boot', 'Elaboración de diagramas UML'], 
@@ -105,10 +110,11 @@ class MainHandler
                 courseHandler.exitEditMode();
 
             if (href != '#languages') 
-               langHandler.exitEditMode();
+                langHandler.exitEditMode();
             
-            // if (href != '#skills')
-            //     skillHandler.exitEditMode();
+            if (href != '#skills')
+                skillHandler.exitEditMode();
+
             // if (href != '#sectors') 
             //     sectorHandler.exitEditMode();
 
