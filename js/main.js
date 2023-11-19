@@ -14,7 +14,7 @@ $(function() {
 
     // basicHandler = new BasicHandler();
 
-    eduHandler = new EduHandler([
+    eduHandler = new EducationHandler([
         {name: 'Licenciatura en Informática Administrativa', institute: 'Universidad Nacional Autónoma de México', start: 2015, end: 2020}, 
         {name: 'Maestría en Administración', institute: 'Universidad del Valle de México', start: 2020, end: 2023}
     ]);

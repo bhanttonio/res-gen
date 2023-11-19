@@ -34,7 +34,7 @@ class Form
             else if (element.name.startsWith('btnMain'))  this.$btnMain = $(element);
         });
 
-        this.$legend = $(this.elForm).find('legend');
+        this.$legend = config.$legend ? config.$legend : $(this.elForm).find('legend');
         if (!this.$btnAux)  this.$btnAux = config.$btnAux;        
         if (!this.$btnMain) this.$btnMain = config.$btnMain;
     }

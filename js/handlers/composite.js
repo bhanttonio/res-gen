@@ -13,7 +13,8 @@ class IweTaskHandler extends Handler
                     formLegend: 'Actividad',
                     insertLegend: 'Nueva', 
                     $btnAux: $('#linkAuxIweTask'),
-                    $btnMain: $('#linkMainIweTask')
+                    $btnMain: $('#linkMainIweTask'), 
+                    $legend: $('#labelIweTask')
                 }), 
             table: 
                 new Table({
@@ -45,7 +46,8 @@ class IweToolHandler extends Handler
                     elForm:  document.getElementById('formIweTool'), 
                     formLegend: 'Entorno', 
                     $btnAux: $('#linkAuxIweTool'),
-                    $btnMain: $('#linkMainIweTool')
+                    $btnMain: $('#linkMainIweTool'),
+                    $legend: $('#labelIweTool')
                 }), 
             table: 
                 new Table({
