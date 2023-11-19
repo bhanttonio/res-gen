@@ -2,7 +2,7 @@
 let basicHandler;
 let eduHandler;
 let courseHandler;
-// var languageHandler;
+let langHandler;
 // var skillHandler;
 // var sectorHandler;
 var iweHandler;
@@ -25,7 +25,11 @@ $(function() {
     ]);
 
 
-    // languageHandler = new LanguageHandler();
+    langHandler = new LanguageHandler([
+        {name: 'Inglés', speak: 50, read: 75, write: 75}, 
+        {name: 'Portugués', speak: 25, read: 25, write: 25}
+    ]);
+
     // skillHandler = new SkillHandler();
     // sectorHandler = new SectorHandler();
     iweHandler = new IweHandler( [
@@ -100,8 +104,9 @@ class MainHandler
             if (href != '#courses')
                 courseHandler.exitEditMode();
 
-            // if (href != '#languages') 
-            //     languageHandler.exitEditMode();
+            if (href != '#languages') 
+               langHandler.exitEditMode();
+            
             // if (href != '#skills')
             //     skillHandler.exitEditMode();
             // if (href != '#sectors') 
