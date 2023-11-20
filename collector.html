@@ -8,845 +8,844 @@
 </head>
 <body>
 	<div class="container">
+		
+		<!-- title -->
 		<div class="row">
+			<br>
+			<h5>Datos del Candidato</h5>
+			<br><br>
+		</div>
+		
+		<!-- tabs -->
+		<div id="wrap-tabs" class="row">
+			<ul id="tabs" class="tabs">
+				<li class="tab"><a href="#basic">B&aacute;sicos</a></li>
+				<li class="tab"><a href="#education">Educaci&oacute;n</a></li>
+				<li class="tab"><a href="#courses">Cursos</a></li>
+				<li class="tab"><a href="#languages">Idiomas</a></li>
+				<li class="tab"><a href="#skills">Conocimientos</a></li>
+				<li class="tab"><a href="#sectors">Sectores</a></li>
+				<li class="tab"><a href="#int-work-exp">Exp Int</a></li>
+				<li class="tab"><a href="#ext-work-exp">Exp Ext</a></li>
+			</ul>
+		</div>
 
-			<!-- title -->
+		<!-- basic -->
+		<section id="basic" class="row section">
+
+			<form id="formBasic" class="col s12">
+				<fieldset class="row">
+					<legend>Nombre y Perfil</legend>
+					<div class="input-field col s3">
+						<input id="nameBasic" name="nameBasic" type="text" class="validate" autocomplete="off" data-length="50" maxlength="50">
+						<label for="nameBasic">Nombre&lpar;s&rpar;</label>
+					</div>
+					<div class="input-field col s2">
+						<input id="surname1Basic" name="surname1Basic" type="text" class="validate" data-length="50" maxlength="50">
+						<label for="surname1Basic">Apellido Paterno</label>
+					</div>
+					<div class="input-field col s2">
+						<input id="surname2Basic" name="surname2Basic" type="text" class="validate" data-length="50" maxlength="50">
+						<label for="surname2Basic">Apellido Materno</label>
+					</div>
+					<div class="input-field col s4 push-s1">
+						<input id="levelBasic" name="levelBasic" type="text" class="validate" data-length="50" maxlength="50">
+						<label for="levelBasic">Nivel</label>
+						<span class="helper-text col s10">Ej. Consultor Senior</span>
+					</div>
+					<div class="input-field col s12">
+						<textarea id="profileBasic" name="profileBasic" class="materialize-textarea validate" data-length="300" maxlength="300"></textarea>
+						<label for="profileBasic">Perfil Profesional</label>
+						<span class="helper-text col s11">Ej. Consultor senior biling&uuml;e del PP SAP, m&aacute;s de 10 
+						a&ntilde;os con SAP ECC, S4Hana y servicios en la nube. Experiencia trabajando de forma remota y en el sitio
+						con clientes en el extranjero y diferentes zonas horarias. Trabaje bien con enfoques Agile y Waterfall.</span>
+					</div>
+					<div class="input-field col s12">
+						<div class="row" style="margin-bottom: 0px;">
+							<div class="col s6">
+								<button id="btnAuxBasic" name="btnAuxBasic" class="waves-effect waves-light btn-flat btn-small" tabindex="-1">Limpiar</button>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+
 			<div class="row">
-				<br>
-				<h5>Datos del Candidato</h5>
-				<br><br>
+				<div class="col s3 push-s9 right-align">
+					<button id="btnNextBasic" data-tab="education" class="waves-effect waves-light btn-flat btn-small">Siguiente</button>
+				</div>
 			</div>
+
+		</section>
+
+
+		<!-- education -->
+		<section id="education" class="row section">
+
+			<form id="formEdu" class="col s3">
+				<fieldset class="row">
+					<legend>Escolaridad &lsqb;Nueva&rsqb;</legend>
+					<input name="indexEdu" type="hidden" value="">
+					<div class="input-field col s12">
+						<input id="nameEdu" name="nameEdu" type="text" class="validate" data-length="75" maxlength="75">
+						<label for="nameEdu">Grado</label>
+						<span class="helper-text col s10">Ej. Lic. en Administraci&oacute;n</span>
+					</div>
+					<div class="input-field col s12">
+						<input id="instituteEdu" name="instituteEdu" type="text" class="validate" data-length="75" maxlength="75">
+						<label for="instituteEdu">Instituci&oacute;n</label>
+						<span class="helper-text col s10">Ej. UNAM</span>
+					</div>
+					<div class="input-field col s6">
+						<input id="startEdu" name="startEdu" type="text" class="validate" data-length="4" maxlength="4">
+						<label for="startEdu">Inicio</label>
+						<span class="helper-text col s9">Ej. 2015</span>
+					</div>
+					<div class="input-field col s6">
+						<input id="endEdu" name="endEdu" type="text" class="validate" data-length="4" maxlength="4">
+						<label for="endEdu">Fin</label>
+						<span class="helper-text col s9">Ej. 2020</span>
+					</div>
+					<div class="input-field col s12">
+						<div class="row" style="margin-bottom: 0px;">
+							<div class="col s6 left-align">
+								<button id="btnAuxEdu" name="btnAuxEdu" class="waves-effect waves-light btn-flat btn-small" tabindex="-1">Limpiar</button>
+							</div>
+							<div class="col s6 right-align">
+								<button id="btnMainEdu" name="btnMainEdu" class="waves-effect waves-light btn-flat btn-small">Agregar</button>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</form>
 			
-			<!-- tabs -->
-			<div id="wrap-tabs" class="row">
-				<ul id="tabs" class="tabs">
-					<li class="tab"><a href="#basic">B&aacute;sicos</a></li>
-					<li class="tab"><a href="#education">Educaci&oacute;n</a></li>
-					<li class="tab"><a href="#courses">Cursos</a></li>
-					<li class="tab"><a href="#languages">Idiomas</a></li>
-					<li class="tab"><a href="#skills">Conocimientos</a></li>
-					<li class="tab"><a href="#sectors">Sectores</a></li>
-					<li class="tab"><a href="#int-work-exp">Exp Int</a></li>
-					<li class="tab"><a href="#ext-work-exp">Exp Ext</a></li>
-				</ul>
-				<br>
+			<article class="col s9">
+				<table id="tableEdu" class="highlight">
+					<thead>
+						<tr>
+							<th>Grado</th>
+							<th>Instituci&oacute;n</th>
+							<th>Inicio</th>
+							<th>Fin</th>
+							<th colspan="4">Opciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- 
+						<tr>
+							<td>Licenciatura en Informática Administrativa</td>
+							<td>Universidad Nacional Autónoma de México</td>
+							<td>2015</td>
+							<td>2020</td>
+							<td><a href="#" onclick="eduHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+							<td><a href="#" onclick="eduHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+							<td><a href="#" onclick="eduHandler.select(event)" title="editar">&#x1F589;</a></td>
+							<td><a href="#" onclick="eduHandler.remove(event)" title="borrar">&#x2327;</a></td>
+						</tr>
+						<tr>
+							<td>Maestría en Administración</td>
+							<td>Universidad del Valle de México</td>
+							<td>2020</td>
+							<td>2023</td>
+							<td><a href="#" onclick="eduHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+							<td><a href="#" onclick="eduHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+							<td><a href="#" onclick="eduHandler.select(event)" title="editar">&#x1F589;</a></td>
+							<td><a href="#" onclick="eduHandler.remove(event)" title="borrar">&#x2327;</a></td>
+						</tr>
+						-->
+					</tbody>
+				</table>
+				<br><br>
+
+				<div class="row">
+					<div class="col s3 left-align">
+						<button id="btnPrevEdu" data-tab="basic" class="waves-effect waves-light btn-flat btn-small">Anterior</button>
+					</div>
+					<div class="col s3 push-s6 right-align">
+						<button id="btnNextEdu" data-tab="courses" class="waves-effect waves-light btn-flat btn-small">Siguiente</button>
+					</div>
+				</div>
+			</article>
+
+		</section>
+
+
+		<!-- courses -->
+		<section id="courses" class="row section">
+			
+			<form id="formCourse" class="col s3">
+				<fieldset class="row">
+					<legend>Curso &lsqb;Nuevo&rsqb;</legend>
+					<input name="indexCourse" type="hidden" value="">
+					<div class="input-field col s12">
+						<input id="nameCourse" name="nameCourse" type="text" class="validate" data-length="75" maxlength="75">
+						<label for="nameCourse">Nombre</label>
+						<span class="helper-text col s10">Ej. Introducci&oacute;n a ITIL v4</span>
+					</div>
+					<div class="input-field col s12">
+						<input id="locationCourse" name="locationCourse" type="text" class="validate" data-length="75" maxlength="75">
+						<label for="locationCourse">Lugar</label>
+						<span class="helper-text col s10">Ej. Udemy</span>
+					</div>
+					<div class="input-field col s12">
+						<input id="dateCourse" name="dateCourse" type="text" class="validate" data-length="25" maxlength="25">
+						<label for="dateCourse">Fecha</label>
+						<span class="helper-text col s10">Ej. Enero 2019</span>
+					</div>
+					<div class="input-field col s12">
+						<div class="row" style="margin-bottom: 0px;">
+							<div class="col s6 left-align">
+								<button id="btnAuxCourse" name="btnAuxCourse" class="waves-effect waves-light btn-flat btn-small" tabindex="-1">Limpiar</button>
+							</div>
+							<div class="col s6 right-align">
+								<button id="btnMainCourse" name="btnMainCourse" class="waves-effect waves-light btn-flat btn-small">Agregar</button>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+			
+			<article class="col s8">
+				<table id="tableCourse" class="highlight">
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th>Lugar</th>
+							<th>Fecha</th>
+							<th colspan="4">Opciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- 
+						<tr>
+							<td>JIRA fundamentals</td>
+							<td>TCS internal courses</td>
+							<td>02/Jul/2022</td>
+							<td><a href="#" onclick="courseHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+							<td><a href="#" onclick="courseHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+							<td><a href="#" onclick="courseHandler.select(event)" title="editar">&#x1F589;</a></td>
+							<td><a href="#" onclick="courseHandler.remove(event)" title="borrar">&#x2327;</a></td>
+						</tr>
+						<tr>
+							<td>Persistencia de datos con Java</td>
+							<td>Platzi</td>
+							<td>Septiembre 2020</td>
+							<td><a href="#" onclick="courseHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+							<td><a href="#" onclick="courseHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+							<td><a href="#" onclick="courseHandler.select(event)" title="editar">&#x1F589;</a></td>
+							<td><a href="#" onclick="courseHandler.remove(event)" title="borrar">&#x2327;</a></td>
+						</tr> 
+						-->
+					</tbody>
+				</table>
+				<br><br>
+
+				<div class="row">
+					<div class="col s3 left-align">
+						<button id="btnPrevCourse" data-tab="education" class="waves-effect waves-light btn-flat btn-small">Anterior</button>
+					</div>
+					<div class="col s3 push-s6 right-align">
+						<button id="btnNextCourse" data-tab="languages" class="waves-effect waves-light btn-flat btn-small">Siguiente</button>
+					</div>
+				</div>
+			</article>
+
+		</section>
+
+
+		<!-- languages -->
+		<section id="languages" class="row section">
+			
+			<form id="formLang" class="col s3">
+				<fieldset class="row">
+					<legend>Idioma &lsqb;Nuevo&rsqb;</legend>
+					<input name="indexLang" type="hidden" value="">
+					<div class="input-field col s6">
+						<input id="nameLang" name="nameLang" type="text" class="validate" data-length="25" maxlength="25">
+						<label for="nameLang">Nombre</label>
+						<span class="helper-text col s8"></span>
+					</div>
+					<div class="input-field col s6">
+						<input id="speakLang" name="speakLang" type="text" class="validate" data-length="3" maxlength="3">
+						<label for="speakLang">&percnt; Habla</label>
+						<span class="helper-text col s8">Ej. 75</span>
+					</div>
+					<div class="input-field col s6">
+						<input id="readLang" name="readLang" type="text" class="validate" data-length="3" maxlength="3">
+						<label for="readLang">&percnt; Lee</label>
+						<span class="helper-text col s8">Ej. 100</span>
+					</div>
+					<div class="input-field col s6">
+						<input id="writeLang" name="writeLang" type="text" class="validate" data-length="3" maxlength="3">
+						<label for="writeLang">&percnt; Escribe</label>
+						<span class="helper-text col s8">Ej. 50</span>
+					</div>
+					<div class="input-field col s12">
+						<div class="row" style="margin-bottom: 0px;">
+							<div class="col s6 left-align">
+								<button id="btnAuxLang" name="btnAuxLang" class="waves-effect waves-light btn-flat btn-small" tabindex="-1">Limpiar</button>
+							</div>
+							<div class="col s6 right-align">
+								<button id="btnMainLang" name="btnMainLang" class="waves-effect waves-light btn-flat btn-small">Agregar</button>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+
+			<article class="col s6">
+				<table id="tableLang" class="highlight centered">
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th>&percnt; Habla</th>
+							<th>&percnt; Lee</th>
+							<th>&percnt; Escribe</th>
+							<th colspan="4">Opciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- 
+						<tr>
+							<td>Inglés</td>
+							<td>50</td>
+							<td>75</td>
+							<td>75</td>
+							<td><a href="#" onclick="languageHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+							<td><a href="#" onclick="languageHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+							<td><a href="#" onclick="languageHandler.select(event)" title="editar">&#x1F589;</a></td>
+							<td><a href="#" onclick="languageHandler.remove(event)" title="borrar">&#x2327;</a></td>
+						</tr>
+						<tr>
+							<td>Portugués</td>
+							<td>25</td>
+							<td>25</td>
+							<td>25</td>
+							<td><a href="#" onclick="languageHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+							<td><a href="#" onclick="languageHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+							<td><a href="#" onclick="languageHandler.select(event)" title="editar">&#x1F589;</a></td>
+							<td><a href="#" onclick="languageHandler.remove(event)" title="borrar">&#x2327;</a></td>
+						</tr> 
+						-->
+					</tbody>
+				</table>
+				<br><br>
+
+				<div class="row">
+					<div class="col s3 left-align">
+						<button id="btnPrevLang" data-tab="courses" class="waves-effect waves-light btn-flat btn-small">Anterior</button>
+					</div>
+					<div class="col s3 push-s6 right-align">
+						<button id="btnNextLang" data-tab="skills" class="waves-effect waves-light btn-flat btn-small">Siguiente</button>
+					</div>
+				</div>
+			</article>	
+
+		</section>
+
+
+		<!-- skills -->
+		<section id="skills" class="row section">
+			
+			<form id="formSkill" class="col s4">
+				<fieldset class="row">
+					<legend>Conocimiento &lsqb;Nuevo&rsqb;</legend>
+					<input name="indexSkill" type="hidden" value="">
+					<div class="input-field col s12">
+						<input id="descSkill" name="descSkill" type="text" class="validate" data-length="125" maxlength="125">
+						<label for="descSkill">Descripci&oacute;n</label>
+						<span class="helper-text col s10">Ej. Manejo de m&oacute;dulos SAP&colon; SD, MM, PP, FI</span>
+					</div>
+					<div class="input-field col s12">
+						<div class="row" style="margin-bottom: 0px;">
+							<div class="col s6 left-align">
+								<button id="btnAuxSkill" name="btnAuxSkill" class="waves-effect waves-light btn-flat btn-small" tabindex="-1">Limpiar</button>
+							</div>
+							<div class="col s6 right-align">
+								<button id="btnMainSkill" name="btnMainSkill" class="waves-effect waves-light btn-flat btn-small">Agregar</button>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+
+			<article class="col s7">
+				<table id="tableSkill" class="highlight">
+					<thead>
+						<tr>
+							<th>Descripci&oacute;n</th>
+							<th colspan="4">Opciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- 
+						<tr>
+							<td>Ingeniería del software: ADOO, UML, Scrum</td>
+							<td><a href="#" onclick="skillHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+							<td><a href="#" onclick="skillHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+							<td><a href="#" onclick="skillHandler.select(event)" title="editar">&#x1F589;</a></td>
+							<td><a href="#" onclick="skillHandler.remove(event)" title="borrar">&#x2327;</a></td>
+						</tr>
+						<tr>
+							<td>Bases de datos: Oracle, PostgreSQL, MySQL, SQL Server, MongoDB</td>
+							<td><a href="#" onclick="skillHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+							<td><a href="#" onclick="skillHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+							<td><a href="#" onclick="skillHandler.select(event)" title="editar">&#x1F589;</a></td>
+							<td><a href="#" onclick="skillHandler.remove(event)" title="borrar">&#x2327;</a></td>
+						</tr> 
+						-->
+					</tbody>
+				</table>
+				<br><br>
+
+				<div class="row">
+					<div class="col s3 left-align">
+						<button id="btnPrevSkill" data-tab="languages" class="waves-effect waves-light btn-flat btn-small">Anterior</button>
+					</div>
+					<div class="col s3 push-s6 right-align">
+						<button id="btnNextSkill" data-tab="sectors" class="waves-effect waves-light btn-flat btn-small">Siguiente</button>
+					</div>
+				</div>
+			</article>
+
+		</section>
+
+
+		<!-- sectors -->
+		<section id="sectors" class="row section">
+			
+			<form id="formSector" class="col s3">
+				<fieldset class="row">
+					<legend>Sector &lsqb;Nuevo&rsqb;</legend>
+					<input name="indexSector" type="hidden" value="">
+					<div class="input-field col s12">
+						<input id="descSector" name="descSector" type="text" class="validate" data-length="50" maxlength="50">
+						<label for="descSector">Descripci&oacute;n</label>
+						<span class="helper-text col s10">Ej. Cadena de suministro</span>
+					</div>
+					<div class="input-field col s12">
+						<div class="row" style="margin-bottom: 0px;">
+							<div class="col s6 left-align">
+								<button id="btnAuxSector" name="btnAuxSector" class="waves-effect waves-light btn-flat btn-small" tabindex="-1">Limpiar</button>
+							</div>
+							<div class="col s6 right-align">
+								<button id="btnMainSector" name="btnMainSector" class="waves-effect waves-light btn-flat btn-small">Agregar</button>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+			
+			<article class="col s4">
+				<table id="tableSector" class="highlight">
+					<thead>
+						<tr>
+							<th>Descripci&oacute;n</th>
+							<th colspan="4">Opciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- 
+						<tr>
+							<td>Bancario</td>
+							<td><a href="#" onclick="sectorHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+							<td><a href="#" onclick="sectorHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+							<td><a href="#" onclick="sectorHandler.select(event)" title="editar">&#x1F589;</a></td>
+							<td><a href="#" onclick="sectorHandler.remove(event)" title="borrar">&#x2327;</a></td>
+						</tr>
+						<tr>
+							<td>Ventas al por menor</td>
+							<td><a href="#" onclick="sectorHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+							<td><a href="#" onclick="sectorHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+							<td><a href="#" onclick="sectorHandler.select(event)" title="editar">&#x1F589;</a></td>
+							<td><a href="#" onclick="sectorHandler.remove(event)" title="borrar">&#x2327;</a></td>
+						</tr> 
+						-->
+					</tbody>
+				</table>
+				<br><br>
+
+				<div class="row">
+					<div class="col s5 left-align">
+						<button id="btnPrevSector" data-tab="skills" class="waves-effect waves-light btn-flat btn-small">Anterior</button>
+					</div>
+					<div class="col s5 push-s2 right-align">
+						<button id="btnNextSector" data-tab="int-work-exp" class="waves-effect waves-light btn-flat btn-small">Siguiente</button>
+					</div>
+				</div>
+			</article>
+			
+		</section>
+
+
+		<!-- internal-work-experience -->
+		<section id="int-work-exp" class="row section">
+			<fieldset class="row">
+				<legend id="formLegendIwe">Experiencia Interna &lsqb;Nueva&rsqb;</legend>
+
+				<!-- first form -->
+				<form id="formIwe" class="row">
+					<input name="indexIwe" type="hidden" value="">
+					<div class="input-field col s6 m6 l3">
+						<input id="accountIwe" name="accountIwe" type="text" class="validate" data-length="50" maxlength="50">
+						<label for="accountIwe">Cuenta</label>
+						<span class="helper-text col s10">Ej. Banco Nacional</span>
+					</div>
+					<div class="input-field col s6 m6 l3">
+						<input id="roleIwe" name="roleIwe" type="text" class="validate" data-length="50" maxlength="50">
+						<label for="roleIwe">Puesto</label>
+						<span class="helper-text col s10">Ej. Desarrollador backend</span>
+					</div>
+					<div class="input-field col s6 m6 l3">
+						<input id="projectIwe" name="projectIwe" type="text" class="validate" data-length="50" maxlength="50">
+						<label for="projectIwe">Proyecto</label>
+						<span class="helper-text col s10">Ej. Migraci&oacute;n de código</span>
+					</div>
+					<div class="input-field col s6 m6 l3">
+						<input id="periodIwe" name="periodIwe" type="text" class="validate" data-length="50" maxlength="50">
+						<label for="periodIwe">Per&iacute;odo</label>
+						<span class="helper-text col s10">Ej. Enero 2017 - Junio 2020</span>
+					</div>
+				</form>
+
+				<!-- tasks -->
+				<div class="col s12 m6 l6">
+					<form id="formIweTask" onsubmit="return false;">
+						<fieldset class="nested">
+							<legend>Actividades</legend>
+
+							<div class="row">
+								<input name="indexIweTask" type="hidden" value="">
+								<div class="input-field col s8">
+									<input id="descIweTask" name="descIweTask" type="text" class="validate" data-length="125" maxlength="125">
+									<label id="labelIweTask" for="descIweTask">Actividad &lsqb;Nueva&rsqb;</label>
+									<span class="helper-text col s10">Ej. An&aacute;lisis de requerimientos</span>
+								</div>
+								<div class="input-field col s4">
+									<div class="col s6 m12 l6">
+										<a id="linkAuxIweTask" name="linkAuxIweTask" href="#" tabindex="-1" class="resgen-simple">Limpiar</a>
+									</div>
+									<div class="col s6 m12 l6">
+										<a id="linkMainIweTask" name="linkMainIweTask" href="#" class="resgen-simple">Agregar</a>
+									</div>
+								</div>
+							</div>
+							
+							<table id="tableIweTask" class="striped">
+								<thead>
+									<tr>
+										<th>Descripci&oacute;n</th>
+										<th colspan="4">Opciones</th>
+									</tr>
+								</thead>
+								<tbody>
+									<!-- 
+									<tr>
+										<td>Diseño e implementación de microservicios con Spring Boot</td>
+										<td><a href="#" onclick="iweHandler.form.taskHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+										<td><a href="#" onclick="iweHandler.form.taskHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+										<td><a href="#" onclick="iweHandler.form.taskHandler.select(event)" title="editar">&#x1F589;</a></td>
+										<td><a href="#" onclick="iweHandler.form.taskHandler.remove(event)" title="borrar">&#x2327;</a></td>
+									</tr>
+									<tr>
+										<td>Análisis de requerimientos y creación de diagramas de secuencia y máquinas de estado</td>
+										<td><a href="#" onclick="iweHandler.form.taskHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+										<td><a href="#" onclick="iweHandler.form.taskHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+										<td><a href="#" onclick="iweHandler.form.taskHandler.select(event)" title="editar">&#x1F589;</a></td>
+										<td><a href="#" onclick="iweHandler.form.taskHandler.remove(event)" title="borrar">&#x2327;</a></td>
+									</tr>
+									-->
+								</tbody>
+							</table>
+
+						</fieldset>
+					</form>
+				</div>
+				
+				<!-- tools -->
+				<div class="col s12 m6 l6">
+					<form id="formIweTool" onsubmit="return false;">
+						<fieldset>
+							<legend>Entorno T&eacute;cnico</legend>
+
+							<div class="row">
+								<input name="indexIweTool" type="hidden" value="">
+								<div class="input-field col s8">
+									<input id="descIweTool" name="descIweTool" type="text" class="validate" data-length="125" maxlength="125">
+									<label id="labelIweTool" for="descIweTool">Entorno  &lsqb;Nuevo&rsqb;</label>
+									<span class="helper-text col s10">Ej. Herramientas&colon; Confluence, Jira</span>
+								</div>
+								<div class="input-field col s4">
+									<div class="col s6 m12 l6">
+										<a id="linkAuxIweTool" name="linkAuxIweTool" href="#" tabindex="-1" class="resgen-simple">Limpiar</a>
+									</div>
+									<div class="col s6 m12 l6">
+										<a id="linkMainIweTool" name="linkMainIweTool" href="#" class="resgen-simple">Agregar</a>
+									</div>
+								</div>
+							</div>
+
+							<table id="tableIweTool" class="striped">
+								<thead>
+									<tr>
+										<th>Descripci&oacute;n</th>
+										<th colspan="4">Opciones</th>
+									</tr>
+								</thead>
+								<tbody>
+									<!-- 
+									<tr>
+										<td>Herramientas: Eclipse IDE, WildFly, GitHub, Jira, Akeyless, Checkmarx, Sonarqube</td>
+										<td><a href="#" onclick="iweHandler.form.toolHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+										<td><a href="#" onclick="iweHandler.form.toolHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+										<td><a href="#" onclick="iweHandler.form.toolHandler.select(event)" title="editar">&#x1F589;</a></td>
+										<td><a href="#" onclick="iweHandler.form.toolHandler.remove(event)" title="borrar">&#x2327;</a></td>
+									</tr>
+									<tr>
+										<td>Tecnologías: Java, Spring Boot, JUnit, Git, Maven, Docker</td>
+										<td><a href="#" onclick="iweHandler.form.toolHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+										<td><a href="#" onclick="iweHandler.form.toolHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+										<td><a href="#" onclick="iweHandler.form.toolHandler.select(event)" title="editar">&#x1F589;</a></td>
+										<td><a href="#" onclick="iweHandler.form.toolHandler.remove(event)" title="borrar">&#x2327;</a></td>
+									</tr>
+									-->
+								</tbody>
+							</table>
+
+						</fieldset>
+					</form>
+				</div> 
+			</fieldset>
+
+			<div class="row">
+				<div class="col s12 m12 l12">
+					<div class="col s4 push-s4 m3 push-m6 l2 push-l8 right-align">
+						<button id="btnAuxIwe" name="btnAuxIwe" class="waves-effect waves-light btn-flat btn-small" tabindex="-1">Limpiar</button>
+					</div>
+					<div class="col s4 push-s4 m3 push-m6 l2 push-l8 right-align">
+						<button id="btnMainIwe" name="btnMainIwe" class="waves-effect waves-light btn-flat btn-small">Agregar</button>
+					</div>
+				</div>
 			</div>
+			<br><br>
 
-			<!-- basic -->
-			<section id="basic" class="row section">
+			<div class="table-wrapper">
+				<table id="tableIwe" class="highlight">
+					<thead>
+						<tr>
+							<th>Cuenta</th>
+							<th>Puesto</th>
+							<th>Proyecto</th>
+							<th>Per&iacute;odo</th>
+							<th>Actividades</th>
+							<th>Entorno T&eacute;cnico</th>
+							<th colspan="4">Opciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- 
+						<tr>
+							<td>Banorte</td>
+							<td>Desarrollador Java</td>
+							<td>Migración de código</td>
+							<td>Enero 2020 - Febrero 2022</td>
+							<td>
+								* Implementación de microservicios con Spring Boot <br>
+								* Elaboración de diagramas UML
+							</td>
+							<td>
+								* Herramientas: Eclipse, Visual Paradigm CE, GitHub <br>
+								* Tecnologías: Java v8, Maven, Git, JSON
+							</td>
+							<td><a href="#" onclick="iweHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+							<td><a href="#" onclick="iweHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+							<td><a href="#" onclick="iweHandler.select(event)" title="editar">&#x1F589;</a></td>
+							<td><a href="#" onclick="iweHandler.remove(event)" title="borrar">&#x2327;</a></td>
+						</tr>
+						<tr>
+							<td>Banamex</td>
+							<td>Desarrollador SQL</td>
+							<td>Migración de datos</td>
+							<td>Abril 2022 - Septiembre 2022</td>
+							<td>
+								* Migración de store procedures de Informix a Oracle <br>
+								* Diseño y creación de nuevas tablas
+							</td>
+							<td>
+								* Herramientas: DBeaver CE, SQL Developer, Notepad++ <br>
+								* Tecnologías: Oracle DB v12, Git
+							</td>
+							<td><a href="#" onclick="iweHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+							<td><a href="#" onclick="iweHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+							<td><a href="#" onclick="iweHandler.select(event)" title="editar">&#x1F589;</a></td>
+							<td><a href="#" onclick="iweHandler.remove(event)" title="borrar">&#x2327;</a></td>
+						</tr>
+						-->
+					</tbody>
+				</table>
+			</div>
+			<br><br>
 
-				<form id="formBasic" class="col s12">
-					<fieldset class="row">
-						<legend>Nombre y Perfil</legend>
-						<div class="input-field col s3">
-							<input id="nameBasic" name="nameBasic" type="text" class="validate" autocomplete="off" data-length="50" maxlength="50">
-							<label for="nameBasic">Nombre&lpar;s&rpar;</label>
-						</div>
-						<div class="input-field col s2">
-							<input id="surname1Basic" name="surname1Basic" type="text" class="validate" data-length="50" maxlength="50">
-							<label for="surname1Basic">Apellido Paterno</label>
-						</div>
-						<div class="input-field col s2">
-							<input id="surname2Basic" name="surname2Basic" type="text" class="validate" data-length="50" maxlength="50">
-							<label for="surname2Basic">Apellido Materno</label>
-						</div>
-						<div class="input-field col s4 push-s1">
-							<input id="levelBasic" name="levelBasic" type="text" class="validate" data-length="50" maxlength="50">
-							<label for="levelBasic">Nivel</label>
-							<span class="helper-text col s10">Ej. Consultor Senior</span>
-						</div>
-						<div class="input-field col s12">
-							<textarea id="profileBasic" name="profileBasic" class="materialize-textarea validate" data-length="300" maxlength="300"></textarea>
-							<label for="profileBasic">Perfil Profesional</label>
-							<span class="helper-text col s11">Ej. Consultor senior biling&uuml;e del PP SAP, m&aacute;s de 10 
-							a&ntilde;os con SAP ECC, S4Hana y servicios en la nube. Experiencia trabajando de forma remota y en el sitio
-							con clientes en el extranjero y diferentes zonas horarias. Trabaje bien con enfoques Agile y Waterfall.</span>
-						</div>
-						<div class="input-field col s12">
-							<div class="row" style="margin-bottom: 0px;">
-								<div class="col s6">
-									<button id="btnAuxBasic" name="btnAuxBasic" class="waves-effect waves-light btn-flat btn-small" tabindex="-1">Limpiar</button>
-								</div>
-							</div>
-						</div>
-					</fieldset>
-				</form>
-
-				<div class="row">
-					<div class="col s3 push-s9 right-align">
-						<button id="btnNextBasic" data-tab="education" class="waves-effect waves-light btn-flat btn-small">Siguiente</button>
+			<div class="row">
+				<div class="col s12 m12 l12">
+					<div class="col s4 m3 l2 left-align">
+						<button id="btnPrevIwe" data-tab="sectors" class="waves-effect waves-light btn-flat btn-small">Anterior</button>
+					</div>
+					<div class="col s4 push-s4 m3 push-m6 l2 push-l8 right-align">
+						<button id="btnNextIwe" data-tab="ext-work-exp" class="waves-effect waves-light btn-flat btn-small">Siguiente</button>
 					</div>
 				</div>
+			</div>
+		</section>
 
-			</section>
 
+		<!-- external-work-experience -->
+		<section id="ext-work-exp" class="section">
+			<fieldset class="row">
+				<legend id="formLegendEwe">Experiencia Externa &lsqb;Nueva&rsqb;</legend>
 
-			<!-- education -->
-			<section id="education" class="row section">
-
-				<form id="formEdu" class="col s3">
-					<fieldset class="row">
-						<legend>Escolaridad &lsqb;Nueva&rsqb;</legend>
-						<input name="indexEdu" type="hidden" value="">
-						<div class="input-field col s12">
-							<input id="nameEdu" name="nameEdu" type="text" class="validate" data-length="75" maxlength="75">
-							<label for="nameEdu">Grado</label>
-							<span class="helper-text col s10">Ej. Lic. en Administraci&oacute;n</span>
-						</div>
-						<div class="input-field col s12">
-							<input id="instituteEdu" name="instituteEdu" type="text" class="validate" data-length="75" maxlength="75">
-							<label for="instituteEdu">Instituci&oacute;n</label>
-							<span class="helper-text col s10">Ej. UNAM</span>
-						</div>
-						<div class="input-field col s6">
-							<input id="startEdu" name="startEdu" type="text" class="validate" data-length="4" maxlength="4">
-							<label for="startEdu">Inicio</label>
-							<span class="helper-text col s9">Ej. 2015</span>
-						</div>
-						<div class="input-field col s6">
-							<input id="endEdu" name="endEdu" type="text" class="validate" data-length="4" maxlength="4">
-							<label for="endEdu">Fin</label>
-							<span class="helper-text col s9">Ej. 2020</span>
-						</div>
-						<div class="input-field col s12">
-							<div class="row" style="margin-bottom: 0px;">
-								<div class="col s6 left-align">
-									<button id="btnAuxEdu" name="btnAuxEdu" class="waves-effect waves-light btn-flat btn-small" tabindex="-1">Limpiar</button>
-								</div>
-								<div class="col s6 right-align">
-									<button id="btnMainEdu" name="btnMainEdu" class="waves-effect waves-light btn-flat btn-small">Agregar</button>
-								</div>
-							</div>
-						</div>
-					</fieldset>
-				</form>
-				
-				<article class="col s9">
-					<table id="tableEdu" class="highlight">
-						<thead>
-							<tr>
-								<th>Grado</th>
-								<th>Instituci&oacute;n</th>
-								<th>Inicio</th>
-								<th>Fin</th>
-								<th colspan="4">Opciones</th>
-							</tr>
-						</thead>
-						<tbody>
-							<!-- 
-							<tr>
-								<td>Licenciatura en Informática Administrativa</td>
-								<td>Universidad Nacional Autónoma de México</td>
-								<td>2015</td>
-								<td>2020</td>
-								<td><a href="#" onclick="eduHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
-								<td><a href="#" onclick="eduHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
-								<td><a href="#" onclick="eduHandler.select(event)" title="editar">&#x1F589;</a></td>
-								<td><a href="#" onclick="eduHandler.remove(event)" title="borrar">&#x2327;</a></td>
-							</tr>
-							<tr>
-								<td>Maestría en Administración</td>
-								<td>Universidad del Valle de México</td>
-								<td>2020</td>
-								<td>2023</td>
-								<td><a href="#" onclick="eduHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
-								<td><a href="#" onclick="eduHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
-								<td><a href="#" onclick="eduHandler.select(event)" title="editar">&#x1F589;</a></td>
-								<td><a href="#" onclick="eduHandler.remove(event)" title="borrar">&#x2327;</a></td>
-							</tr>
-							-->
-						</tbody>
-					</table>
-					<br><br>
-
-					<div class="row">
-						<div class="col s3 left-align">
-							<button id="btnPrevEdu" data-tab="basic" class="waves-effect waves-light btn-flat btn-small">Anterior</button>
-						</div>
-						<div class="col s3 push-s6 right-align">
-							<button id="btnNextEdu" data-tab="courses" class="waves-effect waves-light btn-flat btn-small">Siguiente</button>
-						</div>
+				<!-- first form -->
+				<form id="formEwe" class="row">
+					<input name="indexEwe" type="hidden" value="">
+					<div class="input-field col s6 m6 l4">
+						<input id="companyEwe" name="companyEwe" type="text" class="validate" data-length="50" maxlength="50">
+						<label for="companyEwe">Empresa</label>
+						<span class="helper-text col s10">Ej. Consultancy Services</span>
 					</div>
-				</article>
-
-			</section>
-
-
-			<!-- courses -->
-			<section id="courses" class="row section">
-				
-				<form id="formCourse" class="col s3">
-					<fieldset class="row">
-						<legend>Curso &lsqb;Nuevo&rsqb;</legend>
-						<input name="indexCourse" type="hidden" value="">
-						<div class="input-field col s12">
-							<input id="nameCourse" name="nameCourse" type="text" class="validate" data-length="75" maxlength="75">
-							<label for="nameCourse">Nombre</label>
-							<span class="helper-text col s10">Ej. Introducci&oacute;n a ITIL v4</span>
-						</div>
-						<div class="input-field col s12">
-							<input id="locationCourse" name="locationCourse" type="text" class="validate" data-length="75" maxlength="75">
-							<label for="locationCourse">Lugar</label>
-							<span class="helper-text col s10">Ej. Udemy</span>
-						</div>
-						<div class="input-field col s12">
-							<input id="dateCourse" name="dateCourse" type="text" class="validate" data-length="25" maxlength="25">
-							<label for="dateCourse">Fecha</label>
-							<span class="helper-text col s10">Ej. Enero 2019</span>
-						</div>
-						<div class="input-field col s12">
-							<div class="row" style="margin-bottom: 0px;">
-								<div class="col s6 left-align">
-									<button id="btnAuxCourse" name="btnAuxCourse" class="waves-effect waves-light btn-flat btn-small" tabindex="-1">Limpiar</button>
-								</div>
-								<div class="col s6 right-align">
-									<button id="btnMainCourse" name="btnMainCourse" class="waves-effect waves-light btn-flat btn-small">Agregar</button>
-								</div>
-							</div>
-						</div>
-					</fieldset>
-				</form>
-				
-				<article class="col s8">
-					<table id="tableCourse" class="highlight">
-						<thead>
-							<tr>
-								<th>Nombre</th>
-								<th>Lugar</th>
-								<th>Fecha</th>
-								<th colspan="4">Opciones</th>
-							</tr>
-						</thead>
-						<tbody>
-							<!-- 
-							<tr>
-								<td>JIRA fundamentals</td>
-								<td>TCS internal courses</td>
-								<td>02/Jul/2022</td>
-								<td><a href="#" onclick="courseHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
-								<td><a href="#" onclick="courseHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
-								<td><a href="#" onclick="courseHandler.select(event)" title="editar">&#x1F589;</a></td>
-								<td><a href="#" onclick="courseHandler.remove(event)" title="borrar">&#x2327;</a></td>
-							</tr>
-							<tr>
-								<td>Persistencia de datos con Java</td>
-								<td>Platzi</td>
-								<td>Septiembre 2020</td>
-								<td><a href="#" onclick="courseHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
-								<td><a href="#" onclick="courseHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
-								<td><a href="#" onclick="courseHandler.select(event)" title="editar">&#x1F589;</a></td>
-								<td><a href="#" onclick="courseHandler.remove(event)" title="borrar">&#x2327;</a></td>
-							</tr> 
-							-->
-						</tbody>
-					</table>
-					<br><br>
-
-					<div class="row">
-						<div class="col s3 left-align">
-							<button id="btnPrevCourse" data-tab="education" class="waves-effect waves-light btn-flat btn-small">Anterior</button>
-						</div>
-						<div class="col s3 push-s6 right-align">
-							<button id="btnNextCourse" data-tab="languages" class="waves-effect waves-light btn-flat btn-small">Siguiente</button>
-						</div>
+					<div class="input-field col s6 m6 l4">
+						<input id="roleEwe" name="roleEwe" type="text" class="validate" data-length="50" maxlength="50">
+						<label for="roleEwe">Puesto</label>
+						<span class="helper-text col s10">Ej. Analista de sistemas</span>
 					</div>
-				</article>
-
-			</section>
-
-
-			<!-- languages -->
-			<section id="languages" class="row section">
-				
-				<form id="formLang" class="col s3">
-					<fieldset class="row">
-						<legend>Idioma &lsqb;Nuevo&rsqb;</legend>
-						<input name="indexLang" type="hidden" value="">
-						<div class="input-field col s6">
-							<input id="nameLang" name="nameLang" type="text" class="validate" data-length="25" maxlength="25">
-							<label for="nameLang">Nombre</label>
-							<span class="helper-text col s8"></span>
-						</div>
-						<div class="input-field col s6">
-							<input id="speakLang" name="speakLang" type="text" class="validate" data-length="3" maxlength="3">
-							<label for="speakLang">&percnt; Habla</label>
-							<span class="helper-text col s8">Ej. 75</span>
-						</div>
-						<div class="input-field col s6">
-							<input id="readLang" name="readLang" type="text" class="validate" data-length="3" maxlength="3">
-							<label for="readLang">&percnt; Lee</label>
-							<span class="helper-text col s8">Ej. 100</span>
-						</div>
-						<div class="input-field col s6">
-							<input id="writeLang" name="writeLang" type="text" class="validate" data-length="3" maxlength="3">
-							<label for="writeLang">&percnt; Escribe</label>
-							<span class="helper-text col s8">Ej. 50</span>
-						</div>
-						<div class="input-field col s12">
-							<div class="row" style="margin-bottom: 0px;">
-								<div class="col s6 left-align">
-									<button id="btnAuxLang" name="btnAuxLang" class="waves-effect waves-light btn-flat btn-small" tabindex="-1">Limpiar</button>
-								</div>
-								<div class="col s6 right-align">
-									<button id="btnMainLang" name="btnMainLang" class="waves-effect waves-light btn-flat btn-small">Agregar</button>
-								</div>
-							</div>
-						</div>
-					</fieldset>
+					<div class="input-field col s6 m6 l4">
+						<input id="periodEwe" name="periodEwe" type="text" class="validate" data-length="50" maxlength="50">
+						<label for="periodEwe">Per&iacute;odo</label>
+						<span class="helper-text col s10">Ej. Mar 2018 - Oct 2019</span>
+					</div>
 				</form>
 
-				<article class="col s6">
-					<table id="tableLang" class="highlight centered">
-						<thead>
-							<tr>
-								<th>Nombre</th>
-								<th>&percnt; Habla</th>
-								<th>&percnt; Lee</th>
-								<th>&percnt; Escribe</th>
-								<th colspan="4">Opciones</th>
-							</tr>
-						</thead>
-						<tbody>
-							<!-- 
-							<tr>
-								<td>Inglés</td>
-								<td>50</td>
-								<td>75</td>
-								<td>75</td>
-								<td><a href="#" onclick="languageHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
-								<td><a href="#" onclick="languageHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
-								<td><a href="#" onclick="languageHandler.select(event)" title="editar">&#x1F589;</a></td>
-								<td><a href="#" onclick="languageHandler.remove(event)" title="borrar">&#x2327;</a></td>
-							</tr>
-							<tr>
-								<td>Portugués</td>
-								<td>25</td>
-								<td>25</td>
-								<td>25</td>
-								<td><a href="#" onclick="languageHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
-								<td><a href="#" onclick="languageHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
-								<td><a href="#" onclick="languageHandler.select(event)" title="editar">&#x1F589;</a></td>
-								<td><a href="#" onclick="languageHandler.remove(event)" title="borrar">&#x2327;</a></td>
-							</tr> 
-							-->
-						</tbody>
-					</table>
-					<br><br>
+				<!-- tasks -->
+				<div class="col s12 m6 l6">
+					<form id="formEweTask" onsubmit="return false;">
+						<fieldset class="nested">
+							<legend>Actividades</legend>
 
-					<div class="row">
-						<div class="col s3 left-align">
-							<button id="btnPrevLang" data-tab="courses" class="waves-effect waves-light btn-flat btn-small">Anterior</button>
-						</div>
-						<div class="col s3 push-s6 right-align">
-							<button id="btnNextLang" data-tab="skills" class="waves-effect waves-light btn-flat btn-small">Siguiente</button>
-						</div>
-					</div>
-				</article>	
-
-			</section>
-
-
-			<!-- skills -->
-			<section id="skills" class="row section">
-				
-				<form id="formSkill" class="col s4">
-					<fieldset class="row">
-						<legend>Conocimiento &lsqb;Nuevo&rsqb;</legend>
-						<input name="indexSkill" type="hidden" value="">
-						<div class="input-field col s12">
-							<input id="descSkill" name="descSkill" type="text" class="validate" data-length="125" maxlength="125">
-							<label for="descSkill">Descripci&oacute;n</label>
-							<span class="helper-text col s10">Ej. Manejo de m&oacute;dulos SAP&colon; SD, MM, PP, FI</span>
-						</div>
-						<div class="input-field col s12">
-							<div class="row" style="margin-bottom: 0px;">
-								<div class="col s6 left-align">
-									<button id="btnAuxSkill" name="btnAuxSkill" class="waves-effect waves-light btn-flat btn-small" tabindex="-1">Limpiar</button>
+							<div class="row">
+								<input name="indexEweTask" type="hidden" value="">
+								<div class="input-field col s8">
+									<input id="descEweTask" name="descEweTask" type="text" class="validate" data-length="125" maxlength="125">
+									<label id="labelEweTask" for="descEweTask">Actividad &lsqb;Nueva&rsqb;</label>
+									<span class="helper-text col s10">Ej. Dise&ntilde;o de diagramas UML</span>
 								</div>
-								<div class="col s6 right-align">
-									<button id="btnMainSkill" name="btnMainSkill" class="waves-effect waves-light btn-flat btn-small">Agregar</button>
+								<div class="input-field col s4">
+									<div class="col s6 m12 l6">
+										<a id="linkAuxEweTask" name="linkAuxEweTask" href="#" tabindex="-1" class="resgen-simple">Limpiar</a>
+									</div>
+									<div class="col s6 m12 l6">
+										<a id="linkMainEweTask" name="linkMainEweTask" href="#" class="resgen-simple">Agregar</a>
+									</div>
 								</div>
 							</div>
-						</div>
-					</fieldset>
-				</form>
+							
+							<table id="tableEweTask" class="striped">
+								<thead>
+									<tr>
+										<th>Descripci&oacute;n</th>
+										<th colspan="4">Opciones</th>
+									</tr>
+								</thead>
+								<tbody>
+									<!-- 
+									<tr>
+										<td>Análisis, diseño y programación de nuevo módulo web</td>
+										<td><a href="#" onclick="eweHandler.form.taskHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+										<td><a href="#" onclick="eweHandler.form.taskHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+										<td><a href="#" onclick="eweHandler.form.taskHandler.select(event)" title="editar">&#x1F589;</a></td>
+										<td><a href="#" onclick="eweHandler.form.taskHandler.remove(event)" title="borrar">&#x2327;</a></td>
+									</tr>
+									<tr>
+										<td>Refactorización de aplicaciones standalone</td>
+										<td><a href="#" onclick="eweHandler.form.taskHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+										<td><a href="#" onclick="eweHandler.form.taskHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+										<td><a href="#" onclick="eweHandler.form.taskHandler.select(event)" title="editar">&#x1F589;</a></td>
+										<td><a href="#" onclick="eweHandler.form.taskHandler.remove(event)" title="borrar">&#x2327;</a></td>
+									</tr>
+									-->
+								</tbody>
+							</table>
 
-				<article class="col s7">
-					<table id="tableSkill" class="highlight">
-						<thead>
-							<tr>
-								<th>Descripci&oacute;n</th>
-								<th colspan="4">Opciones</th>
-							</tr>
-						</thead>
-						<tbody>
-							<!-- 
-							<tr>
-								<td>Ingeniería del software: ADOO, UML, Scrum</td>
-								<td><a href="#" onclick="skillHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
-								<td><a href="#" onclick="skillHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
-								<td><a href="#" onclick="skillHandler.select(event)" title="editar">&#x1F589;</a></td>
-								<td><a href="#" onclick="skillHandler.remove(event)" title="borrar">&#x2327;</a></td>
-							</tr>
-							<tr>
-								<td>Bases de datos: Oracle, PostgreSQL, MySQL, SQL Server, MongoDB</td>
-								<td><a href="#" onclick="skillHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
-								<td><a href="#" onclick="skillHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
-								<td><a href="#" onclick="skillHandler.select(event)" title="editar">&#x1F589;</a></td>
-								<td><a href="#" onclick="skillHandler.remove(event)" title="borrar">&#x2327;</a></td>
-							</tr> 
-							-->
-						</tbody>
-					</table>
-					<br><br>
-
-					<div class="row">
-						<div class="col s3 left-align">
-							<button id="btnPrevSkill" data-tab="languages" class="waves-effect waves-light btn-flat btn-small">Anterior</button>
-						</div>
-						<div class="col s3 push-s6 right-align">
-							<button id="btnNextSkill" data-tab="sectors" class="waves-effect waves-light btn-flat btn-small">Siguiente</button>
-						</div>
-					</div>
-				</article>
-
-			</section>
-
-
-			<!-- sectors -->
-			<section id="sectors" class="row section">
-				
-				<form id="formSector" class="col s3">
-					<fieldset class="row">
-						<legend>Sector &lsqb;Nuevo&rsqb;</legend>
-						<input name="indexSector" type="hidden" value="">
-						<div class="input-field col s12">
-							<input id="descSector" name="descSector" type="text" class="validate" data-length="50" maxlength="50">
-							<label for="descSector">Descripci&oacute;n</label>
-							<span class="helper-text col s10">Ej. Cadena de suministro</span>
-						</div>
-						<div class="input-field col s12">
-							<div class="row" style="margin-bottom: 0px;">
-								<div class="col s6 left-align">
-									<button id="btnAuxSector" name="btnAuxSector" class="waves-effect waves-light btn-flat btn-small" tabindex="-1">Limpiar</button>
-								</div>
-								<div class="col s6 right-align">
-									<button id="btnMainSector" name="btnMainSector" class="waves-effect waves-light btn-flat btn-small">Agregar</button>
-								</div>
-							</div>
-						</div>
-					</fieldset>
-				</form>
-				
-				<article class="col s4">
-					<table id="tableSector" class="highlight">
-						<thead>
-							<tr>
-								<th>Descripci&oacute;n</th>
-								<th colspan="4">Opciones</th>
-							</tr>
-						</thead>
-						<tbody>
-							<!-- 
-							<tr>
-								<td>Bancario</td>
-								<td><a href="#" onclick="sectorHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
-								<td><a href="#" onclick="sectorHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
-								<td><a href="#" onclick="sectorHandler.select(event)" title="editar">&#x1F589;</a></td>
-								<td><a href="#" onclick="sectorHandler.remove(event)" title="borrar">&#x2327;</a></td>
-							</tr>
-							<tr>
-								<td>Ventas al por menor</td>
-								<td><a href="#" onclick="sectorHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
-								<td><a href="#" onclick="sectorHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
-								<td><a href="#" onclick="sectorHandler.select(event)" title="editar">&#x1F589;</a></td>
-								<td><a href="#" onclick="sectorHandler.remove(event)" title="borrar">&#x2327;</a></td>
-							</tr> 
-							-->
-						</tbody>
-					</table>
-					<br><br>
-
-					<div class="row">
-						<div class="col s5 left-align">
-							<button id="btnPrevSector" data-tab="skills" class="waves-effect waves-light btn-flat btn-small">Anterior</button>
-						</div>
-						<div class="col s5 push-s2 right-align">
-							<button id="btnNextSector" data-tab="int-work-exp" class="waves-effect waves-light btn-flat btn-small">Siguiente</button>
-						</div>
-					</div>
-				</article>
-				
-			</section>
-
-
-			<!-- internal-work-experience -->
-			<section id="int-work-exp" class="row section">
-				<fieldset class="row">
-					<legend id="formLegendIwe">Experiencia Interna &lsqb;Nueva&rsqb;</legend>
-
-					<!-- first form -->
-					<form id="formIwe" class="row">
-						<input name="indexIwe" type="hidden" value="">
-						<div class="input-field col s6 m6 l3">
-							<input id="accountIwe" name="accountIwe" type="text" class="validate" data-length="50" maxlength="50">
-							<label for="accountIwe">Cuenta</label>
-							<span class="helper-text col s10">Ej. Banco Nacional</span>
-						</div>
-						<div class="input-field col s6 m6 l3">
-							<input id="roleIwe" name="roleIwe" type="text" class="validate" data-length="50" maxlength="50">
-							<label for="roleIwe">Puesto</label>
-							<span class="helper-text col s10">Ej. Desarrollador backend</span>
-						</div>
-						<div class="input-field col s6 m6 l3">
-							<input id="projectIwe" name="projectIwe" type="text" class="validate" data-length="50" maxlength="50">
-							<label for="projectIwe">Proyecto</label>
-							<span class="helper-text col s10">Ej. Migraci&oacute;n de código</span>
-						</div>
-						<div class="input-field col s6 m6 l3">
-							<input id="periodIwe" name="periodIwe" type="text" class="validate" data-length="50" maxlength="50">
-							<label for="periodIwe">Per&iacute;odo</label>
-							<span class="helper-text col s10">Ej. Enero 2017 - Junio 2020</span>
-						</div>
+						</fieldset>
 					</form>
+				</div>
+				
+				<!-- tools -->
+				<div class="col s12 m6 l6">
+					<form id="formEweTool" onsubmit="return false;">
+						<fieldset>
+							<legend>Entorno T&eacute;cnico</legend>
 
-					<!-- tasks -->
-					<div class="col s12 m6 l6">
-						<form id="formIweTask" onsubmit="return false;">
-							<fieldset class="nested">
-								<legend>Actividades</legend>
-
-								<div class="row">
-									<input name="indexIweTask" type="hidden" value="">
-									<div class="input-field col s8">
-										<input id="descIweTask" name="descIweTask" type="text" class="validate" data-length="125" maxlength="125">
-										<label id="labelIweTask" for="descIweTask">Actividad &lsqb;Nueva&rsqb;</label>
-										<span class="helper-text col s10">Ej. An&aacute;lisis de requerimientos</span>
+							<div class="row">
+								<input name="indexEweTool" type="hidden" value="">
+								<div class="input-field col s8">
+									<input id="descEweTool" name="descEweTool" type="text" class="validate" data-length="125" maxlength="125">
+									<label id="labelEweTool" for="descEweTool">Entorno  &lsqb;Nuevo&rsqb;</label>
+									<span class="helper-text col s10">Ej. Herramientas&colon; Visual Paradigm</span>
+								</div>
+								<div class="input-field col s4">
+									<div class="col s6 m12 l6">
+										<a id="linkAuxEweTool" name="linkAuxEweTool" href="#" tabindex="-1" class="resgen-simple">Limpiar</a>
 									</div>
-									<div class="input-field col s4">
-										<div class="col s6 m12 l6">
-											<a id="linkAuxIweTask" name="linkAuxIweTask" href="#" tabindex="-1" class="resgen-simple">Limpiar</a>
-										</div>
-										<div class="col s6 m12 l6">
-											<a id="linkMainIweTask" name="linkMainIweTask" href="#" class="resgen-simple">Agregar</a>
-										</div>
+									<div class="col s6 m12 l6">
+										<a id="linkMainEweTool" name="linkMainEweTool" href="#" class="resgen-simple">Agregar</a>
 									</div>
 								</div>
-								
-								<table id="tableIweTask" class="striped">
-									<thead>
-										<tr>
-											<th>Descripci&oacute;n</th>
-											<th colspan="4">Opciones</th>
-										</tr>
-									</thead>
-									<tbody>
-										<!-- 
-										<tr>
-											<td>Diseño e implementación de microservicios con Spring Boot</td>
-											<td><a href="#" onclick="iweHandler.form.taskHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
-											<td><a href="#" onclick="iweHandler.form.taskHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
-											<td><a href="#" onclick="iweHandler.form.taskHandler.select(event)" title="editar">&#x1F589;</a></td>
-											<td><a href="#" onclick="iweHandler.form.taskHandler.remove(event)" title="borrar">&#x2327;</a></td>
-										</tr>
-										<tr>
-											<td>Análisis de requerimientos y creación de diagramas de secuencia y máquinas de estado</td>
-											<td><a href="#" onclick="iweHandler.form.taskHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
-											<td><a href="#" onclick="iweHandler.form.taskHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
-											<td><a href="#" onclick="iweHandler.form.taskHandler.select(event)" title="editar">&#x1F589;</a></td>
-											<td><a href="#" onclick="iweHandler.form.taskHandler.remove(event)" title="borrar">&#x2327;</a></td>
-										</tr>
-										-->
-									</tbody>
-								</table>
+							</div>
 
-							</fieldset>
-						</form>
-					</div>
-					
-					<!-- tools -->
-					<div class="col s12 m6 l6">
-						<form id="formIweTool" onsubmit="return false;">
-							<fieldset>
-								<legend>Entorno T&eacute;cnico</legend>
+							<table id="tableEweTool" class="striped">
+								<thead>
+									<tr>
+										<th>Descripci&oacute;n</th>
+										<th colspan="4">Opciones</th>
+									</tr>
+								</thead>
+								<tbody>
+									<!-- 
+									<tr>
+										<td>Herramientas: GitHub, DBeaver, JBoss, Tomcat</td>
+										<td><a href="#" onclick="eweHandler.form.toolHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+										<td><a href="#" onclick="eweHandler.form.toolHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+										<td><a href="#" onclick="eweHandler.form.toolHandler.select(event)" title="editar">&#x1F589;</a></td>
+										<td><a href="#" onclick="eweHandler.form.toolHandler.remove(event)" title="borrar">&#x2327;</a></td>
+									</tr>
+									<tr>
+										<td>Tecnologías: JSP, JAX-RS, HTML, CSS, JavaScript</td>
+										<td><a href="#" onclick="eweHandler.form.toolHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+										<td><a href="#" onclick="eweHandler.form.toolHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+										<td><a href="#" onclick="eweHandler.form.toolHandler.select(event)" title="editar">&#x1F589;</a></td>
+										<td><a href="#" onclick="eweHandler.form.toolHandler.remove(event)" title="borrar">&#x2327;</a></td>
+									</tr>
+									-->
+								</tbody>
+							</table>
 
-								<div class="row">
-									<input name="indexIweTool" type="hidden" value="">
-									<div class="input-field col s8">
-										<input id="descIweTool" name="descIweTool" type="text" class="validate" data-length="125" maxlength="125">
-										<label id="labelIweTool" for="descIweTool">Entorno  &lsqb;Nuevo&rsqb;</label>
-										<span class="helper-text col s10">Ej. Herramientas&colon; Confluence, Jira</span>
-									</div>
-									<div class="input-field col s4">
-										<div class="col s6 m12 l6">
-											<a id="linkAuxIweTool" name="linkAuxIweTool" href="#" tabindex="-1" class="resgen-simple">Limpiar</a>
-										</div>
-										<div class="col s6 m12 l6">
-											<a id="linkMainIweTool" name="linkMainIweTool" href="#" class="resgen-simple">Agregar</a>
-										</div>
-									</div>
-								</div>
-
-								<table id="tableIweTool" class="striped">
-									<thead>
-										<tr>
-											<th>Descripci&oacute;n</th>
-											<th colspan="4">Opciones</th>
-										</tr>
-									</thead>
-									<tbody>
-										<!-- 
-										<tr>
-											<td>Herramientas: Eclipse IDE, WildFly, GitHub, Jira, Akeyless, Checkmarx, Sonarqube</td>
-											<td><a href="#" onclick="iweHandler.form.toolHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
-											<td><a href="#" onclick="iweHandler.form.toolHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
-											<td><a href="#" onclick="iweHandler.form.toolHandler.select(event)" title="editar">&#x1F589;</a></td>
-											<td><a href="#" onclick="iweHandler.form.toolHandler.remove(event)" title="borrar">&#x2327;</a></td>
-										</tr>
-										<tr>
-											<td>Tecnologías: Java, Spring Boot, JUnit, Git, Maven, Docker</td>
-											<td><a href="#" onclick="iweHandler.form.toolHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
-											<td><a href="#" onclick="iweHandler.form.toolHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
-											<td><a href="#" onclick="iweHandler.form.toolHandler.select(event)" title="editar">&#x1F589;</a></td>
-											<td><a href="#" onclick="iweHandler.form.toolHandler.remove(event)" title="borrar">&#x2327;</a></td>
-										</tr>
-										-->
-									</tbody>
-								</table>
-
-							</fieldset>
-						</form>
-					</div> 
-				</fieldset>
-
-				<div class="row">
-					<div class="col s12 m12 l12">
-						<div class="col s4 push-s4 m3 push-m6 l2 push-l8 right-align">
-							<button id="btnAuxIwe" name="btnAuxIwe" class="waves-effect waves-light btn-flat btn-small" tabindex="-1">Limpiar</button>
-						</div>
-						<div class="col s4 push-s4 m3 push-m6 l2 push-l8 right-align">
-							<button id="btnMainIwe" name="btnMainIwe" class="waves-effect waves-light btn-flat btn-small">Agregar</button>
-						</div>
-					</div>
-				</div>
-				<br><br>
-
-				<div class="table-wrapper">
-					<table id="tableIwe" class="highlight">
-						<thead>
-							<tr>
-								<th>Cuenta</th>
-								<th>Puesto</th>
-								<th>Proyecto</th>
-								<th>Per&iacute;odo</th>
-								<th>Actividades</th>
-								<th>Entorno T&eacute;cnico</th>
-								<th colspan="4">Opciones</th>
-							</tr>
-						</thead>
-						<tbody>
-							<!-- 
-							<tr>
-								<td>Banorte</td>
-								<td>Desarrollador Java</td>
-								<td>Migración de código</td>
-								<td>Enero 2020 - Febrero 2022</td>
-								<td>
-									* Implementación de microservicios con Spring Boot <br>
-									* Elaboración de diagramas UML
-								</td>
-								<td>
-									* Herramientas: Eclipse, Visual Paradigm CE, GitHub <br>
-									* Tecnologías: Java v8, Maven, Git, JSON
-								</td>
-								<td><a href="#" onclick="iweHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
-								<td><a href="#" onclick="iweHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
-								<td><a href="#" onclick="iweHandler.select(event)" title="editar">&#x1F589;</a></td>
-								<td><a href="#" onclick="iweHandler.remove(event)" title="borrar">&#x2327;</a></td>
-							</tr>
-							<tr>
-								<td>Banamex</td>
-								<td>Desarrollador SQL</td>
-								<td>Migración de datos</td>
-								<td>Abril 2022 - Septiembre 2022</td>
-								<td>
-									* Migración de store procedures de Informix a Oracle <br>
-									* Diseño y creación de nuevas tablas
-								</td>
-								<td>
-									* Herramientas: DBeaver CE, SQL Developer, Notepad++ <br>
-									* Tecnologías: Oracle DB v12, Git
-								</td>
-								<td><a href="#" onclick="iweHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
-								<td><a href="#" onclick="iweHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
-								<td><a href="#" onclick="iweHandler.select(event)" title="editar">&#x1F589;</a></td>
-								<td><a href="#" onclick="iweHandler.remove(event)" title="borrar">&#x2327;</a></td>
-							</tr>
-							-->
-						</tbody>
-					</table>
-				</div>
-				<br><br>
-
-				<div class="row">
-					<div class="col s12 m12 l12">
-						<div class="col s4 m3 l2 left-align">
-							<button id="btnPrevIwe" data-tab="sectors" class="waves-effect waves-light btn-flat btn-small">Anterior</button>
-						</div>
-						<div class="col s4 push-s4 m3 push-m6 l2 push-l8 right-align">
-							<button id="btnNextIwe" data-tab="ext-work-exp" class="waves-effect waves-light btn-flat btn-small">Siguiente</button>
-						</div>
-					</div>
-				</div>
-			</section>
-
-
-			<!-- external-work-experience -->
-			<section id="ext-work-exp" class="section">
-				<fieldset class="row">
-					<legend id="formLegendEwe">Experiencia Externa &lsqb;Nueva&rsqb;</legend>
-
-					<!-- first form -->
-					<form id="formEwe" class="row">
-						<input name="indexEwe" type="hidden" value="">
-						<div class="input-field col s4">
-							<input id="companyEwe" name="companyEwe" type="text" class="validate" data-length="50" maxlength="50">
-							<label for="companyEwe">Empresa</label>
-							<span class="helper-text col s10">Ej. Consultancy Services Group</span>
-						</div>
-						<div class="input-field col s4">
-							<input id="roleEwe" name="roleEwe" type="text" class="validate" data-length="50" maxlength="50">
-							<label for="roleEwe">Puesto</label>
-							<span class="helper-text col s10">Ej. Analista de sistemas</span>
-						</div>
-						<div class="input-field col s4">
-							<input id="periodEwe" name="periodEwe" type="text" class="validate" data-length="50" maxlength="50">
-							<label for="periodEwe">Per&iacute;odo</label>
-							<span class="helper-text col s10">Ej. Marzo/2018 a Octubre/2019</span>
-						</div>
+						</fieldset>
 					</form>
+				</div> 
+			</fieldset>
 
-					<!-- tasks -->
-					<div class="col s6">
-						<form id="formEweTask" onsubmit="return false;">
-							<fieldset>
-								<legend>Actividades</legend>
-
-								<div class="row">
-									<input name="indexEweTask" type="hidden" value="">
-									<div class="input-field col s8">
-										<input id="descEweTask" name="descEweTask" type="text" class="validate" data-length="125" maxlength="125">
-										<label id="labelEweTask" for="descEweTask">Actividad &lsqb;Nueva&rsqb;</label>
-										<span class="helper-text col s10">Ej. Elaboraci&oacute;n de diagramas UML</span>
-									</div>
-									<div class="input-field col s4">
-										<div class="col s6 left-align">
-											<a id="linkAuxEweTask" name="linkAuxEweTask" href="#" tabindex="-1" class="resgen-simple">Limpiar</a>
-										</div>
-										<div class="col s6 right-align">
-											<a id="linkMainEweTask" name="linkMainEweTask" href="#" class="resgen-simple">Agregar</a>
-										</div>
-									</div>
-								</div>
-								
-								<table id="tableEweTask" class="striped">
-									<thead>
-										<tr>
-											<th>Descripci&oacute;n</th>
-											<th colspan="4">Opciones</th>
-										</tr>
-									</thead>
-									<tbody>
-										<!-- 
-										<tr>
-											<td>Análisis, diseño y programación de nuevo módulo web</td>
-											<td><a href="#" onclick="eweHandler.form.taskHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
-											<td><a href="#" onclick="eweHandler.form.taskHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
-											<td><a href="#" onclick="eweHandler.form.taskHandler.select(event)" title="editar">&#x1F589;</a></td>
-											<td><a href="#" onclick="eweHandler.form.taskHandler.remove(event)" title="borrar">&#x2327;</a></td>
-										</tr>
-										<tr>
-											<td>Refactorización de aplicaciones standalone</td>
-											<td><a href="#" onclick="eweHandler.form.taskHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
-											<td><a href="#" onclick="eweHandler.form.taskHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
-											<td><a href="#" onclick="eweHandler.form.taskHandler.select(event)" title="editar">&#x1F589;</a></td>
-											<td><a href="#" onclick="eweHandler.form.taskHandler.remove(event)" title="borrar">&#x2327;</a></td>
-										</tr>
-										-->
-									</tbody>
-								</table>
-
-							</fieldset>
-						</form>
+			<div class="row">
+				<div class="col s12 m12 l12">
+					<div class="col s4 push-s4 m3 push-m6 l2 push-l8 right-align">
+						<button id="btnAuxEwe" name="btnAuxEwe" class="waves-effect waves-light btn-flat btn-small" tabindex="-1">Limpiar</button>
 					</div>
-					
-					<!-- tools -->
-					<div class="col s6">
-						<form id="formEweTool" onsubmit="return false;">
-							<fieldset>
-								<legend>Entorno T&eacute;cnico</legend>
-
-								<div class="row">
-									<input name="indexEweTool" type="hidden" value="">
-									<div class="input-field col s8">
-										<input id="descEweTool" name="descEweTool" type="text" class="validate" data-length="125" maxlength="125">
-										<label id="labelEweTool" for="descEweTool">Entorno  &lsqb;Nuevo&rsqb;</label>
-										<span class="helper-text col s10">Ej. Herramientas&colon; Visual Paradigm, UMLet</span>
-									</div>
-									<div class="input-field col s4">
-										<div class="col s6 left-align">
-											<a id="linkAuxEweTool" name="linkAuxEweTool" href="#" tabindex="-1" class="resgen-simple">Limpiar</a>
-										</div>
-										<div class="col s6 right-align">
-											<a id="linkMainEweTool" name="linkMainEweTool" href="#" class="resgen-simple">Agregar</a>
-										</div>
-									</div>
-								</div>
-
-								<table id="tableEweTool" class="striped">
-									<thead>
-										<tr>
-											<th>Descripci&oacute;n</th>
-											<th colspan="4">Opciones</th>
-										</tr>
-									</thead>
-									<tbody>
-										<!-- 
-										<tr>
-											<td>Herramientas: GitHub, DBeaver, JBoss, Tomcat</td>
-											<td><a href="#" onclick="eweHandler.form.toolHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
-											<td><a href="#" onclick="eweHandler.form.toolHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
-											<td><a href="#" onclick="eweHandler.form.toolHandler.select(event)" title="editar">&#x1F589;</a></td>
-											<td><a href="#" onclick="eweHandler.form.toolHandler.remove(event)" title="borrar">&#x2327;</a></td>
-										</tr>
-										<tr>
-											<td>Tecnologías: JSP, JAX-RS, HTML, CSS, JavaScript</td>
-											<td><a href="#" onclick="eweHandler.form.toolHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
-											<td><a href="#" onclick="eweHandler.form.toolHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
-											<td><a href="#" onclick="eweHandler.form.toolHandler.select(event)" title="editar">&#x1F589;</a></td>
-											<td><a href="#" onclick="eweHandler.form.toolHandler.remove(event)" title="borrar">&#x2327;</a></td>
-										</tr>
-										-->
-									</tbody>
-								</table>
-
-							</fieldset>
-						</form>
-					</div> 
-				</fieldset>
-
-				<div class="row">
-					<div class="col s6 push-s6">
-						<div class="col s3 push-s6" style="text-align: right;">
-							<button id="btnAuxEwe" name="btnAuxEwe" class="waves-effect waves-light btn-flat btn-small" tabindex="-1">Limpiar</button>
-						</div>
-						<div class="col s3 push-s6" style="text-align: right;">
-							<button id="btnMainEwe" name="btnMainEwe" class="waves-effect waves-light btn-flat btn-small">Agregar</button>
-						</div>
+					<div class="col s4 push-s4 m3 push-m6 l2 push-l8 right-align">
+						<button id="btnMainEwe" name="btnMainEwe" class="waves-effect waves-light btn-flat btn-small">Agregar</button>
 					</div>
 				</div>
-				<br><br>
+			</div>
+			<br><br>
 
+			<div class="table-wrapper">
 				<table id="tableEwe" class="highlight">
 					<thead>
 						<tr>
@@ -897,20 +896,22 @@
 						-->
 					</tbody>
 				</table>
-				<br><br>
+			</div>
+			<br><br>
 
-				<div class="row">
-					<div class="col s2 left-align">
+			<div class="row">
+				<div class="col s12 m12 l12">
+					<div class="col s4 m3 l2 left-align">
 						<button id="btnPrevEwe" data-tab="int-work-exp" class="waves-effect waves-light btn-flat btn-small">Anterior</button>
 					</div>
-					<!-- <div class="col s2 push-s8 right-align">
+					<!-- <div class="col s4 push-s4 m3 push-m6 l2 push-l8 right-align">
 						<button id="btnNextEwe" data-tab="" class="waves-effect waves-light btn-flat btn-small">Siguiente</button>
 					</div> -->
 				</div>
-			</section>
-
-		</div>
-	</div>
+			</div>
+		</section>
+		
+	</div><!-- container -->
 
 	<script type="text/javascript" src="js/lib/jquery-3.7.1.min.js"></script>
 	<script type="text/javascript" src="js/lib/materialize.min.js"></script>
