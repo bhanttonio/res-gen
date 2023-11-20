@@ -488,22 +488,22 @@
 					<!-- first form -->
 					<form id="formIwe" class="row">
 						<input name="indexIwe" type="hidden" value="">
-						<div class="input-field col s3">
+						<div class="input-field col s6 m6 l3">
 							<input id="accountIwe" name="accountIwe" type="text" class="validate" data-length="50" maxlength="50">
 							<label for="accountIwe">Cuenta</label>
 							<span class="helper-text col s10">Ej. Banco Nacional</span>
 						</div>
-						<div class="input-field col s3">
+						<div class="input-field col s6 m6 l3">
 							<input id="roleIwe" name="roleIwe" type="text" class="validate" data-length="50" maxlength="50">
 							<label for="roleIwe">Puesto</label>
 							<span class="helper-text col s10">Ej. Desarrollador backend</span>
 						</div>
-						<div class="input-field col s3">
+						<div class="input-field col s6 m6 l3">
 							<input id="projectIwe" name="projectIwe" type="text" class="validate" data-length="50" maxlength="50">
 							<label for="projectIwe">Proyecto</label>
-							<span class="helper-text col s10">Ej. Migraci&oacute;n de código legacy</span>
+							<span class="helper-text col s10">Ej. Migraci&oacute;n de código</span>
 						</div>
-						<div class="input-field col s3">
+						<div class="input-field col s6 m6 l3">
 							<input id="periodIwe" name="periodIwe" type="text" class="validate" data-length="50" maxlength="50">
 							<label for="periodIwe">Per&iacute;odo</label>
 							<span class="helper-text col s10">Ej. Enero 2017 - Junio 2020</span>
@@ -511,9 +511,9 @@
 					</form>
 
 					<!-- tasks -->
-					<div class="col s6">
+					<div class="col s12 m6 l6">
 						<form id="formIweTask" onsubmit="return false;">
-							<fieldset>
+							<fieldset class="nested">
 								<legend>Actividades</legend>
 
 								<div class="row">
@@ -521,13 +521,13 @@
 									<div class="input-field col s8">
 										<input id="descIweTask" name="descIweTask" type="text" class="validate" data-length="125" maxlength="125">
 										<label id="labelIweTask" for="descIweTask">Actividad &lsqb;Nueva&rsqb;</label>
-										<span class="helper-text col s10">Ej. An&aacute;lisis de requerimientos funcionales</span>
+										<span class="helper-text col s10">Ej. An&aacute;lisis de requerimientos</span>
 									</div>
 									<div class="input-field col s4">
-										<div class="col s6 left-align">
+										<div class="col s6 m12 l6">
 											<a id="linkAuxIweTask" name="linkAuxIweTask" href="#" tabindex="-1" class="resgen-simple">Limpiar</a>
 										</div>
-										<div class="col s6 right-align">
+										<div class="col s6 m12 l6">
 											<a id="linkMainIweTask" name="linkMainIweTask" href="#" class="resgen-simple">Agregar</a>
 										</div>
 									</div>
@@ -565,7 +565,7 @@
 					</div>
 					
 					<!-- tools -->
-					<div class="col s6">
+					<div class="col s12 m6 l6">
 						<form id="formIweTool" onsubmit="return false;">
 							<fieldset>
 								<legend>Entorno T&eacute;cnico</legend>
@@ -575,13 +575,13 @@
 									<div class="input-field col s8">
 										<input id="descIweTool" name="descIweTool" type="text" class="validate" data-length="125" maxlength="125">
 										<label id="labelIweTool" for="descIweTool">Entorno  &lsqb;Nuevo&rsqb;</label>
-										<span class="helper-text col s10">Ej. Herramientas&colon; Confluence, Bitbucket</span>
+										<span class="helper-text col s10">Ej. Herramientas&colon; Confluence, Jira</span>
 									</div>
 									<div class="input-field col s4">
-										<div class="col s6 left-align">
+										<div class="col s6 m12 l6">
 											<a id="linkAuxIweTool" name="linkAuxIweTool" href="#" tabindex="-1" class="resgen-simple">Limpiar</a>
 										</div>
-										<div class="col s6 right-align">
+										<div class="col s6 m12 l6">
 											<a id="linkMainIweTool" name="linkMainIweTool" href="#" class="resgen-simple">Agregar</a>
 										</div>
 									</div>
@@ -620,78 +620,82 @@
 				</fieldset>
 
 				<div class="row">
-					<div class="col s6 push-s6">
-						<div class="col s3 push-s6" style="text-align: right;">
+					<div class="col s12 m12 l12">
+						<div class="col s4 push-s4 m3 push-m6 l2 push-l8 right-align">
 							<button id="btnAuxIwe" name="btnAuxIwe" class="waves-effect waves-light btn-flat btn-small" tabindex="-1">Limpiar</button>
 						</div>
-						<div class="col s3 push-s6" style="text-align: right;">
+						<div class="col s4 push-s4 m3 push-m6 l2 push-l8 right-align">
 							<button id="btnMainIwe" name="btnMainIwe" class="waves-effect waves-light btn-flat btn-small">Agregar</button>
 						</div>
 					</div>
 				</div>
 				<br><br>
 
-				<table id="tableIwe" class="highlight">
-					<thead>
-						<tr>
-							<th>Cuenta</th>
-							<th>Puesto</th>
-							<th>Proyecto</th>
-							<th>Per&iacute;odo</th>
-							<th>Actividades</th>
-							<th>Entorno T&eacute;cnico</th>
-							<th colspan="4">Opciones</th>
-						</tr>
-					</thead>
-					<tbody>
-						<!-- 
-						<tr>
-							<td>Banorte</td>
-							<td>Desarrollador Java</td>
-							<td>Migración de código</td>
-							<td>Enero 2020 - Febrero 2022</td>
-							<td>
-								* Implementación de microservicios con Spring Boot <br>
-								* Elaboración de diagramas UML
-							</td>
-							<td>
-								* Herramientas: Eclipse, Visual Paradigm CE, GitHub <br>
-								* Tecnologías: Java v8, Maven, Git, JSON
-							</td>
-							<td><a href="#" onclick="iweHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
-							<td><a href="#" onclick="iweHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
-							<td><a href="#" onclick="iweHandler.select(event)" title="editar">&#x1F589;</a></td>
-							<td><a href="#" onclick="iweHandler.remove(event)" title="borrar">&#x2327;</a></td>
-						</tr>
-						<tr>
-							<td>Banamex</td>
-							<td>Desarrollador SQL</td>
-							<td>Migración de datos</td>
-							<td>Abril 2022 - Septiembre 2022</td>
-							<td>
-								* Migración de store procedures de Informix a Oracle <br>
-								* Diseño y creación de nuevas tablas
-							</td>
-							<td>
-								* Herramientas: DBeaver CE, SQL Developer, Notepad++ <br>
-								* Tecnologías: Oracle DB v12, Git
-							</td>
-							<td><a href="#" onclick="iweHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
-							<td><a href="#" onclick="iweHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
-							<td><a href="#" onclick="iweHandler.select(event)" title="editar">&#x1F589;</a></td>
-							<td><a href="#" onclick="iweHandler.remove(event)" title="borrar">&#x2327;</a></td>
-						</tr>
-						-->
-					</tbody>
-				</table>
+				<div class="table-wrapper">
+					<table id="tableIwe" class="highlight">
+						<thead>
+							<tr>
+								<th>Cuenta</th>
+								<th>Puesto</th>
+								<th>Proyecto</th>
+								<th>Per&iacute;odo</th>
+								<th>Actividades</th>
+								<th>Entorno T&eacute;cnico</th>
+								<th colspan="4">Opciones</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- 
+							<tr>
+								<td>Banorte</td>
+								<td>Desarrollador Java</td>
+								<td>Migración de código</td>
+								<td>Enero 2020 - Febrero 2022</td>
+								<td>
+									* Implementación de microservicios con Spring Boot <br>
+									* Elaboración de diagramas UML
+								</td>
+								<td>
+									* Herramientas: Eclipse, Visual Paradigm CE, GitHub <br>
+									* Tecnologías: Java v8, Maven, Git, JSON
+								</td>
+								<td><a href="#" onclick="iweHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+								<td><a href="#" onclick="iweHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+								<td><a href="#" onclick="iweHandler.select(event)" title="editar">&#x1F589;</a></td>
+								<td><a href="#" onclick="iweHandler.remove(event)" title="borrar">&#x2327;</a></td>
+							</tr>
+							<tr>
+								<td>Banamex</td>
+								<td>Desarrollador SQL</td>
+								<td>Migración de datos</td>
+								<td>Abril 2022 - Septiembre 2022</td>
+								<td>
+									* Migración de store procedures de Informix a Oracle <br>
+									* Diseño y creación de nuevas tablas
+								</td>
+								<td>
+									* Herramientas: DBeaver CE, SQL Developer, Notepad++ <br>
+									* Tecnologías: Oracle DB v12, Git
+								</td>
+								<td><a href="#" onclick="iweHandler.moveUp(event)" title="subir">&bigtriangleup;</a></td>
+								<td><a href="#" onclick="iweHandler.moveDown(event)" title="bajar">&bigtriangledown;</a></td>
+								<td><a href="#" onclick="iweHandler.select(event)" title="editar">&#x1F589;</a></td>
+								<td><a href="#" onclick="iweHandler.remove(event)" title="borrar">&#x2327;</a></td>
+							</tr>
+							-->
+						</tbody>
+					</table>
+				</div>
 				<br><br>
 
 				<div class="row">
-					<div class="col s2 left-align">
-						<button id="btnPrevIwe" data-tab="sectors" class="waves-effect waves-light btn-flat btn-small">Anterior</button>
-					</div>
-					<div class="col s2 push-s8 right-align">
-						<button id="btnNextIwe" data-tab="ext-work-exp" class="waves-effect waves-light btn-flat btn-small">Siguiente</button>
+					<div class="col s12 m12 l12">
+						<div class="col s4 m3 l2 left-align">
+							<button id="btnPrevIwe" data-tab="sectors" class="waves-effect waves-light btn-flat btn-small">Anterior</button>
+						</div>
+						<div class="col s4 push-s4 m3 push-m6 l2 push-l8 right-align">
+							<button id="btnNextIwe" data-tab="ext-work-exp" class="waves-effect waves-light btn-flat btn-small">Siguiente</button>
+						</div>
 					</div>
 				</div>
 			</section>

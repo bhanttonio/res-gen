@@ -93,7 +93,7 @@ th {
 th, td {
 	padding: 7px 5px;
 }
-@media (max-width: 600px) {
+@media (max-width: 700px) {
 	div.table-wrapper {
 		width: 100%;
 		overflow-x: scroll;
