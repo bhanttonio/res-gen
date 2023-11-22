@@ -173,31 +173,31 @@
 		<!-- courses -->
 		<section id="courses" class="row section">
 			
-			<form id="formCourse" class="col s3">
+			<form id="formCourse" class="col s12 m12 l10 push-l1">
 				<fieldset class="row">
 					<legend>Curso &lsqb;Nuevo&rsqb;</legend>
 					<input name="indexCourse" type="hidden" value="">
-					<div class="input-field col s12">
-						<input id="nameCourse" name="nameCourse" type="text" class="validate" data-length="75" maxlength="75">
+					<div class="input-field col s6 m4 l4">
+						<input id="nameCourse" name="nameCourse" type="text" class="validate" data-length="50" maxlength="50">
 						<label for="nameCourse">Nombre</label>
-						<span class="helper-text col s10">Ej. Introducci&oacute;n a ITIL v4</span>
+						<span class="helper-text col s10">Ej. Introducci&oacute;n a ITIL</span>
 					</div>
-					<div class="input-field col s12">
-						<input id="locationCourse" name="locationCourse" type="text" class="validate" data-length="75" maxlength="75">
+					<div class="input-field col s6 m4 l4">
+						<input id="locationCourse" name="locationCourse" type="text" class="validate" data-length="50" maxlength="50">
 						<label for="locationCourse">Lugar</label>
 						<span class="helper-text col s10">Ej. Udemy</span>
 					</div>
-					<div class="input-field col s12">
+					<div class="input-field col s6 m4 l4">
 						<input id="dateCourse" name="dateCourse" type="text" class="validate" data-length="25" maxlength="25">
 						<label for="dateCourse">Fecha</label>
 						<span class="helper-text col s10">Ej. Enero 2019</span>
 					</div>
-					<div class="input-field col s12">
+					<div class="input-field col s12 m12 l12">
 						<div class="row" style="margin-bottom: 0px;">
-							<div class="col s6 left-align">
+							<div class="col s6 m6 l6 left-align">
 								<button id="btnAuxCourse" name="btnAuxCourse" class="waves-effect waves-light btn-flat btn-small" tabindex="-1">Limpiar</button>
 							</div>
-							<div class="col s6 right-align">
+							<div class="col s6 m6 l6 right-align">
 								<button id="btnMainCourse" name="btnMainCourse" class="waves-effect waves-light btn-flat btn-small">Agregar</button>
 							</div>
 						</div>
@@ -205,7 +205,7 @@
 				</fieldset>
 			</form>
 			
-			<article class="col s8">
+			<article class="col s12 m12 l10 push-l1">
 				<table id="tableCourse" class="highlight">
 					<thead>
 						<tr>
@@ -241,10 +241,10 @@
 				<br><br>
 
 				<div class="row">
-					<div class="col s3 left-align">
+					<div class="col s6 m6 l6 left-align">
 						<button id="btnPrevCourse" data-tab="education" class="waves-effect waves-light btn-flat btn-small">Anterior</button>
 					</div>
-					<div class="col s3 push-s6 right-align">
+					<div class="col s6 m6 l6 right-align">
 						<button id="btnNextCourse" data-tab="languages" class="waves-effect waves-light btn-flat btn-small">Siguiente</button>
 					</div>
 				</div>
