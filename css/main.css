@@ -75,6 +75,7 @@ span.character-counter {
 	line-height: 22px;
 	font-size: 10px;
 	border: 1px solid black;
+	padding: 0px 10px;
 }
 .btn-small:hover, .btn-small:focus {
 	color: white;
