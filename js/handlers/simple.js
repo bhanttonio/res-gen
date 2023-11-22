@@ -87,9 +87,9 @@ class EducationHandler extends Handler
     }
 
     isValidForm() {
-        return Validator.isInputNotEmpty( this.form.fields[EduHandler.#NAME] ) * 
-               Validator.isInputNotEmpty( this.form.fields[EduHandler.#INSTITUTE] ) * 
-               Validator.isYearRangeValid( this.form.fields[EduHandler.#START], this.form.fields[EduHandler.#END] );
+        return Validator.isInputNotEmpty( this.form.fields[EducationHandler.#NAME] ) * 
+               Validator.isInputNotEmpty( this.form.fields[EducationHandler.#INSTITUTE] ) * 
+               Validator.isYearRangeValid( this.form.fields[EducationHandler.#START], this.form.fields[EducationHandler.#END] );
     }
 
 }//
