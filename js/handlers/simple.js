@@ -1,6 +1,8 @@
 
 class BasicHandler
 {
+    static #HANDLER_NAME = 'basicHandler';
+
     #elForm; 
     #elName;
     #elSurname1;
@@ -11,7 +13,7 @@ class BasicHandler
     #$btnAux;
 
     constructor() {
-        console.log('\t basicHandler');
+        console.log(`\t ${BasicHandler.#HANDLER_NAME}`);
         this.#initRefs();
         this.#initCharCounters();
         this.#initAuxBtn();
@@ -47,7 +49,7 @@ class BasicHandler
                Validator.isInputNotEmpty(this.#elProfile);
     }
 
-    getObject() {
+    data() {
         return new Basic(
             this.#elName.value, 
             this.#elSurname1.value, 
