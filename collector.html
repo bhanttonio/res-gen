@@ -33,30 +33,33 @@
 		<!-- basic -->
 		<section id="basic" class="row section">
 
-			<form id="formBasic" class="col s12">
+			<form id="formBasic" class="col s12 m12 l11">
 				<fieldset class="row">
 					<legend>Nombre y Perfil</legend>
-					<div class="input-field col s3">
+					<div class="input-field col s6 m3 l3">
 						<input id="nameBasic" name="nameBasic" type="text" class="validate" autocomplete="off" data-length="50" maxlength="50">
 						<label for="nameBasic">Nombre&lpar;s&rpar;</label>
+						<span class="helper-text col s9"></span>
 					</div>
-					<div class="input-field col s2">
+					<div class="input-field col s6 m3 l3">
 						<input id="surname1Basic" name="surname1Basic" type="text" class="validate" data-length="50" maxlength="50">
 						<label for="surname1Basic">Apellido Paterno</label>
+						<span class="helper-text col s9"></span>
 					</div>
-					<div class="input-field col s2">
+					<div class="input-field col s6 m3 l3">
 						<input id="surname2Basic" name="surname2Basic" type="text" class="validate" data-length="50" maxlength="50">
 						<label for="surname2Basic">Apellido Materno</label>
+						<span class="helper-text col s9"></span>
 					</div>
-					<div class="input-field col s4 push-s1">
+					<div class="input-field col s6 m3 l3">
 						<input id="levelBasic" name="levelBasic" type="text" class="validate" data-length="50" maxlength="50">
 						<label for="levelBasic">Nivel</label>
-						<span class="helper-text col s10">Ej. Consultor Senior</span>
+						<span class="helper-text col s9">Ej. Consultor Senior</span>
 					</div>
 					<div class="input-field col s12">
 						<textarea id="profileBasic" name="profileBasic" class="materialize-textarea validate" data-length="300" maxlength="300"></textarea>
 						<label for="profileBasic">Perfil Profesional</label>
-						<span class="helper-text col s11">Ej. Consultor senior biling&uuml;e del PP SAP, m&aacute;s de 10 
+						<span class="helper-text col s11" style="text-align: justify;">Ej. Consultor senior biling&uuml;e del PP SAP, m&aacute;s de 10 
 						a&ntilde;os con SAP ECC, S4Hana y servicios en la nube. Experiencia trabajando de forma remota y en el sitio
 						con clientes en el extranjero y diferentes zonas horarias. Trabaje bien con enfoques Agile y Waterfall.</span>
 					</div>
@@ -70,8 +73,8 @@
 				</fieldset>
 			</form>
 
-			<div class="row">
-				<div class="col s3 push-s9 right-align">
+			<div class="col s12 m12 l11">
+				<div class="col s6 push-s6 right-align">
 					<button id="btnNextBasic" data-tab="education" class="waves-effect waves-light btn-flat btn-small">Siguiente</button>
 				</div>
 			</div>
@@ -282,10 +285,10 @@
 					</div>
 					<div class="input-field col s12 m12 l12">
 						<div class="row" style="margin-bottom: 0px;">
-							<div class="col s6 m6 l6 left-align">
+							<div class="col s6 m6 l6 right-align">
 								<button id="btnAuxLang" name="btnAuxLang" class="waves-effect waves-light btn-flat btn-small" tabindex="-1">Limpiar</button>
 							</div>
-							<div class="col s6 m6 l6 right-align">
+							<div class="col s6 m6 l6 left-align">
 								<button id="btnMainLang" name="btnMainLang" class="waves-effect waves-light btn-flat btn-small">Agregar</button>
 							</div>
 						</div>
@@ -332,10 +335,10 @@
 				<br><br>
 
 				<div class="row">
-					<div class="col s6 m6 l6 left-align">
+					<div class="col s6 m6 l6 right-align">
 						<button id="btnPrevLang" data-tab="courses" class="waves-effect waves-light btn-flat btn-small">Anterior</button>
 					</div>
-					<div class="col s6 m6 l6 right-align">
+					<div class="col s6 m6 l6 left-align">
 						<button id="btnNextLang" data-tab="skills" class="waves-effect waves-light btn-flat btn-small">Siguiente</button>
 					</div>
 				</div>
@@ -358,10 +361,10 @@
 					</div>
 					<div class="input-field col s12 m12 l12">
 						<div class="row" style="margin-bottom: 0px;">
-							<div class="col s6 m6 l6 left-align">
+							<div class="col s6 m6 l6 right-align">
 								<button id="btnAuxSkill" name="btnAuxSkill" class="waves-effect waves-light btn-flat btn-small" tabindex="-1">Limpiar</button>
 							</div>
-							<div class="col s6 m6 l6 right-align">
+							<div class="col s6 m6 l6 left-align">
 								<button id="btnMainSkill" name="btnMainSkill" class="waves-effect waves-light btn-flat btn-small">Agregar</button>
 							</div>
 						</div>
@@ -399,10 +402,10 @@
 				<br><br>
 
 				<div class="row">
-					<div class="col s6 m6 l6 left-align">
+					<div class="col s6 m6 l6 right-align">
 						<button id="btnPrevSkill" data-tab="languages" class="waves-effect waves-light btn-flat btn-small">Anterior</button>
 					</div>
-					<div class="col s6 m6 l6 right-align">
+					<div class="col s6 m6 l6 left-align">
 						<button id="btnNextSkill" data-tab="sectors" class="waves-effect waves-light btn-flat btn-small">Siguiente</button>
 					</div>
 				</div>
@@ -425,10 +428,10 @@
 					</div>
 					<div class="input-field col s12 m12 l12">
 						<div class="row" style="margin-bottom: 0px;">
-							<div class="col s6 m6 l6 left-align">
+							<div class="col s6 m6 l6 right-align">
 								<button id="btnAuxSector" name="btnAuxSector" class="waves-effect waves-light btn-flat btn-small" tabindex="-1">Limpiar</button>
 							</div>
-							<div class="col s6 m6 l6 right-align">
+							<div class="col s6 m6 l6 left-align">
 								<button id="btnMainSector" name="btnMainSector" class="waves-effect waves-light btn-flat btn-small">Agregar</button>
 							</div>
 						</div>
@@ -466,10 +469,10 @@
 				<br><br>
 
 				<div class="row">
-					<div class="col s6 m6 l6 left-align">
+					<div class="col s6 m6 l6 right-align">
 						<button id="btnPrevSector" data-tab="skills" class="waves-effect waves-light btn-flat btn-small">Anterior</button>
 					</div>
-					<div class="col s6 m6 l6 right-align">
+					<div class="col s6 m6 l6 left-align">
 						<button id="btnNextSector" data-tab="int-work-exp" class="waves-effect waves-light btn-flat btn-small">Siguiente</button>
 					</div>
 				</div>
@@ -619,10 +622,10 @@
 
 			<div class="row">
 				<div class="col s12 m12 l12">
-					<div class="col s4 push-s4 m3 push-m6 l2 push-l8 right-align">
+					<div class="col s6 m6 l6 right-align">
 						<button id="btnAuxIwe" name="btnAuxIwe" class="waves-effect waves-light btn-flat btn-small" tabindex="-1">Limpiar</button>
 					</div>
-					<div class="col s4 push-s4 m3 push-m6 l2 push-l8 right-align">
+					<div class="col s6 m6 l6 left-align">
 						<button id="btnMainIwe" name="btnMainIwe" class="waves-effect waves-light btn-flat btn-small">Agregar</button>
 					</div>
 				</div>
@@ -688,10 +691,10 @@
 
 			<div class="row">
 				<div class="col s12 m12 l12">
-					<div class="col s4 m3 l2 left-align">
+					<div class="col s6 m6 l6 right-align">
 						<button id="btnPrevIwe" data-tab="sectors" class="waves-effect waves-light btn-flat btn-small">Anterior</button>
 					</div>
-					<div class="col s4 push-s4 m3 push-m6 l2 push-l8 right-align">
+					<div class="col s6 m6 l6 left-align">
 						<button id="btnNextIwe" data-tab="ext-work-exp" class="waves-effect waves-light btn-flat btn-small">Siguiente</button>
 					</div>
 				</div>
@@ -835,10 +838,10 @@
 
 			<div class="row">
 				<div class="col s12 m12 l12">
-					<div class="col s4 push-s4 m3 push-m6 l2 push-l8 right-align">
+					<div class="col s6 m6 l6 right-align">
 						<button id="btnAuxEwe" name="btnAuxEwe" class="waves-effect waves-light btn-flat btn-small" tabindex="-1">Limpiar</button>
 					</div>
-					<div class="col s4 push-s4 m3 push-m6 l2 push-l8 right-align">
+					<div class="col s6 m6 l6 left-align">
 						<button id="btnMainEwe" name="btnMainEwe" class="waves-effect waves-light btn-flat btn-small">Agregar</button>
 					</div>
 				</div>
@@ -901,10 +904,10 @@
 
 			<div class="row">
 				<div class="col s12 m12 l12">
-					<div class="col s4 m3 l2 left-align">
+					<div class="col s6 m6 l6 right-align">
 						<button id="btnPrevEwe" data-tab="int-work-exp" class="waves-effect waves-light btn-flat btn-small">Anterior</button>
 					</div>
-					<!-- <div class="col s4 push-s4 m3 push-m6 l2 push-l8 right-align">
+					<!-- <div class="col s6 m6 l6 left-align">
 						<button id="btnNextEwe" data-tab="" class="waves-effect waves-light btn-flat btn-small">Siguiente</button>
 					</div> -->
 				</div>
