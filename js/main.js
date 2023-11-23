@@ -78,12 +78,14 @@ class MainHandler
     #tabsInstance;
     #$btnsNext;
     #$btnsPrev;
+    #$btnGenRes;
 
     constructor() {
         console.log(`\t ${MainHandler.#HANDLER_NAME}`);
         this.#loadRefs();
         this.#setUpDirButtons();
         this.#setUpTabs();
+        this.#setUpBtnGenRes();
         this.#setUpTabOnLoad();
     }
 
@@ -92,6 +94,7 @@ class MainHandler
         this.#tabsInstance = M.Tabs.getInstance(this.#elTabs);
         this.#$btnsPrev = $('button[id^="btnPrev"]');
         this.#$btnsNext = $('button[id^="btnNext"]');
+        this.#$btnGenRes = $('button#btnGenRes');
     }
 
     #setUpDirButtons() {
@@ -143,6 +146,13 @@ class MainHandler
                 eweHandler.form.toolHandler.exitEditMode();
             }
 		});
+    }
+
+    #setUpBtnGenRes() {
+        this.#$btnGenRes.on('click', event => {
+            event.preventDefault();
+            alert('Sending data to the server ...');
+        });
     }
 
     #setUpTabOnLoad() {
