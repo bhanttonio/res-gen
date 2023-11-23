@@ -1,12 +1,6 @@
 
 class Basic {
-	constructor(name, surname1, surname2, level, profile) {
-		this.name = name; 
-		this.surname1 = surname1; 
-		this.surname2 = surname2;
-		this.level = level; 
-		this.profile = profile;
-	}
+	name; surname1; surname2; level; profile;
 }
 
 class Education {

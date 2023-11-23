@@ -2,31 +2,31 @@
 class BasicHandler
 {
     static #HANDLER_NAME = 'basicHandler';
+    static #NAME     = 0;
+    static #SURNAME1 = 1;
+    static #SURNAME2 = 2;
+    static #LEVEL    = 3;
+    static #PROFILE  = 4;
 
     #elForm; 
-    #elName;
-    #elSurname1;
-    #elSurname2;
-    #elLevel;
-    #elProfile;
+    #fields = [];
 
     #$btnAux;
 
-    constructor() {
+    constructor(data = {}) {
         console.log(`\t ${BasicHandler.#HANDLER_NAME}`);
         this.#initRefs();
         this.#initCharCounters();
         this.#initAuxBtn();
+        this.#load(data);
     }
 
     #initRefs() {
         this.#elForm = document.getElementById('formBasic');
-        this.#elName     = this.#elForm.elements.nameBasic;
-        this.#elSurname1 = this.#elForm.elements.surname1Basic;
-        this.#elSurname2 = this.#elForm.elements.surname2Basic;
-        this.#elLevel    = this.#elForm.elements.levelBasic;
-        this.#elProfile  = this.#elForm.elements.profileBasic;
-        this.$btnAux = $('#btnAuxBasic');
+        [...this.#elForm.elements]
+            .filter(el => el.type.startsWith('text'))
+            .forEach(el => this.#fields.push(el));
+        this.#$btnAux = $('#btnAuxBasic');
     }
 
     #initCharCounters() {
@@ -34,28 +34,38 @@ class BasicHandler
 	}
 
     #initAuxBtn() {
-    	this.$btnAux.on('click', event => {
+    	this.#$btnAux.on('click', event => {
         	event.preventDefault();
+            /* console.log( JSON.stringify(this.data(), null, 2) ); */
 			FormUtil.reset(this.#elForm);
 			event.target.blur();
     	});
     }
 
     isValidForm() {
-        return Validator.isInputNotEmpty(this.#elName) * 
-               Validator.isInputNotEmpty(this.#elSurname1) * 
-               Validator.isInputNotEmpty(this.#elSurname2) * 
-               Validator.isInputNotEmpty(this.#elLevel) * 
-               Validator.isInputNotEmpty(this.#elProfile);
+        return Validator.isInputNotEmpty(this.#fields[BasicHandler.#NAME]) * 
+               Validator.isInputNotEmpty(this.#fields[BasicHandler.#SURNAME1]) * 
+               Validator.isInputNotEmpty(this.#fields[BasicHandler.#SURNAME2]) * 
+               Validator.isInputNotEmpty(this.#fields[BasicHandler.#LEVEL]) * 
+               Validator.isInputNotEmpty(this.#fields[BasicHandler.#PROFILE]);
     }
 
     data() {
-        return new Basic(
-            this.#elName.value, 
-            this.#elSurname1.value, 
-            this.#elSurname2.value, 
-            this.#elLevel.value, 
-            this.#elProfile.value);
+        let basic = new Basic();
+        let propNames = Object.getOwnPropertyNames(basic);
+        for (let i = 0; i < this.#fields.length; i++) 
+            basic[propNames[i]] = this.#fields[i].value;
+        return basic;
+    }
+
+    #load(basic) {
+        let values = Object.values(basic);
+        if (values.length > 0) {
+            this.#fields.forEach(field => {
+                field.value = values.shift();
+                field.focus();
+            });   
+        }
     }
 
 }//

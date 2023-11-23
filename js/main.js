@@ -13,8 +13,12 @@ $(function() {
     console.log('loading');
     M.AutoInit();
 
-    basicHandler = new BasicHandler();
-    eduHandler = new EducationHandler([
+    basicHandler = new BasicHandler( /*
+        {name: 'Candidato', surname1: 'Lastname1', surname2: 'Lastname2', level: 'Desarrollador Java Middle', 
+         profile: 'Desarrollador de software con más de cinco años de experiencia, mayormente orientado a la implementación y mantenimiento de aplicaciones basadas en Java y frameworks relacionadas.'} 
+    */ );
+    
+        eduHandler = new EducationHandler([
         {name: 'Licenciatura en Informática Administrativa', institute: 'Universidad Nacional Autónoma de México', start: 2015, end: 2020}, 
         {name: 'Maestría en Administración', institute: 'Universidad del Valle de México', start: 2020, end: 2023}
     ]);
